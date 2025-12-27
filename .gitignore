@@ -1,24 +1,51 @@
-*.log
-.DS_Store
-.env
-.env.backup
-.env.production
-.phpactor.json
-.phpunit.result.cache
-/.fleet
-/.idea
-/.nova
-/.phpunit.cache
-/.vscode
-/.zed
-/auth.json
+# Laravel
+/vendor
 /node_modules
 /public/build
-/public/hot
-/public/storage
 /storage/*.key
-/storage/pail
-/vendor
-Homestead.json
-Homestead.yaml
+/storage/logs
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/views
+/storage/framework/testing
+/.env
+/.env.*
+!/\.env\.example
+
+# Composer
+composer.phar
+composer.lock
+
+# Node / Vite
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+vite.config.js.timestamp-*
+.vite
+.eslintcache
+
+# Laravel Sail / Docker
+docker-compose.override.yml
+/.docker
+/.idea/docker.xml
+
+# IDEs e Editores
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+
+# Sistema Operacional
+.DS_Store
 Thumbs.db
+desktop.ini
+
+# Testes / Coverage
+/coverage
+.phpunit.result.cache
+
+# Cache geral
+*.cache
+*.log
+*.tmp

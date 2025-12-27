@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a8e014139935a2b3927c6615f42acb9",
+    "content-hash": "0e42fe1a7066e7a110e956ae26703d94",
     "packages": [
         {
             "name": "brick/math",
@@ -6471,65 +6471,6 @@
             "time": "2025-12-09T13:33:49+00:00"
         },
         {
-            "name": "lucascudo/laravel-pt-br-localization",
-            "version": "v3.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lucascudo/laravel-pt-BR-localization.git",
-                "reference": "5133b5c315a49cb0bbb2fc14cedf0031f003521e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lucascudo/laravel-pt-BR-localization/zipball/5133b5c315a49cb0bbb2fc14cedf0031f003521e",
-                "reference": "5133b5c315a49cb0bbb2fc14cedf0031f003521e",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Lucascudo\\LaravelPtBrLocalization\\LaravelPtBrLocalizationServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Lucascudo\\LaravelPtBrLocalization\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Cascudo",
-                    "email": "lucas.sisau@gmail.com"
-                }
-            ],
-            "description": "Arquivos de linguagem em Português do Brasil (pt-BR) para Laravel",
-            "homepage": "https://github.com/lucascudo/laravel-pt-br-localization",
-            "support": {
-                "issues": "https://github.com/lucascudo/laravel-pt-BR-localization/issues",
-                "source": "https://github.com/lucascudo/laravel-pt-BR-localization/tree/v3.0.4"
-            },
-            "funding": [
-                {
-                    "url": "https://buymeacoffee.com/lucasrocha",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/lucascudo",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/lucascudo/laravel-pt-br-localization",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2025-03-06T11:03:14+00:00"
-        },
-        {
             "name": "mockery/mockery",
             "version": "1.6.12",
             "source": {
@@ -8507,5 +8448,5 @@
         "php": "^8.2"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
