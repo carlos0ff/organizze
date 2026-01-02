@@ -33,17 +33,21 @@ Route::middleware(['guest'])->group(function () {
     /**
      * Cadastro
      */
-    Route::get('/cadastrar', [RegisterController::class, 'create'])->name('auth.register');
-    Route::post('/cadastar', [RegisterController::class, 'store'])->name('auth.register.store');
+    // Route::get('/cadastrar', [RegisterController::class, 'create'])->name('auth.register');
+    // Route::post('/cadastar', [RegisterController::class, 'store'])->name('auth.register.store');
 
     /**
      * Recuperação de Senha | Esqueci a Senha
      */
-    Route::get('/recuperar-senha', [ForgetPasswordController::class, 'update'])->name('auth.password');
-    Route::post('/recuperar-senha', [ForgetPasswordController::class, 'store'])->name('auth.password.email');
+    // Route::get('/recuperar-senha', [ForgetPasswordController::class, 'update'])->name('auth.password');
+    // Rout e::post('/recuperar-senha', [ForgetPasswordController::class, 'store'])->name('auth.password.email');
 });
 
 Route::get('/entrar', function () {
-    return Inertia::render('auth/Login');
+    return Inertia::render('auth/LoginForm');
 })->name('auth.login');
+
+Route::get('/cadastar', function () {
+    return Inertia::render('auth/RegisterForm');
+})->name('auth.register');
 
