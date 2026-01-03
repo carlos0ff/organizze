@@ -14,40 +14,14 @@ Route::get('/', function () {
 });
 
 /**
- * Testes Route
- */
-Route::get('/teste', function () {
-    return Inertia::render('Testes');
-});
-
-/**
- * Authentication Routes
- */
-Route::middleware(['guest'])->group(function () {
-    /**
-     * Login
-     */
-    Route::get('/entrar', [LoginController::class, 'index'])->name('auth.login');
-    Route::post('/entrar', [LoginController::class, 'store'])->name('auth.login.store');
-
-    /**
-     * Cadastro
-     */
-    // Route::get('/cadastrar', [RegisterController::class, 'create'])->name('auth.register');
-    // Route::post('/cadastar', [RegisterController::class, 'store'])->name('auth.register.store');
-
-    /**
-     * Recuperação de Senha | Esqueci a Senha
-     */
-    // Route::get('/recuperar-senha', [ForgetPasswordController::class, 'update'])->name('auth.password');
-    // Rout e::post('/recuperar-senha', [ForgetPasswordController::class, 'store'])->name('auth.password.email');
-});
-
+ * Auth Routes
+*/
 Route::get('/entrar', function () {
     return Inertia::render('auth/LoginForm');
 })->name('auth.login');
 
-Route::get('/cadastar', function () {
-    return Inertia::render('auth/RegisterForm');
-})->name('auth.register');
+
+Route::get('/app', function () {
+    return Inertia::render('app/Dashboard');
+})->name('app.dashboard');
 
