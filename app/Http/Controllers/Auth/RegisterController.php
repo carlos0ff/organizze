@@ -7,5 +7,12 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
-    //
+    /**
+     * Mostra a página de registro.
+     * @return \Inertia\Response
+     */
+    public function index(): \Inertia\Response
+    {
+        return \Inertia\Inertia::render('auth/Register');
+    }
 }

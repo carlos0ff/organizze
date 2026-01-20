@@ -1,15 +1,19 @@
+<script>
+
+</script>
+
 <template>
-  <footer class="bg-light border-t border-green-100 p-3 mt-10">
+  <footer class="bg-light border-t border-gray-50 p-3 mt-10">
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row justify-between items-center gap-6">
 
         <div class="flex items-center space-x-2">
-          <span class="text-xl font-bold bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent lowercase">
+          <span class="text-xl font-bold bg-linear-to-r from-green-600 to-green-400 bg-clip-text text-transparent capitalize">
             Organizze
           </span>
         </div>
 
-        <div class="flex space-x-6 order-last md:order-none">
+        <div class="flex space-x-6 order-last md:order-0">
           <a href="https://www.instagram.com/carliinhos0f/" class="group text-gray-400 hover:text-pink-500 transition-colors duration-300">
             <span class="sr-only">Instagram</span>
             <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm4.75-.88a1.12 1.12 0 11-2.24 0 1.12 1.12 0 012.24 0z"/></svg>
@@ -24,7 +28,7 @@
           </a>
         </div>
 
-        <p class="text-sm text-gray-400">
+        <p class="text-sm text-gray-400 ">
           &copy; {{ new Date().getFullYear() }} Organizze. <span class="hidden sm:inline">Todos os direitos reservados.</span>
         </p>
       </div>
