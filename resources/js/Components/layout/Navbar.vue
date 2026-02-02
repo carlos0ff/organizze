@@ -1,7 +1,3 @@
-<script>
-
-</script>
-
 <template>
     <nav class="bg-[#22c75e] shadow-lg fixed top-0 left-0 w-full z-50" >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -111,63 +107,61 @@
                     </div>
                 </div>
 
-
-
-                <!-- Perfil Usuário -->
-                <div class="relative" >
-                    <button class="flex items-center gap-3 group">
-                        <img src="https://i.pravatar.cc/100?img=12" alt="Seu perfil" class="h-9 w-9 rounded-full object-cover ring-2 ring-white/30 group-hover:ring-white/60 transition" />
-                            <div class="hidden lg:flex flex-col items-start">
-                                <span class="text-sm text-white leading-4">Thiago Santos</span>
-                                <span class="text-[11px] text-white/80 leading-3">Plano Gratuito</span>
-                            </div>
-                        <i class="fas fa-chevron-down text-white/90 text-xs"></i>
-                    </button>
-
-                    <!-- Menu do usuário -->
-                    <div class="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg ring-1 ring-black/5 z-50 hidden">
-                        <div class="px-4 py-3 border-b border-gray-100 flex items-center gap-3">
-                            <img src="https://i.pravatar.cc/100?img=12" alt="Seu perfil" class="h-10 w-10 rounded-full object-cover" />
-                            <div>
-                                <p class="text-sm font-medium text-gray-900">Thiago Santos</p>
-                                <p class="text-xs text-gray-500">thiagosantos@email.com</p>
-                            </div>
-                        </div>
-
-                        <!-- Links do menu -->
-                        <div class="capitalize">
-                            <a href="" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                <i class="far fa-user-circle w-5"></i>
-                                <span>Meu perfil</span>
-                            </a>
-
-                            <a href="/assinatura" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                <i class="far fa-gem w-5"></i>
-                                <span>Meu plano</span>
-                            </a>
-
-                            <a href="/configuracoes" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                <i class="far fa-cogs w-5"></i>
-                                <span>configurações</span>
-                            </a>
-
-                            <a href="/help" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                <i class="far fa-life-ring w-5"></i>
-                                <span>Ajuda & Suporte</span>
-                            </a>
-                        </div>
-
-                        <div class="border-t border-gray-100"></div>
-
-                        <button class="w-full text-left flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50">
-                            <i class="fas fa-sign-out-alt w-5"></i>
-                            <a href="" class="font-semibold p-auto cursor-pointer py-1">Sair</a>
+                    <!-- Perfil Usuário -->
+                    <div class="relative" >
+                        <button class="flex items-center gap-3 group">
+                            <img src="https://i.pravatar.cc/100?img=12" alt="Seu perfil" class="h-9 w-9 rounded-full object-cover ring-2 ring-white/30 group-hover:ring-white/60 transition" />
+                                <div class="hidden lg:flex flex-col items-start">
+                                    <span class="text-sm text-white leading-4">Thiago Santos</span>
+                                    <span class="text-[11px] text-white/80 leading-3">Plano Gratuito</span>
+                                </div>
+                                <i class="fas fa-chevron-down text-white/90 text-xs"></i>
                         </button>
+
+                        <!-- Menu do usuário -->
+                        <div class="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg ring-1 ring-black/5 z-50 hidden">
+                            <div class="px-4 py-3 border-b border-gray-100 flex items-center gap-3">
+                                <img src="https://i.pravatar.cc/100?img=12" alt="Seu perfil" class="h-10 w-10 rounded-full object-cover" />
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">Thiago Santos</p>
+                                    <p class="text-xs text-gray-500">thiagosantos@email.com</p>
+                                </div>
+                            </div>
+
+                            <!-- Links do menu -->
+                            <div class="capitalize">
+                                <a href="" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="far fa-user-circle w-5"></i>
+                                    <span>Meu perfil</span>
+                                </a>
+
+                                <a href="/assinatura" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="far fa-gem w-5"></i>
+                                    <span>Meu plano</span>
+                                </a>
+
+                                <a href="/configuracoes" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="far fa-cogs w-5"></i>
+                                    <span>configurações</span>
+                                </a>
+
+                                <a href="/help" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="far fa-life-ring w-5"></i>
+                                    <span>Ajuda & Suporte</span>
+                                </a>
+                            </div>
+
+                            <div class="border-t border-gray-100"></div>
+
+                            <button class="w-full text-left flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                                <i class="fas fa-sign-out-alt w-5"></i>
+                                <a href="" class="font-semibold p-auto cursor-pointer py-1">Sair</a>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Mobile -->
+                <!-- Mobile -->
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-button" class="text-white hover:text-gray-200 focus:outline-none focus:text-gray-200" aria-label="Abrir menu">
                     <i class="fas fa-bars w-6 h-6"></i>

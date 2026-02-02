@@ -2,8 +2,8 @@
 import { ref } from 'vue';
 
 /** Elementos de entrada **/
-import EmailInput from '@/components/inputs/EmailInput.vue';
-import BaseCard from '@/components/layout/BaseCard.vue';
+import EmailInput from '@/Components/inputs/EmailInput.vue';
+import BaseCard from '@/Components/layout/BaseCard.vue';
 
 /** Estado **/
 const email = ref('');
@@ -25,7 +25,7 @@ const submit = () => {
             </a>
         </div>
 
-        <BaseCard>
+        <div class="w-full max-w-md bg-white shadow-xl rounded-md px-6 py-10 sm:px-10 sm:py-12">
             <div class="flex flex-col items-center text-center max-w-md mx-auto mb-10">
                 <img src="https://auth.organizze.com.br/images/auth/cadastro-007a76dc766900e275dc0f6f934d3de1.png?vsn=d" alt="Ilustração de cadastro" class="w-24 h-24 sm:w-28 sm:h-28 m-auto mb-4" />
                 <h1 class="mb-2 text-xl sm:text-2xl font-semibold text-[#2E312D] leading-tight">
@@ -42,20 +42,21 @@ const submit = () => {
             <form @submit.prevent="submit" method="post" action="" class="w-full flex flex-col items-center" autocomplete="off">
 
                 <div class="flex justify-between items-center w-full ">
-                    <div>
-                        <h2 class="text-sm font-semibold text-[#4D4D4D]"> Seu email</h2>
+                    <div class="font-semibold">
+                        <h2 class="text-sm  text-[#4D4D4D]"> Seu email</h2>
                     </div>
 
                     <a href="/entrar" class="text-sm font-medium text-[#16C64F] hover:underline hover:text-[#117641] transition-colors duration-200 cursor-pointer whitespace-nowrap">
-                        ← Voltar e entrar!
+                        <i class="fal fa-arrow-left"></i>
+                        Voltar e entrar!
                     </a>
                 </div>
 
                 <div class="mb-6 flex w-full flex-col">
-                    <EmailInput v-model="email" label="" placeholder="exemplo@email.com" />
+                    <input type="email" placeholder="exemplo@email.com" class="focus:outline-none border border-[#DBDED8] bg-[#FEFDF9] h-12 w-full rounded-md px-4 mt-2" required/>
+                    <!-- <EmailInput v-model="email" label="" placeholder="exemplo@email.com" /> -->
                 </div>
 
-                <!-- Texto informativo -->
                 <div class="mb-6 w-full hidden">
                     <p class="text-xs sm:text-sm text-[#5C5F5A] bg-blue-50 p-3 rounded-lg border border-blue-100">
                         🔒 <span class="font-medium">Segurança garantida:</span>
@@ -63,13 +64,12 @@ const submit = () => {
                     </p>
                 </div>
 
-                <!-- Botão de envio -->
                 <button type="submit" class="h-12.5 text-[#FEFDF9] bg-[#16C64F] relative w-full rounded-md font-semibold transition duration-200 ease-out hover:bg-[#117641] hover:ease-in focus:outline-none focus:ring-2 focus:ring-[#16C64F] focus:ring-opacity-50  cursor-pointer">
                     Enviar link de recuperação
                 </button>
 
             </form>
-        </BaseCard>
+        </div>
 
         <div class="mt-6 text-center">
             <p class="text-xs text-[#7A7D77]">

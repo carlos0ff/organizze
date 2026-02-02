@@ -1,7 +1,3 @@
-<script>
-
-</script>
-
 <template>
   <footer class="bg-light border-t border-gray-50 p-3 mt-10">
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">

@@ -1,14 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-
-/** Elementos de entrada **/
-import BaseCard from '@/components/layout/BaseCard.vue';
-import EmailInput from '@/components/inputs/EmailInput.vue';
-import PasswordInput from '@/components/inputs/PasswordInput.vue';
-
-/** **/
-
-
 </script>
 
 
@@ -22,7 +13,7 @@ import PasswordInput from '@/components/inputs/PasswordInput.vue';
             </a>
         </div>
 
-        <BaseCard>
+        <div class="">
            <div class="flex flex-col items-center text-center max-w-md mx-auto mb-6">
             <img src="https://auth.organizze.com.br/images/auth/cadastro-007a76dc766900e275dc0f6f934d3de1.png?vsn=d"
                 alt="Ilustração de cadastro" class="w-25 h-25 m-auto" />

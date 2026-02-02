@@ -2,8 +2,8 @@
 import { ref } from 'vue';
 
 /** Elementos  **/
-import Navbar from '@/components/layout/Navbar.vue';
-import Footer from '@/components/layout/Footer.vue';
+import Navbar from '@/Components/layout/Navbar.vue';
+import Footer from '@/Components/layout/Footer.vue';
 
 </script>
 
