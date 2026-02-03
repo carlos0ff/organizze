@@ -30,11 +30,11 @@ Route::prefix("blog")->group(function(){
     /** Blog Home **/
     Route::get("/", [BlogController::class , "index"])->name("blog.home");
 
+    /** Blog post { SLUG } **/
+    Route::get("/post", [BlogController::class , "post"])->name("blog.post");
+
     /** Blog Categorys { SLUG } **/
     Route::get("/{category}", [BlogController::class , "index"])->name("blog.category");
-
-    /** Blog post { SLUG } **/
-    Route::get("/post/{slug}", [BlogController::class , "index"])->name("blog.post");
 
 });
 

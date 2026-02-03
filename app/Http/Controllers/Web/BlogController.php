@@ -16,4 +16,13 @@ class BlogController extends Controller
         return inertia('Blog/Index');
     }
 
+    /**
+     * Exibe a página de posts do blog.
+     * @return \Inertia\Response
+     */
+    public function post(): \Inertia\Response
+    {
+        return inertia('Blog/Post/Index');
+    }
+
 }

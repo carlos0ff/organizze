@@ -1,445 +1,425 @@
-<script setup>
-import { ref } from 'vue';
-
-/** Elementos  **/
-import Navbar from '@/Components/layout/Navbar.vue';
-import Footer from '@/Components/layout/Footer.vue';
-
-</script>
 
 <template>
-    <div class="min-h-screen flex flex-col bg-gray-50">
 
-        <!-- Navbar -->
-        <Navbar />
+        <!-- Header Azul -->
+        <div class="h-72 bg-[#10b981] w-full fixed top-0 shadow-md z-0">
+            <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center text-white">
+                <!-- Logo -->
+                <div class="text-2xl font-bold flex items-center w-1/4">
+                    <i class="fas fa-coffee mr-2"></i> Organizze
+                </div>
 
-        <!-- Content -->
-            <main class="flex-1 pt-12 lg:pt-20">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
-                    <section class="mt-8">
-                        <!-- Card Principal com sombra bem leve -->
-                        <div class="bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_4px_6px_-2px_rgba(0,0,0,0.05)] p-6 lg:p-8 border border-gray-50 max-w-7xl mx-auto">
-                            <div class="flex flex-col lg:flex-row items-center justify-between gap-10">
+                <!-- Navbar Centralizada -->
+                <nav class="hidden md:flex space-x-8 text-sm font-medium justify-center flex-1">
+                    <a href="#" class="nav-link active">Visão Geral</a>
+                    <a href="#" class="nav-link">Lançamentos</a>
+                    <a href="#" class="nav-link">Relatórios</a>
+                    <a href="#" class="nav-link">Limite de Gastos</a>
+                    <a href="#" class="nav-link">Conexão Bancária</a>
+                </nav>
 
-                                <!-- BLOCO 1 - GREETING + RECEITA/DESPESA -->
-                                <div class="flex-1 w-full">
-                                    <!-- Greeting -->
-                                    <div class="mb-6">
-                                        <p class="text-[13px] text-gray-400 mb-1 font-medium">Bom dia,</p>
-                                        <div class="flex items-center gap-2">
-                                            <h1 class="text-xl font-bold text-gray-600 tracking-tight">Rogério Dória</h1>
-                                            <span class="text-2xl">🌤️</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Receita e Despesa -->
-                                    <div class="flex gap-5">
-                                        <!-- Card Receita -->
-                                        <div class="bg-white rounded-2xl shadow-[0_10px_20px_-5px_rgba(0,0,0,0.03),0_4px_6px_-2px_rgba(0,0,0,0.02)] border border-gray-50/50 px-6 py-5 flex-1 flex flex-col items-center justify-center min-h-[110px] transition-all hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.05)]">
-                                            <p class="text-[10px] uppercase tracking-widest text-gray-400 mb-2 font-semibold">receita mensal</p>
-                                            <p class="text-xl font-extrabold text-green-500/90">R$ 823,95</p>
-                                        </div>
-
-                                        <!-- Card Despesa -->
-                                        <div class="bg-white rounded-2xl shadow-[0_10px_20px_-5px_rgba(0,0,0,0.03),0_4px_6px_-2_rgba(0,0,0,0.02)] border border-gray-50/50 px-6 py-5 flex-1 flex flex-col items-center justify-center min-h-[110px] transition-all hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.05)]">
-                                            <p class="text-[10px] uppercase tracking-widest text-gray-400 mb-2 font-semibold">despesa mensal</p>
-                                            <p class="text-xl font-extrabold text-red-400/90">R$ 1.319.61</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- DIVISOR 1 -->
-                                <div class="hidden lg:block w-px h-28 bg-gray-100/80"></div>
-
-                                <!-- BLOCO 2 - SALDO GERAL -->
-                                <div class="flex flex-col items-center lg:items-start justify-between h-full py-1">
-                                    <div class="text-center lg:text-left mb-6">
-                                        <p class="text-[10px] tracking-widest text-gray-400 mb-2 font-semibold uppercase">Saldo geral</p>
-                                        <div class="flex items-center gap-3">
-                                            <p class="text-xl font-extrabold text-gray-600/90">R$ 22.321,25</p>
-                                            <button class="text-gray-400 hover:text-gray-500 transition-all duration-75 py-2" title="Mostrar / ocultar saldo">
-                                                <i class="fas fa-eye text-lg hover:text-sky-500 cursor-pointer"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- Ver Relatórios -->
-                                    <a href="#" class="bg-white rounded-md shadow-[0_6px_14px_-4px_rgba(0,0,0,0.04)] border border-gray-100 px-4 py-2 flex items-center gap-2 text-gray-600 hover:bg-sky-50/60 hover:border-sky-100 hover:shadow-[0_12px_20px_-6px_rgba(0,0,0,0.06)] active:scale-[0.97] ransition-all duration-300 group w-full">
-                                        <i class="fas fa-chart-line text-base transition-transform duration-300 group-hover:scale-110 group-hover:text-sky-500"></i>
-                                        <span class="text-xs font-semibold transition-colors duration-300 group-hover:text-sky-600">
-                                            Ver relatórios
-                                        </span>
-                                    </a>
-                                </div>
-
-                                <!-- DIVISOR 2 -->
-                                <div class="hidden lg:block w-px h-28 bg-gray-100/80"></div>
-
-                                <!-- BLOCO 3 - ACESSO RÁPIDO -->
-                                <div class="w-full lg:w-auto">
-                                    <h3 class="text-[15px] font-bold text-gray-600 mb-6 text-center lg:text-left tracking-tight">Acesso rápido</h3>
-                                    <div class="flex justify-center lg:justify-start gap-4">
-                                        <!-- DESPESA -->
-                                        <button class="flex flex-col items-center bg-white rounded-2xl shadow-[0_10px_20px_-5px_rgba(0,0,0,0.03),0_4px_6px_-2px_rgba(0,0,0,0.02)] border border-gray-50/50 p-5 w-[100px] transition-all hover:shadow-[0_20_25px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 group">
-                                            <div class="w-12 h-12 rounded-full border-[2.5px] border-red-500/40 flex items-center justify-center mb-3 group-hover:border-red-400 transition-colors">
-                                                <i class="far fa-minus text-2xl text-red-600"></i>
-                                            </div>
-                                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter group-hover:text-gray-600 transition-colors">DESPESA</span>
-                                        </button>
-
-                                        <!-- RECEITA -->
-                                        <button class="flex flex-col items-center bg-white rounded-2xl shadow-[0_10px_20px_-5px_rgba(0,0,0,0.03),0_4px_6px_-2px_rgba(0,0,0,0.02)] border border-gray-50/50 p-5 w-[100px] transition-all hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 group">
-                                            <div class="w-12 h-12 rounded-full border-[2.5px] border-green-400/40 flex items-center justify-center mb-3 group-hover:border-green-400 transition-colors">
-                                                <i class="fas fa-plus text-2xl text-green-600"></i>
-                                            </div>
-                                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter group-hover:text-gray-600 transition-colors">RECEITA</span>
-                                        </button>
-
-                                        <!-- TRANSFERÊNCIA -->
-                                        <button class="flex flex-col items-center bg-white rounded-2xl shadow-[0_10px_20px_-5px_rgba(0,0,0,0.03),0_4px_6px_-2px_rgba(0,0,0,0.02)] border border-gray-50/50 p-5 w-[100px] transition-all hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 group">
-                                            <div class="w-12 h-12 rounded-full border-[2.5px] border-gray-200 flex items-center justify-center mb-3 group-hover:border-gray-300 transition-colors">
-                                                <i class="fad fa-exchange-alt text-gray-400 text-lg"></i>
-                                            </div>
-                                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter group-hover:text-gray-600 transition-colors">TRANSF.</span>
-                                        </button>
-
-                                        <!-- IMPORTAR -->
-                                        <button class="flex flex-col items-center bg-white rounded-2xl shadow-[0_10px_20px_-5px_rgba(0,0,0,0.03),0_4px_6px_-2px_rgba(0,0,0,0.02)] border border-gray-50/50 p-5 w-[100px] transition-all hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 group">
-                                            <div class="w-12 h-12 rounded-full border-[2.5px] border-sky-400/40 flex items-center justify-center mb-3 group-hover:border-sky-400 transition-colors">
-                                                <i class="fad fa-download text-sky-400 fa-lg"></i>
-                                            </div>
-                                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter group-hover:text-gray-600 transition-colors">IMPORTAR</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Perfil -->
+                <div class="flex items-center space-x-4 w-1/4 justify-end">
+                    <div class="relative">
+                        <i class="fas fa-bell"></i>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-[10px] rounded-full px-1">3</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <img src="https://ui-avatars.com/api/?name=Thiago+Santos&background=ffffff&color=10b981" class="w-8 h-8 rounded-full border-2 border-white">
+                        <div class="text-xs hidden sm:block">
+                            <p class="font-bold">Thiago Santos</p>
+                            <p class="opacity-75">Plano Gratuito</p>
                         </div>
-                    </section>
+                        <i class="fas fa-chevron-down text-[10px]"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    <!-- PRINCIPAL: Minhas Contas + Maiores Gastos -->
-                    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start mb-8">
-                        <div class="space-y-6">
-                            <!-- TUTORIAL: PRIMEIROS PASSOS -->
-                            <div class="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-6 mt-5 hidden">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex items-center gap-4">
-                                        <!-- Ć¨cone -->
-                                        <div class="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center">
-                                            <i class="fas fa-chart-line text-green-500 text-xl"></i>
-                                        </div>
-                                        <!-- Texto -->
-                                        <div>
-                                            <h3 class="text-base font-bold text-gray-700">Primeiros passos</h3>
-                                            <p class="text-sm text-gray-400">1 de 5 tarefas completas</p>
-                                        </div>
-                                    </div>
-                                    <!-- BotĆ£o Continuar -->
-                                    <button class="bg-green-100/80 hover:bg-green-100 text-green-700 font-bold py-2.5 px-6 rounded-xl transition-colors text-sm cursor-pointer">
-                                        Continuar
-                                    </button>
+        <div class="h-72 relative z-10"></div>
+
+        <!-- Conteúdo Principal -->
+        <main class="relative max-w-7xl mx-auto px-4 pb-12 -mt-48 z-20">
+
+            <!-- Botões no topo (sobrepondo o header) -->
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 text-white">
+                <div></div>
+                <div class="mt-4 md:mt-0 flex space-x-3">
+                    <button class="bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center relative z-30">
+                        <i class="fas fa-download mr-2"></i> Exportar
+                    </button>
+                    <button class="bg-white text-emerald-600 px-4 py-2 rounded-lg text-sm font-bold shadow-lg hover:bg-emerald-50 transition-all flex items-center relative z-30">
+                        <i class="fas fa-plus-circle mr-2"></i> Novo Lançamento
+                    </button>
+                </div>
+            </div>
+
+            <!-- Boas vindas e Acesso Rápido -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                <div class="lg:col-span-2 bg-white rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.1)] p-6">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h1 class="text-md font-light text-gray-500">
+                                Bom dia, <i class="fas fa-cloud text-blue-400 ml-4 text-[1.5em]"></i>
+                            </h1>
+                            <p class="text-[22px] text-gray-800/80 flex items-center font-semibold">
+                                Rogério Dória
+                            </p>
+                        </div>
+                        <button class="text-xs text-blue-600 font-medium border border-blue-100 px-3 py-1 rounded hover:bg-blue-50">
+                            <i class="fas fa-chart-line mr-1"></i> ver relatórios
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <p class="text-xs text-gray-500 uppercase mb-1">receita mensal</p>
+                            <p class="text-xl font-bold text-green-600">R$ 5.500,00</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 uppercase mb-1">despesa mensal</p>
+                            <p class="text-xl font-bold text-red-500">R$ 2.470,80</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 uppercase mb-1">saldo geral <i class="far fa-eye-slash ml-1 cursor-pointer"></i></p>
+                            <p class="text-xl font-bold text-green-600">R$ ---</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.1)] p-6">
+                    <p class="text-xs font-bold text-gray-400 uppercase mb-4">Acesso rápido</p>
+                    <div class="flex justify-between items-center px-2">
+                        <div class="text-center group cursor-pointer">
+                            <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-red-400 mb-2 group-hover:bg-red-100 transition-colors">
+                                <i class="fas fa-minus"></i>
+                            </div>
+                            <span class="text-[10px] uppercase font-bold text-gray-500">Despesa</span>
+                        </div>
+                        <div class="text-center group cursor-pointer">
+                            <div class="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center text-green-500 mb-2 group-hover:bg-green-100 transition-colors">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <span class="text-[10px] uppercase font-bold text-gray-500">Receita</span>
+                        </div>
+                        <div class="text-center group cursor-pointer">
+                            <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-400 mb-2 group-hover:bg-blue-100 transition-colors">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <span class="text-[10px] uppercase font-bold text-gray-500">Transf.</span>
+                        </div>
+                        <div class="text-center group cursor-pointer">
+                            <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 mb-2 group-hover:bg-blue-100 transition-colors">
+                                <i class="fas fa-file-import"></i>
+                            </div>
+                            <span class="text-[10px] uppercase font-bold text-gray-500">Importar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid de Widgets -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- Minhas Contas -->
+                <div class="bg-white rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.1)] p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="font-bold text-gray-700">Minhas Contas</h2>
+                        <button class="text-xs text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-eye-slash mr-1"></i> Esconder saldo
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs">
+                                    <i class="fas fa-star"></i>
                                 </div>
-
-                                <!-- Barra de Progresso Segmentada -->
-                                <div class="flex gap-2 h-2">
-                                    <div class="flex-1 bg-green-500 rounded-full"></div>
-                                    <div class="flex-1 bg-gray-100 rounded-full"></div>
-                                    <div class="flex-1 bg-gray-100 rounded-full"></div>
-                                    <div class="flex-1 bg-gray-100 rounded-full"></div>
-                                    <div class="flex-1 bg-gray-100 rounded-full"></div>
+                                <div>
+                                    <p class="text-sm font-bold text-gray-800">Caixa Econômica</p>
+                                    <p class="text-xs text-gray-400">Conta Corrente</p>
                                 </div>
                             </div>
-
-                            <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100 mt-5">
-                                <div class="text-lg font-semibold text-gray-600 mb-4">
-                                    <h3 class="text-[#787878] font-semibold mb-4 capitalize text-lg">minhas contas</h3>
-                                    <p class="flex items-center justify-between text-gray-500 text-sm cursor-pointer mb-6">
-                                        Esconder saldo das contas poupanças / investimentos
-                                        <i class="fas fa-eye-slash fa-md text-gray-400 hover:text-blue-500"></i>
-                                    </p>
-
-                                    <!-- Lista de Contas com Novo Design -->
-                                    <div class="divide-y divide-gray-50">
-                                        <div class="flex items-center justify-between py-4">
-                                            <div class="flex items-center gap-4">
-                                                <div class="relative">
-                                                    <div class="w-11 h-11 bg-[#EC0000] rounded-full flex items-center justify-center shadow-sm">
-                                                        <i class="fas fa-university text-white text-lg"></i>
-                                                    </div>
-                                                    <div class="absolute -bottom-0.5 -right-0.5 w-4.5 h-4.5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
-                                                        <i class="fas fa-link text-[7px] text-white"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <p class="text-[14px] font-bold text-gray-700 leading-tight">Conta Santander</p>
-                                                    <p class="text-[12px] text-gray-400 font-normal">Conta conectada</p>
-                                                </div>
-                                            </div>
-                                            <p class="text-[15px] font-bold text-blue-700">
-                                                <span>R$ 1.486,45</span>
-                                            </p>
-                                        </div>
-
-                                        <!-- Caixa -->
-                                        <div class="flex items-center justify-between py-4">
-                                            <div class="flex items-center gap-4">
-                                                <div class="w-11 h-11 bg-[#005CA9] rounded-full flex items-center justify-center shadow-sm">
-                                                    <i class="fas fa-x text-orange-400 text-lg font-black"></i>
-                                                </div>
-                                                <div>
-                                                    <p class="text-[14px] font-bold text-gray-700 leading-tight">Conta Caixa Econômica</p>
-                                                    <p class="text-[12px] text-gray-400 font-normal">Conta manual</p>
-                                                </div>
-                                            </div>
-                                            <p class="text-[15px] font-bold text-blue-700">
-                                                <span>R$ 5.468,99</span>
-                                            </p>
-                                        </div>
-
-                                        <!-- Inter -->
-                                        <div class="flex items-center justify-between py-4">
-                                            <div class="flex items-center gap-4">
-                                                <div class="w-11 h-11 bg-[#FF7A00] rounded-full flex items-center justify-center shadow-sm">
-                                                    <span class="text-white font-bold text-[10px] italic">inter</span>
-                                                </div>
-                                                <div>
-                                                    <p class="text-[14px] font-bold text-gray-700 leading-tight">Conta Inter</p>
-                                                    <p class="text-[12px] text-gray-400 font-normal">Conta manual</p>
-                                                </div>
-                                            </div>
-                                            <p class="text-[15px] font-bold text-blue-700">
-                                                <span>R$ 3.645,00</span>
-                                            </p>
-                                        </div>
-
-                                        <!-- Nubank -->
-                                        <div class="flex items-center justify-between py-4">
-                                            <div class="flex items-center gap-4">
-                                                <div class="relative">
-                                                    <div class="w-11 h-11 bg-[#8A05BE] rounded-full flex items-center justify-center shadow-sm">
-                                                        <span class="text-white font-bold text-base">nu</span>
-                                                    </div>
-                                                    <div class="absolute -bottom-0.5 -right-0.5 w-4.5 h-4.5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
-                                                        <i class="fas fa-link text-[7px] text-white"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <p class="text-[14px] font-bold text-gray-700 leading-tight">Conta Nubank</p>
-                                                    <p class="text-[12px] text-gray-400 font-normal">Conta conectada</p>
-                                                </div>
-                                            </div>
-                                            <p class="text-[15px] font-bold text-blue-700">
-                                                <span>R$ 4.345,17</span>
-                                            </p>
-                                        </div>
-                                    </div>
+                            <p class="text-sm font-bold text-green-600">R$ -----</p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center text-white text-xs">
+                                    <i class="fas fa-square"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-gray-800">Caixa Xadrez</p>
+                                    <p class="text-xs text-gray-400">Outros</p>
                                 </div>
                             </div>
-
-                            <!-- Cartão de Creditos -->
-                            <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h4 class="text-lg font-semibold text-gray-900">Cartão de Crédito</h4>
-                                    <a href="#cartoes" class="text-sm font-medium text-primary hover:text-primary-dark">Gerenciar</a>
+                            <p class="text-sm font-bold text-green-600">R$ -----</p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-white text-xs">
+                                    <i class="fas fa-wallet"></i>
                                 </div>
-
-                                <div class="space-y-4">
-                                    <div class="rounded-xl p-4 transition">
-                                        <div class="flex items-start justify-between gap-4">
-                                            <div class="flex items-center gap-3">
-                                                <div class="w-12 h-12 rounded-xl bg-linear-to-br from-purple-600 to-purple-500 flex items-center justify-center ring-1 ring-purple-300/40 shadow-sm">
-                                                    <i class="fas fa-credit-card text-white text-lg"></i>
-                                                </div>
-                                                <div>
-                                                    <div class="flex items-center gap-2">
-                                                        <p class="font-semibold text-gray-900">Nubank • <span class="text-gray-600 text-sm">•••• 1234</span></p>
-                                                        <i class="fab fa-cc-mastercard text-[#EB001B] text-lg" title="Mastercard" aria-label="Bandeira Mastercard"></i>
-                                                    </div>
-                                                    <p class="text-xs text-gray-500">
-                                                        Fechamento: <span class="font-medium text-gray-700">10/10</span> •
-                                                        Vencimento: <span class="font-medium text-gray-700">15/10</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                            <!-- Direita: status -->
-                                            <div class="text-right">
-                                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-700">Fatura aberta</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div>
+                                    <p class="text-sm font-bold text-gray-800">Carteira</p>
+                                    <p class="text-xs text-gray-400">Outros</p>
                                 </div>
-
-                                <div class="rounded-xl p-4 transition">
-                                    <div class="flex items-start justify-between gap-4">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-12 h-12 rounded-xl bg-orange-500 flex items-center justify-center ring-1 ring-orange-300/40 shadow-sm">
-                                                <i class="fas fa-credit-card text-white text-lg"></i>
-                                            </div>
-                                        <div>
-                                            <div class="flex items-center gap-2">
-                                                <p class="font-semibold text-gray-900">Inter • <span class="text-gray-600 text-sm">•••• 9876</span></p>
-                                                <i class="fab fa-cc-visa text-blue-600 text-lg" title="Visa" aria-label="Bandeira Visa"></i>
-                                            </div>
-                                            <p class="text-xs text-gray-500">
-                                                Fechamento: <span class="font-medium text-gray-700">17/10</span> •
-                                                Vencimento: <span class="font-medium text-gray-700">20/10</span>
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div class="text-right">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-red-100 text-red-700">Vencido</span>
-                                    </div>
+                            </div>
+                            <p class="text-sm font-bold text-green-600">R$ -----</p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white text-[10px] font-bold">
+                                    INTER
                                 </div>
+                                <div>
+                                    <p class="text-sm font-bold text-gray-800">Inter</p>
+                                    <p class="text-xs text-gray-400">Conta Corrente</p>
+                                </div>
+                            </div>
+                            <p class="text-sm font-bold text-green-600">R$ -----</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maiores Gastos -->
+                <div class="bg-white rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.1)] p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="font-bold text-gray-700">Maiores Gastos do Mês Atual</h2>
+                        <button class="text-xs text-gray-400 border border-gray-200 px-2 py-1 rounded hover:bg-gray-50">Ver Relatório</button>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-1/2 relative flex justify-center">
+                            <div class="w-32 h-32 rounded-full border-16 border-blue-500 border-t-purple-500 border-r-pink-400 border-l-cyan-400"></div>
+                        </div>
+
+                        <div class="w-1/2 space-y-2">
+                            <div class="flex justify-between items-center text-[11px]">
+                                <span class="flex items-center"><i class="fas fa-circle text-purple-500 mr-2 text-[8px]"></i> Presentes e Doações</span>
+                                <span class="font-bold">18,83%</span>
+                            </div>
+
+                            <div class="flex justify-between items-center text-[11px]">
+                                <span class="flex items-center"><i class="fas fa-circle text-pink-400 mr-2 text-[8px]"></i> Alimentação</span>
+                                <span class="font-bold">6,18%</span>
+                            </div>
+
+                            <div class="flex justify-between items-center text-[11px]">
+                                <span class="flex items-center"><i class="fas fa-circle text-cyan-400 mr-2 text-[8px]"></i> Lazer e Hobbies</span>
+                                <span class="font-bold">1,81%</span>
+                            </div>
+
+                            <div class="flex justify-between items-center text-[11px]">
+                                <span class="flex items-center"><i class="fas fa-circle text-blue-300 mr-2 text-[8px]"></i> Saúde e Bem-estar</span>
+                                <span class="font-bold">1,25%</span>
+                            </div>
+
+                            <div class="flex justify-between items-center text-[11px]">
+                                <span class="flex items-center"><i class="fas fa-circle text-yellow-400 mr-2 text-[8px]"></i> Transporte</span>
+                                <span class="font-bold">0,92%</span>
+                            </div>
+
+                            <div class="flex justify-between items-center text-[11px]">
+                                <span class="flex items-center"><i class="fas fa-circle text-red-300 mr-2 text-[8px]"></i> Educação</span>
+                                <span class="font-bold">0,45%</span>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Coluna da direita: Charts, Relatórios de metas -->
-                    <div class="space-y-6">
-                        <!-- CARD: GRÁFICO DE DESPESAS POR CATEGORIA -->
-                        <div class="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-6 mt-5">
-                            <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-[#787878] font-semibold capitalize">Despesas por Categoria</h3>
-                                <select class="text-xs text-gray-500 bg-gray-50 border-none rounded-lg px-2 py-1 focus:ring-0 cursor-pointer">
-                                    <option>Este mês</option>
-                                    <option>Mês passado</option>
-                                </select>
+                <!-- Cartão de Crédito -->
+                <div class="bg-white rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.1)] p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="font-bold text-gray-700">Cartão de Crédito</h2>
+                        <button class="text-xs text-emerald-500 font-medium hover:underline">Gerenciar</button>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Nubank -->
+                        <div class="p-4 rounded-xl bg-linear-to-r from-purple-700 to-purple-600 text-white shadow-md relative overflow-hidden">
+                            <div class="flex justify-between items-start mb-4 relative z-10">
+                                <div>
+                                    <p class="text-[10px] uppercase opacity-80 font-bold">Nubank Platinum</p>
+                                    <p class="text-sm font-bold tracking-widest">•••• 1234</p>
+                                </div>
                             </div>
 
-                            <div class="flex flex-col md:flex-row items-center gap-8">
-                                <!-- Gráfico Donut Simulado com CSS -->
-                                <div class="relative w-40 h-40">
-                                    <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
-                                        <circle cx="18" cy="18" r="16" fill="none" class="stroke-gray-100" stroke-width="3.5"></circle>
-                                        <!-- Alimentação (40%) -->
-                                        <circle cx="18" cy="18" r="16" fill="none" class="stroke-orange-400" stroke-width="3.5" stroke-dasharray="40, 100" stroke-dashoffset="0"></circle>
-                                        <!-- Moradia (30%) -->
-                                        <circle cx="18" cy="18" r="16" fill="none" class="stroke-blue-500" stroke-width="3.5" stroke-dasharray="30, 100" stroke-dashoffset="-40"></circle>
-                                        <!-- Transporte (20%) -->
-                                        <circle cx="18" cy="18" r="16" fill="none" class="stroke-purple-500" stroke-width="3.5" stroke-dasharray="20, 100" stroke-dashoffset="-70"></circle>
-                                        <!-- Outros (10%) -->
-                                        <circle cx="18" cy="18" r="16" fill="none" class="stroke-green-500" stroke-width="3.5" stroke-dasharray="10, 100" stroke-dashoffset="-90"></circle>
+                            <div class="flex justify-between items-end relative z-10">
+                                <div>
+                                    <p class="text-[9px] opacity-70">Vencimento: 15/10</p>
+                                    <p class="text-lg font-black">R$ 840,00</p>
+                                </div>
+                                <div class="flex flex-col items-end gap-2">
+
+                                    <svg class="w-10 h-10" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
+                                        <path d="M7.2795 5.4336c-1.1815 0-2.1846.4628-2.9432 1.252h-.002c-.0541-.0022-.1074-.002-.162-.002-1.5436 0-2.9925.8835-3.699 2.2559-.3088.5996-.4234 1.2442-.459 1.9003-.0321.589 0 1.1863 0 1.7696v5.6523H3.184s.0022-2.784 0-5.1777c-.0014-1.6112-.0118-3.0471 0-3.3418.056-1.3937.4372-2.3053 1.1484-3.0508 2.3585.0018 3.8852 1.6091 3.9705 4.168.0196.5874.0254 3.7304.0254 3.7304v3.672h3.1678v-4.965c0-1.5007.0127-2.8006-.0918-3.6952-.292-2.5-1.821-4.168-4.1248-4.168zm8.3903.3008l-3.166.0039v4.9648c0 1.5009-.0127 2.8007.0919 3.6953.2921 2.5001 1.821 4.168 4.1248 4.168 1.1815 0 2.1846-.4628 2.9432-1.252.0542.0023.1093.002.164.002 1.5435 0 2.9905-.8835 3.6971-2.2558.3088-.5997.4233-1.2442.459-1.9004.032-.5889 0-1.1862 0-1.7695V5.7383H20.816s-.0022 2.784 0 5.1777c.0015 1.6113.0119 3.047 0 3.3418-.056 1.3935-.4372 2.3053-1.1483 3.0508-2.3586-.0018-3.8853-1.6091-3.9706-4.168-.0196-.5874-.0273-2.0437-.0273-3.7324Z"/>
                                     </svg>
-                                    <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                        <span class="text-xs text-gray-400 uppercase font-medium">Total</span>
-                                        <span class="text-sm font-bold text-gray-700">R$ 2.470</span>
-                                    </div>
-                                </div>
 
-                                <!-- Legenda -->
-                                <div class="flex-1 space-y-3 w-full">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center gap-2">
-                                            <span class="w-3 h-3 rounded-full bg-orange-400"></span>
-                                            <span class="text-sm text-gray-600">Alimentação</span>
-                                        </div>
-                                        <span class="text-sm font-bold text-gray-700">40%</span>
-                                    </div>
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center gap-2">
-                                            <span class="w-3 h-3 rounded-full bg-blue-500"></span>
-                                            <span class="text-sm text-gray-600">Moradia</span>
-                                        </div>
-                                        <span class="text-sm font-bold text-gray-700">30%</span>
-                                    </div>
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center gap-2">
-                                            <span class="w-3 h-3 rounded-full bg-purple-500"></span>
-                                            <span class="text-sm text-gray-600">Transporte</span>
-                                        </div>
-                                        <span class="text-sm font-bold text-gray-700">20%</span>
-                                    </div>
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center gap-2">
-                                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
-                                            <span class="text-sm text-gray-600">Outros</span>
-                                        </div>
-                                        <span class="text-sm font-bold text-gray-700">10%</span>
-                                    </div>
+                                    <!-- Status da fatura -->
+                                    <span class="text-[9px] bg-white/20 px-2 py-1 rounded font-bold uppercase">
+                                        Fatura aberta
+                                    </span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- CARD: METAS FINANCEIRAS -->
-                        <div class="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-6">
-                            <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-[#787878] font-semibold capitalize">Minhas Metas</h3>
-                                <button class="text-blue-600 text-xs font-bold hover:underline cursor-pointer">Ver todas</button>
-                            </div>
-
-                            <div class="space-y-6">
-                                <!-- Meta 1: Reserva de Emergência -->
-                                <div class="space-y-2">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
-                                                <i class="fas fa-shield-alt text-blue-500"></i>
-                                            </div>
-                                            <div>
-                                                <p class="text-sm font-bold text-gray-700">Reserva de Emergência</p>
-                                                <p class="text-[11px] text-gray-400">Meta: R$ 15.000,00</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-sm font-bold text-blue-600">65%</span>
-                                    </div>
-                                    <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                                        <div class="bg-blue-500 h-full rounded-full" style="width: 65%"></div>
-                                    </div>
-                                </div>
-
-                                <!-- Meta 2: Viagem de Férias -->
-                                <div class="space-y-2">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center">
-                                                <i class="fas fa-plane text-orange-400"></i>
-                                            </div>
-                                            <div>
-                                                <p class="text-sm font-bold text-gray-700">Viagem de Férias</p>
-                                                <p class="text-[11px] text-gray-400">Meta: R$ 5.000,00</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-sm font-bold text-orange-500">30%</span>
-                                    </div>
-                                    <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                                        <div class="bg-orange-400 h-full rounded-full" style="width: 30%"></div>
-                                    </div>
-                                </div>
-
-                                <!-- Meta 3: Novo MacBook -->
-                                <div class="space-y-2">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center">
-                                                <i class="fas fa-laptop text-purple-500"></i>
-                                            </div>
-                                            <div>
-                                                <p class="text-sm font-bold text-gray-700">Novo MacBook</p>
-                                                <p class="text-[11px] text-gray-400">Meta: R$ 12.000,00</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-sm font-bold text-purple-600">15%</span>
-                                    </div>
-                                    <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                                        <div class="bg-purple-500 h-full rounded-full" style="width: 15%"></div>
-                                    </div>
+                        <!-- Banco Inter -->
+                        <div class="p-4 rounded-xl bg-linear-to-r from-orange-500 to-orange-600 text-white shadow-md relative overflow-hidden">
+                            <div class="flex justify-between items-start mb-4 relative z-10">
+                                <div>
+                                    <p class="text-[10px] uppercase opacity-80 font-bold">Banco Inter Gold</p>
+                                    <p class="text-sm font-bold tracking-widest">•••• 5678</p>
                                 </div>
                             </div>
 
-                            <!-- Botão Adicionar Meta -->
-                            <button class="w-full mt-6 py-3 border-2 border-dashed border-gray-100 rounded-2xl text-gray-400 text-sm font-medium hover:border-blue-200 hover:text-blue-500 transition-all cursor-pointer flex items-center justify-center gap-2">
-                                <i class="fas fa-plus-circle"></i>
-                                Criar nova meta
-                            </button>
+                            <div class="flex justify-between items-end relative z-10">
+                                <div>
+                                    <p class="text-[9px] opacity-70">Vencimento: 20/10</p>
+                                    <p class="text-lg font-black">R$ 1.230,00</p>
+                                </div>
+                                <div class="flex flex-col items-end gap-2">
+                                    <svg class="w-12 h-5" viewBox="0 0 201.5 72" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                                        <g>
+                                            <path d="M8.2,5.9c0,0.1,0,0.2,0,0.5v1c0,0.2,0,0.4,0,0.5c0.1,3.2,2.8,5.8,6.2,5.9c0.1,0,0.3,0,0.5,0c0.3,0,0.4,0,0.5,0
+                                                c3.4-0.1,6.1-2.7,6.2-5.9c0-0.1,0-0.2,0-0.5v-1c0-0.3,0-0.4,0-0.5c-0.1-3.2-2.8-5.8-6.2-5.9c-0.1,0-0.2,0-0.5,0c-0.3,0-0.4,0-0.5,0
+                                                C11.1,0.1,8.3,2.7,8.2,5.9L8.2,5.9z" fill="white" />
+
+                                            <path d="M96.7,28.6v26.2c0,4.6,1.8,6.6,7.3,6.6c2.3,0,4.6-0.6,6-1.1v10.6c-2.3,0.8-5.9,1.2-8.8,1.2
+                                                c-11.7,0-17.2-5.8-17.2-16V3.1h12.7V20H110v8.6L96.7,28.6L96.7,28.6z M96.7,28.6" fill="white" />
+                                            <path d="M114.3,44.5c0-15.5,9.8-26.1,25.5-26.1c16.7,0,25,12.2,24.2,29.9h-36.6c0.7,9.1,4.9,13.7,12.5,13.7
+                                                c6.4,0,9.8-3.1,11.2-7.4h12.4C161.1,65.3,152.6,72,139.7,72c-15.9,0-25.5-10.5-25.5-26.2V44.5z M139.6,28.6
+                                                c-7,0-11.1,3.7-12.3,11.1l23.8-0.2C150.4,32.6,146.7,28.6,139.6,28.6L139.6,28.6z M139.6,28.6" fill="white" />
+                                            <path d="M58.4,18.4c-8.2,0-13.2,4.8-15.8,9.6l-0.6-8H29.9v50.5h12.7V42.1c0-8.4,4.4-13.5,11.2-13.5S63,33,63,40.7v29.7
+                                                h12.7V38C75.7,26.7,70.8,18.4,58.4,18.4L58.4,18.4z M183.7,28c3.2-6.3,9.8-9.6,14.8-9.6c0.9,0,2.3,0.1,3,0.3v9.9
+                                                c-1.2-0.1-2.5-0.2-3.7-0.2c-9,0-14.1,5.4-14.1,14.7v27.4H171V20h12.3L183.7,28z M0,20v8.6h8.6v41.9h12.7V20H0z M0,20" fill="white"/>
+                                        </g>
+                                    </svg>
+
+                                    <!-- Status da fatura -->
+                                    <span class="text-[9px] bg-red-500 px-2 py-1 rounded font-bold uppercase">
+                                        Vencida
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botão Adicionar Cartão -->
+                        <button class="w-full p-4 border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:border-emerald-300 hover:text-emerald-500 hover:bg-emerald-50 transition-all group">
+                            <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center mb-2 group-hover:bg-emerald-100 transition-colors">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <span class="text-xs font-bold uppercase tracking-wider">Adicionar Cartão de Crédito</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Metas de Outubro -->
+                <div class="bg-white rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.1)] p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="font-bold text-gray-700">Metas de Outubro</h2>
+                        <span class="text-xl font-bold text-green-500">65%</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="p-3 border border-gray-100 rounded-lg flex items-center space-x-4">
+                            <div class="relative w-10 h-10 flex items-center justify-center">
+                                <svg class="w-full h-full transform -rotate-90">
+                                    <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="3" fill="transparent" class="text-gray-100" />
+                                    <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="3" fill="transparent" stroke-dasharray="113" stroke-dashoffset="39" class="text-blue-400" />
+                                </svg>
+                                <span class="absolute text-[8px] font-bold">65%</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-xs font-bold text-gray-700">Transporte</p>
+                                <p class="text-[10px] text-gray-400">Meta: R$ 400,00 • Gasto: R$ 260,00</p>
+                            </div>
+                        </div>
+                        <div class="p-3 border border-gray-100 rounded-lg flex items-center space-x-4">
+                            <div class="relative w-10 h-10 flex items-center justify-center">
+                                <svg class="w-full h-full transform -rotate-90">
+                                    <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="3" fill="transparent" class="text-gray-100" />
+                                    <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="3" fill="transparent" stroke-dasharray="113" stroke-dashoffset="22" class="text-orange-400" />
+                                </svg>
+                                <span class="absolute text-[8px] font-bold">80%</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-xs font-bold text-gray-700">Alimentação</p>
+                                <p class="text-[10px] text-gray-400">Meta: R$ 1.000,00 • Gasto: R$ 800,00</p>
+                            </div>
+                        </div>
+                        <button class="w-full text-center text-[10px] font-bold text-green-500 uppercase pt-2 hover:underline">Análise Completa</button>
+                    </div>
+                </div>
+
+                <!-- Contas a Pagar -->
+                <div class="bg-white rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.1)] p-6 lg:col-span-2">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="font-bold text-gray-700">Contas a Pagar</h2>
+                        <div class="flex items-center text-xs text-gray-500 cursor-pointer">
+                            Próximos 7 dias <i class="fas fa-chevron-down ml-2 text-[10px]"></i>
                         </div>
                     </div>
-                </section>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-50">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-8 h-8 bg-red-50 text-red-400 rounded-full flex items-center justify-center text-xs">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-gray-800">Aluguel <span class="text-[10px] text-orange-500 font-normal ml-2">vence em 2 dias</span></p>
+                                    <p class="text-[10px] text-gray-400">Categoria: Casa • Vencimento: 10/11</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <p class="text-sm font-bold text-gray-800">R$ 1.200,00</p>
+                                <i class="fas fa-ellipsis-h text-gray-300 cursor-pointer"></i>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-50">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-8 h-8 bg-blue-50 text-blue-400 rounded-full flex items-center justify-center text-xs">
+                                    <i class="fas fa-wifi"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-gray-800">Internet <span class="text-[10px] text-green-500 font-normal ml-2">em 5 dias</span></p>
+                                    <p class="text-[10px] text-gray-400">Categoria: Serviços • Vencimento: 13/11</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <p class="text-sm font-bold text-gray-800">R$ 120,00</p>
+                                <i class="fas fa-ellipsis-h text-gray-300 cursor-pointer"></i>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-8 h-8 bg-yellow-50 text-yellow-500 rounded-full flex items-center justify-center text-xs">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-gray-800">Luz <span class="text-[10px] bg-red-50 text-red-500 px-1 rounded font-normal ml-2">vencido</span></p>
+                                    <p class="text-[10px] text-gray-400">Categoria: Casa • Vencimento: 05/11</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <p class="text-sm font-bold text-red-500">-R$ 220,00</p>
+                                <i class="fas fa-ellipsis-h text-gray-300 cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-between items-center">
+                        <p class="text-[10px] text-gray-400">3 contas listadas • Total: <span class="font-bold text-gray-600">R$ 1.540,00</span></p>
+                        <button class="text-[10px] font-bold text-green-500 uppercase hover:underline">Ver todas as contas</button>
+                    </div>
+                </div>
 
             </div>
+
+            <!-- Footer -->
+            <footer class="mt-12 pt-8 border-t border-gray-200 flex justify-between items-center text-[10px] text-gray-400">
+                <p>© 2025 Seu Projeto. Todos os direitos reservados.</p>
+                <div class="flex space-x-4">
+                    <i class="fab fa-github cursor-pointer hover:text-gray-600"></i>
+                    <i class="fab fa-linkedin cursor-pointer hover:text-gray-600"></i>
+                    <i class="fab fa-twitter cursor-pointer hover:text-gray-600"></i>
+                </div>
+            </footer>
         </main>
 
-        <!-- Footer -->
-        <Footer />
-    </div>
 </template>
