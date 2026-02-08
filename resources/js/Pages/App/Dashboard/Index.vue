@@ -1,41 +1,44 @@
 
 <template>
 
-        <!-- Header Azul -->
-        <div class="h-72 bg-[#10b981] w-full fixed top-0 shadow-md z-0">
-            <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center text-white">
-                <!-- Logo -->
-                <div class="text-2xl font-bold flex items-center w-1/4">
-                    <i class="fas fa-coffee mr-2"></i> Organizze
+    <!-- Header Azul -->
+    <div class="h-72 bg-[#10b981] w-full fixed top-0 shadow-md z-0">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center text-white">
+            <!-- Logo -->
+            <div class="text-2xl font-bold flex items-center w-1/4">
+                <i class="fas fa-coffee mr-2"></i> Organizze
+            </div>
+
+            <!-- Navbar Centralizada -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium justify-center flex-1">
+                <a href="#" class="nav-link active">Visão Geral</a>
+                <a href="#" class="nav-link">Lançamentos</a>
+                <a href="#" class="nav-link">Relatórios</a>
+                <a href="#" class="nav-link">Limite de Gastos</a>
+                <a href="#" class="nav-link">Conexão Bancária</a>
+            </nav>
+
+            <!-- Perfil -->
+            <div class="flex items-center space-x-4 w-1/4 justify-end">
+                <div class="relative">
+                    <i class="fas fa-bell"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-[10px] rounded-full px-1">3</span>
                 </div>
-
-                <!-- Navbar Centralizada -->
-                <nav class="hidden md:flex space-x-8 text-sm font-medium justify-center flex-1">
-                    <a href="#" class="nav-link active">Visão Geral</a>
-                    <a href="#" class="nav-link">Lançamentos</a>
-                    <a href="#" class="nav-link">Relatórios</a>
-                    <a href="#" class="nav-link">Limite de Gastos</a>
-                    <a href="#" class="nav-link">Conexão Bancária</a>
-                </nav>
-
-                <!-- Perfil -->
-                <div class="flex items-center space-x-4 w-1/4 justify-end">
-                    <div class="relative">
-                        <i class="fas fa-bell"></i>
-                        <span class="absolute -top-2 -right-2 bg-red-500 text-[10px] rounded-full px-1">3</span>
+                <div class="flex items-center space-x-2">
+                    <img
+                        src="https://ui-avatars.com/api/?name=Thiago+Santos&background=8E05EC&color=FFFFFD"
+                        class="w-8 h-8 rounded-full border-2 border-white " />
+                    <div class="text-xs hidden sm:block">
+                        <p class="font-bold">Thiago Santos</p>
+                        <p class="opacity-75">Plano Gratuito</p>
                     </div>
-                    <div class="flex items-center space-x-2">
-                        <img src="https://ui-avatars.com/api/?name=Thiago+Santos&background=ffffff&color=10b981" class="w-8 h-8 rounded-full border-2 border-white">
-                        <div class="text-xs hidden sm:block">
-                            <p class="font-bold">Thiago Santos</p>
-                            <p class="opacity-75">Plano Gratuito</p>
-                        </div>
-                        <i class="fas fa-chevron-down text-[10px]"></i>
-                    </div>
+                    <i class="fas fa-chevron-down text-[10px]"></i>
                 </div>
             </div>
         </div>
+    </div>
 
+        <!-- Divider -->
         <div class="h-72 relative z-10"></div>
 
         <!-- Conteúdo Principal -->
@@ -80,7 +83,9 @@
                             <p class="text-xl font-bold text-red-500">R$ 2.470,80</p>
                         </div>
                         <div>
-                            <p class="text-xs text-gray-500 uppercase mb-1">saldo geral <i class="far fa-eye-slash ml-1 cursor-pointer"></i></p>
+                            <p class="text-xs text-gray-500 uppercase mb-1">
+                                saldo geral <i class="far fa-eye-slash ml-1 cursor-pointer"></i>
+                            </p>
                             <p class="text-xl font-bold text-green-600">R$ ---</p>
                         </div>
                     </div>
@@ -186,6 +191,7 @@
                         <h2 class="font-bold text-gray-700">Maiores Gastos do Mês Atual</h2>
                         <button class="text-xs text-gray-400 border border-gray-200 px-2 py-1 rounded hover:bg-gray-50">Ver Relatório</button>
                     </div>
+
                     <div class="flex items-center">
                         <div class="w-1/2 relative flex justify-center">
                             <div class="w-32 h-32 rounded-full border-16 border-blue-500 border-t-purple-500 border-r-pink-400 border-l-cyan-400"></div>
@@ -248,11 +254,9 @@
                                     <p class="text-lg font-black">R$ 840,00</p>
                                 </div>
                                 <div class="flex flex-col items-end gap-2">
-
                                     <svg class="w-10 h-10" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
                                         <path d="M7.2795 5.4336c-1.1815 0-2.1846.4628-2.9432 1.252h-.002c-.0541-.0022-.1074-.002-.162-.002-1.5436 0-2.9925.8835-3.699 2.2559-.3088.5996-.4234 1.2442-.459 1.9003-.0321.589 0 1.1863 0 1.7696v5.6523H3.184s.0022-2.784 0-5.1777c-.0014-1.6112-.0118-3.0471 0-3.3418.056-1.3937.4372-2.3053 1.1484-3.0508 2.3585.0018 3.8852 1.6091 3.9705 4.168.0196.5874.0254 3.7304.0254 3.7304v3.672h3.1678v-4.965c0-1.5007.0127-2.8006-.0918-3.6952-.292-2.5-1.821-4.168-4.1248-4.168zm8.3903.3008l-3.166.0039v4.9648c0 1.5009-.0127 2.8007.0919 3.6953.2921 2.5001 1.821 4.168 4.1248 4.168 1.1815 0 2.1846-.4628 2.9432-1.252.0542.0023.1093.002.164.002 1.5435 0 2.9905-.8835 3.6971-2.2558.3088-.5997.4233-1.2442.459-1.9004.032-.5889 0-1.1862 0-1.7695V5.7383H20.816s-.0022 2.784 0 5.1777c.0015 1.6113.0119 3.047 0 3.3418-.056 1.3935-.4372 2.3053-1.1483 3.0508-2.3586-.0018-3.8853-1.6091-3.9706-4.168-.0196-.5874-.0273-2.0437-.0273-3.7324Z"/>
                                     </svg>
-
                                     <!-- Status da fatura -->
                                     <span class="text-[9px] bg-white/20 px-2 py-1 rounded font-bold uppercase">
                                         Fatura aberta
@@ -311,12 +315,13 @@
                     </div>
                 </div>
 
-                <!-- Metas de Outubro -->
+                <!-- Metas do Mês -->
                 <div class="bg-white rounded-md shadow-[0_1px_3px_rgba(0,0,0,0.1)] p-6">
                     <div class="flex justify-between items-center mb-4">
-                        <h2 class="font-bold text-gray-700">Metas de Outubro</h2>
+                        <h2 class="font-bold text-gray-700">Metas do Mês</h2>
                         <span class="text-xl font-bold text-green-500">65%</span>
                     </div>
+
                     <div class="space-y-3">
                         <div class="p-3 border border-gray-100 rounded-lg flex items-center space-x-4">
                             <div class="relative w-10 h-10 flex items-center justify-center">
@@ -331,6 +336,7 @@
                                 <p class="text-[10px] text-gray-400">Meta: R$ 400,00 • Gasto: R$ 260,00</p>
                             </div>
                         </div>
+
                         <div class="p-3 border border-gray-100 rounded-lg flex items-center space-x-4">
                             <div class="relative w-10 h-10 flex items-center justify-center">
                                 <svg class="w-full h-full transform -rotate-90">
@@ -356,6 +362,7 @@
                             Próximos 7 dias <i class="fas fa-chevron-down ml-2 text-[10px]"></i>
                         </div>
                     </div>
+
                     <div class="space-y-4">
                         <div class="flex justify-between items-center pb-3 border-b border-gray-50">
                             <div class="flex items-center space-x-4">
@@ -372,6 +379,7 @@
                                 <i class="fas fa-ellipsis-h text-gray-300 cursor-pointer"></i>
                             </div>
                         </div>
+
                         <div class="flex justify-between items-center pb-3 border-b border-gray-50">
                             <div class="flex items-center space-x-4">
                                 <div class="w-8 h-8 bg-blue-50 text-blue-400 rounded-full flex items-center justify-center text-xs">
@@ -382,44 +390,49 @@
                                     <p class="text-[10px] text-gray-400">Categoria: Serviços • Vencimento: 13/11</p>
                                 </div>
                             </div>
+
                             <div class="flex items-center space-x-4">
                                 <p class="text-sm font-bold text-gray-800">R$ 120,00</p>
                                 <i class="fas fa-ellipsis-h text-gray-300 cursor-pointer"></i>
                             </div>
                         </div>
+
                         <div class="flex justify-between items-center">
                             <div class="flex items-center space-x-4">
                                 <div class="w-8 h-8 bg-yellow-50 text-yellow-500 rounded-full flex items-center justify-center text-xs">
                                     <i class="fas fa-bolt"></i>
                                 </div>
+
                                 <div>
                                     <p class="text-sm font-bold text-gray-800">Luz <span class="text-[10px] bg-red-50 text-red-500 px-1 rounded font-normal ml-2">vencido</span></p>
                                     <p class="text-[10px] text-gray-400">Categoria: Casa • Vencimento: 05/11</p>
                                 </div>
                             </div>
+
                             <div class="flex items-center space-x-4">
                                 <p class="text-sm font-bold text-red-500">-R$ 220,00</p>
                                 <i class="fas fa-ellipsis-h text-gray-300 cursor-pointer"></i>
                             </div>
                         </div>
                     </div>
+
                     <div class="mt-6 flex justify-between items-center">
                         <p class="text-[10px] text-gray-400">3 contas listadas • Total: <span class="font-bold text-gray-600">R$ 1.540,00</span></p>
                         <button class="text-[10px] font-bold text-green-500 uppercase hover:underline">Ver todas as contas</button>
                     </div>
                 </div>
-
             </div>
 
-            <!-- Footer -->
-            <footer class="mt-12 pt-8 border-t border-gray-200 flex justify-between items-center text-[10px] text-gray-400">
-                <p>© 2025 Seu Projeto. Todos os direitos reservados.</p>
-                <div class="flex space-x-4">
-                    <i class="fab fa-github cursor-pointer hover:text-gray-600"></i>
-                    <i class="fab fa-linkedin cursor-pointer hover:text-gray-600"></i>
-                    <i class="fab fa-twitter cursor-pointer hover:text-gray-600"></i>
-                </div>
-            </footer>
-        </main>
-
+        <!-- Footer -->
+        <footer class="mt-12 pt-8 border-t border-gray-200 flex justify-between items-center text-[10px] text-gray-400 ">
+            <p class="text-sm text-gray-400 ">
+                &copy; {{ new Date().getFullYear() }} Organizze. <span class="hidden sm:inline">Todos os direitos reservados.</span>
+            </p>
+            <div class="flex space-x-4">
+                <i class="fab fa-github cursor-pointer hover:text-gray-600 fa-2x"></i>
+                <i class="fab fa-linkedin cursor-pointer hover:text-gray-600 fa-2x"></i>
+                <i class="fab fa-twitter cursor-pointer hover:text-gray-600 fa-2x"></i>
+            </div>
+        </footer>
+    </main>
 </template>
