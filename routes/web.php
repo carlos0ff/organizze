@@ -12,6 +12,17 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
+/**
+ * Rotas publicas
+ */
+require __DIR__."/public.php";
+
+
+/**
+ *
+ */
+require __DIR__.'/app.php';
+
 
 /**
  * Web Route - Home

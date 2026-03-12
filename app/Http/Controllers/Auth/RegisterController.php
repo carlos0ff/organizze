@@ -13,6 +13,6 @@ class RegisterController extends Controller
      */
     public function index(): \Inertia\Response
     {
-        return \Inertia\Inertia::render('auth/Register');
+        return \Inertia\Inertia::render('Auth/Cadastro');
     }
 }

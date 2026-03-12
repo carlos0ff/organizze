@@ -1,28 +1,45 @@
 import { defineConfig } from 'vite';
-import path from 'path';
-import laravel from 'laravel-vite-plugin';
+import tailwindcss from "@tailwindcss/vite";
 
-import tailwindcss from '@tailwindcss/vite';
+import { wayfinder } from "@laravel/vite-plugin-wayfinder";
 import vue from '@vitejs/plugin-vue';
 
+/** **/
+import laravel from 'laravel-vite-plugin';
+
+/**
+ *
+ */
 export default defineConfig({
-    publicDir: 'public/assets',
     plugins: [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
+        laravel([
+            'resources/css/app.css',
+            'resources/js/app.ts',
+        ]),
+        wayfinder({
+            path: "resources/js/wayfinder",
+            formVariants: false,
         }),
         tailwindcss(),
-        vue()
+        vue({
+            template: {
+                transformAssetUrls: {
+                    base: null,
+                    includeAbsolute: false,
+                },
+            },
+
+        }),
     ],
-    resolve:{
-        alias:{
-            '@': path.resolve(__dirname, './resources/js'),
+    server: {
+        hmr: {
+            host: 'localhost',
         },
     },
-    server: {
-        watch: {
-            ignored: ['**/storage/framework/views/**'],
+    resolve: {
+        alias: {
+            '@': '/resources/js',
+            'ziggy-js': '/vendor/tightenco/ziggy',
         },
     },
 });
