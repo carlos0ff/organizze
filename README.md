@@ -1,4 +1,6 @@
-<h1 align="center">Organizze</h1>
+<h1 align="center">
+    Organizze 
+</h1>
 
 <div align="center">
 
