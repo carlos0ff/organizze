@@ -1,52 +1,25 @@
 <?php
+declare(strict_types=1);
 
-
+/** Web Routes **/
 use Illuminate\Support\Facades\Route;
-use Illuminate\Validation\Rules\In;
-use Illuminate\Cache\Console\ForgetCommand;
-use Illuminate\Container\Attributes\DB;
-use Inertia\Inertia;
-
-/** Auth Controllers  **/
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
 
 /**
- * Rotas publicas
- */
-require __DIR__."/public.php";
-
-
-/**
- *
- */
-require __DIR__.'/app.php';
-
+ * Rotas públicas (landing, blog, páginas institucionais)
+ **/
+require __DIR__.'/web/public.php';
 
 /**
- * Web Route - Home
- */
-Route::get('/', function () {
-    return Inertia::render('Testes');
-});
-
+ * Rotas de autenticação
+ **/
+require __DIR__.'/web/auth.php';
 
 /**
- * Auth Routes - Grupo de rotas de autenticação
- * Todas as rotas deste grupo terão prefixo "auth"
-*/
-Route::prefix('auth')->middleware('guest')->group(function(){
+ * Rotas administrativas
+ **/
+require __DIR__.'/web/admin.php';
 
-    /**  Rota de login **/
-    Route::get('/entrar', [LoginController::class, "index"])->name('auth.login');
-    Route::post('/entrar', [LoginController::class, "authenticate"])->name('auth.authenticate');
-
-    /** Rota de cadastro de usuário **/
-    Route::get('/cadastro', [RegisterController::class, "index"])->name('auth.register');
-    Route::post('/cadastro', [RegisterController::class, "authenticate"])->name('auth.authenticate');
-
-    /** Rota de recuperação de senha **/
-    Route::get('/recuperar', [ForgotPasswordController::class, "index"])->name('auth.forget');
-    Route::get('/recuperar', [ForgotPasswordController::class, "index"])->name('auth.forget');
-});
+/**
+ * Rotas da aplicação (usuários autenticados)
+ **/
+require __DIR__.'/web/app.php';

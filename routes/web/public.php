@@ -11,14 +11,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Blog\CategoryController;
 use App\Http\Controllers\Blog\BlogController;
 
-/**
- * Landing page - Grupo de rotas públicas
- * Todas as rotas deste grupo são acessíveis sem autenticação
- */
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('home');
-
 
 /**
  * Blog - Grupo de rotas do Blog
