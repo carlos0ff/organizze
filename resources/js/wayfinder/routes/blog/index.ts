@@ -46,62 +46,44 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 /**
 * @see \App\Http\Controllers\Blog\BlogController::post
 * @see app/Http/Controllers/Blog/BlogController.php:24
-* @route '/blog/post/{slug}'
+* @route '/blog/post'
 */
-export const post = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: post.url(args, options),
+export const post = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: post.url(options),
     method: 'get',
 })
 
 post.definition = {
     methods: ["get","head"],
-    url: '/blog/post/{slug}',
+    url: '/blog/post',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
 * @see \App\Http\Controllers\Blog\BlogController::post
 * @see app/Http/Controllers/Blog/BlogController.php:24
-* @route '/blog/post/{slug}'
+* @route '/blog/post'
 */
-post.url = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { slug: args }
-    }
-
-    if (Array.isArray(args)) {
-        args = {
-            slug: args[0],
-        }
-    }
-
-    args = applyUrlDefaults(args)
-
-    const parsedArgs = {
-        slug: args.slug,
-    }
-
-    return post.definition.url
-            .replace('{slug}', parsedArgs.slug.toString())
-            .replace(/\/+$/, '') + queryParams(options)
+post.url = (options?: RouteQueryOptions) => {
+    return post.definition.url + queryParams(options)
 }
 
 /**
 * @see \App\Http\Controllers\Blog\BlogController::post
 * @see app/Http/Controllers/Blog/BlogController.php:24
-* @route '/blog/post/{slug}'
+* @route '/blog/post'
 */
-post.get = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: post.url(args, options),
+post.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: post.url(options),
     method: 'get',
 })
 
 /**
 * @see \App\Http\Controllers\Blog\BlogController::post
 * @see app/Http/Controllers/Blog/BlogController.php:24
-* @route '/blog/post/{slug}'
+* @route '/blog/post'
 */
-post.head = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: post.url(args, options),
+post.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: post.url(options),
     method: 'head',
 })
 
