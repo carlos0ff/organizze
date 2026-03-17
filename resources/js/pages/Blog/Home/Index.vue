@@ -655,9 +655,8 @@
                                     alt="Organizze" class="h-8 w-auto"
                                     style="filter: brightness(0) invert(1);"
                                 />
-
-
                             </div>
+                            
                             <p class="text-sm text-gray-300 max-w-xs leading-relaxed">
                                 Simplificando o controle financeiro para você tomar decisões
                                 melhores todos os dias.
