@@ -22,11 +22,17 @@ Route::prefix("blog")->group(function(){
     Route::get("/", [BlogController::class , "index"])->name("blog.home");
 
     /** Blog post { SLUG } **/
-    Route::get("/post/{slug}", [BlogController::class , "post"])->name("blog.post");
+    Route::get("/post/", [BlogController::class , "post"])->name("blog.post");
 
     /** Blog Categorys { SLUG } **/
     Route::get("/categoria/{category}", [CategoryController::class , "show"])->name("blog.category");
 
 });
+
+/**
+ * http://localhost/blog
+ * http://localhost/blog/post/como-viver-na-lagoa
+ * http://localhost/blog/categoria/controle
+ */
 
 

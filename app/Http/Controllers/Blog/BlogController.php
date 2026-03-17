@@ -23,7 +23,7 @@ class BlogController extends Controller
      */
     public function post(): \Inertia\Response
     {
-        return inertia('Blog/Post/Index');
+        return inertia('Blog/Posts/Show');
     }
 
 }
