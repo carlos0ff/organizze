@@ -24,6 +24,9 @@ Route::prefix("app")->group(function () {
 
     Route::get('/contas', [AccountController::class, "index"])->name('app.conta');
 
+    /** **/
+    Route::get('/cards', [AccountController::class, "index"])->name('app.cards');
+
     /** Rota para listar contas **/
     Route::get('/configuracao', [SettingsController::class, "index"])->name('app.settings');
 

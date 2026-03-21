@@ -13,7 +13,7 @@ class AccountController extends Controller
      */
     public function index() : \Inertia\Response
     {
-        return inertia('App/Account/Index');
+        return inertia('App/Cards/Index');
     }
 
     /**

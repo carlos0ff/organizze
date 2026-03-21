@@ -263,10 +263,55 @@ conta.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     method: 'head',
 })
 
+/**
+* @see \App\Http\Controllers\App\AccountController::cards
+* @see app/Http/Controllers/App/AccountController.php:14
+* @route '/app/cards'
+*/
+export const cards = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: cards.url(options),
+    method: 'get',
+})
+
+cards.definition = {
+    methods: ["get","head"],
+    url: '/app/cards',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\AccountController::cards
+* @see app/Http/Controllers/App/AccountController.php:14
+* @route '/app/cards'
+*/
+cards.url = (options?: RouteQueryOptions) => {
+    return cards.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\AccountController::cards
+* @see app/Http/Controllers/App/AccountController.php:14
+* @route '/app/cards'
+*/
+cards.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: cards.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\AccountController::cards
+* @see app/Http/Controllers/App/AccountController.php:14
+* @route '/app/cards'
+*/
+cards.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: cards.url(options),
+    method: 'head',
+})
+
 const app = {
     dashboard: Object.assign(dashboard, dashboard),
     settings: Object.assign(settings, settings),
     conta: Object.assign(conta, conta),
+    cards: Object.assign(cards, cards),
 }
 
 export default app
