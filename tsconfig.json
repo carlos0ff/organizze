@@ -2,22 +2,15 @@
     "compilerOptions": {
         "target": "ESNext",
         "useDefineForClassFields": true,
-        "lib": [
-            "ESNext",
-            "DOM",
-            "DOM.Iterable"
-        ],
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
         "jsx": "preserve",
         "jsxImportSource": "vue",
         "module": "ESNext",
         "moduleResolution": "bundler",
         "paths": {
-            "@/*": ["./resources/js/*"],
+            "@/*": ["./resources/js/*"]
         },
-        "types": [
-            "vite/client",
-            "./resources/js",
-        ],
+        "types": ["vite/client", "./resources/js"],
         "resolveJsonModule": true,
         "allowJs": true,
         "sourceMap": true,
@@ -28,9 +21,5 @@
         "strict": true,
         "skipLibCheck": true
     },
-    "include": [
-        "resources/js/**/*.ts",
-        "resources/js/**/*.d.ts",
-        "resources/js/**/*.vue"
-    ]
+    "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.vue"]
 }
