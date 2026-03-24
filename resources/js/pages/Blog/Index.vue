@@ -158,6 +158,7 @@
                 </div>
             </div>
         </section>
+
         <!-- Seção de Artigos -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <section class="mt-10 mb-10">
@@ -237,522 +238,328 @@
                 </div>
             </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- <div>
-                    <h3>
-                        Mais Artigos
-                    </h3>
-                </div> -->
-                <!-- Artigo 1 -->
-                <article
-                    class="group bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-green-200 shadow-sm hover:shadow-lg transition-all duration-300"
-                >
-                    <div class="relative h-52 overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=1470&auto=format&fit=crop"
-                            class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 text-[11px] font-semibold px-3 py-1 rounded-full bg-green-600 text-white shadow"
-                            >Investimentos</span
-                        >
+            <!-- Artigps listagem -->
+            <section class="max-w-7xl mx-auto px-6 py-8">
+                <div class="mb-8 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">Mais artigos</h2>
+                        <p class="mt-1 text-sm text-gray-600">Conteúdos recentes para te ajudar a organizar melhor suas finanças.</p>
                     </div>
-                    <div class="p-5 flex flex-col gap-3">
-                        <h3 class="text-lg font-semibold leading-snug text-gray-900 group-hover:text-green-700 transition-colors">
-                            <a href="#"> Investimentos para iniciantes: por onde começar com pouco dinheiro </a>
-                        </h3>
-                        <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
-                            Descubra as melhores opções de investimento para quem está começando e quer fazer o dinheiro trabalhar por você.
-                        </p>
-                        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
-                            <div class="flex items-center gap-2 text-xs text-gray-500">
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                    9 min leitura
-                                </span>
-                            </div>
-                            <a href="#" class="inline-flex items-center gap-1 text-xs font-medium text-green-700 hover:gap-2 transition-all">
-                                Ler artigo
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
 
-                <!-- Artigo 2 -->
-                <article
-                    class="group bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-green-200 shadow-sm hover:shadow-lg transition-all duration-300"
-                >
-                    <div class="relative h-52 overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1470&auto=format&fit=crop"
-                            class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 text-[11px] font-semibold px-3 py-1 rounded-full bg-green-600 text-white shadow"
-                            >Reserva de Emergência</span
-                        >
-                    </div>
-                    <div class="p-5 flex flex-col gap-3">
-                        <h3 class="text-lg font-semibold leading-snug text-gray-900 group-hover:text-green-700 transition-colors">
-                            <a href="#"> Por que você precisa de uma reserva de emergência agora </a>
-                        </h3>
-                        <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
-                            Entenda a importância de ter um colchão financeiro e veja um passo a passo prático para montar o seu.
-                        </p>
-                        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
-                            <div class="flex items-center gap-2 text-xs text-gray-500">
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                    6 min leitura
-                                </span>
-                            </div>
-                            <a href="#" class="inline-flex items-center gap-1 text-xs font-medium text-green-700 hover:gap-2 transition-all">
-                                Ler artigo
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
+                    <a
+                        href="/artigos"
+                        class="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-green-700 hover:text-green-800 transition"
+                    >
+                        Ver todos
 
-                <!-- Artigo 3 -->
-                <article
-                    class="group bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-green-200 shadow-sm hover:shadow-lg transition-all duration-300"
-                >
-                    <div class="relative h-52 overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1470&auto=format&fit=crop"
-                            class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 text-[11px] font-semibold px-3 py-1 rounded-full bg-green-600 text-white shadow"
-                            >Planejamento</span
+                        <svg
+                            class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
                         >
-                    </div>
-                    <div class="p-5 flex flex-col gap-3">
-                        <h3 class="text-lg font-semibold leading-snug text-gray-900 group-hover:text-green-700 transition-colors">
-                            <a href="#"> Como montar um orçamento mensal que você realmente vai seguir </a>
-                        </h3>
-                        <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
-                            Modelos prontos e dicas práticas para criar um planejamento financeiro mensal realista e sustentável.
-                        </p>
-                        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
-                            <div class="flex items-center gap-2 text-xs text-gray-500">
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                    8 min leitura
-                                </span>
-                            </div>
-                            <a href="#" class="inline-flex items-center gap-1 text-xs font-medium text-green-700 hover:gap-2 transition-all">
-                                Ler artigo
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
 
-                <!-- Artigo 4 -->
-                <article
-                    class="group bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-green-200 shadow-sm hover:shadow-lg transition-all duration-300"
-                >
-                    <div class="relative h-52 overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1470&auto=format&fit=crop"
-                            class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 text-[11px] font-semibold px-3 py-1 rounded-full bg-green-600 text-white shadow"
-                            >Dívidas</span
-                        >
-                    </div>
-                    <div class="p-5 flex flex-col gap-3">
-                        <h3 class="text-lg font-semibold leading-snug text-gray-900 group-hover:text-green-700 transition-colors">
-                            <a href="#"> Saindo das dívidas: estratégias que funcionam de verdade </a>
-                        </h3>
-                        <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
-                            Conheça os métodos avalanche e bola de neve para quitar suas dívidas mais rápido e retomar o controle das suas finanças.
-                        </p>
-                        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
-                            <div class="flex items-center gap-2 text-xs text-gray-500">
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                    11 min leitura
-                                </span>
-                            </div>
-                            <a href="#" class="inline-flex items-center gap-1 text-xs font-medium text-green-700 hover:gap-2 transition-all">
-                                Ler artigo
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </a>
+                <!-- GRID -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
+                    <!-- Artigo 1 -->
+                    <article
+                        class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full"
+                    >
+                        <div class="relative h-48 overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4"
+                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full">Tecnologia</span>
                         </div>
-                    </div>
-                </article>
-
-                <!-- Artigo 5 -->
-                <article
-                    class="group bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-green-200 shadow-sm hover:shadow-lg transition-all duration-300"
-                >
-                    <div class="relative h-52 overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1470&auto=format&fit=crop"
-                            class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 text-[11px] font-semibold px-3 py-1 rounded-full bg-green-600 text-white shadow"
-                            >Renda Extra</span
-                        >
-                    </div>
-                    <div class="p-5 flex flex-col gap-3">
-                        <h3 class="text-lg font-semibold leading-snug text-gray-900 group-hover:text-green-700 transition-colors">
-                            <a href="#">10 formas de ganhar renda extra sem sair de casa em 2025</a>
-                        </h3>
-                        <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
-                            Ideias práticas e validadas para aumentar sua renda no tempo livre, usando habilidades que você já tem.
-                        </p>
-                        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
-                            <div class="flex items-center gap-2 text-xs text-gray-500">
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                    10 min leitura
-                                </span>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold line-clamp-2">Apps de finanças: como escolher o ideal</h3>
+                            <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed mt-2">
+                                Aprenda os critérios essenciais para escolher um app financeiro eficiente.
+                            </p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs">7 min</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
                             </div>
-                            <a href="#" class="inline-flex items-center gap-1 text-xs font-medium text-green-700 hover:gap-2 transition-all">
-                                Ler artigo
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </a>
                         </div>
-                    </div>
-                </article>
+                    </article>
 
-                <!-- Artigo 6 -->
-                <article
-                    class="group bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-green-200 shadow-sm hover:shadow-lg transition-all duration-300"
-                >
-                    <div class="relative h-52 overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?q=80&w=1470&auto=format&fit=crop"
-                            class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 text-[11px] font-semibold px-3 py-1 rounded-full bg-green-600 text-white shadow"
-                            >Aposentadoria</span
-                        >
-                    </div>
-                    <div class="p-5 flex flex-col gap-3">
-                        <h3 class="text-lg font-semibold leading-snug text-gray-900 group-hover:text-green-700 transition-colors">
-                            <a href="#"> Previdência privada ou Tesouro Direto: qual é melhor para se aposentar? </a>
-                        </h3>
-                        <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
-                            Uma comparação honesta entre as duas opções mais populares para quem quer garantir uma aposentadoria tranquila.
-                        </p>
-                        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
-                            <div class="flex items-center gap-2 text-xs text-gray-500">
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                    13 min leitura
-                                </span>
+                    <!-- Artigo 2 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1454165205744-3b78555e5572?q=80&w=1470&auto=format&fit=crop"
+                                alt="Pessoa mexendo no tablet com planilha aberta"
+                                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full font-medium">
+                                Orçamento
+                            </span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-green-700 transition-colors">
+                                <a href="#">Como montar um orçamento que realmente funciona</a>
+                            </h3>
+                            <p class="text-sm text-gray-600 line-clamp-3 mt-2 leading-relaxed">
+                                Esqueça planilhas complexas e aprenda um método realista para controlar seu orçamento.
+                            </p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs">6 min</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
                             </div>
-                            <a href="#" class="inline-flex items-center gap-1 text-xs font-medium text-green-700 hover:gap-2 transition-all">
-                                Ler artigo
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </a>
                         </div>
-                    </div>
-                </article>
+                    </article>
 
-                <!-- Artigo 7 -->
-                <article
-                    class="group bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-green-200 shadow-sm hover:shadow-lg transition-all duration-300"
-                >
-                    <div class="relative h-52 overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1470&auto=format&fit=crop"
-                            class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 text-[11px] font-semibold px-3 py-1 rounded-full bg-green-600 text-white shadow"
-                            >Cartão de Crédito</span
-                        >
-                    </div>
-                    <div class="p-5 flex flex-col gap-3">
-                        <h3 class="text-lg font-semibold leading-snug text-gray-900 group-hover:text-green-700 transition-colors">
-                            <a href="#"> Cartão de crédito: vilão ou aliado? Como usar sem se endividar </a>
-                        </h3>
-                        <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
-                            Dicas para usar o cartão com inteligência, acumular pontos e milhas e jamais pagar juros rotativo.
-                        </p>
-                        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
-                            <div class="flex items-center gap-2 text-xs text-gray-500">
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                    7 min leitura
-                                </span>
+                    <!-- Artigo 3 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1554224155-6726b3ff858f"
+                                class="absolute inset-0 w-full h-full object-cover"
+                            />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full"> Organização </span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold text-gray-900">Como organizar suas finanças em menos de 30 minutos</h3>
+                            <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed mt-2">
+                                Um método simples para sair da bagunça financeira e ganhar clareza sobre seu dinheiro.
+                            </p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs">5 min</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
                             </div>
-                            <a href="#" class="inline-flex items-center gap-1 text-xs font-medium text-green-700 hover:gap-2 transition-all">
-                                Ler artigo
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </a>
                         </div>
-                    </div>
-                </article>
+                    </article>
 
-                <!-- Artigo 8 -->
-                <article
-                    class="group bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-green-200 shadow-sm hover:shadow-lg transition-all duration-300"
-                >
-                    <div class="relative h-52 overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=1470&auto=format&fit=crop"
-                            class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 text-[11px] font-semibold px-3 py-1 rounded-full bg-green-600 text-white shadow"
-                            >Imóveis</span
-                        >
-                    </div>
-                    <div class="p-5 flex flex-col gap-3">
-                        <h3 class="text-lg font-semibold leading-snug text-gray-900 group-hover:text-green-700 transition-colors">
-                            <a href="#">Comprar ou alugar? A conta que você precisa fazer antes de decidir</a>
-                        </h3>
-                        <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
-                            Analisamos os cenários financeiros de cada opção para te ajudar a tomar a melhor decisão de acordo com o seu momento de
-                            vida.
-                        </p>
-                        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
-                            <div class="flex items-center gap-2 text-xs text-gray-500">
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                    12 min leitura
-                                </span>
+                    <!-- Artigo 4 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1470&auto=format&fit=crop"
+                                alt="Mão segurando faturas e papel"
+                                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full font-medium"> Dívidas </span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-green-700 transition-colors">
+                                <a href="#">Estratégias práticas para sair das dívidas</a>
+                            </h3>
+                            <p class="text-sm text-gray-600 line-clamp-3 mt-2 leading-relaxed">
+                                Técnicas simples para renegociar dívidas e retomar o controle da sua vida financeira.
+                            </p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs">8 min</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
                             </div>
-                            <a href="#" class="inline-flex items-center gap-1 text-xs font-medium text-green-700 hover:gap-2 transition-all">
-                                Ler artigo
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </a>
                         </div>
-                    </div>
-                </article>
+                    </article>
 
-                <!-- Artigo 9 -->
-                <article
-                    class="group bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-green-200 shadow-sm hover:shadow-lg transition-all duration-300"
-                >
-                    <div class="relative h-52 overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1434626881859-194d67b2b86f?q=80&w=1470&auto=format&fit=crop"
-                            class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 text-[11px] font-semibold px-3 py-1 rounded-full bg-green-600 text-white shadow"
-                            >Mentalidade Financeira</span
-                        >
-                    </div>
-                    <div class="p-5 flex flex-col gap-3">
-                        <h3 class="text-lg font-semibold leading-snug text-gray-900 group-hover:text-green-700 transition-colors">
-                            <a href="#"> Os hábitos financeiros das pessoas que enriquecem devagar (e de forma sólida) </a>
-                        </h3>
-                        <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
-                            Descubra quais comportamentos e mentalidades separam quem constrói riqueza de verdade de quem apenas sonha com ela.
-                        </p>
-                        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
-                            <div class="flex items-center gap-2 text-xs text-gray-500">
-                                <span class="flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                    9 min leitura
-                                </span>
+                    <!-- Artigo 5 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1508385082359-f38ae991e8f2"
+                                class="absolute inset-0 w-full h-full object-cover"
+                            />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full">Empreendedorismo</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold line-clamp-2">MEI: como organizar suas finanças</h3>
+                            <p class="text-sm text-gray-600 line-clamp-3 mt-2">Dicas essenciais para manter o controle financeiro sendo MEI.</p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs">6 min</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
                             </div>
-                            <a href="#" class="inline-flex items-center gap-1 text-xs font-medium text-green-700 hover:gap-2 transition-all">
-                                Ler artigo
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </a>
                         </div>
-                    </div>
-                </article>
-            </div>
+                    </article>
 
-            <div class="mt-12 flex justify-center">
-                <button
-                    class="px-8 py-3 rounded-md border border-green-700 hover:cursor-pointer text-green-700 font-semibold hover:bg-green-700 hover:text-white ransition-colors duration-200"
-                >
-                    Carregar mais
-                </button>
-            </div>
+                    <!-- Artigo 6 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e"
+                                class="absolute inset-0 w-full h-full object-cover"
+                            />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full">Educação Financeira</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold line-clamp-2">Educação financeira para iniciantes</h3>
+                            <p class="text-sm text-gray-600 line-clamp-3 mt-2">Conceitos básicos para transformar sua vida financeira.</p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs">7 min</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artigo 7 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1470&auto=format&fit=crop"
+                                alt="Planilha financeira em tela"
+                                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full font-medium">Orçamento</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-green-700 transition-colors">
+                                <a href="#">Como montar um orçamento que realmente funciona</a>
+                            </h3>
+                            <p class="text-sm text-gray-600 line-clamp-3 mt-2 leading-relaxed">
+                                Esqueça planilhas complexas e aprenda um método realista para controlar seu orçamento.
+                            </p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs">9 min</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artigo 8 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df"
+                                class="absolute inset-0 w-full h-full object-cover"
+                            />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full">Cartão de crédito</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold line-clamp-1">Como usar cartão sem se endividar</h3>
+                            <p class="text-sm text-gray-600 line-clamp-2 leading-relaxed mt-2">
+                                Evite armadilhas e use seu cartão de crédito com inteligência, mantendo o controle dos gastos no dia a dia.
+                            </p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs">5 min</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artigo 9 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48">
+                            <img
+                                src="https://images.unsplash.com/photo-1529078155058-5d716f45d604?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full"> Controle Financeiro </span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold text-gray-900 line-clamp-2">Como fazer controle financeiro sem planilha complicada</h3>
+                            <p class="text-sm text-gray-600 line-clamp-2 leading-relaxed mt-2">
+                                Métodos simples e rápidos que realmente funcionam para quem odeia planilhas ou apps cheios de funcionalidades.
+                            </p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs">6 min</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- BOTÃO -->
+                <div class="mt-12 flex justify-center">
+                    <button
+                        class="px-8 py-3 rounded-md border border-green-700 text-green-700 font-semibold hover:bg-green-700 hover:text-white hover:cursor-pointer transition-colors"
+                    >
+                        Carregar mais
+                    </button>
+                </div>
+            </section>
         </div>
 
         <!-- Footer -->
-        <footer class="bg-[#2F4F3F] mt-10">
-            <div class="max-w-6xl mx-auto px-4 py-10">
-                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
-                    <div class="flex flex-col gap-4">
-                        <div>
-                            <img
-                                src="https://auth.organizze.com.br/images/auth/logo-909f6075bb5972376e589ed01866ee33.svg?vsn=d"
-                                alt="Organizze"
-                                class="h-8 w-auto"
-                                style="filter: brightness(0) invert(1)"
-                            />
-                        </div>
-                        <p class="text-sm text-gray-300 max-w-xs leading-relaxed">
-                            Simplificando o controle financeiro para você tomar decisões melhores todos os dias.
-                        </p>
+        <footer class="bg-[#2F4F3F] text-gray-300 mt-16 border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12">
+                <div class="flex flex-col gap-6 md:col-span-1 lg:col-span-1">
+                    <div class="transition-opacity hover:opacity-80">
+                        <img
+                            src="https://auth.organizze.com.br/images/auth/logo-909f6075bb5972376e589ed01866ee33.svg?vsn=d"
+                            alt="Organizze"
+                            class="h-7 w-auto"
+                            style="filter: brightness(0) invert(1)"
+                        />
                     </div>
-
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
-                        <div>
-                            <h4 class="text-sm font-semibold text-white mb-3">Institucional</h4>
-                            <ul class="space-y-2 text-sm">
-                                <li>
-                                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Quem somos</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Trabalhe conosco</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h4 class="text-sm font-semibold text-white mb-3">Ajuda</h4>
-                            <ul class="space-y-2 text-sm">
-                                <li>
-                                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Central de ajuda</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Contato</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h4 class="text-sm font-semibold text-white mb-3">Legal</h4>
-                            <ul class="space-y-2 text-sm">
-                                <li>
-                                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Termos de uso</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Privacidade</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col gap-4">
-                        <h4 class="text-sm font-semibold text-white">Baixe o app</h4>
-                        <div class="flex gap-3">
-                            <a href="#" class="hover:opacity-90 transition">
-                                <img
-                                    src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                                    alt="App Store"
-                                    class="h-10"
-                                />
-                            </a>
-                            <a href="#" class="hover:opacity-90 transition">
-                                <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-                                    alt="Google Play"
-                                    class="h-10"
-                                />
-                            </a>
-                        </div>
-
-                        <!-- QR Code -->
-                        <div class="flex items-center gap-3 mt-2">
-                            <img
-                                src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.organizze.com.br"
-                                alt="QR Code para download do app"
-                                class="h-20 w-20 rounded-md bg-white p-1"
-                            />
-                            <p class="text-xs text-gray-300 leading-snug max-w-30">Escaneie o QR Code e baixe o app no seu celular</p>
-                        </div>
-                    </div>
+                    <p class="text-sm leading-relaxed text-gray-400">
+                        Simplificando o controle financeiro para você tomar as melhores decisões todos os dias com segurança e clareza.
+                    </p>
                 </div>
 
-                <div class="border-t border-[#3A5849] mt-10 pt-4">
-                    <p class="text-center text-xs text-gray-300">
-                        © {{ new Date().getFullYear() }} Organizze Tecnologia Ltda. CNPJ 35.381.093/0001-26
+                <div>
+                    <h3 class="text-white font-bold text-sm uppercase tracking-wider mb-6">Navegação</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="/" class="hover:text-white hover:translate-x-1 transition-all inline-block">Início</a></li>
+                        <li><a href="/artigos" class="hover:text-white hover:translate-x-1 transition-all inline-block">Artigos</a></li>
+                        <li><a href="/temas" class="hover:text-white hover:translate-x-1 transition-all inline-block">Temas</a></li>
+                        <li>
+                            <a href="/app" class="hover:text-white hover:translate-x-1 transition-all inline-block font-medium text-green-400"
+                                >Baixar App</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold text-sm uppercase tracking-wider mb-6">Mais lidos</h3>
+                    <ul class="space-y-3 text-sm font-light">
+                        <li><a href="#" class="hover:text-white hover:translate-x-1 transition-all inline-block">Apps de finanças</a></li>
+                        <li><a href="#" class="hover:text-white hover:translate-x-1 transition-all inline-block">Montar orçamento</a></li>
+                        <li><a href="#" class="hover:text-white hover:translate-x-1 transition-all inline-block">Organizar rápido</a></li>
+                        <li><a href="#" class="hover:text-white hover:translate-x-1 transition-all inline-block">Sair das dívidas</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold text-sm uppercase tracking-wider mb-6">Institucional</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="/sobre" class="hover:text-white transition-colors">Sobre nós</a></li>
+                        <li><a href="/contato" class="hover:text-white transition-colors">Centro de Ajuda</a></li>
+                        <li><a href="/termos" class="hover:text-white transition-colors">Termos de uso</a></li>
+                        <li><a href="/privacidade" class="hover:text-white transition-colors">Privacidade</a></li>
+                    </ul>
+                </div>
+
+                <div class="flex flex-col gap-6">
+                    <h3 class="text-white font-bold text-sm uppercase tracking-wider">Experimente grátis</h3>
+
+                    <div class="flex flex-col gap-3">
+                        <a href="#" class="transition-transform hover:scale-105 active:scale-95">
+                            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" class="h-9 w-auto" />
+                        </a>
+                        <a href="#" class="transition-transform hover:scale-105 active:scale-95">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" class="h-9 w-auto" />
+                        </a>
+                    </div>
+
+                    <div class="flex items-center gap-4 p-3 bg-white/5 rounded-lg border border-white/10">
+                        <img
+                            src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.organizze.com.br"
+                            class="h-14 w-14 rounded-md bg-white p-1 shadow-lg"
+                            alt="QR Code"
+                        />
+                        <p class="text-[10px] text-gray-400 uppercase leading-tight font-medium">Aponte a câmera para baixar</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/5">
+                <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-[11px] text-gray-500 font-medium">
+                        &copy; {{ new Date().getFullYear() }} Organizze Tecnologia LTDA. Todos os direitos reservados.
                     </p>
+                    <div class="flex gap-6 text-[11px] text-gray-500 uppercase tracking-widest">
+                        <a href="#" class="hover:text-white transition-colors"> Instagram </a>
+                        <a href="#" class="hover:text-white transition-colors"> <Youtube /> YouTube </a>
+                        <a href="#" class="hover:text-white transition-colors"> <Linkedin /> LinkedIn </a>
+                        <a href="#" class="hover:text-white transition-colors"> <Github /> Github </a>
+                    </div>
                 </div>
             </div>
         </footer>

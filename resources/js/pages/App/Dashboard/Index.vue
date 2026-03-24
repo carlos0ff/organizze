@@ -199,16 +199,18 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                             class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50"
                         >
                             <div class="p-2">
-                                <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-slate-50"
-                                    ><User class="w-4 h-4" /> Perfil</a
-                                >
-                                <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-slate-50"
-                                    ><Gem class="w-4 h-4 text-amber-500" /> Meu Plano</a
-                                >
-                                <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-slate-50"
-                                    ><Settings class="w-4 h-4" /> Configurações</a
-                                >
+                                <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-slate-50">
+                                    <User class="w-4 h-4" /> Perfil
+                                </a>
+                                <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-slate-50">
+                                    <Gem class="w-4 h-4 text-amber-500" /> Meu Plano
+                                </a>
+                                <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-slate-50">
+                                    <Settings class="w-4 h-4" /> Configurações
+                                </a>
+
                                 <div class="border-t my-1"></div>
+
                                 <button class="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50">
                                     <LogOut class="w-4 h-4" /> Sair
                                 </button>
@@ -222,7 +224,7 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
 
     <!-- Content -->
     <main class="max-w-7xl mx-auto px-4 pt-24 pb-12">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-4">
             <div class="lg:col-span-2 bg-white rounded-md shadow-sm p-6">
                 <div class="flex justify-between items-start mb-6">
                     <h1 class="text-2xl font-semibold text-gray-800 flex items-center gap-2">
@@ -290,7 +292,7 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
         </div>
 
         <!-- CARD DE TUTORIAL -->
-        <div class="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-gray-50 p-6">
+        <div class="bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-gray-50 p-6 mb-4">
             <div class="flex items-center justify-between mb-6">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center">
@@ -791,7 +793,7 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                         <h2 class="text-lg font-bold text-gray-800">Metas de Outubro</h2>
                         <p class="text-xs text-gray-500">Acompanhe seus gastos por categoria</p>
                     </div>
-                    <div class="bg-emerald-50 p-2 rounded-2xl text-right border border-emerald-100">
+                    <div class="bg-emerald-50 p-2 rounded-md text-right border border-emerald-100">
                         <div class="flex items-baseline gap-1 justify-end">
                             <span class="text-2xl font-black text-emerald-600">65</span>
                             <span class="text-sm font-bold text-emerald-500">%</span>
@@ -806,7 +808,7 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                     <div class="group">
                         <div class="flex justify-between items-center mb-2">
                             <div class="flex items-center gap-2">
-                                <div class="w-9 h-9 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+                                <div class="w-9 h-9 bg-blue-50 text-blue-600 rounded-md flex items-center justify-center">
                                     <Car class="w-4.5 h-4.5" />
                                 </div>
                                 <div>
@@ -1043,8 +1045,7 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                     <p class="text-xs text-gray-400 mt-1">{{ cards.length }} de {{ MAX_CARDS }} cartões</p>
                 </div>
 
-                <button @click="isModalOpen = false" class="p-2 hover:bg-grpt-br
-                ay-100 rounded-full">
+                <button @click="isModalOpen = false" class="p-2 hover:bg-grpt-br ay-100 rounded-full">
                     <X class="w-5 h-5 text-gray-400" />
                 </button>
             </div>
