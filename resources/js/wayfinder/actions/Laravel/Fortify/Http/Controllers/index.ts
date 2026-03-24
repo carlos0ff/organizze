@@ -1,0 +1,39 @@
+import AuthenticatedSessionController from './AuthenticatedSessionController';
+import ConfirmablePasswordController from './ConfirmablePasswordController';
+import ConfirmedPasswordStatusController from './ConfirmedPasswordStatusController';
+import ConfirmedTwoFactorAuthenticationController from './ConfirmedTwoFactorAuthenticationController';
+import EmailVerificationNotificationController from './EmailVerificationNotificationController';
+import EmailVerificationPromptController from './EmailVerificationPromptController';
+import NewPasswordController from './NewPasswordController';
+import PasswordController from './PasswordController';
+import PasswordResetLinkController from './PasswordResetLinkController';
+import ProfileInformationController from './ProfileInformationController';
+import RecoveryCodeController from './RecoveryCodeController';
+import RegisteredUserController from './RegisteredUserController';
+import TwoFactorAuthenticatedSessionController from './TwoFactorAuthenticatedSessionController';
+import TwoFactorAuthenticationController from './TwoFactorAuthenticationController';
+import TwoFactorQrCodeController from './TwoFactorQrCodeController';
+import TwoFactorSecretKeyController from './TwoFactorSecretKeyController';
+import VerifyEmailController from './VerifyEmailController';
+
+const Controllers = {
+    AuthenticatedSessionController: Object.assign(AuthenticatedSessionController, AuthenticatedSessionController),
+    PasswordResetLinkController: Object.assign(PasswordResetLinkController, PasswordResetLinkController),
+    NewPasswordController: Object.assign(NewPasswordController, NewPasswordController),
+    RegisteredUserController: Object.assign(RegisteredUserController, RegisteredUserController),
+    EmailVerificationPromptController: Object.assign(EmailVerificationPromptController, EmailVerificationPromptController),
+    VerifyEmailController: Object.assign(VerifyEmailController, VerifyEmailController),
+    EmailVerificationNotificationController: Object.assign(EmailVerificationNotificationController, EmailVerificationNotificationController),
+    ProfileInformationController: Object.assign(ProfileInformationController, ProfileInformationController),
+    PasswordController: Object.assign(PasswordController, PasswordController),
+    ConfirmablePasswordController: Object.assign(ConfirmablePasswordController, ConfirmablePasswordController),
+    ConfirmedPasswordStatusController: Object.assign(ConfirmedPasswordStatusController, ConfirmedPasswordStatusController),
+    TwoFactorAuthenticatedSessionController: Object.assign(TwoFactorAuthenticatedSessionController, TwoFactorAuthenticatedSessionController),
+    TwoFactorAuthenticationController: Object.assign(TwoFactorAuthenticationController, TwoFactorAuthenticationController),
+    ConfirmedTwoFactorAuthenticationController: Object.assign(ConfirmedTwoFactorAuthenticationController, ConfirmedTwoFactorAuthenticationController),
+    TwoFactorQrCodeController: Object.assign(TwoFactorQrCodeController, TwoFactorQrCodeController),
+    TwoFactorSecretKeyController: Object.assign(TwoFactorSecretKeyController, TwoFactorSecretKeyController),
+    RecoveryCodeController: Object.assign(RecoveryCodeController, RecoveryCodeController),
+};
+
+export default Controllers;
