@@ -12,6 +12,8 @@ use App\Http\Controllers\Blog\CategoryController;
 use App\Http\Controllers\Blog\BlogController;
 
 
+// Route::get("/", )->name();
+
 /**
  * Blog - Grupo de rotas do Blog
  * Todas as rotas deste grupo terão prefixo "blog"
