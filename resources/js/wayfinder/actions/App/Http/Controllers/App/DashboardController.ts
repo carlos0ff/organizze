@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\App\DashboardController::index
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see app/Http/Controllers/App/DashboardController.php:15
 * @route '/panel'
 */
 const indexfc281efe9b3109603fafd82c703ad3f9 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ indexfc281efe9b3109603fafd82c703ad3f9.definition = {
 
 /**
 * @see \App\Http\Controllers\App\DashboardController::index
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see app/Http/Controllers/App/DashboardController.php:15
 * @route '/panel'
 */
 indexfc281efe9b3109603fafd82c703ad3f9.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ indexfc281efe9b3109603fafd82c703ad3f9.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\App\DashboardController::index
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see app/Http/Controllers/App/DashboardController.php:15
 * @route '/panel'
 */
 indexfc281efe9b3109603fafd82c703ad3f9.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ indexfc281efe9b3109603fafd82c703ad3f9.get = (options?: RouteQueryOptions): Route
 
 /**
 * @see \App\Http\Controllers\App\DashboardController::index
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see app/Http/Controllers/App/DashboardController.php:15
 * @route '/panel'
 */
 indexfc281efe9b3109603fafd82c703ad3f9.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ indexfc281efe9b3109603fafd82c703ad3f9.head = (options?: RouteQueryOptions): Rout
 
 /**
 * @see \App\Http\Controllers\App\DashboardController::index
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see app/Http/Controllers/App/DashboardController.php:15
 * @route '/app'
 */
 const index66c7f35ef69d84111bb599576cd05b30 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -60,7 +60,7 @@ index66c7f35ef69d84111bb599576cd05b30.definition = {
 
 /**
 * @see \App\Http\Controllers\App\DashboardController::index
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see app/Http/Controllers/App/DashboardController.php:15
 * @route '/app'
 */
 index66c7f35ef69d84111bb599576cd05b30.url = (options?: RouteQueryOptions) => {
@@ -69,7 +69,7 @@ index66c7f35ef69d84111bb599576cd05b30.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\App\DashboardController::index
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see app/Http/Controllers/App/DashboardController.php:15
 * @route '/app'
 */
 index66c7f35ef69d84111bb599576cd05b30.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -79,7 +79,7 @@ index66c7f35ef69d84111bb599576cd05b30.get = (options?: RouteQueryOptions): Route
 
 /**
 * @see \App\Http\Controllers\App\DashboardController::index
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see app/Http/Controllers/App/DashboardController.php:15
 * @route '/app'
 */
 index66c7f35ef69d84111bb599576cd05b30.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({

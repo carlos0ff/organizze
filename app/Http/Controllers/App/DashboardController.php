@@ -5,6 +5,8 @@ namespace App\Http\Controllers\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Inertia\Inertia;
+
 class DashboardController extends Controller
 {
     /**
@@ -12,7 +14,7 @@ class DashboardController extends Controller
      */
     public function index() : \Inertia\Response
     {
-        return inertia('App/Dashboard/Index');
+        return nertia::render('App/Dashboard/Index');
     }
 
     /**
@@ -40,3 +42,4 @@ class DashboardController extends Controller
     }
 
 }
+

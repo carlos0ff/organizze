@@ -5,6 +5,8 @@ namespace App\Http\Controllers\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Inertia\Inertia;
+
 class AccountController extends Controller
 {
     /**
@@ -13,7 +15,7 @@ class AccountController extends Controller
      */
     public function index() : \Inertia\Response
     {
-        return inertia('App/Cards/Index');
+        return Inertia::render('App/Cards/Index');
     }
 
     /**
@@ -51,7 +53,7 @@ class AccountController extends Controller
      */
     public function edit() : \Inertia\Response
     {
-        return inertia('App/Account/Edit');
+        return Inertia::render('App/Account/Edit');
     }
 
     /**
@@ -59,8 +61,10 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request): \Illuminate\Http\RedirectResponse
+    public function signature(): \Inertia\Response
     {
-        // Lógica para atualizar os detalhes da conta
+        // PROVISORIO
+
+        return Inertia::render('App/Signature/Index');
     }
 }

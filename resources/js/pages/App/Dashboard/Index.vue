@@ -1,97 +1,139 @@
 <script setup>
-import { ref, computed } from 'vue';
-// Importação agrupada por categoria para melhor organização
+import { ref, computed } from 'vue'
+
+// ==================== IMPORTS LUCIDE ====================
 import {
-    // Social
-    Github,
-    Linkedin,
-    Youtube,
-    Twitter,
+  // UI / Navegação
+  ChevronDown,
+  Ellipsis,
+  Menu,
+  X,
 
-    // Navegação e UI
-    ChevronDown,
-    ChevronRight,
-    Menu,
-    X,
-    Ellipsis,
+  // Ações
+  Check,
+  Download,
+  LogOut,
+  Minus,
+  Plus,
+  Settings,
 
-    // Ações
-    EyeOff,
-    Info,
-    Download,
-    Plus,
-    Minus,
-    LogOut,
-    Settings,
+  // Finanças
+  ArrowRightLeft,
+  CreditCard,
+  TrendingUp,
+  Wallet,
 
-    // Calendário e Tempo
-    CalendarRange,
-    CloudSun,
+  // Outros
+  Bell,
+  CalendarRange,
+  Car,
+  CirclePlus,
+  Gamepad2,
+  Gem,
+  Gift,
+  GraduationCap,
+  HeartPulse,
+  Home,
+  Layers,
+  Scale,
+  ShoppingCart,
+  Star,
+  TreePalm,
+  TvMinimalPlay,
+  User,
+  Utensils,
+  Wifi,
+  Tag,
+  MessageSquareText ,
+  Paperclip,
+  Repeat
+} from 'lucide-vue-next'
 
-    // Finanças e Compras
-    CreditCard,
-    Wallet,
-    TrendingUp,
-    ArrowRightLeft,
+// ==================== STATE ====================
+const activeModal = ref(false)
+const modalType = ref('despesa') // 'despesa' | 'receita' | 'transferencia'
+const modalTitle = ref('')
 
-    // Categorias
-    Home,
-    Wifi,
-    Car,
-    Utensils,
-    TvMinimalPlay,
-    GraduationCap,
-    HeartPulse,
-    TreePalm,
-    Gift,
-    ShoppingCart,
-    Gamepad2,
-
-    // Geral
-    CirclePlus,
-    Scale,
-    Layers,
-    User,
-    Gem,
-    Bell,
-    Star,
-    Square,
-    Circle,
-} from 'lucide-vue-next';
-
-const isModalOpen = ref(false);
-
-const toggleModal = (id) => {
-    const modal = document.getElementById(id);
-
-    if (!modal) return;
-
-    const isHidden = modal.classList.contains('opacity-0');
-
-    if (isHidden) {
-        modal.classList.remove('opacity-0', 'pointer-events-none');
-        modal.classList.add('opacity-100', 'pointer-events-auto');
-        document.body.classList.add('modal-active');
-    } else {
-        modal.classList.add('opacity-0', 'pointer-events-none');
-        modal.classList.remove('opacity-100', 'pointer-events-auto');
-        document.body.classList.remove('modal-active');
-    }
-};
-
-// lista de cartões
+// Dados dos cartões
 const cards = ref([
-    { bank: 'Banco do Brasil', number: '•••• 5544', value: 'R$ 3.400,00', status: 'Aberta' },
-    { bank: 'Santander', number: '•••• 9876', value: 'R$ 860,00', status: 'Fechada' },
-    { bank: 'Inter', number: '•••• 4321', value: 'R$ 1.240,00', status: 'Aberta' },
-    { bank: 'Inter', number: '•••• 4321', value: 'R$ 1.240,00', status: 'Aberta' },
-]);
+  { bank: 'Banco do Brasil', number: '•••• 5544', value: 'R$ 3.400,00', status: 'Aberta' },
+  { bank: 'Santander', number: '•••• 9876', value: 'R$ 860,00', status: 'Fechada' },
+  { bank: 'Inter', number: '•••• 4321', value: 'R$ 1.240,00', status: 'Aberta' },
+])
 
-// limite máximo
-const MAX_CARDS = 4;
+const MAX_CARDS = 4
+const isModalOpen = ref(false) // Modal de "Ver Todos os Cartões"
 
-// verificação
-const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
+// ==================== COMPUTED ====================
+const isLimitReached = computed(() => cards.value.length >= MAX_CARDS)
+const isExpense = computed(() => modalType.value === 'despesa')
+
+const iconComponent = computed(() => isExpense.value ? Minus : Plus)
+const iconBgClass = computed(() => isExpense.value ? 'bg-red-100' : 'bg-emerald-100')
+const iconColorClass = computed(() => isExpense.value ? 'text-red-600' : 'text-emerald-600')
+
+// ==================== FORM ====================
+const form = ref({
+  description: '',
+  amount: null,
+  date: new Date().toISOString().split('T')[0],
+  accountId: '',
+  categoryId: '',
+  note: ''
+})
+
+// ==================== MÉTODOS ====================
+
+const openModal = (type) => {
+  modalType.value = type
+
+  if (type === 'despesa') {
+    modalTitle.value = 'Nova Despesa'
+  } else if (type === 'receita') {
+    modalTitle.value = 'Nova Receita'
+  } else if (type === 'transfer') {
+    modalTitle.value = 'Nova Transferência'
+  } else if (type === 'import') {
+    modalTitle.value = 'Importar Lançamentos'
+  }
+
+  activeModal.value = true
+  // Limpa formulário ao abrir
+  resetForm()
+}
+
+const closeModal = () => {
+  activeModal.value = false
+}
+
+const handleSubmit = () => {
+  console.log('Salvando:', { ...form.value, type: modalType.value })
+  // Aqui você pode chamar sua API ou store
+  closeModal()
+}
+
+// Ações dos ícones
+const toggleRepeat = () => console.log('Repetir clicado')
+const focusNote = () => console.log('Focar observação')
+const handleAttach = () => console.log('Anexar arquivo')
+const handleTags = () => console.log('Abrir tags')
+
+const resetForm = () => {
+  form.value = {
+    description: '',
+    amount: null,
+    date: new Date().toISOString().split('T')[0],
+    accountId: '',
+    categoryId: '',
+    note: ''
+  }
+}
+
+// Modal de cartões
+const goToCardsPage = () => {
+  console.log('Ir para página de cartões')
+  isModalOpen.value = false
+}
 </script>
 
 <template>
@@ -252,41 +294,38 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                 </div>
             </div>
 
-            <div class="bg-white rounded-md shadow-sm p-6">
-                <p class="text-[10px] font-bold text-gray-400 uppercase mb-4">Acesso rápido</p>
-                <div class="flex justify-between items-center">
-                    <div class="text-center group cursor-pointer">
-                        <div
-                            class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-red-400 mb-2 group-hover:bg-red-100 transition-colors"
-                        >
-                            <Minus class="w-6 h-6" />
-                        </div>
-                        <span class="text-[10px] uppercase font-bold text-gray-500">Despesa</span>
+            <!-- Botões de Acesso Rápido -->
+            <div class="flex justify-between items-center bg-white rounded-md shadow-sm p-6">
+                <!-- Despesa -->
+                <div @click="openModal('despesa')" class="text-center group cursor-pointer">
+                    <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-red-400 mb-2 group-hover:bg-red-100 transition-colors">
+                        <Minus class="w-6 h-6" />
                     </div>
-                    <div class="text-center group cursor-pointer">
-                        <div
-                            class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-500 mb-2 group-hover:bg-emerald-100 transition-colors"
-                        >
-                            <Plus class="w-6 h-6" />
-                        </div>
-                        <span class="text-[10px] uppercase font-bold text-gray-500">Receita</span>
+                    <span class="text-[10px] uppercase font-bold text-gray-500">Despesa</span>
+                </div>
+
+                <!-- Receita -->
+                <div @click="openModal('receita')" class="text-center group cursor-pointer">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-500 mb-2 group-hover:bg-emerald-100 transition-colors">
+                        <Plus class="w-6 h-6" />
                     </div>
-                    <div class="text-center group cursor-pointer">
-                        <div
-                            class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-400 mb-2 group-hover:bg-blue-100 transition-colors"
-                        >
-                            <ArrowRightLeft class="w-6 h-6" />
-                        </div>
-                        <span class="text-[10px] uppercase font-bold text-gray-500">Transf.</span>
+                    <span class="text-[10px] uppercase font-bold text-gray-500">Receita</span>
+                </div>
+
+                <!-- Transferência -->
+                <div @click="openModal('transfer')" class="text-center group cursor-pointer">
+                    <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-400 mb-2 group-hover:bg-blue-100 transition-colors">
+                        <ArrowRightLeft class="w-6 h-6" />
                     </div>
-                    <div class="text-center group cursor-pointer">
-                        <div
-                            class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-600 mb-2 group-hover:bg-emerald-100 transition-colors"
-                        >
-                            <Download class="w-6 h-6" />
-                        </div>
-                        <span class="text-[10px] uppercase font-bold text-gray-500">Importar</span>
+                    <span class="text-[10px] uppercase font-bold text-gray-500">Transf.</span>
+                </div>
+
+                <!-- Importar -->
+                <div @click="openModal('import')" class="text-center group cursor-pointer">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-600 mb-2 group-hover:bg-emerald-100 transition-colors">
+                        <Download class="w-6 h-6" />
                     </div>
+                    <span class="text-[10px] uppercase font-bold text-gray-500">Importar</span>
                 </div>
             </div>
         </div>
@@ -307,6 +346,7 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                     Continuar
                 </button>
             </div>
+
             <div class="flex gap-2 h-1.5">
                 <div class="flex-1 bg-green-500 rounded-full"></div>
                 <div class="flex-1 bg-gray-100 rounded-full"></div>
@@ -478,85 +518,47 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                                 <circle cx="100" cy="100" r="82" stroke="#e2e8f0" stroke-width="14" fill="transparent" stroke-linecap="round" />
 
                                 <!-- Segmentos com gradientes e animação -->
-                                <circle
-                                    cx="100"
-                                    cy="100"
-                                    r="82"
-                                    stroke="url(#gradient1)"
-                                    stroke-width="14"
-                                    fill="transparent"
-                                    stroke-dasharray="515.2"
-                                    stroke-dashoffset="360"
-                                    stroke-linecap="round"
-                                >
+                                <circle cx="100" cy="100" r="82"
+                                    stroke="url(#gradient1)" stroke-width="14"
+                                    fill="transparent" stroke-dasharray="515.2"
+                                    stroke-dashoffset="360" stroke-linecap="round" >
                                     <animate attributeName="stroke-dashoffset" from="515.2" to="360" dur="1.5s" fill="freeze" />
                                 </circle>
 
-                                <circle
-                                    cx="100"
-                                    cy="100"
-                                    r="82"
+                                <circle cx="100" cy="100" r="82"
                                     stroke="url(#gradient2)"
-                                    stroke-width="14"
-                                    fill="transparent"
-                                    stroke-dasharray="515.2"
-                                    stroke-dashoffset="430"
-                                    stroke-linecap="round"
-                                    transform="rotate(95 100 100)"
-                                >
+                                    stroke-width="14" fill="transparent"
+                                    stroke-dasharray="515.2" stroke-dashoffset="430"
+                                    stroke-linecap="round" transform="rotate(95 100 100)" >
                                     <animate attributeName="stroke-dashoffset" from="515.2" to="430" dur="1.5s" fill="freeze" begin="0.2s" />
                                 </circle>
 
-                                <circle
-                                    cx="100"
-                                    cy="100"
-                                    r="82"
+                                <circle cx="100" cy="100" r="82"
                                     stroke="url(#gradient3)"
-                                    stroke-width="14"
-                                    fill="transparent"
-                                    stroke-dasharray="515.2"
-                                    stroke-dashoffset="445"
-                                    stroke-linecap="round"
-                                    transform="rotate(135 100 100)"
-                                >
+                                    stroke-width="14" fill="transparent"
+                                    stroke-dasharray="515.2" stroke-dashoffset="445"
+                                    stroke-linecap="round" transform="rotate(135 100 100)" >
                                     <animate attributeName="stroke-dashoffset" from="515.2" to="445" dur="1.5s" fill="freeze" begin="0.4s" />
                                 </circle>
 
-                                <circle
-                                    cx="100"
-                                    cy="100"
-                                    r="82"
-                                    stroke="url(#gradient4)"
-                                    stroke-width="14"
-                                    fill="transparent"
-                                    stroke-dasharray="515.2"
-                                    stroke-dashoffset="475"
-                                    stroke-linecap="round"
-                                    transform="rotate(170 100 100)"
-                                >
+                                <circle cx="100" cy="100" r="82"
+                                    stroke="url(#gradient4)" stroke-width="14"
+                                    fill="transparent" stroke-dasharray="515.2"
+                                    stroke-dashoffset="475" stroke-linecap="round"
+                                    transform="rotate(170 100 100)" >
                                     <animate attributeName="stroke-dashoffset" from="515.2" to="475" dur="1.5s" fill="freeze" begin="0.6s" />
                                 </circle>
 
-                                <circle
-                                    cx="100"
-                                    cy="100"
-                                    r="82"
-                                    stroke="url(#gradient5)"
-                                    stroke-width="14"
-                                    fill="transparent"
-                                    stroke-dasharray="515.2"
-                                    stroke-dashoffset="490"
-                                    stroke-linecap="round"
-                                    transform="rotate(205 100 100)"
-                                >
+                                <circle cx="100" cy="100" r="82" stroke="url(#gradient5)"
+                                    stroke-width="14" fill="transparent"
+                                    stroke-dasharray="515.2" stroke-dashoffset="490"
+                                    stroke-linecap="round" transform="rotate(205 100 100)" >
                                     <animate attributeName="stroke-dashoffset" from="515.2" to="490" dur="1.5s" fill="freeze" begin="0.8s" />
                                 </circle>
                             </svg>
 
                             <!-- Card central sem sombras -->
-                            <div
-                                class="absolute inset-0 flex flex-col items-center justify-center m-10 bg-white rounded-full border border-gray-100 transition-all duration-500"
-                            >
+                            <div class="absolute inset-0 flex flex-col items-center justify-center m-10 bg-white rounded-full border border-gray-100 transition-all duration-500" >
                                 <div class="flex flex-col items-center gap-1">
                                     <span class="text-xs text-indigo-500 font-bold uppercase tracking-wider bg-indigo-50 px-2 py-0.5 rounded-full">
                                         Total
@@ -578,12 +580,8 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                             </div>
 
                             <!-- Tooltip flutuante no hover -->
-                            <div
-                                class="absolute -right-2 -top-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1 group-hover:-translate-y-1"
-                            >
-                                <div
-                                    class="bg-slate-800 text-white text-xs px-2 py-1 rounded-lg whitespace-nowrap flex items-center gap-1.5 shadow-lg"
-                                >
+                            <div class="absolute -right-2 -top-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1 group-hover:-translate-y-1">
+                                <div class="bg-slate-800 text-white text-xs px-2 py-1 rounded-lg whitespace-nowrap flex items-center gap-1.5 shadow-lg" >
                                     <TrendingUp class="w-3.5 h-3.5 text-emerald-400" />
                                     <span>Ver detalhes</span>
                                 </div>
@@ -595,7 +593,7 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                     <div class="flex-1 space-y-1 overflow-hidden">
                         <div class="flex justify-between items-center p-2 rounded-lg bg-purple-50 border border-purple-100">
                             <div class="flex items-center gap-2.5">
-                                <div class="w-8 h-8 flex items-center justify-center rounded-full bg-purple-500 text-white">
+                                <div class="w-8 h-8 flex items-center justify-center rounded-md bg-purple-500 text-white">
                                     <Gift class="w-4 h-4" />
                                 </div>
                                 <div>
@@ -612,13 +610,12 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                         <!-- OUTROS -->
                         <div class="flex justify-between items-center p-2 rounded-lg hover:bg-gray-50 transition group">
                             <div class="flex items-center gap-2.5">
-                                <div
-                                    class="w-7 h-7 flex items-center justify-center rounded-full bg-rose-50 text-rose-500 group-hover:bg-rose-500 group-hover:text-white transition"
-                                >
+                                <div class="w-7 h-7 flex items-center justify-center rounded-md bg-rose-50 text-rose-500 group-hover:bg-rose-500 group-hover:text-white transition" >
                                     <ShoppingCart class="w-3.5 h-3.5" />
                                 </div>
                                 <span class="text-[11px] text-gray-700">Compras</span>
                             </div>
+
                             <div class="text-right">
                                 <p class="text-[11px] font-bold">9,20%</p>
                                 <p class="text-[9px] text-gray-400">R$ 230,00</p>
@@ -627,13 +624,12 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
 
                         <div class="flex justify-between items-center p-2 rounded-lg hover:bg-gray-50 transition group">
                             <div class="flex items-center gap-2.5">
-                                <div
-                                    class="w-7 h-7 flex items-center justify-center rounded-full bg-pink-50 text-pink-500 group-hover:bg-pink-500 group-hover:text-white transition"
-                                >
+                                <div class="w-7 h-7 flex items-center justify-center rounded-md bg-pink-50 text-pink-500 group-hover:bg-pink-500 group-hover:text-white transition" >
                                     <Utensils class="w-3.5 h-3.5" />
                                 </div>
                                 <span class="text-[11px] text-gray-700">Alimentação</span>
                             </div>
+
                             <div class="text-right">
                                 <p class="text-[11px] font-bold">6,18%</p>
                                 <p class="text-[9px] text-gray-400">R$ 152,70</p>
@@ -642,13 +638,12 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
 
                         <div class="flex justify-between items-center p-2 rounded-lg hover:bg-gray-50 transition group">
                             <div class="flex items-center gap-2.5">
-                                <div
-                                    class="w-7 h-7 flex items-center justify-center rounded-full bg-cyan-50 text-cyan-500 group-hover:bg-cyan-500 group-hover:text-white transition"
-                                >
+                                <div class="w-7 h-7 flex items-center justify-center rounded-md bg-cyan-50 text-cyan-500 group-hover:bg-cyan-500 group-hover:text-white transition" >
                                     <Gamepad2 class="w-3.5 h-3.5" />
                                 </div>
                                 <span class="text-[11px] text-gray-700">Lazer</span>
                             </div>
+
                             <div class="text-right">
                                 <p class="text-[11px] font-bold">1,81%</p>
                                 <p class="text-[9px] text-gray-400">R$ 44,72</p>
@@ -657,9 +652,7 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
 
                         <div class="flex justify-between items-center p-2 rounded-lg hover:bg-gray-50 transition group">
                             <div class="flex items-center gap-2.5">
-                                <div
-                                    class="w-7 h-7 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition"
-                                >
+                                <div class="w-7 h-7 flex items-center justify-center rounded-md bg-emerald-50 text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition">
                                     <Car class="w-3.5 h-3.5" />
                                 </div>
                                 <span class="text-[11px] text-gray-700">Transporte</span>
@@ -667,6 +660,19 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                             <div class="text-right">
                                 <p class="text-[11px] font-bold">12%</p>
                                 <p class="text-[9px] text-gray-400">R$ 300,00</p>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center p-2 rounded-lg hover:bg-gray-50 transition group">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 flex items-center justify-center rounded-md bg-emerald-50 text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition"  >
+                                    <Car class="w-3.5 h-3.5" />
+                                </div>
+                                <span class="text-[11px] text-gray-700">Saúde</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[11px] font-bold">12%</p>
+                                <p class="text-[9px] text-gray-400">R$ 400,00</p>
                             </div>
                         </div>
                     </div>
@@ -688,99 +694,73 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                         <h2 class="text-lg font-bold text-gray-800">Meus Cartões</h2>
                         <p class="text-xs text-gray-500">Exibindo os últimos 3 cartões</p>
                     </div>
-                    <button
-                        @click="isModalOpen = true"
-                        class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 bg-emerald-50 px-3 py-1.5 rounded-lg transition-all"
-                    >
+                    <button @click="isModalOpen = true" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 bg-emerald-50 px-3 py-1.5 rounded-lg transition-all" >
                         Ver Todos
                     </button>
                 </div>
 
-                <!-- Lista de Cartões (Espaçada para alinhar com 6 metas) -->
+                <!-- Lista de Cartões  -->
                 <div class="flex-1 flex flex-col justify-start space-y-6">
                     <!-- Cartão 1 -->
-                    <div
-                        class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-lg shadow-orange-100 group transition-transform hover:scale-[1.01]"
-                    >
+                    <div class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-lg shadow-orange-100 group transition-transform hover:scale-[1.01]" >
                         <div class="flex justify-between items-start mb-6">
                             <div>
                                 <p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Banco Inter</p>
                                 <p class="text-sm font-medium tracking-[0.2em]">•••• 4321</p>
                             </div>
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg"
-                                alt="Mastercard"
-                                class="h-6 opacity-90"
-                            />
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="Mastercard" class="h-6 opacity-90" />
                         </div>
                         <div class="flex justify-between items-end">
                             <div>
                                 <p class="text-[10px] opacity-70 mb-1 font-semibold uppercase">Fatura Atual</p>
                                 <p class="text-xl font-extrabold">R$ 1.240,00</p>
                             </div>
-                            <span class="text-[10px] font-bold bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30"
-                                >Aberta</span
-                            >
+                            <span class="text-[10px] font-bold bg-[#FFFFFF]/20 backdrop-blur-md px-3 py-1 rounded-md border border-[#FFFFFF]/30">Aberta</span>
                         </div>
                     </div>
 
                     <!-- Cartão 2 -->
-                    <div
-                        class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-red-500 to-red-700 text-white shadow-lg shadow-red-100 group transition-transform hover:scale-[1.01]"
-                    >
+                    <div class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-red-500 to-red-700 text-[#FFFFFF] shadow-lg shadow-red-100 group transition-transform hover:scale-[1.01]">
                         <div class="flex justify-between items-start mb-6">
                             <div>
                                 <p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Santander</p>
                                 <p class="text-sm font-medium tracking-[0.2em]">•••• 9876</p>
                             </div>
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Visa_Inc._logo_%282005%E2%80%932014%29.svg/960px-Visa_Inc._logo_%282005%E2%80%932014%29.svg.png"
-                                alt="Visa"
-                                class="h-4 opacity-90 brightness-0 invert"
-                            />
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Visa_Inc._logo_%282005%E2%80%932014%29.svg/960px-Visa_Inc._logo_%282005%E2%80%932014%29.svg.png"
+                                alt="Visa" class="h-4 opacity-90 brightness-0 invert" />
                         </div>
+
                         <div class="flex justify-between items-end">
                             <div>
                                 <p class="text-[10px] opacity-70 mb-1 font-semibold uppercase">Fatura Atual</p>
                                 <p class="text-xl font-extrabold">R$ 860,00</p>
                             </div>
-                            <span class="text-[10px] font-bold bg-black/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/10"
-                                >Fechada</span
-                            >
+                            <span class="text-[10px] font-bold bg-black/20 backdrop-blur-md px-3 py-1 rounded-full border border-[#FFFFFF]/10">Fechada</span>
                         </div>
                     </div>
 
                     <!-- Cartão 3 -->
-                    <div
-                        class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-800 text-white shadow-lg shadow-purple-100 group transition-transform hover:scale-[1.01]"
-                    >
+                    <div class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-800 text-white shadow-lg shadow-purple-100 group transition-transform hover:scale-[1.01]">
                         <div class="flex justify-between items-start mb-6">
                             <div>
                                 <p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Nubank</p>
                                 <p class="text-sm font-medium tracking-[0.2em]">•••• 1122</p>
                             </div>
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg"
-                                alt="Mastercard"
-                                class="h-6 opacity-90"
-                            />
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg"
+                                alt="Mastercard" class="h-6 opacity-90" />
                         </div>
                         <div class="flex justify-between items-end">
                             <div>
                                 <p class="text-[10px] opacity-70 mb-1 font-semibold uppercase">Fatura Atual</p>
                                 <p class="text-xl font-extrabold">R$ 2.150,00</p>
                             </div>
-                            <span class="text-[10px] font-bold bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30"
-                                >Aberta</span
-                            >
+                            <span class="text-[10px] font-bold bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30">Aberta</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-8 pt-4 border-t border-gray-50">
-                    <button
-                        class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-gray-50 text-gray-600 font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-emerald-600 hover:text-white transition-all duration-300"
-                    >
+                    <button class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-gray-50 text-gray-600 font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-emerald-600 hover:text-white transition-all duration-300" >
                         <Plus class="w-4 h-4" /> Novo Cartão
                     </button>
                 </div>
@@ -938,9 +918,7 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                 </div>
 
                 <div class="mt-8 pt-4 border-t border-gray-50">
-                    <button
-                        class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-emerald-600 shadow-lg shadow-emerald-100 transition-all duration-300"
-                    >
+                    <button class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-emerald-600 shadow-lg shadow-emerald-100 transition-all duration-300">
                         <CirclePlus class="w-4 h-4" /> Criar Nova Meta
                     </button>
                 </div>
@@ -1052,18 +1030,11 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
 
             <!-- LISTAGEM -->
             <div class="p-6 flex-1 overflow-y-auto space-y-4">
-                <div
-                    v-for="(card, index) in cards"
-                    :key="index"
-                    class="p-4 border border-gray-300 rounded-md flex justify-between items-center hover:bg-gray-200 transition"
-                >
+                <div v-for="(card, index) in cards" :key="index" class="p-4 border border-gray-300 rounded-md flex justify-between items-center hover:bg-gray-200 transition" >
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-8 bg-blue-600 rounded-md flex items-center justify-center text-white text-[9px] font-bold">
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Visa_Inc._logo_%282005%E2%80%932014%29.svg/960px-Visa_Inc._logo_%282005%E2%80%932014%29.svg.png"
-                                alt="Visa"
-                                class="h-3 opacity-90 brightness-0 invert"
-                            />
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Visa_Inc._logo_%282005%E2%80%932014%29.svg/960px-Visa_Inc._logo_%282005%E2%80%932014%29.svg.png"
+                                alt="Visa" class="h-3 opacity-90 brightness-0 invert" />
                         </div>
 
                         <div>
@@ -1106,38 +1077,104 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
             </div>
         </div>
     </div>
+
+                 <!-- ==================== MODAL PRINCIPAL ==================== -->
+                <div v-if="activeModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4" @click.self="closeModal" >
+                    <div class="bg-white w-full max-w-lg rounded-md shadow-2xl overflow-hidden">
+
+                        <!-- HEADER -->
+                        <div class="px-6 pt-6 pb-2 border-b border-gray-200/50 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+
+                                <div>
+                                    <h2 class="text-lg font-semibold text-gray-800">{{ modalTitle }}</h2>
+                                </div>
+                            </div>
+                            <button @click="closeModal" class="w-9 h-9 flex items-center justify-center text-gray-600 hover:text-gray-600 hover:bg-gray-100 rounded-md hover:cursor-pointer transition-colors" >
+                                <X class="w-5 h-5" />
+                            </button>
+                        </div>
+
+                        <!-- FORM -->
+                        <form @submit.prevent="handleSubmit" class="p-6 space-y-6">
+                            <div>
+                                <label class="text-xs font-medium text-gray-500 block mb-1.5">Descrição</label>
+                                <input v-model="form.description" type="text" placeholder="Ex: Aluguel, Salário, Supermercado..." class="w-full border border-gray-300 rounded-md px-4 py-3 text-sm focus:border-emerald-500 outline-none" />
+                            </div>
+
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="text-xs font-medium text-gray-500 block mb-1.5">Valor</label>
+                                    <div class="relative">
+                                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium">R$</span>
+                                        <input v-model="form.amount" type="number" step="0.01" placeholder="0,00" class="w-full border border-gray-300 rounded-md px-9 py-2 text-lg font-semibold focus:border-emerald-500 outline-none" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="text-xs font-medium text-gray-500 block mb-1.5">Data</label>
+                                    <input v-model="form.date"  type="date" class="w-full border border-gray-300 rounded-md px-4 py-3 text-sm focus:border-emerald-500 outline-none" />
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="text-xs font-medium text-gray-500 block mb-1.5">Conta / Cartão</label>
+                                        <select v-model="form.accountId" class="w-full border border-gray-300 rounded-md text-sm focus:border-emerald-500 outline-none mr-4 px-4 py-3">
+                                            <option value="">Selecione a conta...</option>
+                                        </select>
+                                    </div>
+                                <div>
+                                    <label class="text-xs font-medium text-gray-500 block mb-1.5">Categoria</label>
+                                    <select v-model="form.categoryId" class="w-full border border-gray-300 rounded-md px-4 py-3 text-sm focus:border-emerald-500 outline-none">
+                                        <option value="">Selecione a categoria...</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Observação -->
+                            <div>
+                                <label class="text-xs font-medium text-gray-500 block mb-1.5">Observação (opcional)</label>
+                                <textarea v-model="form.note"  rows="3" placeholder="Adicione uma observação..." class="w-full border border-gray-300 rounded-md px-4 py-3 text-sm resize-y min-h-[80px] focus:border-emerald-500 outline-none"></textarea>
+                            </div>
+
+                            <!-- 4 BOTÕES DE AÇÃO NO RODAPÉ -->
+                            <div class="flex justify-center gap-6">
+
+                                <!-- Repetir -->
+                                <div @click="toggleRepeat" class="text-center group cursor-pointer">
+                                    <div class="w-12 h-12 bg-gray-100/70 rounded-md flex items-center justify-center text-gray-600 mb-2 group-hover:bg-gray-100 transition-colors">
+                                        <Repeat class="w-6 h-6" />
+                                    </div>
+                                    <span class="text-[10px] uppercase font-bold text-gray-500">Repetir</span>
+                                </div>
+
+                                <!-- Observação -->
+                                <div @click="focusNote" class="text-center group cursor-pointer" :class="{ 'text-emerald-600': form.note }">
+                                    <div class="w-12 h-12 bg-gray-100/70 rounded-md flex items-center justify-center text-gray-600 mb-2 group-hover:bg-gray-100 transition-colors">
+                                        <MessageSquareText  class="w-6 h-6" />
+                                    </div>
+                                    <span class="text-[10px] uppercase font-bold text-gray-500">Obs</span>
+                                </div>
+
+                                <!-- Anexo -->
+                                <div @click="handleAttach" class="text-center group cursor-pointer">
+                                    <div class="w-12 h-12 bg-gray-100/70 rounded-md flex items-center justify-center text-gray-600 mb-2 group-hover:bg-gray-100 transition-colors">
+                                        <Paperclip class="w-6 h-6" />
+                                    </div>
+                                    <span class="text-[10px] uppercase font-bold text-gray-500">Anexo</span>
+                                </div>
+
+                                <!-- Tags -->
+                                <div @click="handleTags" class="text-center group cursor-pointer">
+                                    <div class="w-12 h-12 bg-gray-100/70 rounded-md flex items-center justify-center text-gray-600 mb-2 group-hover:bg-gray-100 transition-colors">
+                                        <Tag class="w-6 h-6" />
+                                    </div>
+                                    <span class="text-[10px] uppercase font-bold text-gray-500">Tags</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
 </template>
-
-<style>
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f8fafc;
-}
-
-.modal-active {
-    overflow: hidden;
-}
-
-.modal {
-    transition: opacity 0.25s ease;
-}
-
-.shadow-3xl {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-@keyframes pulse-ring {
-    0% {
-        transform: scale(0.95);
-        opacity: 0.5;
-    }
-    100% {
-        transform: scale(1.05);
-        opacity: 0;
-    }
-}
-
-.group:hover .pulse-ring {
-    animation: pulse-ring 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-</style>

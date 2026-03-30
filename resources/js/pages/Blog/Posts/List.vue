@@ -10,39 +10,24 @@ import { ArrowRight } from 'lucide-vue-next';
                 <!-- Logo -->
                 <div class="flex items-center shrink-0">
                     <a href="#" class="flex items-center gap-2 transition-opacity hover:opacity-80">
-                        <img
-                            src="https://auth.organizze.com.br/images/auth/logo-909f6075bb5972376e589ed01866ee33.svg?vsn=d"
-                            alt="Organizze"
-                            class="h-8 w-auto"
-                        />
+                        <img src="https://auth.organizze.com.br/images/auth/logo-909f6075bb5972376e589ed01866ee33.svg?vsn=d"
+                            alt="Organizze" class="h-8 w-auto" />
                         <span class="hidden text-sm font-medium text-gray-600 sm:inline">Blog</span>
                     </a>
                 </div>
 
                 <!-- Menu / Links Centralizado -->
                 <div class="hidden md:flex items-center justify-center space-x-8 flex-1">
-                    <a
-                        href="#home"
-                        class="capitalize relative text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full"
-                    >
+                    <a href="#home" class="capitalize relative text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full">
                         Home
                     </a>
-                    <a
-                        href="#categorias"
-                        class="capitalize relative text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full"
-                    >
+                    <a href="#categorias" class="capitalize relative text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full">
                         Categorias
                     </a>
-                    <a
-                        href="#depoimentos"
-                        class="capitalize relative text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full"
-                    >
+                    <a href="#depoimentos" class="capitalize relative text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full">
                         Artigos
                     </a>
-                    <a
-                        href="#depoimentos"
-                        class="capitalize relative text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full"
-                    >
+                    <a href="#depoimentos" class="capitalize relative text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full">
                         Mais lido
                     </a>
 
@@ -59,36 +44,17 @@ import { ArrowRight } from 'lucide-vue-next';
                     <div class="hidden md:flex items-center relative">
                         <button class="p-2 text-gray-700 rounded-lg border border-gray-200 hover:bg-gray-100 transition cursor-pointer">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </button>
 
                         <div class="absolute top-14 right-0 w-80">
                             <div class="bg-white rounded-xl shadow-xl border border-gray-200 p-4 hidden">
                                 <div class="relative">
-                                    <svg
-                                        class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                        />
+                                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                                     </svg>
-                                    <input
-                                        type="text"
-                                        placeholder="Buscar artigos..."
-                                        class="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#16C64F]/30 focus:border-[#16C64F]"
-                                    />
+                                    <input type="text" placeholder="Buscar artigos..." class="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#16C64F]/30 focus:border-[#16C64F]" />
                                 </div>
 
                                 <div class="mt-4 text-sm">
@@ -121,24 +87,16 @@ import { ArrowRight } from 'lucide-vue-next';
             <section class="max-w-7xl mx-auto px-4 py-10">
                 <div class="relative flex flex-col md:flex-row overflow-hidden rounded-md shadow-lg">
                     <div class="relative md:w-2/3 h-65 md:h-90">
-                        <img
-                            src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"
-                            alt="Controle de gastos"
-                            class="w-full h-full object-cover"
-                        />
+                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93" alt="Controle de gastos" class="w-full h-full object-cover" />
                         <span class="absolute bottom-4 left-4 bg-[#1F3D2B] text-white text-xs px-3 py-1 rounded-full"> Controle de Gastos</span>
 
-                        <button
-                            class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition"
-                        >
+                        <button class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                             </svg>
                         </button>
 
-                        <button
-                            class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition"
-                        >
+                        <button class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition" >
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                             </svg>
@@ -183,15 +141,8 @@ import { ArrowRight } from 'lucide-vue-next';
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 flex-1">
-                        <a
-                            href="#"
-                            class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300"
-                        >
-                            <img
-                                src="https://www.organizze.com.br/blog/wp-content/uploads/MEI-280x210-1.jpg"
-                                alt="MEI"
-                                class="w-full h-44 object-cover transform group-hover:scale-110 transition-transform duration-500"
-                            />
+                        <a href="#" class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300" >
+                            <img src="https://www.organizze.com.br/blog/wp-content/uploads/MEI-280x210-1.jpg" alt="MEI" class="w-full h-44 object-cover transform group-hover:scale-110 transition-transform duration-500" />
                             <span class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-90"></span>
                             <div class="absolute bottom-0 p-4">
                                 <h3 class="text-white font-semibold text-base">MEI & Empreendedorismo</h3>
@@ -199,15 +150,8 @@ import { ArrowRight } from 'lucide-vue-next';
                             </div>
                         </a>
 
-                        <a
-                            href="#"
-                            class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300"
-                        >
-                            <img
-                                src="https://www.organizze.com.br/blog/wp-content/uploads/Investimento-280x210-1.jpg"
-                                alt="Investimentos"
-                                class="w-full h-44 object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
+                        <a href="#" class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                            <img src="https://www.organizze.com.br/blog/wp-content/uploads/Investimento-280x210-1.jpg" alt="Investimentos" class="w-full h-44 object-cover group-hover:scale-110 transition-transform duration-500"/>
                             <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
                             <div class="absolute bottom-0 p-4">
                                 <h3 class="text-white font-semibold text-base">Investimentos</h3>
@@ -215,15 +159,8 @@ import { ArrowRight } from 'lucide-vue-next';
                             </div>
                         </a>
 
-                        <a
-                            href="#"
-                            class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300"
-                        >
-                            <img
-                                src="https://www.organizze.com.br/blog/wp-content/uploads/Direitos-do-consumidor-280x210-1.jpg"
-                                alt="Orçamento"
-                                class="w-full h-44 object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
+                        <a href="#" class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                            <img src="https://www.organizze.com.br/blog/wp-content/uploads/Direitos-do-consumidor-280x210-1.jpg" alt="Orçamento" class="w-full h-44 object-cover group-hover:scale-110 transition-transform duration-500" />
                             <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
                             <div class="absolute bottom-0 p-4">
                                 <h3 class="text-white font-semibold text-base">Orçamento</h3>
@@ -231,15 +168,8 @@ import { ArrowRight } from 'lucide-vue-next';
                             </div>
                         </a>
 
-                        <a
-                            href="#"
-                            class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300"
-                        >
-                            <img
-                                src="https://www.organizze.com.br/blog/wp-content/uploads/D%C2%A1vidas-280x210-1.jpg"
-                                alt="Impostos"
-                                class="w-full h-44 object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
+                        <a href="#" class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                            <img src="https://www.organizze.com.br/blog/wp-content/uploads/D%C2%A1vidas-280x210-1.jpg" alt="Impostos" class="w-full h-44 object-cover group-hover:scale-110 transition-transform duration-500" />
                             <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
                             <div class="absolute bottom-0 p-4">
                                 <h3 class="text-white font-semibold text-base">Impostos</h3>
@@ -264,19 +194,12 @@ import { ArrowRight } from 'lucide-vue-next';
                                     />
                                 </a>
 
-                                <div
-                                    class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-4 text-white"
-                                >
-                                    <a
-                                        class="bg-green-800 text-white text-[12px] px-2 py-0.5 rounded-md md:w-30 Capitalize font-semibold hover:cursor-pointer"
-                                    >
+                                <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-4 text-white" >
+                                    <a class="bg-green-800 text-white text-[12px] px-2 py-0.5 rounded-md md:w-30 Capitalize font-semibold hover:cursor-pointer">
                                         Gestão Financeira
                                     </a>
                                     <h2 class="text-2xl lg:text-3xl font-bold leading-tight mb-3">
-                                        <a
-                                            href="https://www.organizze.com.br/blog/gestao-financeira/aplicativo-para-controle-financeiro"
-                                            class="hover:underline"
-                                        >
+                                        <a href="https://www.organizze.com.br/blog/gestao-financeira/aplicativo-para-controle-financeiro" class="hover:underline">
                                             12 melhores aplicativos para controle financeiro e organização de contas
                                         </a>
                                     </h2>
@@ -291,10 +214,7 @@ import { ArrowRight } from 'lucide-vue-next';
                                             <span>Por Anderson de Andrade</span>
                                             <span>• 9 min de leitura</span>
                                         </div>
-                                        <a
-                                            href="#"
-                                            class="inline-flex items-center gap-2 text-white font-medium hover:text-blue-300 transition-colors"
-                                        >
+                                        <a href="#" class="inline-flex items-center gap-2 text-white font-medium hover:text-blue-300 transition-colors" >
                                             Leia mais
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -382,10 +302,7 @@ import { ArrowRight } from 'lucide-vue-next';
 
                                 <div class="space-y-6">
                                     <article class="border-b border-gray-300/50 mb-3">
-                                        <a
-                                            href="https://www.organizze.com.br/blog/investimento"
-                                            class="bg-green-800 text-white text-[10px] px-2 py-0.5 rounded-md hover:cursor-pointer"
-                                        >
+                                        <a href="https://www.organizze.com.br/blog/investimento" class="bg-green-800 text-white text-[10px] px-2 py-0.5 rounded-md hover:cursor-pointer">
                                             Investimento
                                         </a>
                                         <h3 class="mt-1 text-sm md:text-base font-semibold leading-tight">

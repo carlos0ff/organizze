@@ -8,9 +8,8 @@ use Illuminate\Support\Facades\Route;
  * Blog Controller
  * Controllers relacionados ao blog, como exibição de posts, categorias, etc.
  */
-use App\Http\Controllers\Blog\CategoryController;
-use App\Http\Controllers\Blog\BlogController;
-
+use App\Http\Controllers\Blog\Post\ListPostsController;
+use App\Http\Controllers\Blog\Post\ShowPostController;
 
 // Route::get("/", )->name();
 
@@ -21,13 +20,13 @@ use App\Http\Controllers\Blog\BlogController;
 Route::prefix("blog")->group(function(){
 
     /** Blog Home **/
-    Route::get("/", [BlogController::class , "index"])->name("blog.home");
+    Route::get("/", ListPostsController::class)->name("blog.home");
 
     /** Blog post { SLUG } **/
-    Route::get("/post/", [BlogController::class , "post"])->name("blog.post");
+    Route::get("/post/{slug}", ShowPostController::class)->name("blog.post");
 
     /** Blog Categorys { SLUG } **/
-    Route::get("/categoria/{category}", [CategoryController::class , "show"])->name("blog.category");
+    // Route::get("/categoria/{category}", CategoryController::class)->name("blog.category");
 
 });
 
@@ -35,6 +34,7 @@ Route::prefix("blog")->group(function(){
  * http://localhost/blog
  * http://localhost/blog/post/como-viver-na-lagoa
  * http://localhost/blog/categoria/controle
+ * sail artisan make:controller ./App/Account/DeleteAccountController --invokable
  */
 
 

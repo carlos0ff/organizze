@@ -65,3 +65,32 @@ class CategoryController extends Controller
         // Lógica para remover a categoria
     }
 }
+
+
+
+// sail artisan make:controller Blog/Post/ListPostsController --invokable
+// sail artisan make:controller Blog/Post/ShowPostController --invokable
+// sail artisan make:controller Blog/Post/CreatePostController --invokable
+// sail artisan make:controller Blog/Post/UpdatePostController --invokable
+// sail artisan make:controller Blog/Post/DeletePostController --invokable
+// sail artisan make:controller Blog/Post/PublishPostController --invokable
+
+
+// sail artisan make:controller Blog/Category/ListCategoriesController --invokable
+// sail artisan make:controller Blog/Category/CreateCategoryController --invokable
+// sail artisan make:controller Blog/Category/UpdateCategoryController --invokable
+// sail artisan make:controller Blog/Category/DeleteCategoryController --invokable
+
+// sail artisan make:controller Blog/Tag/ListTagsController --invokable
+// sail artisan make:controller Blog/Tag/CreateTagController --invokable
+// sail artisan make:controller Blog/Tag/UpdateTagController --invokable
+// sail artisan make:controller Blog/Tag/DeleteTagController --invokable
+
+
+// sail artisan make:controller Blog/Feed/GetFeedController --invokable
+
+// sail artisan make:controller Panel/DashboardController
+// sail artisan make:controller Panel/UserController --resource
+// sail artisan make:controller Panel/Blog/PostController --resource
+// sail artisan make:controller Panel/Finance/TransactionController --resource
+// sail artisan make:controller Panel/ReportController

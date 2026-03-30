@@ -1,9 +1,7 @@
-import BlogController from './BlogController'
-import CategoryController from './CategoryController'
+import Post from './Post'
 
 const Blog = {
-    BlogController: Object.assign(BlogController, BlogController),
-    CategoryController: Object.assign(CategoryController, CategoryController),
+    Post: Object.assign(Post, Post),
 }
 
 export default Blog
