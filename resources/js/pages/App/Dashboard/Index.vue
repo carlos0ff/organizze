@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
+import Footer from '@/Components/layout/Footer.vue';
 
 // ==================== IMPORTS LUCIDE ====================
 import {
@@ -48,6 +49,7 @@ import {
   Paperclip,
   Repeat
 } from 'lucide-vue-next'
+
 
 // ==================== STATE ====================
 const activeModal = ref(false)
@@ -371,7 +373,7 @@ const goToCardsPage = () => {
                 </div>
 
                 <!-- Empty State -->
-                <div class="flex-1 flex flex-col items-center justify-center text-center space-y-3">
+                <!-- <div class="flex-1 flex flex-col items-center justify-center text-center space-y-3">
                     <div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-gray-300">
                         <Plus class="w-6 h-6" />
                     </div>
@@ -379,14 +381,12 @@ const goToCardsPage = () => {
                         <p class="text-sm font-bold text-gray-400">Nenhuma conta encontrada</p>
                         <p class="text-[11px] text-gray-300">Conecte seu banco para gerenciar seu saldo.</p>
                     </div>
-                    <button
-                        class="mt-2 px-4 py-1.5 text-[11px] font-bold text-emerald-600 border border-emerald-100 rounded-full hover:bg-emerald-50 transition-all uppercase"
-                    >
+                    <button class="mt-2 px-4 py-1.5 text-[11px] font-bold text-emerald-600 border border-emerald-100 rounded-full hover:bg-emerald-50 transition-all uppercase">
                         Conectar Agora
                     </button>
-                </div>
+                </div> -->
 
-                <!-- <div class="flex-1 overflow-hidden pr-1">
+                <div class="flex-1 overflow-hidden pr-1">
                     <div class="space-y-1">
                         <div class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
                             <div class="flex items-center space-x-3">
@@ -453,13 +453,13 @@ const goToCardsPage = () => {
                             <p class="text-sm font-bold text-emerald-600">R$ 1.000,00</p>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
-                <!-- <div class="mt-4 pt-4 border-t border-gray-50 flex-shrink-0">
+                <div class="mt-4 pt-4 border-t border-gray-50 flex-shrink-0">
                     <button class="w-full py-2.5 text-[11px] font-bold text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all uppercase tracking-widest flex items-center justify-center">
-                        <Plus class="w-3 h-3 mr-2" /> Gerenciar Contas
+                        <Plus class="w-3 h-3 mr-2" /> Ver minhas contas
                     </button>
-                </div> -->
+                </div>
             </div>
 
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col h-[460px]">
@@ -998,17 +998,7 @@ const goToCardsPage = () => {
             </div>
         </div>
 
-        <!-- footer -->
-        <footer class="mt-12 pt-8 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-400">
-            <p class="mb-4 sm:mb-0">&copy; {{ new Date().getFullYear() }} Organizze. Todos os direitos reservados.</p>
-
-            <div class="flex space-x-6">
-                <Github class="w-5 h-5 text-gray-400 cursor-pointer transition-colors duration-200 hover:text-gray-600" />
-                <Linkedin class="w-5 h-5 text-gray-400 cursor-pointer transition-colors duration-200 hover:text-blue-600" />
-                <Youtube class="w-5 h-5 text-gray-400 cursor-pointer transition-colors duration-200 hover:text-red-600" />
-                <Twitter class="w-5 h-5 text-gray-400 cursor-pointer transition-colors duration-200 hover:text-blue-400" />
-            </div>
-        </footer>
+        <Footer />
     </main>
 
     <!-- MODAL DE CARTÕES -->

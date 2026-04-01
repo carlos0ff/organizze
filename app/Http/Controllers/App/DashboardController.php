@@ -14,7 +14,7 @@ class DashboardController extends Controller
      */
     public function index() : \Inertia\Response
     {
-        return nertia::render('App/Dashboard/Index');
+        return Inertia::render('App/Dashboard/Index');
     }
 
     /**
