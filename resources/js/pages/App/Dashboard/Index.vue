@@ -1,22 +1,18 @@
 <script setup>
-import { ref, computed } from 'vue'
-import Footer from '@/Components/layout/Footer.vue';
+import { ref, computed } from 'vue';
+import AppFooter  from '../Components/layout/Footer.vue';
+import Navbar from '../Components/navigation/Navbar.vue';
 
 // ==================== IMPORTS LUCIDE ====================
 import {
-  // UI / Navegação
-  ChevronDown,
   Ellipsis,
   Menu,
   X,
-
   // Ações
   Check,
   Download,
-  LogOut,
   Minus,
   Plus,
-  Settings,
 
   // Finanças
   ArrowRightLeft,
@@ -25,30 +21,26 @@ import {
   Wallet,
 
   // Outros
-  Bell,
-  CalendarRange,
   Car,
   CirclePlus,
   Gamepad2,
-  Gem,
   Gift,
   GraduationCap,
   HeartPulse,
   Home,
-  Layers,
-  Scale,
+
   ShoppingCart,
   Star,
   TreePalm,
   TvMinimalPlay,
-  User,
   Utensils,
   Wifi,
   Tag,
   MessageSquareText ,
   Paperclip,
   Repeat
-} from 'lucide-vue-next'
+} from 'lucide-vue-next';
+
 
 
 // ==================== STATE ====================
@@ -139,132 +131,9 @@ const goToCardsPage = () => {
 </script>
 
 <template>
-    <nav class="bg-[#22c75e] shadow-lg fixed top-0 left-0 w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="shrink-0 flex items-center">
-                        <img
-                            style="filter: brightness(0) invert(1)"
-                            src="https://auth.organizze.com.br/images/auth/logo-909f6075bb5972376e589ed01866ee33.svg?vsn=d"
-                            alt="Organizze"
-                            class="logo h-8 w-auto"
-                        />
-                    </div>
-                </div>
 
-                <div class="hidden md:flex items-center space-x-8">
-                    <a
-                        href="/app"
-                        class="relative text-white font-medium text-sm after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[#F9F9F9F9] after:transition-all after:duration-500 hover:after:w-10"
-                        >Visão Geral</a
-                    >
-                    <a
-                        href="#lancamentos"
-                        class="relative text-white font-medium text-sm after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[#F9F9F9F9] after:transition-all after:duration-500 hover:after:w-10"
-                        >Lançamentos</a
-                    >
-
-                    <div class="relative group">
-                        <a href="#relatorios" class="flex items-center gap-1 text-white font-medium text-sm">
-                            Relatórios
-                            <ChevronDown class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" />
-                        </a>
-
-                        <div
-                            class="absolute left-0 mt-3 w-64 rounded-lg bg-white shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all border border-slate-200"
-                        >
-                            <a
-                                href="#relatorios/mensal"
-                                class="flex items-center gap-2 px-4 py-3 text-sm text-slate-700 hover:bg-slate-100 rounded-t-xl"
-                            >
-                                <span class="flex h-8 w-8 items-center justify-center rounded-md border border-slate-200 text-indigo-500">
-                                    <CalendarRange class="w-4 h-4" />
-                                </span>
-                                Mensal
-                            </a>
-                            <a href="#relatorios/anual" class="flex items-center gap-2 px-4 py-3 text-sm text-slate-700 hover:bg-slate-100">
-                                <span class="flex h-8 w-8 items-center justify-center rounded-md border border-slate-200 text-blue-500">
-                                    <TrendingUp class="w-4 h-4" />
-                                </span>
-                                Anual
-                            </a>
-                            <a href="#relatorios/categorias" class="flex items-center gap-2 px-4 py-3 text-sm text-slate-700 hover:bg-slate-100">
-                                <span class="flex h-8 w-8 items-center justify-center rounded-md border border-slate-200 text-purple-500">
-                                    <Layers class="w-4 h-4" />
-                                </span>
-                                Por Categoria
-                            </a>
-                            <a
-                                href="#relatorios/receitas-despesas"
-                                class="flex items-center gap-2 px-4 py-3 text-sm text-slate-700 hover:bg-slate-100"
-                            >
-                                <span class="flex h-8 w-8 items-center justify-center rounded-md border border-slate-200 text-green-500">
-                                    <Scale class="w-4 h-4" />
-                                </span>
-                                Receitas vs Despesas
-                            </a>
-                        </div>
-                    </div>
-
-                    <a
-                        href="#limites-gastos"
-                        class="relative text-white font-medium text-sm after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[#F9F9F9F9] after:transition-all after:duration-500 hover:after:w-10"
-                    >
-                        Limite de Gastos
-                    </a>
-                    <a
-                        href="#conexao-bancaria"
-                        class="relative text-white font-medium text-sm after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[#F9F9F9F9] after:transition-all after:duration-500 hover:after:w-10"
-                        >Conexão Bancária</a
-                    >
-                </div>
-
-                <div class="flex items-center space-x-4">
-                    <button class="relative text-white hover:text-gray-200 transition-colors">
-                        <Bell class="w-6 h-6" />
-                        <span class="absolute top-0 right-0 flex h-2.5 w-2.5">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
-                        </span>
-                    </button>
-
-                    <div class="relative group">
-                        <button class="flex items-center gap-2">
-                            <img src="https://i.pravatar.cc/100?img=12" class="h-9 w-9 rounded-full ring-2 ring-white/30" />
-                            <div class="hidden lg:flex flex-col items-start">
-                                <span class="text-sm text-white font-medium">Thiago Santos</span>
-                                <span class="text-[10px] text-white/80">Plano Gratuito</span>
-                            </div>
-                            <ChevronDown class="w-4 h-4 text-white" />
-                        </button>
-
-                        <div
-                            class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50"
-                        >
-                            <div class="p-2">
-                                <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-slate-50">
-                                    <User class="w-4 h-4" /> Perfil
-                                </a>
-                                <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-slate-50">
-                                    <Gem class="w-4 h-4 text-amber-500" /> Meu Plano
-                                </a>
-                                <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-slate-50">
-                                    <Settings class="w-4 h-4" /> Configurações
-                                </a>
-
-                                <div class="border-t my-1"></div>
-
-                                <button class="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50">
-                                    <LogOut class="w-4 h-4" /> Sair
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <!-- Navbar -->
+    <Navbar />
 
     <!-- Content -->
     <main class="max-w-7xl mx-auto px-4 pt-24 pb-12">
@@ -272,14 +141,13 @@ const goToCardsPage = () => {
             <div class="lg:col-span-2 bg-white rounded-md shadow-sm p-6">
                 <div class="flex justify-between items-start mb-6">
                     <h1 class="text-2xl font-semibold text-gray-800 flex items-center gap-2">
-                        Bom dia, { { Rogério Dória } } <CloudSun class="text-amber-400" />
+                        Bom dia, Thiago Santos <CloudSun class="text-amber-400" />
                     </h1>
-                    <button
-                        class="flex items-center text-xs text-emerald-600 font-medium border border-emerald-100 px-3 py-1 rounded hover:bg-emerald-50"
-                    >
+                    <button class="flex items-center text-xs text-emerald-600 font-medium border border-emerald-100 px-3 py-1 rounded hover:bg-emerald-50">
                         <TrendingUp class="w-3 h-3 mr-1" /> ver relatórios
                     </button>
                 </div>
+                 
                 <div class="grid grid-cols-3 gap-4">
                     <div>
                         <p class="text-[10px] text-gray-400 uppercase font-bold">receita mensal</p>
@@ -332,7 +200,7 @@ const goToCardsPage = () => {
             </div>
         </div>
 
-        <!-- CARD DE TUTORIAL -->
+        <!-- PASSO A PASSO -->
         <div class="bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-gray-50 p-6 mb-4">
             <div class="flex items-center justify-between mb-6">
                 <div class="flex items-center gap-4">
@@ -341,10 +209,10 @@ const goToCardsPage = () => {
                     </div>
                     <div>
                         <h3 class="text-base font-bold text-gray-700">Primeiros passos</h3>
-                        <p class="text-sm text-gray-400">1 de 5 tarefas completas</p>
+                        <p class="text-sm text-gray-400">2 de 5 tarefas completas</p>
                     </div>
                 </div>
-                <button class="bg-green-50 text-green-600 font-bold py-2 px-6 rounded-xl text-sm hover:bg-green-100 transition-colors">
+                <button class="bg-green-50 text-green-600 font-bold py-2 px-6 rounded-md text-sm hover:bg-green-100 cursor-pointer transition-colors">
                     Continuar
                 </button>
             </div>
@@ -373,7 +241,7 @@ const goToCardsPage = () => {
                 </div>
 
                 <!-- Empty State -->
-                <!-- <div class="flex-1 flex flex-col items-center justify-center text-center space-y-3">
+                <div class="flex-1 flex flex-col items-center justify-center text-center space-y-3 hidden">
                     <div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-gray-300">
                         <Plus class="w-6 h-6" />
                     </div>
@@ -381,76 +249,71 @@ const goToCardsPage = () => {
                         <p class="text-sm font-bold text-gray-400">Nenhuma conta encontrada</p>
                         <p class="text-[11px] text-gray-300">Conecte seu banco para gerenciar seu saldo.</p>
                     </div>
-                    <button class="mt-2 px-4 py-1.5 text-[11px] font-bold text-emerald-600 border border-emerald-100 rounded-full hover:bg-emerald-50 transition-all uppercase">
+                    <button class="mt-2 px-4 py-1.5 text-[11px] font-bold text-emerald-600 border border-emerald-100 rounded-md hover:bg-emerald-50 transition-all uppercase">
                         Conectar Agora
                     </button>
-                </div> -->
+                </div>
 
                 <div class="flex-1 overflow-hidden pr-1">
-                    <div class="space-y-1">
-                        <div class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                                    <Star class="w-5 h-5" />
+                    <div class="space-y-2">
+                        <!-- 1 -->
+                        <div class="flex justify-between items-center p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 flex items-center justify-center rounded-md bg-white border border-gray-200 shadow-xs ">
+                                    <img src="https://cdn-sites-assets.mziq.com/wp-content/uploads/sites/1221/2023/05/Logomarca_Banco_Inter-1.png" class="w-full h-full object-contain" />
                                 </div>
                                 <div>
-                                    <p class="text-sm font-bold text-gray-800 leading-tight">Conta 1</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Conta Corrente</p>
+                                    <p class="text-sm font-semibold text-gray-800 leading-tight"> Banco Inter </p>
+                                    <p class="text-xs text-gray-400 mt-0.5"> Conta Corrente</p>
                                 </div>
                             </div>
-                            <p class="text-sm font-bold text-emerald-600">R$ 1.000,00</p>
+
+                            <p class="text-sm font-semibold text-emerald-600"> R$ 12.202,30</p>
                         </div>
 
-                         <div class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                                    <Star class="w-5 h-5" />
+                        <!-- 3 -->
+                        <div class="flex justify-between items-center p-3 rounded-md hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 flex items-center justify-center rounded-2xl bg-white border border-gray-200 shadow-xs ">
+                                    <img src="https://assets.organizze.com.br/institutions/logos/nubank.png" class="w-full h-full object-contain" />
                                 </div>
+
                                 <div>
-                                    <p class="text-sm font-bold text-gray-800 leading-tight">Conta 2</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Conta Corrente</p>
+                                    <p class="text-sm font-semibold text-gray-800 leading-tight capitalize">nubank </p>
+                                    <p class="text-xs text-gray-400 mt-0.5"> Conta Corrente</p>
                                 </div>
                             </div>
-                            <p class="text-sm font-bold text-emerald-600">R$ 1.000,00</p>
+                            <p class="text-sm font-semibold text-emerald-600"> R$ 12.202,30</p>
                         </div>
 
-                        <div class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                                    <Star class="w-5 h-5" />
+                        <!-- 4 -->
+                        <div class="flex justify-between items-center p-3 rounded-md hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 flex items-center justify-center rounded-2xl bg-white border border-gray-200 shadow-xs ">
+                                    <img src="https://assets.organizze.com.br/institutions/logos/picpay.png" class="w-full h-full object-contain" />
                                 </div>
+
                                 <div>
-                                    <p class="text-sm font-bold text-gray-800 leading-tight">Conta 3</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Conta Corrente</p>
+                                    <p class="text-sm font-semibold text-gray-800 leading-tight capitalize">picpay </p>
+                                    <p class="text-xs text-gray-400 mt-0.5"> Conta Corrente</p>
                                 </div>
                             </div>
-                            <p class="text-sm font-bold text-emerald-600">R$ 1.000,00</p>
+                            <p class="text-sm font-semibold text-emerald-600"> R$ 12.202,30</p>
                         </div>
 
-                        <div class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                                    <Star class="w-5 h-5" />
+                        <!-- 5 -->
+                        <div class="flex justify-between items-center p-3 rounded-md hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 flex items-center justify-center rounded-2xl bg-white border border-gray-200 shadow-xs ">
+                                    <img src="https://assets.organizze.com.br/institutions/logos/santander.png" class="w-full h-full object-contain" />
                                 </div>
-                                <div>
-                                    <p class="text-sm font-bold text-gray-800 leading-tight">Conta 4</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Conta Corrente</p>
-                                </div>
-                            </div>
-                            <p class="text-sm font-bold text-emerald-600">R$ 1.000,00</p>
-                        </div>
 
-                        <div class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                                    <Star class="w-5 h-5" />
-                                </div>
                                 <div>
-                                    <p class="text-sm font-bold text-gray-800 leading-tight">Conta 5</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Conta Corrente</p>
+                                    <p class="text-sm font-semibold text-gray-800 leading-tight">Santander </p>
+                                    <p class="text-xs text-gray-400 mt-0.5"> Conta Corrente</p>
                                 </div>
                             </div>
-                            <p class="text-sm font-bold text-emerald-600">R$ 1.000,00</p>
+                            <p class="text-sm font-semibold text-emerald-600"> R$ 12.202,30</p>
                         </div>
                     </div>
                 </div>
@@ -470,9 +333,7 @@ const goToCardsPage = () => {
                         <p class="text-xs text-gray-500">Resumo do mês</p>
                     </div>
 
-                    <button
-                        class="text-[10px] font-semibold text-emerald-600 border border-emerald-100 px-3 py-1.5 rounded-lg hover:bg-emerald-50 transition uppercase"
-                    >
+                    <button class="text-[10px] font-semibold text-emerald-600 border border-emerald-100 px-3 py-1.5 rounded-md hover:bg-emerald-50 transition uppercase">
                         Relatório
                     </button>
                 </div>
@@ -518,41 +379,23 @@ const goToCardsPage = () => {
                                 <circle cx="100" cy="100" r="82" stroke="#e2e8f0" stroke-width="14" fill="transparent" stroke-linecap="round" />
 
                                 <!-- Segmentos com gradientes e animação -->
-                                <circle cx="100" cy="100" r="82"
-                                    stroke="url(#gradient1)" stroke-width="14"
-                                    fill="transparent" stroke-dasharray="515.2"
-                                    stroke-dashoffset="360" stroke-linecap="round" >
+                                <circle cx="100" cy="100" r="82" stroke="url(#gradient1)" stroke-width="14" fill="transparent" stroke-dasharray="515.2" stroke-dashoffset="360" stroke-linecap="round" >
                                     <animate attributeName="stroke-dashoffset" from="515.2" to="360" dur="1.5s" fill="freeze" />
                                 </circle>
 
-                                <circle cx="100" cy="100" r="82"
-                                    stroke="url(#gradient2)"
-                                    stroke-width="14" fill="transparent"
-                                    stroke-dasharray="515.2" stroke-dashoffset="430"
-                                    stroke-linecap="round" transform="rotate(95 100 100)" >
+                                <circle cx="100" cy="100" r="82" stroke="url(#gradient2)" stroke-width="14" fill="transparent" stroke-dasharray="515.2" stroke-dashoffset="430" stroke-linecap="round" transform="rotate(95 100 100)" >
                                     <animate attributeName="stroke-dashoffset" from="515.2" to="430" dur="1.5s" fill="freeze" begin="0.2s" />
                                 </circle>
 
-                                <circle cx="100" cy="100" r="82"
-                                    stroke="url(#gradient3)"
-                                    stroke-width="14" fill="transparent"
-                                    stroke-dasharray="515.2" stroke-dashoffset="445"
-                                    stroke-linecap="round" transform="rotate(135 100 100)" >
+                                <circle cx="100" cy="100" r="82" stroke="url(#gradient3)" stroke-width="14" fill="transparent" stroke-dasharray="515.2" stroke-dashoffset="445" stroke-linecap="round" transform="rotate(135 100 100)" >
                                     <animate attributeName="stroke-dashoffset" from="515.2" to="445" dur="1.5s" fill="freeze" begin="0.4s" />
                                 </circle>
 
-                                <circle cx="100" cy="100" r="82"
-                                    stroke="url(#gradient4)" stroke-width="14"
-                                    fill="transparent" stroke-dasharray="515.2"
-                                    stroke-dashoffset="475" stroke-linecap="round"
-                                    transform="rotate(170 100 100)" >
+                                <circle cx="100" cy="100" r="82" stroke="url(#gradient4)" stroke-width="14" fill="transparent" stroke-dasharray="515.2" stroke-dashoffset="475" stroke-linecap="round" transform="rotate(170 100 100)" >
                                     <animate attributeName="stroke-dashoffset" from="515.2" to="475" dur="1.5s" fill="freeze" begin="0.6s" />
                                 </circle>
 
-                                <circle cx="100" cy="100" r="82" stroke="url(#gradient5)"
-                                    stroke-width="14" fill="transparent"
-                                    stroke-dasharray="515.2" stroke-dashoffset="490"
-                                    stroke-linecap="round" transform="rotate(205 100 100)" >
+                                <circle cx="100" cy="100" r="82" stroke="url(#gradient5)" stroke-width="14" fill="transparent" stroke-dasharray="515.2" stroke-dashoffset="490" stroke-linecap="round" transform="rotate(205 100 100)" >
                                     <animate attributeName="stroke-dashoffset" from="515.2" to="490" dur="1.5s" fill="freeze" begin="0.8s" />
                                 </circle>
                             </svg>
@@ -581,7 +424,7 @@ const goToCardsPage = () => {
 
                             <!-- Tooltip flutuante no hover -->
                             <div class="absolute -right-2 -top-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1 group-hover:-translate-y-1">
-                                <div class="bg-slate-800 text-white text-xs px-2 py-1 rounded-lg whitespace-nowrap flex items-center gap-1.5 shadow-lg" >
+                                <div class="bg-slate-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap flex items-center gap-1.5 shadow-xs" >
                                     <TrendingUp class="w-3.5 h-3.5 text-emerald-400" />
                                     <span>Ver detalhes</span>
                                 </div>
@@ -688,7 +531,7 @@ const goToCardsPage = () => {
             </div>
 
             <!-- SEÇÃO: CARTÃO DE CRÉDITO -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col h-full min-h-[720px]">
+            <div class="bg-[#F9F9F9] rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col h-full min-h-[720px]">
                 <div class="flex justify-between items-center mb-6">
                     <div>
                         <h2 class="text-lg font-bold text-gray-800">Meus Cartões</h2>
@@ -702,7 +545,7 @@ const goToCardsPage = () => {
                 <!-- Lista de Cartões  -->
                 <div class="flex-1 flex flex-col justify-start space-y-6">
                     <!-- Cartão 1 -->
-                    <div class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-lg shadow-orange-100 group transition-transform hover:scale-[1.01]" >
+                    <div class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-lg shadow-orange-100 group " >
                         <div class="flex justify-between items-start mb-6">
                             <div>
                                 <p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Banco Inter</p>
@@ -720,7 +563,7 @@ const goToCardsPage = () => {
                     </div>
 
                     <!-- Cartão 2 -->
-                    <div class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-red-500 to-red-700 text-[#FFFFFF] shadow-lg shadow-red-100 group transition-transform hover:scale-[1.01]">
+                    <div class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-red-500 to-red-700 text-[#FFFFFF] shadow-lg shadow-red-100 group ">
                         <div class="flex justify-between items-start mb-6">
                             <div>
                                 <p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Santander</p>
@@ -735,12 +578,12 @@ const goToCardsPage = () => {
                                 <p class="text-[10px] opacity-70 mb-1 font-semibold uppercase">Fatura Atual</p>
                                 <p class="text-xl font-extrabold">R$ 860,00</p>
                             </div>
-                            <span class="text-[10px] font-bold bg-black/20 backdrop-blur-md px-3 py-1 rounded-full border border-[#FFFFFF]/10">Fechada</span>
+                            <span class="text-[10px] font-bold bg-black/20 backdrop-blur-md px-3 py-1 rounded-md border border-[#FFFFFF]/10">Fechada</span>
                         </div>
                     </div>
 
                     <!-- Cartão 3 -->
-                    <div class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-800 text-white shadow-lg shadow-purple-100 group transition-transform hover:scale-[1.01]">
+                    <div class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-800 text-white shadow-lg shadow-purple-100 group">
                         <div class="flex justify-between items-start mb-6">
                             <div>
                                 <p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Nubank</p>
@@ -754,13 +597,13 @@ const goToCardsPage = () => {
                                 <p class="text-[10px] opacity-70 mb-1 font-semibold uppercase">Fatura Atual</p>
                                 <p class="text-xl font-extrabold">R$ 2.150,00</p>
                             </div>
-                            <span class="text-[10px] font-bold bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30">Aberta</span>
+                            <span class="text-[10px] font-bold bg-white/20 backdrop-blur-md px-3 py-1 rounded-md border border-white/30">Aberta</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-8 pt-4 border-t border-gray-50">
-                    <button class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-gray-50 text-gray-600 font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-emerald-600 hover:text-white transition-all duration-300" >
+                    <button class="flex items-center justify-center text-xs uppercase text-gray-600 font-bold tracking-wider bg-gray-50 hover:bg-emerald-600 hover:text-white hover:cursor-pointer rounded-md gap-2 py-3 px-4 w-full">
                         <Plus class="w-4 h-4" /> Novo Cartão
                     </button>
                 </div>
@@ -784,7 +627,6 @@ const goToCardsPage = () => {
 
                 <!-- Lista de Metas (6 Metas) -->
                 <div class="flex-1 flex flex-col justify-between space-y-4 py-2">
-                    <!-- Meta 1: Transporte -->
                     <div class="group">
                         <div class="flex justify-between items-center mb-2">
                             <div class="flex items-center gap-2">
@@ -802,7 +644,7 @@ const goToCardsPage = () => {
                             <span class="text-xs font-black text-blue-600">65%</span>
                         </div>
                         <div class="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
-                            <div class="h-full bg-blue-500 rounded-full" style="width: 65%"></div>
+                            <div class="h-full bg-blue-500 rounded-full" style="width: 25%"></div>
                         </div>
                     </div>
 
@@ -815,10 +657,10 @@ const goToCardsPage = () => {
                                 </div>
                                 <div>
                                     <h3 class="text-sm font-bold text-gray-700">Alimentação</h3>
-                                    <div class="flex gap-2 text-[10px] text-gray-400">
+                                    <di2v class="flex gap-2 text-[10px] text-gray-400">
                                         <span>Gasto: <b class="text-gray-600">R$ 800</b></span>
                                         <span>Meta: <b class="text-gray-600">R$ 1.000</b></span>
-                                    </div>
+                                    </di2v>
                                 </div>
                             </div>
                             <span class="text-xs font-black text-orange-600">80%</span>
@@ -918,7 +760,7 @@ const goToCardsPage = () => {
                 </div>
 
                 <div class="mt-8 pt-4 border-t border-gray-50">
-                    <button class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-emerald-600 shadow-lg shadow-emerald-100 transition-all duration-300">
+                    <button class="flex items-center justify-center text-xs uppercase text-gray-600 font-bold tracking-wider bg-gray-50 hover:bg-emerald-600 hover:text-white hover:cursor-pointer rounded-md gap-2 py-3 px-4 w-full">
                         <CirclePlus class="w-4 h-4" /> Criar Nova Meta
                     </button>
                 </div>
@@ -967,7 +809,7 @@ const goToCardsPage = () => {
                     </div>
                 </div>
 
-                <div class="flex justify-between items-center pb-3 border-b border-gray-50">
+                <div class="flex justify-between items-center pb-3 border-b border-gray-50 hover:bg-gray-50 cursor-pointer">
                     <div class="flex items-center space-x-4">
                         <div class="w-8 h-8 bg-red-50 text-red-400 rounded-full flex items-center justify-center">
                             <Home class="w-4 h-4" />
@@ -998,7 +840,7 @@ const goToCardsPage = () => {
             </div>
         </div>
 
-        <Footer />
+        <AppFooter  />
     </main>
 
     <!-- MODAL DE CARTÕES -->
@@ -1035,7 +877,7 @@ const goToCardsPage = () => {
 
                     <div class="text-right">
                         <p class="text-sm font-bold text-gray-700">{{ card.value }}</p>
-                        <span class="text-[10px] font-bold uppercase" :class="card.status === 'Aberta' ? 'text-emerald-500' : 'text-gray-400'">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-gray-100 text-gray-600" >
                             {{ card.status }}
                         </span>
                     </div>
@@ -1048,19 +890,13 @@ const goToCardsPage = () => {
                 <div v-if="isLimitReached" class="space-y-3 text-center">
                     <p class="text-xs text-red-400 font-semibold">Limite de cartões atingido</p>
 
-                    <button
-                        @click="goToCardsPage"
-                        class="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gray-900 text-white text-sm font-semibold hover:bg-black transition"
-                    >
+                    <button @click="goToCardsPage" class="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gray-900 text-white text-sm font-semibold hover:bg-black transition" >
                         Ver todos os cartões
                     </button>
                 </div>
 
                 <!-- NORMAL -->
-                <button
-                    v-else
-                    class="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-emerald-500 text-white text-sm font-semibold hover:bg-emerald-600 transition"
-                >
+                <button v-else class="flex items-center justify-center text-white text-sm font-semibold bg-emerald-500 hover:bg-emerald-600 rounded-md w-full gap-2 py-2.5">
                     <Plus class="w-4 h-4" />
                     Adicionar Novo Cartão
                 </button>
@@ -1068,103 +904,103 @@ const goToCardsPage = () => {
         </div>
     </div>
 
-                 <!-- ==================== MODAL PRINCIPAL ==================== -->
-                <div v-if="activeModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4" @click.self="closeModal" >
-                    <div class="bg-white w-full max-w-lg rounded-md shadow-2xl overflow-hidden">
+    <!-- ==================== MODAL PRINCIPAL ==================== -->
+    <div v-if="activeModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4" @click.self="closeModal" >
+        <div class="bg-white w-full max-w-lg rounded-md shadow-2xl overflow-hidden">
 
-                        <!-- HEADER -->
-                        <div class="px-6 pt-6 pb-2 border-b border-gray-200/50 flex items-center justify-between">
-                            <div class="flex items-center gap-3">
+            <!-- HEADER -->
+            <div class="px-6 pt-6 pb-2 border-b border-gray-200/50 flex items-center justify-between">
+                <div class="flex items-center gap-3">
 
-                                <div>
-                                    <h2 class="text-lg font-semibold text-gray-800">{{ modalTitle }}</h2>
-                                </div>
-                            </div>
-                            <button @click="closeModal" class="w-9 h-9 flex items-center justify-center text-gray-600 hover:text-gray-600 hover:bg-gray-100 rounded-md hover:cursor-pointer transition-colors" >
-                                <X class="w-5 h-5" />
-                            </button>
-                        </div>
-
-                        <!-- FORM -->
-                        <form @submit.prevent="handleSubmit" class="p-6 space-y-6">
-                            <div>
-                                <label class="text-xs font-medium text-gray-500 block mb-1.5">Descrição</label>
-                                <input v-model="form.description" type="text" placeholder="Ex: Aluguel, Salário, Supermercado..." class="w-full border border-gray-300 rounded-md px-4 py-3 text-sm focus:border-emerald-500 outline-none" />
-                            </div>
-
-
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="text-xs font-medium text-gray-500 block mb-1.5">Valor</label>
-                                    <div class="relative">
-                                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium">R$</span>
-                                        <input v-model="form.amount" type="number" step="0.01" placeholder="0,00" class="w-full border border-gray-300 rounded-md px-9 py-2 text-lg font-semibold focus:border-emerald-500 outline-none" />
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="text-xs font-medium text-gray-500 block mb-1.5">Data</label>
-                                    <input v-model="form.date"  type="date" class="w-full border border-gray-300 rounded-md px-4 py-3 text-sm focus:border-emerald-500 outline-none" />
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="text-xs font-medium text-gray-500 block mb-1.5">Conta / Cartão</label>
-                                        <select v-model="form.accountId" class="w-full border border-gray-300 rounded-md text-sm focus:border-emerald-500 outline-none mr-4 px-4 py-3">
-                                            <option value="">Selecione a conta...</option>
-                                        </select>
-                                    </div>
-                                <div>
-                                    <label class="text-xs font-medium text-gray-500 block mb-1.5">Categoria</label>
-                                    <select v-model="form.categoryId" class="w-full border border-gray-300 rounded-md px-4 py-3 text-sm focus:border-emerald-500 outline-none">
-                                        <option value="">Selecione a categoria...</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Observação -->
-                            <div>
-                                <label class="text-xs font-medium text-gray-500 block mb-1.5">Observação (opcional)</label>
-                                <textarea v-model="form.note"  rows="3" placeholder="Adicione uma observação..." class="w-full border border-gray-300 rounded-md px-4 py-3 text-sm resize-y min-h-[80px] focus:border-emerald-500 outline-none"></textarea>
-                            </div>
-
-                            <!-- 4 BOTÕES DE AÇÃO NO RODAPÉ -->
-                            <div class="flex justify-center gap-6">
-
-                                <!-- Repetir -->
-                                <div @click="toggleRepeat" class="text-center group cursor-pointer">
-                                    <div class="w-12 h-12 bg-gray-100/70 rounded-md flex items-center justify-center text-gray-600 mb-2 group-hover:bg-gray-100 transition-colors">
-                                        <Repeat class="w-6 h-6" />
-                                    </div>
-                                    <span class="text-[10px] uppercase font-bold text-gray-500">Repetir</span>
-                                </div>
-
-                                <!-- Observação -->
-                                <div @click="focusNote" class="text-center group cursor-pointer" :class="{ 'text-emerald-600': form.note }">
-                                    <div class="w-12 h-12 bg-gray-100/70 rounded-md flex items-center justify-center text-gray-600 mb-2 group-hover:bg-gray-100 transition-colors">
-                                        <MessageSquareText  class="w-6 h-6" />
-                                    </div>
-                                    <span class="text-[10px] uppercase font-bold text-gray-500">Obs</span>
-                                </div>
-
-                                <!-- Anexo -->
-                                <div @click="handleAttach" class="text-center group cursor-pointer">
-                                    <div class="w-12 h-12 bg-gray-100/70 rounded-md flex items-center justify-center text-gray-600 mb-2 group-hover:bg-gray-100 transition-colors">
-                                        <Paperclip class="w-6 h-6" />
-                                    </div>
-                                    <span class="text-[10px] uppercase font-bold text-gray-500">Anexo</span>
-                                </div>
-
-                                <!-- Tags -->
-                                <div @click="handleTags" class="text-center group cursor-pointer">
-                                    <div class="w-12 h-12 bg-gray-100/70 rounded-md flex items-center justify-center text-gray-600 mb-2 group-hover:bg-gray-100 transition-colors">
-                                        <Tag class="w-6 h-6" />
-                                    </div>
-                                    <span class="text-[10px] uppercase font-bold text-gray-500">Tags</span>
-                                </div>
-                            </div>
-                        </form>
+                    <div>
+                        <h2 class="text-lg font-semibold text-gray-800">{{ modalTitle }}</h2>
                     </div>
                 </div>
+                <button @click="closeModal" class="w-9 h-9 flex items-center justify-center text-gray-600 hover:text-gray-600 hover:bg-gray-100 rounded-md hover:cursor-pointer transition-colors" >
+                    <X class="w-5 h-5" />
+                </button>
+            </div>
+
+            <!-- FORM -->
+            <form @submit.prevent="handleSubmit" class="p-6 space-y-6">
+                <div>
+                    <label class="text-xs font-medium text-gray-500 block mb-1.5">Descrição</label>
+                    <input v-model="form.description" type="text" placeholder="Ex: Aluguel, Salário, Supermercado..." class="w-full border border-gray-300 rounded-md px-4 py-3 text-sm focus:border-emerald-500 outline-none" />
+                </div>
+
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-medium text-gray-500 block mb-1.5">Valor</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium">R$</span>
+                            <input v-model="form.amount" type="number" step="0.01" placeholder="0,00" class="w-full border border-gray-300 rounded-md px-9 py-2 text-lg font-semibold focus:border-emerald-500 outline-none" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium text-gray-500 block mb-1.5">Data</label>
+                        <input v-model="form.date"  type="date" class="w-full border border-gray-300 rounded-md px-4 py-3 text-sm focus:border-emerald-500 outline-none" />
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-xs font-medium text-gray-500 block mb-1.5">Conta / Cartão</label>
+                            <select v-model="form.accountId" class="w-full border border-gray-300 rounded-md text-sm focus:border-emerald-500 outline-none mr-4 px-4 py-3">
+                                <option value="">Selecione a conta...</option>
+                            </select>
+                        </div>
+                    <div>
+                        <label class="text-xs font-medium text-gray-500 block mb-1.5">Categoria</label>
+                        <select v-model="form.categoryId" class="w-full border border-gray-300 rounded-md px-4 py-3 text-sm focus:border-emerald-500 outline-none">
+                            <option value="">Selecione a categoria...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Observação -->
+                <div>
+                    <label class="text-xs font-medium text-gray-500 block mb-1.5">Observação (opcional)</label>
+                    <textarea v-model="form.note"  rows="3" placeholder="Adicione uma observação..." class="w-full border border-gray-300 rounded-md px-4 py-3 text-sm resize-y min-h-[80px] focus:border-emerald-500 outline-none"></textarea>
+                </div>
+
+                <!-- 4 BOTÕES DE AÇÃO NO RODAPÉ -->
+                <div class="flex justify-center gap-6">
+
+                    <!-- Repetir -->
+                    <div @click="toggleRepeat" class="text-center group cursor-pointer">
+                        <div class="w-12 h-12 bg-gray-100/70 rounded-md flex items-center justify-center text-gray-600 mb-2 group-hover:bg-gray-100 transition-colors">
+                            <Repeat class="w-6 h-6" />
+                        </div>
+                        <span class="text-[10px] uppercase font-bold text-gray-500">Repetir</span>
+                    </div>
+
+                    <!-- Observação -->
+                    <div @click="focusNote" class="text-center group cursor-pointer" :class="{ 'text-emerald-600': form.note }">
+                        <div class="w-12 h-12 bg-gray-100/70 rounded-md flex items-center justify-center text-gray-600 mb-2 group-hover:bg-gray-100 transition-colors">
+                            <MessageSquareText  class="w-6 h-6" />
+                        </div>
+                        <span class="text-[10px] uppercase font-bold text-gray-500">Obs</span>
+                    </div>
+
+                    <!-- Anexo -->
+                    <div @click="handleAttach" class="text-center group cursor-pointer">
+                        <div class="w-12 h-12 bg-gray-100/70 rounded-md flex items-center justify-center text-gray-600 mb-2 group-hover:bg-gray-100 transition-colors">
+                            <Paperclip class="w-6 h-6" />
+                        </div>
+                        <span class="text-[10px] uppercase font-bold text-gray-500">Anexo</span>
+                    </div>
+
+                    <!-- Tags -->
+                    <div @click="handleTags" class="text-center group cursor-pointer">
+                        <div class="w-12 h-12 bg-gray-100/70 rounded-md flex items-center justify-center text-gray-600 mb-2 group-hover:bg-gray-100 transition-colors">
+                            <Tag class="w-6 h-6" />
+                        </div>
+                        <span class="text-[10px] uppercase font-bold text-gray-500">Tags</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
 </template>

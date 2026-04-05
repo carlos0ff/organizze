@@ -11,6 +11,12 @@
 }
 /** **/
 body {
-    background-color: #f3f4f6;
+    background-color: #F0F2F5;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.classes{
+    display: flex;
+    justify-content: space-between;
 }

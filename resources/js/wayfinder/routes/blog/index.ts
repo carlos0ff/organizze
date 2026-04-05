@@ -44,6 +44,50 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @route '/blog/posts'
+*/
+export const lists = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: lists.url(options),
+    method: 'get',
+})
+
+lists.definition = {
+    methods: ["get","head"],
+    url: '/blog/posts',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @route '/blog/posts'
+*/
+lists.url = (options?: RouteQueryOptions) => {
+    return lists.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @route '/blog/posts'
+*/
+lists.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: lists.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @route '/blog/posts'
+*/
+lists.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: lists.url(options),
+    method: 'head',
+})
+
+/**
 * @see \App\Http\Controllers\Blog\Post\ShowPostController::__invoke
 * @see app/Http/Controllers/Blog/Post/ShowPostController.php:13
 * @route '/blog/post/{slug}'
@@ -107,6 +151,7 @@ post.head = (args: { slug: string | number } | [slug: string | number ] | string
 
 const blog = {
     home: Object.assign(home, home),
+    lists: Object.assign(lists, lists),
     post: Object.assign(post, post),
 }
 

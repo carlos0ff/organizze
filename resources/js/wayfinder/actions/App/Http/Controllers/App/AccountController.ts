@@ -46,141 +46,52 @@ indexea4eab75445b6e636460dc1b7f1b8673.head = (options?: RouteQueryOptions): Rout
 /**
 * @see \App\Http\Controllers\App\AccountController::index
 * @see app/Http/Controllers/App/AccountController.php:16
-* @route '/app/contas'
+* @route '/app/conexoes-bancarias'
 */
-const index97d1bce32d14980a02a1da8f4d371174 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: index97d1bce32d14980a02a1da8f4d371174.url(options),
+const index6fe0e351fd05ac1759f0a59bc5fb44ce = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: index6fe0e351fd05ac1759f0a59bc5fb44ce.url(options),
     method: 'get',
 })
 
-index97d1bce32d14980a02a1da8f4d371174.definition = {
+index6fe0e351fd05ac1759f0a59bc5fb44ce.definition = {
     methods: ["get","head"],
-    url: '/app/contas',
+    url: '/app/conexoes-bancarias',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
 * @see \App\Http\Controllers\App\AccountController::index
 * @see app/Http/Controllers/App/AccountController.php:16
-* @route '/app/contas'
+* @route '/app/conexoes-bancarias'
 */
-index97d1bce32d14980a02a1da8f4d371174.url = (options?: RouteQueryOptions) => {
-    return index97d1bce32d14980a02a1da8f4d371174.definition.url + queryParams(options)
+index6fe0e351fd05ac1759f0a59bc5fb44ce.url = (options?: RouteQueryOptions) => {
+    return index6fe0e351fd05ac1759f0a59bc5fb44ce.definition.url + queryParams(options)
 }
 
 /**
 * @see \App\Http\Controllers\App\AccountController::index
 * @see app/Http/Controllers/App/AccountController.php:16
-* @route '/app/contas'
+* @route '/app/conexoes-bancarias'
 */
-index97d1bce32d14980a02a1da8f4d371174.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: index97d1bce32d14980a02a1da8f4d371174.url(options),
+index6fe0e351fd05ac1759f0a59bc5fb44ce.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: index6fe0e351fd05ac1759f0a59bc5fb44ce.url(options),
     method: 'get',
 })
 
 /**
 * @see \App\Http\Controllers\App\AccountController::index
 * @see app/Http/Controllers/App/AccountController.php:16
-* @route '/app/contas'
+* @route '/app/conexoes-bancarias'
 */
-index97d1bce32d14980a02a1da8f4d371174.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: index97d1bce32d14980a02a1da8f4d371174.url(options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\App\AccountController::index
-* @see app/Http/Controllers/App/AccountController.php:16
-* @route '/app/cartao'
-*/
-const index5e4dfecc8881dd3d1b338607e78bf9b5 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: index5e4dfecc8881dd3d1b338607e78bf9b5.url(options),
-    method: 'get',
-})
-
-index5e4dfecc8881dd3d1b338607e78bf9b5.definition = {
-    methods: ["get","head"],
-    url: '/app/cartao',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\App\AccountController::index
-* @see app/Http/Controllers/App/AccountController.php:16
-* @route '/app/cartao'
-*/
-index5e4dfecc8881dd3d1b338607e78bf9b5.url = (options?: RouteQueryOptions) => {
-    return index5e4dfecc8881dd3d1b338607e78bf9b5.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\App\AccountController::index
-* @see app/Http/Controllers/App/AccountController.php:16
-* @route '/app/cartao'
-*/
-index5e4dfecc8881dd3d1b338607e78bf9b5.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: index5e4dfecc8881dd3d1b338607e78bf9b5.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\App\AccountController::index
-* @see app/Http/Controllers/App/AccountController.php:16
-* @route '/app/cartao'
-*/
-index5e4dfecc8881dd3d1b338607e78bf9b5.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: index5e4dfecc8881dd3d1b338607e78bf9b5.url(options),
+index6fe0e351fd05ac1759f0a59bc5fb44ce.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: index6fe0e351fd05ac1759f0a59bc5fb44ce.url(options),
     method: 'head',
 })
 
 export const index = {
     '/panel/contas': indexea4eab75445b6e636460dc1b7f1b8673,
-    '/app/contas': index97d1bce32d14980a02a1da8f4d371174,
-    '/app/cartao': index5e4dfecc8881dd3d1b338607e78bf9b5,
+    '/app/conexoes-bancarias': index6fe0e351fd05ac1759f0a59bc5fb44ce,
 }
 
-/**
-* @see \App\Http\Controllers\App\AccountController::signature
-* @see app/Http/Controllers/App/AccountController.php:64
-* @route '/app/assinatura'
-*/
-export const signature = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: signature.url(options),
-    method: 'get',
-})
-
-signature.definition = {
-    methods: ["get","head"],
-    url: '/app/assinatura',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\App\AccountController::signature
-* @see app/Http/Controllers/App/AccountController.php:64
-* @route '/app/assinatura'
-*/
-signature.url = (options?: RouteQueryOptions) => {
-    return signature.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\App\AccountController::signature
-* @see app/Http/Controllers/App/AccountController.php:64
-* @route '/app/assinatura'
-*/
-signature.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: signature.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\App\AccountController::signature
-* @see app/Http/Controllers/App/AccountController.php:64
-* @route '/app/assinatura'
-*/
-signature.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: signature.url(options),
-    method: 'head',
-})
-
-const AccountController = { index, signature }
+const AccountController = { index }
 
 export default AccountController
