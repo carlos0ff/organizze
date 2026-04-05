@@ -16,8 +16,8 @@ class ListPostsController extends Controller
     public function __invoke(Request $request)
     {
 
-        $post = Post::all();
+        // $post = Post::all();
 
-        return inertia('Blog/Index');
+        return inertia('Blog/Posts/List');
     }
 }
