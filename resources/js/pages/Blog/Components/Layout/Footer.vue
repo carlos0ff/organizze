@@ -1,6 +1,6 @@
 
 <script setup>
-import { Youtube, Linkedin, Github } from 'lucide-vue-next'
+import { Youtube, Linkedin, Github, Instagram} from 'lucide-vue-next'
 
 </script>
 
@@ -57,19 +57,16 @@ import { Youtube, Linkedin, Github } from 'lucide-vue-next'
                 <h3 class="text-white font-bold text-sm uppercase tracking-wider">Experimente grátis</h3>
 
                 <div class="flex flex-col gap-3">
-                    <a href="#" class="transition-transform hover:scale-105 active:scale-95">
+                    <a href="#">
                         <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" class="h-9 w-auto" alt="App Store" />
                     </a>
-                    <a href="#" class="transition-transform hover:scale-105 active:scale-95">
+                    <a href="#" >
                         <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" class="h-9 w-auto" alt="Google Play" />
                     </a>
                 </div>
 
                 <div class="flex items-center gap-4 p-3 bg-white/5 rounded-lg border border-white/10">
-                    <img
-                        src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.organizze.com.br"
-                        class="h-14 w-14 rounded-md bg-white p-1 shadow-lg"
-                        alt="QR Code"
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.organizze.com.br" class="h-14 w-14 rounded-md bg-white p-1 shadow-lg" alt="QR Code"
                     />
                     <p class="text-[10px] text-gray-400 uppercase leading-tight font-medium">Aponte a câmera para baixar</p>
                 </div>
@@ -82,7 +79,9 @@ import { Youtube, Linkedin, Github } from 'lucide-vue-next'
                     &copy; {{ new Date().getFullYear() }} Organizze Tecnologia LTDA. Todos os direitos reservados.
                 </p>
                 <div class="flex gap-6 text-[11px] text-gray-500 uppercase tracking-widest">
-                    <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                    <a href="#" class="flex items-center gap-1 hover:text-white transition-colors">
+                        <Instagram class="w-3 h-3"/> Instagram
+                    </a>
                     <a href="#" class="flex items-center gap-1 hover:text-white transition-colors">
                         <Youtube class="w-3 h-3" /> YouTube
                     </a>

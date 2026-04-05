@@ -1,3 +1,21 @@
+<script setup>
+
+/**
+ *
+ */
+defineProps({
+    image: { type: String, required: true },
+    alt: { type: String, default: '' },
+    category: { type: String, required: true },
+    title: { type: String, required: true },
+    description: { type: String, default: '' },
+    readTime: { type: [String, Number], required: true },
+    href: { type: String, default: '#' },
+})
+
+</script>
+
+
 <template>
     <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
         <div class="relative h-48 overflow-hidden">
@@ -21,14 +39,3 @@
     </article>
 </template>
 
-<script setup>
-defineProps({
-    image: { type: String, required: true },
-    alt: { type: String, default: '' },
-    category: { type: String, required: true },
-    title: { type: String, required: true },
-    description: { type: String, default: '' },
-    readTime: { type: [String, Number], required: true },
-    href: { type: String, default: '#' },
-})
-</script>
