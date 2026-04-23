@@ -28,7 +28,20 @@ class LoginController extends Controller
      */
     public function authenticate(Request $request): \Illuminate\Http\RedirectResponse
     {
-       // Lógica para autenticar o usuário
+        $credentials = $request->validate([
+            'email'    => ['required', 'email'],
+            'password' => ['required', 'min:6'],
+        ]);
+
+        if (!Auth::attempt($credentials, $request->boolean('remember'))) {
+            return back()->withErrors([
+                'email' => 'E-mail ou senha incorretos.',
+            ])->onlyInput('email');
+        }
+
+        $request->session()->regenerate();
+
+        return redirect()->intended('/app');
     }
 
     /**
@@ -39,6 +52,12 @@ class LoginController extends Controller
     public function logout(Request $request): \Illuminate\Http\RedirectResponse
     {
         // Lógica para deslogar o usuário
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect("/");
     }
 
     /**
@@ -48,6 +67,8 @@ class LoginController extends Controller
      */
     protected function validateCredentials(array $credentials): bool
     {
-        // Lógica para validar as credenciais
+ 
+
+        
     }
 }
