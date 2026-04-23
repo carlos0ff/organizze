@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\.\App\CreditCard\Invoice;
+namespace App\Http\Controllers\App\CreditCard\Invoice;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

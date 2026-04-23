@@ -3,43 +3,20 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
+use App\Models\Blog\Post;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
-    /**
-     * Exibe o painel de controle.
-     */
-    public function index() : \Inertia\Response
+    public function index(): \Inertia\Response
     {
-        return Inertia::render('App/Dashboard/Index');
-    }
+        $recentPosts = Post::where('status', 'published')
+            ->latest('published_at')
+            ->limit(3)
+            ->get(['id', 'title', 'slug', 'content', 'published_at', 'reading_time', 'views']);
 
-    /**
-     * Exibe as estatísticas do usuário.
-     */
-    public function stats() : \Inertia\Response
-    {
-        return inertia('App/Dashboard');
+        return Inertia::render('App/Dashboard/Index', [
+            'recentPosts' => $recentPosts,
+        ]);
     }
-
-    /**
-     * Exibe as notificações do usuário.
-     */
-    public function notifications()
-    {
-        // Lógica para obter notificações do usuário
-    }
-
-    /**
-     * Exibe o perfil do usuário.
-     */
-    public function profile()
-    {
-        // Lógica para exibir o perfil do usuário
-    }
-
 }
-

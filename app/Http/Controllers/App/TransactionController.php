@@ -3,59 +3,28 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class TransactionController extends Controller
 {
-
-    /**
-     * Exibe a lista de transações.
-     */
-    public function index() : \Inertia\Response
+    public function index(Request $request): \Inertia\Response
     {
-        return inertia('App/Transactions/Index');
-    }
+        $month = (int) $request->get('month', now()->month);
+        $year  = (int) $request->get('year', now()->year);
 
-    /**
-     * Exibe o formulário para criar uma nova transação.
-     */
-    public function create() : \Inertia\Response
-    {
-        return inertia('App/Transactions/Create');
-    }
+        $transactions = Transaction::where('user_id', Auth::id())
+            ->whereMonth('date', $month)
+            ->whereYear('date', $year)
+            ->orderBy('date', 'desc')
+            ->orderBy('id', 'desc')
+            ->get();
 
-    /**
-     * Exibe o formulário para editar uma transação existente.
-     * @param int $id
-     */
-    public function edit(int $id) : \Inertia\Response
-    {
-        return inertia('App/Transactions/Edit', ['id' => $id]);
-    }
-
-    /**
-     * Armazena uma nova transação.
-     */
-    public function store(Request $request)
-    {
-        // Lógica para armazenar a transação
-    }
-
-    /**
-     * Atualiza uma transação existente.
-     * @param int $id
-     */
-    public function update(Request $request, int $id)
-    {
-        // Lógica para atualizar a transação
-    }
-
-    /**
-     * Remove uma transação.
-     * @param int $id
-     */
-    public function destroy(int $id)
-    {
-        // Lógica para remover a transação
+        return Inertia::render('App/Lancamentos/Index', [
+            'transactions' => $transactions,
+            'filters'      => ['month' => $month, 'year' => $year],
+        ]);
     }
 }
