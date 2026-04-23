@@ -24,7 +24,7 @@
 @inertia
 
 <!-- Core JavaScript -->
-@vite('resources/js/app.js')
+@vite('resources/js/app.ts')
 
 </body>
 </html>
