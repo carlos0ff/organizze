@@ -12,24 +12,16 @@ import BlogFooter from '@/pages/Blog/Components/Layout/Footer.vue'
             <section class="max-w-7xl mx-auto px-4 py-10">
                 <div class="relative flex flex-col md:flex-row overflow-hidden rounded-md shadow-lg">
                     <div class="relative md:w-2/3 h-65 md:h-90">
-                        <img
-                            src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"
-                            alt="Controle de gastos"
-                            class="w-full h-full object-cover"
-                        />
+                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"  alt="Controle de gastos" class="w-full h-full object-cover" />
                         <span class="absolute bottom-4 left-4 bg-[#1F3D2B] text-white text-xs px-3 py-1 rounded-full"> Controle de Gastos</span>
 
-                        <button
-                            class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition"
-                        >
+                        <button class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition" >
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                             </svg>
                         </button>
 
-                        <button
-                            class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition"
-                        >
+                        <button class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition" >
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                             </svg>
@@ -74,15 +66,8 @@ import BlogFooter from '@/pages/Blog/Components/Layout/Footer.vue'
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 flex-1">
-                        <a
-                            href="#"
-                            class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300"
-                        >
-                            <img
-                                src="https://www.organizze.com.br/blog/wp-content/uploads/MEI-280x210-1.jpg"
-                                alt="MEI"
-                                class="w-full h-44 object-cover transform group-hover:scale-110 transition-transform duration-500"
-                            />
+                        <a href="#" class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                            <img src="https://www.organizze.com.br/blog/wp-content/uploads/MEI-280x210-1.jpg" alt="MEI" class="w-full h-44 object-cover transform group-hover:scale-110 transition-transform duration-500" />
                             <span class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-90"></span>
                             <div class="absolute bottom-0 p-4">
                                 <h3 class="text-white font-semibold text-base">MEI & Empreendedorismo</h3>
@@ -657,10 +642,8 @@ import BlogFooter from '@/pages/Blog/Components/Layout/Footer.vue'
                 </div>
 
                 <div class="mt-12 flex justify-center">
-                    <button
-                        class="px-8 py-3 rounded-md border border-green-700 hover:cursor-pointer text-green-700 font-semibold hover:bg-green-700 hover:text-white ransition-colors duration-200"
-                    >
-                        Carregar mais
+                    <button class="px-8 py-3 rounded-md border border-green-700 hover:cursor-pointer text-green-700 font-semibold hover:bg-green-700 hover:text-white ransition-colors duration-200" >
+                        Carregar maisg
                     </button>
                 </div>
             </section>

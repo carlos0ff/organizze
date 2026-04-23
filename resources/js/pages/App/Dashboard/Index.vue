@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
-import AppFooter  from '../Components/layout/Footer.vue';
-import Navbar from '../Components/navigation/Navbar.vue';
+import AppFooter from '@/Components/layout/Footer.vue';
+import Navbar from '@/Components/layout/Navbar.vue';
 
 // ==================== IMPORTS LUCIDE ====================
 import {
@@ -13,12 +13,18 @@ import {
   Download,
   Minus,
   Plus,
+  EyeOff,
 
   // Finanças
   ArrowRightLeft,
   CreditCard,
   TrendingUp,
   Wallet,
+
+  // Clima/Saudação
+  CloudSun,
+  Sunset,
+  Moon,
 
   // Outros
   Car,
@@ -36,12 +42,32 @@ import {
   Utensils,
   Wifi,
   Tag,
-  MessageSquareText ,
+  MessageSquareText,
   Paperclip,
-  Repeat
+  Repeat,
+  ArrowUpCircle,
+  ArrowDownCircle,
+  ChevronRight,
 } from 'lucide-vue-next';
 
 
+
+// ==================== SAUDAÇÃO DINÂMICA ====================
+const hour = new Date().getHours();
+const greeting = hour < 12 ? 'Bom dia' : hour < 18 ? 'Boa tarde' : 'Boa noite';
+const greetingIcon = hour < 12 ? CloudSun : hour < 18 ? Sunset : Moon;
+const greetingColor = hour < 12 ? 'text-amber-400' : hour < 18 ? 'text-orange-400' : 'text-indigo-400';
+
+const hideSaldo = ref(false);
+
+const receita  = 5500.00;
+const despesa  = 2470.80;
+const saldo    = receita - despesa;
+const spentPct = Math.round((despesa / receita) * 100);
+
+function fmtMoney(v) {
+    return Number(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
 
 // ==================== STATE ====================
 const activeModal = ref(false)
@@ -138,65 +164,110 @@ const goToCardsPage = () => {
     <!-- Content -->
     <main class="max-w-7xl mx-auto px-4 pt-24 pb-12">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-4">
-            <div class="lg:col-span-2 bg-white rounded-md shadow-sm p-6">
-                <div class="flex justify-between items-start mb-6">
-                    <h1 class="text-2xl font-semibold text-gray-800 flex items-center gap-2">
-                        Bom dia, Thiago Santos <CloudSun class="text-amber-400" />
-                    </h1>
-                    <button class="flex items-center text-xs text-emerald-600 font-medium border border-emerald-100 px-3 py-1 rounded hover:bg-emerald-50">
-                        <TrendingUp class="w-3 h-3 mr-1" /> ver relatórios
-                    </button>
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col justify-between gap-5">
+                <!-- Linha 1: saudação + ações -->
+                <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
+                            <component :is="greetingIcon" :class="greetingColor" class="w-6 h-6" />
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">{{ greeting }},</p>
+                            <h1 class="text-lg font-bold text-gray-800 leading-tight">Thiago Santos</h1>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <a href="/app/lancamentos" class="flex items-center gap-1 text-xs text-gray-500 font-medium border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
+                            Lançamentos <ChevronRight class="w-3 h-3" />
+                        </a>
+                        <button class="flex items-center gap-1 text-xs text-emerald-600 font-medium border border-emerald-100 px-3 py-1.5 rounded-lg hover:bg-emerald-50 transition-colors">
+                            <TrendingUp class="w-3 h-3" /> Relatórios
+                        </button>
+                    </div>
                 </div>
-                 
-                <div class="grid grid-cols-3 gap-4">
-                    <div>
-                        <p class="text-[10px] text-gray-400 uppercase font-bold">receita mensal</p>
-                        <p class="text-xl font-bold text-emerald-600">R$ 5.500,00</p>
+
+                <!-- Linha 2: métricas -->
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="bg-emerald-50 rounded-xl p-4">
+                        <div class="flex items-center gap-1.5 mb-1">
+                            <ArrowUpCircle class="w-3.5 h-3.5 text-emerald-500" />
+                            <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-wide">Receitas</p>
+                        </div>
+                        <p class="text-lg font-black text-emerald-700">{{ fmtMoney(receita) }}</p>
                     </div>
-                    <div>
-                        <p class="text-[10px] text-gray-400 uppercase font-bold">despesa mensal</p>
-                        <p class="text-xl font-bold text-red-500">R$ 2.470,80</p>
+                    <div class="bg-red-50 rounded-xl p-4">
+                        <div class="flex items-center gap-1.5 mb-1">
+                            <ArrowDownCircle class="w-3.5 h-3.5 text-red-400" />
+                            <p class="text-[10px] font-bold text-red-500 uppercase tracking-wide">Despesas</p>
+                        </div>
+                        <p class="text-lg font-black text-red-600">{{ fmtMoney(despesa) }}</p>
                     </div>
-                    <div class="group cursor-pointer">
-                        <p class="text-[10px] text-gray-400 uppercase font-bold flex items-center">saldo geral <EyeOff class="ml-1 w-3 h-3" /></p>
-                        <p class="text-xl font-bold text-emerald-600">R$ ---</p>
+                    <div class="bg-gray-50 rounded-xl p-4 cursor-pointer group" @click="hideSaldo = !hideSaldo">
+                        <div class="flex items-center gap-1.5 mb-1">
+                            <EyeOff class="w-3.5 h-3.5 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Saldo</p>
+                        </div>
+                        <p class="text-lg font-black text-gray-700">
+                            {{ hideSaldo ? '••••••' : fmtMoney(saldo) }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Linha 3: barra receita vs despesa -->
+                <div>
+                    <div class="flex justify-between text-[10px] font-semibold text-gray-400 mb-1.5">
+                        <span>Despesas representam <b class="text-gray-600">{{ spentPct }}%</b> das receitas</span>
+                        <span :class="spentPct >= 90 ? 'text-red-400' : spentPct >= 70 ? 'text-orange-400' : 'text-emerald-500'">
+                            {{ spentPct >= 90 ? 'Atenção!' : spentPct >= 70 ? 'Moderado' : 'Saudável' }}
+                        </span>
+                    </div>
+                    <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                        <div
+                            class="h-full rounded-full transition-all duration-700"
+                            :class="spentPct >= 90 ? 'bg-red-400' : spentPct >= 70 ? 'bg-orange-400' : 'bg-emerald-500'"
+                            :style="`width: ${spentPct}%`"
+                        ></div>
                     </div>
                 </div>
             </div>
 
             <!-- Botões de Acesso Rápido -->
-            <div class="flex justify-between items-center bg-white rounded-md shadow-sm p-6">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 grid grid-cols-2 gap-3">
                 <!-- Despesa -->
-                <div @click="openModal('despesa')" class="text-center group cursor-pointer">
-                    <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-red-400 mb-2 group-hover:bg-red-100 transition-colors">
-                        <Minus class="w-6 h-6" />
+                <button @click="openModal('despesa')"
+                    class="group flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-red-100 bg-red-50 hover:bg-red-100 hover:border-red-200 transition-all">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-red-400 shadow-sm group-hover:scale-110 transition-transform">
+                        <Minus class="w-5 h-5" />
                     </div>
-                    <span class="text-[10px] uppercase font-bold text-gray-500">Despesa</span>
-                </div>
+                    <span class="text-[11px] uppercase font-bold text-red-500 tracking-wide">Despesa</span>
+                </button>
 
                 <!-- Receita -->
-                <div @click="openModal('receita')" class="text-center group cursor-pointer">
-                    <div class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-500 mb-2 group-hover:bg-emerald-100 transition-colors">
-                        <Plus class="w-6 h-6" />
+                <button @click="openModal('receita')"
+                    class="group flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-emerald-100 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-200 transition-all">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-emerald-500 shadow-sm group-hover:scale-110 transition-transform">
+                        <Plus class="w-5 h-5" />
                     </div>
-                    <span class="text-[10px] uppercase font-bold text-gray-500">Receita</span>
-                </div>
+                    <span class="text-[11px] uppercase font-bold text-emerald-600 tracking-wide">Receita</span>
+                </button>
 
                 <!-- Transferência -->
-                <div @click="openModal('transfer')" class="text-center group cursor-pointer">
-                    <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-400 mb-2 group-hover:bg-blue-100 transition-colors">
-                        <ArrowRightLeft class="w-6 h-6" />
+                <button @click="openModal('transfer')"
+                    class="group flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-blue-100 bg-blue-50 hover:bg-blue-100 hover:border-blue-200 transition-all">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-400 shadow-sm group-hover:scale-110 transition-transform">
+                        <ArrowRightLeft class="w-5 h-5" />
                     </div>
-                    <span class="text-[10px] uppercase font-bold text-gray-500">Transf.</span>
-                </div>
+                    <span class="text-[11px] uppercase font-bold text-blue-500 tracking-wide">Transferência</span>
+                </button>
 
                 <!-- Importar -->
-                <div @click="openModal('import')" class="text-center group cursor-pointer">
-                    <div class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-600 mb-2 group-hover:bg-emerald-100 transition-colors">
-                        <Download class="w-6 h-6" />
+                <button @click="openModal('import')"
+                    class="group flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-violet-100 bg-violet-50 hover:bg-violet-100 hover:border-violet-200 transition-all">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-violet-500 shadow-sm group-hover:scale-110 transition-transform">
+                        <Download class="w-5 h-5" />
                     </div>
-                    <span class="text-[10px] uppercase font-bold text-gray-500">Importar</span>
-                </div>
+                    <span class="text-[11px] uppercase font-bold text-violet-500 tracking-wide">Importar</span>
+                </button>
             </div>
         </div>
 
