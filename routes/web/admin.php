@@ -3,29 +3,27 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
-
-/** Auth Controllers  **/
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-
-/** App Controller **/
-use App\Http\Controllers\App\DashboardController;
-use App\Http\Controllers\App\SettingsController;
-use App\Http\Controllers\App\AccountController;
+use App\Http\Controllers\Panel\DashboardController;
+use App\Http\Controllers\Panel\UserController;
+use App\Http\Controllers\Panel\ReportController;
 
 /**
- * App - Grupo de rotas do Administração
- * Todas as rotas deste grupo terão prefixo "app"
+ * Painel administrativo — prefixo /panel, protegido por auth + admin
  */
-Route::prefix("panel")->group(function () {
+Route::prefix('panel')
+    ->middleware(['auth', 'admin'])
+    ->name('panel.')
+    ->group(function () {
 
-    /** Rota principal do app **/
-    Route::get('/', [DashboardController::class, "index"])->name('app.dashboard');
+        /** Dashboard **/
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    /** Rota de configurações do app **/
-    Route::get('/configuracoes', [SettingsController::class, "index"])->name('app.settings');
+        /** Usuários **/
+        Route::get('/usuarios',           [UserController::class, 'index'])  ->name('users.index');
+        Route::get('/usuarios/{user}',    [UserController::class, 'show'])   ->name('users.show');
+        Route::put('/usuarios/{user}',    [UserController::class, 'update']) ->name('users.update');
+        Route::delete('/usuarios/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
-    /** Rota de contas do app **/
-    Route::get('/contas', [AccountController::class, "index"])->name('app.conta');
-});
+        /** Relatórios **/
+        Route::get('/relatorios', [ReportController::class, 'index'])->name('reports.index');
+    });
