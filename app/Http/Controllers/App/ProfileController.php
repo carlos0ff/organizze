@@ -10,6 +10,6 @@ class ProfileController extends Controller
 {
     public function index(): \Inertia\Response
     {
-        return inertia('App/Profile/Index');
+        return inertia('App/Perfil/Index');
     }
 }

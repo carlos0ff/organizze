@@ -8,7 +8,7 @@
 /storage/framework/sessions
 /storage/framework/views
 /storage/framework/testing
-/.env
+
 /.env.*
 !/\.env\.example
 

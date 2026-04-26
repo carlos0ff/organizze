@@ -40,7 +40,7 @@ Route::prefix("blog")->group(function(){
  * http://localhost/blog
  * http://localhost/blog/post/como-viver-na-lagoa
  * http://localhost/blog/categoria/controle
- * sail artisan make:controller ./App/Account/DeleteAccountController --invokable
+ * sail artisan make:controller ./App/Conta/DeleteAccountController --invokable
  */
 
 

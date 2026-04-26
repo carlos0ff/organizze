@@ -12,13 +12,13 @@ const routes: RouteRecordRaw[] = [
     { path: '/app/lancamentos',        name: 'app.lancamentos',     component: () => import('@/pages/App/Lancamentos/Index.vue') },
     { path: '/app/limites-gastos',     name: 'app.limites',         component: () => import('@/pages/App/LimitesGastos/Index.vue') },
     { path: '/app/conexao-bancaria',   name: 'app.conexao',         component: () => import('@/pages/App/ConexaoBancaria/Index.vue') },
-    { path: '/app/contas',             name: 'app.contas',          component: () => import('@/pages/App/Account/Index.vue') },
+    { path: '/app/contas',             name: 'app.contas',          component: () => import('../pages/App/Conta/Index.vue') },
     { path: '/app/cartao',             name: 'app.cartao',          component: () => import('@/pages/App/Cards/Index.vue') },
     { path: '/app/assinatura',         name: 'app.assinatura',      component: () => import('@/pages/App/Signature/Index.vue') },
-    { path: '/app/perfil',             name: 'app.perfil',          component: () => import('@/pages/App/Profile/Index.vue') },
+    { path: '/app/perfil',             name: 'app.perfil',          component: () => import('../pages/App/Perfil/Index.vue') },
     { path: '/app/plano',              name: 'app.plano',           component: () => import('@/pages/App/Plan/Index.vue') },
     { path: '/app/configuracao',       name: 'app.configuracao',    component: () => import('@/pages/App/Settings/Index.vue') },
-    { path: '/app/ajuda',              name: 'app.ajuda',           component: () => import('@/pages/App/Help/Index.vue') },
+    { path: '/app/ajuda',              name: 'app.ajuda',           component: () => import('../pages/App/Suporte/Index.vue') },
 
     // ── Blog ──────────────────────────────────────
     { path: '/blog',                        name: 'blog.home',     component: () => import('@/pages/Blog/Home/Index.vue') },

@@ -52,7 +52,7 @@ class AccountController extends Controller
      */
     public function edit() : \Inertia\Response
     {
-        return Inertia::render('App/Account/Edit');
+        return Inertia::render('App/Conta/Edit');
     }
 
     /**
