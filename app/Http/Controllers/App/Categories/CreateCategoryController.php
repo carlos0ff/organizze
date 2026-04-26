@@ -12,6 +12,6 @@ class CreateCategoryController extends Controller
      */
     public function __invoke(Request $request)
     {
-        //
+        return inertia('App/Categories/Create');
     }
 }

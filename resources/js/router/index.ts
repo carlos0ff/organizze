@@ -15,10 +15,16 @@ const routes: RouteRecordRaw[] = [
     { path: '/app/contas',             name: 'app.contas',          component: () => import('@/pages/App/Account/Index.vue') },
     { path: '/app/cartao',             name: 'app.cartao',          component: () => import('@/pages/App/Cards/Index.vue') },
     { path: '/app/assinatura',         name: 'app.assinatura',      component: () => import('@/pages/App/Signature/Index.vue') },
+    { path: '/app/perfil',             name: 'app.perfil',          component: () => import('@/pages/App/Profile/Index.vue') },
+    { path: '/app/plano',              name: 'app.plano',           component: () => import('@/pages/App/Plan/Index.vue') },
+    { path: '/app/configuracao',       name: 'app.configuracao',    component: () => import('@/pages/App/Settings/Index.vue') },
+    { path: '/app/ajuda',              name: 'app.ajuda',           component: () => import('@/pages/App/Help/Index.vue') },
 
     // ── Blog ──────────────────────────────────────
-    { path: '/blog',             name: 'blog.home', component: () => import('@/pages/Blog/Posts/List.vue') },
-    { path: '/blog/post/:slug',  name: 'blog.post', component: () => import('@/pages/Blog/Posts/Show.vue') },
+    { path: '/blog',                        name: 'blog.home',     component: () => import('@/pages/Blog/Home/Index.vue') },
+    { path: '/blog/post/:slug',            name: 'blog.post',     component: () => import('@/pages/Blog/Posts/Show.vue') },
+    { path: '/blog/categoria/:category',   name: 'blog.category', component: () => import('@/pages/Blog/Categories/Show.vue') },
+    { path: '/blog/artigos',               name: 'blog.articles', component: () => import('@/pages/Blog/Articles/Index.vue') },
 
     // ── Panel ─────────────────────────────────────
     { path: '/panel',              name: 'panel.dashboard',  component: () => import('@/pages/Panel/Dashboard/Index.vue') },

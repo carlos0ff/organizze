@@ -14,6 +14,9 @@ use App\Http\Controllers\App\AccountController;
 use App\Http\Controllers\App\TransactionController;
 use App\Http\Controllers\App\SpendingLimitController;
 use App\Http\Controllers\App\BankConnectionController;
+use App\Http\Controllers\App\ProfileController;
+use App\Http\Controllers\App\HelpController;
+use App\Http\Controllers\App\PlanController;
 
 
 /**
@@ -44,4 +47,13 @@ Route::prefix("app")->group(function () {
 
     /** **/
     Route::get("/assinatura", [AccountController::class, "signature"])->name('app.signature');
+
+    /** Perfil **/
+    Route::get('/perfil', [ProfileController::class, 'index'])->name('app.perfil');
+
+    /** Meu Plano **/
+    Route::get('/plano', [PlanController::class, 'index'])->name('app.plano');
+
+    /** Ajuda & Suporte **/
+    Route::get('/ajuda', [HelpController::class, 'index'])->name('app.ajuda');
 });

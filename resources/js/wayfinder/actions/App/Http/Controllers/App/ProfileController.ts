@@ -1,8 +1,8 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../wayfinder'
 /**
-* @see \App\Http\Controllers\App\DashboardController::index
-* @see app/Http/Controllers/App/DashboardController.php:11
-* @route '/app'
+* @see \App\Http\Controllers\App\ProfileController::index
+* @see app/Http/Controllers/App/ProfileController.php:11
+* @route '/app/perfil'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: index.url(options),
@@ -11,22 +11,22 @@ export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 index.definition = {
     methods: ["get","head"],
-    url: '/app',
+    url: '/app/perfil',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\DashboardController::index
-* @see app/Http/Controllers/App/DashboardController.php:11
-* @route '/app'
+* @see \App\Http\Controllers\App\ProfileController::index
+* @see app/Http/Controllers/App/ProfileController.php:11
+* @route '/app/perfil'
 */
 index.url = (options?: RouteQueryOptions) => {
     return index.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\App\DashboardController::index
-* @see app/Http/Controllers/App/DashboardController.php:11
-* @route '/app'
+* @see \App\Http\Controllers\App\ProfileController::index
+* @see app/Http/Controllers/App/ProfileController.php:11
+* @route '/app/perfil'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: index.url(options),
@@ -34,15 +34,15 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\DashboardController::index
-* @see app/Http/Controllers/App/DashboardController.php:11
-* @route '/app'
+* @see \App\Http\Controllers\App\ProfileController::index
+* @see app/Http/Controllers/App/ProfileController.php:11
+* @route '/app/perfil'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: index.url(options),
     method: 'head',
 })
 
-const DashboardController = { index }
+const ProfileController = { index }
 
-export default DashboardController
+export default ProfileController

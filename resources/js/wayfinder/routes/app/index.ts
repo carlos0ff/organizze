@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see app/Http/Controllers/App/DashboardController.php:15
+* @see app/Http/Controllers/App/DashboardController.php:11
 * @route '/app'
 */
 export const dashboard = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ dashboard.definition = {
 
 /**
 * @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see app/Http/Controllers/App/DashboardController.php:15
+* @see app/Http/Controllers/App/DashboardController.php:11
 * @route '/app'
 */
 dashboard.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ dashboard.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see app/Http/Controllers/App/DashboardController.php:15
+* @see app/Http/Controllers/App/DashboardController.php:11
 * @route '/app'
 */
 dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see app/Http/Controllers/App/DashboardController.php:15
+* @see app/Http/Controllers/App/DashboardController.php:11
 * @route '/app'
 */
 dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -351,6 +351,138 @@ signature.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     method: 'head',
 })
 
+/**
+* @see \App\Http\Controllers\App\ProfileController::perfil
+* @see app/Http/Controllers/App/ProfileController.php:11
+* @route '/app/perfil'
+*/
+export const perfil = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: perfil.url(options),
+    method: 'get',
+})
+
+perfil.definition = {
+    methods: ["get","head"],
+    url: '/app/perfil',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\ProfileController::perfil
+* @see app/Http/Controllers/App/ProfileController.php:11
+* @route '/app/perfil'
+*/
+perfil.url = (options?: RouteQueryOptions) => {
+    return perfil.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\ProfileController::perfil
+* @see app/Http/Controllers/App/ProfileController.php:11
+* @route '/app/perfil'
+*/
+perfil.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: perfil.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\ProfileController::perfil
+* @see app/Http/Controllers/App/ProfileController.php:11
+* @route '/app/perfil'
+*/
+perfil.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: perfil.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\PlanController::plano
+* @see app/Http/Controllers/App/PlanController.php:11
+* @route '/app/plano'
+*/
+export const plano = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: plano.url(options),
+    method: 'get',
+})
+
+plano.definition = {
+    methods: ["get","head"],
+    url: '/app/plano',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\PlanController::plano
+* @see app/Http/Controllers/App/PlanController.php:11
+* @route '/app/plano'
+*/
+plano.url = (options?: RouteQueryOptions) => {
+    return plano.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\PlanController::plano
+* @see app/Http/Controllers/App/PlanController.php:11
+* @route '/app/plano'
+*/
+plano.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: plano.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\PlanController::plano
+* @see app/Http/Controllers/App/PlanController.php:11
+* @route '/app/plano'
+*/
+plano.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: plano.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\HelpController::ajuda
+* @see app/Http/Controllers/App/HelpController.php:11
+* @route '/app/ajuda'
+*/
+export const ajuda = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: ajuda.url(options),
+    method: 'get',
+})
+
+ajuda.definition = {
+    methods: ["get","head"],
+    url: '/app/ajuda',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\HelpController::ajuda
+* @see app/Http/Controllers/App/HelpController.php:11
+* @route '/app/ajuda'
+*/
+ajuda.url = (options?: RouteQueryOptions) => {
+    return ajuda.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\HelpController::ajuda
+* @see app/Http/Controllers/App/HelpController.php:11
+* @route '/app/ajuda'
+*/
+ajuda.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: ajuda.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\HelpController::ajuda
+* @see app/Http/Controllers/App/HelpController.php:11
+* @route '/app/ajuda'
+*/
+ajuda.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: ajuda.url(options),
+    method: 'head',
+})
+
 const app = {
     dashboard: Object.assign(dashboard, dashboard),
     conta: Object.assign(conta, conta),
@@ -360,6 +492,9 @@ const app = {
     limitesGastos: Object.assign(limitesGastos, limitesGastos),
     conexaoBancaria: Object.assign(conexaoBancaria, conexaoBancaria),
     signature: Object.assign(signature, signature),
+    perfil: Object.assign(perfil, perfil),
+    plano: Object.assign(plano, plano),
+    ajuda: Object.assign(ajuda, ajuda),
 }
 
 export default app

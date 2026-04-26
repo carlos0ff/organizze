@@ -24,7 +24,7 @@ const REPORTS = [
     { label: 'Receitas vs Despesas',to: '/app/relatorios/receitas-despesas', icon: Scale },
 ];
 
-function isActive(name: string) {
+function isActive(name) {
     return route.name === name;
 }
 
@@ -158,13 +158,13 @@ function logout() {
                                 <RouterLink to="/app/perfil" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
                                     <User class="w-4 h-4 text-gray-400" /> Meu perfil
                                 </RouterLink>
-                                <RouterLink to="/app/assinatura" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                                <RouterLink to="/app/plano" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
                                     <Gem class="w-4 h-4 text-amber-400" /> Meu plano
                                 </RouterLink>
                                 <RouterLink to="/app/configuracao" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
                                     <Settings class="w-4 h-4 text-gray-400" /> Configurações
                                 </RouterLink>
-                                <RouterLink to="/help" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                                <RouterLink to="/app/ajuda" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
                                     <LifeBuoy class="w-4 h-4 text-gray-400" /> Ajuda & Suporte
                                 </RouterLink>
                             </div>

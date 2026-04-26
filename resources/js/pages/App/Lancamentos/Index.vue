@@ -1,7 +1,10 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { router } from '@inertiajs/vue3';
+import { useRouter } from 'vue-router';
 import Navbar from '@/Components/layout/Navbar.vue';
+
+const vueRouter = useRouter();
 import {
     Plus, Minus, ArrowRightLeft, ChevronLeft, ChevronRight,
     Check, X, Pencil, Trash2, ArrowUpCircle, ArrowDownCircle,

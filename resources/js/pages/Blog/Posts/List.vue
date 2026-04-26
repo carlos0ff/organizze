@@ -11,18 +11,133 @@ import Footer from '@/pages/Blog/Components/Layout/Footer.vue';
     <main class="flex-1 pt-12 lg:pt-20">
 
         <!-- Hero Blogger artigos -->
-        <section class="bg-[#EDFDF2]">
-            <div class="max-w7xl mx-auto px-4 pt-12">
-                <div class="flex flex-col-2 justify-between">
-                    <div class="">
-                        <h1>Minha vida é uma merda :( </h1>
+        <section class="max-w-7xl mx-auto px-4 py-10">
+            <div class="relative flex flex-col md:flex-row overflow-hidden rounded-md shadow-lg">
+                <div class="relative md:w-2/3 h-65 md:h-90">
+                    <img
+                        src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"
+                        alt="Controle de gastos"
+                        class="w-full h-full object-cover"
+                    />
+                    <span class="absolute bottom-4 left-4 bg-[#1F3D2B] text-white text-xs px-3 py-1 rounded-full"> Controle de Gastos</span>
+
+                    <button
+                        class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition"
+                    >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+
+                    <button
+                        class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition"
+                    >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="md:w-1/3 bg-[#2F4F3F] p-6 md:p-8 flex flex-col justify-center">
+                    <h2 class="text-white text-xl md:text-2xl font-semibold leading-snug">
+                        Gastos diários: como mapear, reduzir e controlar sem sofrimento
+                    </h2>
+                    <p class="mt-4 text-sm text-gray-300 leading-relaxed line-clamp-3">
+                        Manter as finanças pessoais organizadas não precisa ser complicado. Neste artigo, você vai aprender como identificar seus
+                        gastos diários, entender para onde seu dinheiro está indo e aplicar estratégias simples para reduzir desperdícios e tomar
+                        decisões financeiras mais conscientes.
+                    </p>
+
+                    <div class="mt-5 flex items-center gap-4 text-xs text-gray-300">
+                        <span class="flex items-center gap-2 capitalize">
+                            <img src="https://i.pravatar.cc/40?img=12" alt="Autor" class="w-5 h-5 rounded-full object-cover" />
+                            Carlos Júnior
+                        </span>
+                        <span>23/01/2026</span>
+                        <span>7 min de leitura</span>
                     </div>
-                    <div class="">
-                        <h1>Minha vida é uma merda ;()</h1>
-                    </div>
+                </div>
+
+                <div class="absolute bottom-4 right-4 flex gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-400"></span>
+                    <span class="w-2 h-2 rounded-full bg-white/40"></span>
+                    <span class="w-2 h-2 rounded-full bg-white/40"></span>
                 </div>
             </div>
         </section>
+
+        <!-- Seção de Artigos -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section class="mt-10 mb-10">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+                    <div class="md:max-w-sm">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-3">Temas</h2>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Explore os assuntos mais relevantes e encontre conteúdos criados para facilitar suas decisões financeiras no dia a dia.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 flex-1">
+                        <a href="#" class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300"
+                        >
+                            <img src="https://www.organizze.com.br/blog/wp-content/uploads/MEI-280x210-1.jpg"
+                                alt="MEI" class="w-full h-44 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <span class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-90"></span>
+                            <div class="absolute bottom-0 p-4">
+                                <h3 class="text-white font-semibold text-base">MEI & Empreendedorismo</h3>
+                                <p class="text-white/80 text-xs mt-1">Obrigações, impostos e dicas</p>
+                            </div>
+                        </a>
+
+                        <a href="#" class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300" >
+                            <img
+                                src="https://www.organizze.com.br/blog/wp-content/uploads/Investimento-280x210-1.jpg"
+                                alt="Investimentos"
+                                class="w-full h-44 object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
+                            <div class="absolute bottom-0 p-4">
+                                <h3 class="text-white font-semibold text-base">Investimentos</h3>
+                                <p class="text-white/80 text-xs mt-1">Renda fixa e variável</p>
+                            </div>
+                        </a>
+
+                        <a
+                            href="#"
+                            class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300"
+                        >
+                            <img
+                                src="https://www.organizze.com.br/blog/wp-content/uploads/Direitos-do-consumidor-280x210-1.jpg"
+                                alt="Orçamento"
+                                class="w-full h-44 object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
+                            <div class="absolute bottom-0 p-4">
+                                <h3 class="text-white font-semibold text-base">Orçamento</h3>
+                                <p class="text-white/80 text-xs mt-1">Controle financeiro</p>
+                            </div>
+                        </a>
+
+                        <a
+                            href="#"
+                            class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300"
+                        >
+                            <img
+                                src="https://www.organizze.com.br/blog/wp-content/uploads/D%C2%A1vidas-280x210-1.jpg"
+                                alt="Impostos"
+                                class="w-full h-44 object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
+                            <div class="absolute bottom-0 p-4">
+                                <h3 class="text-white font-semibold text-base">Impostos</h3>
+                                <p class="text-white/80 text-xs mt-1">Declarações e taxas</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
 
         <!-- Seção de Artigos -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

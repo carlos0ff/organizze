@@ -1,19 +1,22 @@
 <script setup>
+import { RouterLink, useRoute } from 'vue-router';
 import {
     LayoutDashboard, Users, BarChart3, Settings,
     LogOut, ChevronRight, Shield,
 } from 'lucide-vue-next';
 
+const route = useRoute();
+
 const nav = [
-    { label: 'Dashboard',  href: '/panel',          icon: LayoutDashboard },
-    { label: 'Usuários',   href: '/panel/usuarios',  icon: Users },
-    { label: 'Relatórios', href: '/panel/relatorios',icon: BarChart3 },
-    { label: 'Configurações', href: '/panel/configuracoes', icon: Settings },
+    { label: 'Dashboard',     to: '/panel',               name: 'panel.dashboard', icon: LayoutDashboard },
+    { label: 'Usuários',      to: '/panel/usuarios',       name: 'panel.users',     icon: Users },
+    { label: 'Relatórios',    to: '/panel/relatorios',     name: 'panel.reports',   icon: BarChart3 },
+    { label: 'Configurações', to: '/panel/configuracoes',  name: null,              icon: Settings },
 ];
 
-function isActive(href) {
-    const path = window.location.pathname;
-    return href === '/panel' ? path === '/panel' : path.startsWith(href);
+function isActive(name, to) {
+    if (name) return route.name === name;
+    return route.path === to;
 }
 </script>
 
@@ -33,10 +36,10 @@ function isActive(href) {
 
         <!-- Nav -->
         <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
-            <a
-                v-for="item in nav" :key="item.href"
-                :href="item.href"
-                :class="isActive(item.href)
+            <RouterLink
+                v-for="item in nav" :key="item.to"
+                :to="item.to"
+                :class="isActive(item.name, item.to)
                     ? 'bg-white/10 text-white'
                     : 'text-white/50 hover:bg-white/5 hover:text-white'"
                 class="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors group"
@@ -45,16 +48,16 @@ function isActive(href) {
                     <component :is="item.icon" class="w-4 h-4 shrink-0" />
                     {{ item.label }}
                 </div>
-                <ChevronRight v-if="isActive(item.href)" class="w-3.5 h-3.5 opacity-60" />
-            </a>
+                <ChevronRight v-if="isActive(item.name, item.to)" class="w-3.5 h-3.5 opacity-60" />
+            </RouterLink>
         </nav>
 
-        <!-- Separador + Voltar ao app -->
-        <div class="px-3 py-4 border-t border-white/10 space-y-1">
-            <a href="/app" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-white/50 hover:bg-white/5 hover:text-white transition-colors">
+        <!-- Voltar ao app -->
+        <div class="px-3 py-4 border-t border-white/10">
+            <RouterLink to="/app" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-white/50 hover:bg-white/5 hover:text-white transition-colors">
                 <LogOut class="w-4 h-4" />
                 Voltar ao App
-            </a>
+            </RouterLink>
         </div>
     </aside>
 </template>

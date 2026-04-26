@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
+import { RouterLink } from 'vue-router';
 import AppFooter from '@/Components/layout/Footer.vue';
 import Navbar from '@/Components/layout/Navbar.vue';
 
@@ -48,9 +49,127 @@ import {
   ArrowUpCircle,
   ArrowDownCircle,
   ChevronRight,
+  BookOpen,
+  Clock,
+  Eye,
+  ArrowRight,
+  // Primeiros passos
+  Rocket,
+  Building2,
+  BadgeCheck,
+  PiggyBank,
+  Link2,
 } from 'lucide-vue-next';
 
+// ==================== PRIMEIROS PASSOS ====================
+const tutorialOpen = ref(false);
+const tooltipVisible = ref(null);
 
+const STEPS = [
+    {
+        id: 1,
+        icon: BadgeCheck,
+        iconBg: 'bg-emerald-100',
+        iconColor: 'text-emerald-600',
+        label: 'Criar sua conta',
+        desc: 'Você já criou sua conta no Organizze. Parabéns pelo primeiro passo!',
+        detail: 'Sua conta foi criada com sucesso. Você já pode começar a organizar suas finanças.',
+        done: true,
+    },
+    {
+        id: 2,
+        icon: Building2,
+        iconBg: 'bg-blue-100',
+        iconColor: 'text-blue-600',
+        label: 'Adicionar conta bancária',
+        desc: 'Cadastre sua conta corrente, poupança ou carteira.',
+        detail: 'Adicione uma conta para registrar seus lançamentos e acompanhar seu saldo em tempo real.',
+        done: true,
+        action: { label: 'Adicionar conta', to: '/app/contas' },
+    },
+    {
+        id: 3,
+        icon: ArrowRight,
+        iconBg: 'bg-violet-100',
+        iconColor: 'text-violet-600',
+        label: 'Registrar primeiro lançamento',
+        desc: 'Adicione uma despesa ou receita para começar o controle.',
+        detail: 'Um lançamento é qualquer movimentação financeira: salário, aluguel, compras, etc.',
+        done: false,
+        action: { label: 'Novo lançamento', to: '/app/lancamentos' },
+    },
+    {
+        id: 4,
+        icon: PiggyBank,
+        iconBg: 'bg-amber-100',
+        iconColor: 'text-amber-600',
+        label: 'Definir limite de gastos',
+        desc: 'Crie metas por categoria para não estourar o orçamento.',
+        detail: 'Limites de gastos te alertam quando você está chegando perto do teto em uma categoria.',
+        done: false,
+        action: { label: 'Criar limite', to: '/app/limites-gastos' },
+    },
+    {
+        id: 5,
+        icon: Link2,
+        iconBg: 'bg-teal-100',
+        iconColor: 'text-teal-600',
+        label: 'Conectar seu banco',
+        desc: 'Sincronize extratos automaticamente pelo Open Finance.',
+        detail: 'Com a conexão bancária seus lançamentos são importados automaticamente, sem digitar nada.',
+        done: false,
+        badge: 'Pro',
+        action: { label: 'Conectar banco', to: '/app/conexao-bancaria' },
+    },
+];
+
+const doneCount = computed(() => STEPS.filter(s => s.done).length);
+const progressPct = computed(() => (doneCount.value / STEPS.length) * 100);
+
+
+
+// ==================== PROPS ====================
+const props = defineProps({
+    recentPosts: { type: Array, default: () => [] },
+});
+
+// ==================== BLOG HELPERS ====================
+const BLOG_MOCK = [
+    {
+        id: 1, slug: 'como-sair-das-dividas-em-2026',
+        title: 'Como sair das dívidas em 2026',
+        excerpt: 'Descubra o método passo a passo que milhares de brasileiros usaram para quitar dívidas e reconquistar sua liberdade financeira.',
+        reading_time: 5, views: 1240, published_at: '2026-04-20T10:00:00Z',
+        tag: 'Dívidas', tagColor: 'bg-red-50 text-red-500',
+    },
+    {
+        id: 2, slug: 'investir-com-pouco-dinheiro',
+        title: 'Como investir com pouco dinheiro',
+        excerpt: 'Você não precisa de muito capital para começar a investir. Veja as melhores opções para quem está iniciando com R$ 50.',
+        reading_time: 7, views: 3870, published_at: '2026-04-18T08:00:00Z',
+        tag: 'Investimentos', tagColor: 'bg-emerald-50 text-emerald-600',
+    },
+    {
+        id: 3, slug: 'orcamento-familiar-do-zero',
+        title: 'Monte seu orçamento familiar do zero',
+        excerpt: 'Um guia prático para organizar as finanças da sua família, cortar gastos desnecessários e ainda sobrar dinheiro no final do mês.',
+        reading_time: 6, views: 2105, published_at: '2026-04-15T14:00:00Z',
+        tag: 'Orçamento', tagColor: 'bg-blue-50 text-blue-500',
+    },
+];
+
+const blogPosts = computed(() =>
+    props.recentPosts.length > 0 ? props.recentPosts : BLOG_MOCK
+);
+
+function fmtDate(d) {
+    return new Date(d).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+}
+
+function excerpt(content, max = 110) {
+    const plain = content?.replace(/<[^>]*>/g, '') ?? '';
+    return plain.length > max ? plain.slice(0, max) + '…' : plain;
+}
 
 // ==================== SAUDAÇÃO DINÂMICA ====================
 const hour = new Date().getHours();
@@ -271,31 +390,135 @@ const goToCardsPage = () => {
             </div>
         </div>
 
-        <!-- PASSO A PASSO -->
-        <div class="bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-gray-50 p-6 mb-4">
-            <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center">
-                        <i class="fas fa-chart-line text-green-500 text-xl"></i>
+        <!-- ══ PRIMEIROS PASSOS ══════════════════════════════════════════════ -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-4">
+
+            <!-- Cabeçalho -->
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center shrink-0">
+                        <Rocket class="w-5 h-5 text-emerald-600" />
                     </div>
                     <div>
-                        <h3 class="text-base font-bold text-gray-700">Primeiros passos</h3>
-                        <p class="text-sm text-gray-400">2 de 5 tarefas completas</p>
+                        <h3 class="text-sm font-bold text-gray-800">Primeiros passos</h3>
+                        <p class="text-xs text-gray-400">{{ doneCount }} de {{ STEPS.length }} tarefas completas</p>
                     </div>
                 </div>
-                <button class="bg-green-50 text-green-600 font-bold py-2 px-6 rounded-md text-sm hover:bg-green-100 cursor-pointer transition-colors">
-                    Continuar
+                <button
+                    @click="tutorialOpen = !tutorialOpen"
+                    class="text-xs font-bold text-emerald-600 bg-emerald-50 hover:bg-emerald-100 px-4 py-2 rounded-lg transition-colors"
+                >
+                    {{ tutorialOpen ? 'Fechar' : 'Continuar' }}
                 </button>
             </div>
 
-            <div class="flex gap-2 h-1.5">
-                <div class="flex-1 bg-green-500 rounded-full"></div>
-                <div class="flex-1 bg-gray-100 rounded-full"></div>
-                <div class="flex-1 bg-gray-100 rounded-full"></div>
-                <div class="flex-1 bg-gray-100 rounded-full"></div>
-                <div class="flex-1 bg-gray-100 rounded-full"></div>
+            <!-- Barra de progresso -->
+            <div class="relative h-2 bg-gray-100 rounded-full overflow-hidden mb-1">
+                <div
+                    class="h-full bg-emerald-500 rounded-full transition-all duration-700"
+                    :style="`width: ${progressPct}%`"
+                />
+            </div>
+            <div class="flex justify-between text-[10px] text-gray-400 font-medium mb-4">
+                <span>{{ Math.round(progressPct) }}% concluído</span>
+                <span>{{ STEPS.length - doneCount }} tarefas restantes</span>
+            </div>
+
+            <!-- Passos (expandido) -->
+            <transition
+                enter-active-class="transition-all duration-300 ease-out"
+                enter-from-class="opacity-0 -translate-y-2"
+                enter-to-class="opacity-100 translate-y-0"
+                leave-active-class="transition-all duration-200 ease-in"
+                leave-from-class="opacity-100 translate-y-0"
+                leave-to-class="opacity-0 -translate-y-2"
+            >
+                <div v-if="tutorialOpen" class="space-y-2 pt-2">
+                    <div
+                        v-for="step in STEPS" :key="step.id"
+                        class="relative group"
+                        @mouseenter="tooltipVisible = step.id"
+                        @mouseleave="tooltipVisible = null"
+                    >
+                        <div
+                            :class="[
+                                'flex items-start gap-4 p-4 rounded-xl border transition-all',
+                                step.done
+                                    ? 'bg-emerald-50/60 border-emerald-100'
+                                    : 'bg-gray-50 border-gray-100 hover:border-gray-200 hover:bg-white',
+                            ]"
+                        >
+                            <!-- Ícone / Checkbox -->
+                            <div class="relative shrink-0">
+                                <div :class="[step.iconBg, 'w-9 h-9 rounded-lg flex items-center justify-center']">
+                                    <component :is="step.icon" :class="[step.iconColor, 'w-4 h-4']" />
+                                </div>
+                                <!-- Checkmark overlay quando done -->
+                                <div v-if="step.done"
+                                    class="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full flex items-center justify-center ring-2 ring-white">
+                                    <svg class="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Texto -->
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <p :class="['text-sm font-semibold', step.done ? 'text-gray-500 line-through' : 'text-gray-800']">
+                                        {{ step.label }}
+                                    </p>
+                                    <span v-if="step.badge"
+                                        class="text-[9px] font-black px-1.5 py-0.5 bg-amber-100 text-amber-600 rounded-full uppercase tracking-wide">
+                                        {{ step.badge }}
+                                    </span>
+                                    <span v-if="step.done"
+                                        class="text-[9px] font-bold px-1.5 py-0.5 bg-emerald-100 text-emerald-600 rounded-full uppercase">
+                                        Feito
+                                    </span>
+                                </div>
+                                <p class="text-[11px] text-gray-400 mt-0.5 leading-relaxed">{{ step.desc }}</p>
+                            </div>
+
+                            <!-- Botão de ação -->
+                            <RouterLink v-if="!step.done && step.action" :to="step.action.to"
+                                class="shrink-0 text-[11px] font-bold text-emerald-600 border border-emerald-200 px-3 py-1.5 rounded-lg hover:bg-emerald-50 transition-colors whitespace-nowrap">
+                                {{ step.action.label }}
+                            </RouterLink>
+                        </div>
+
+                        <!-- Tooltip -->
+                        <transition
+                            enter-active-class="transition-all duration-150"
+                            enter-from-class="opacity-0 translate-y-1"
+                            enter-to-class="opacity-100 translate-y-0"
+                            leave-active-class="transition-all duration-100"
+                            leave-from-class="opacity-100 translate-y-0"
+                            leave-to-class="opacity-0 translate-y-1"
+                        >
+                            <div v-if="tooltipVisible === step.id"
+                                class="absolute left-14 -top-10 z-20 bg-gray-900 text-white text-[11px] font-medium px-3 py-2 rounded-lg shadow-xl whitespace-nowrap max-w-xs pointer-events-none">
+                                {{ step.detail }}
+                                <!-- Seta do tooltip -->
+                                <div class="absolute left-4 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-900" />
+                            </div>
+                        </transition>
+                    </div>
+                </div>
+            </transition>
+
+            <!-- Prévia dos steps (quando fechado) — dots coloridos -->
+            <div v-if="!tutorialOpen" class="flex items-center gap-1.5">
+                <div
+                    v-for="step in STEPS" :key="step.id"
+                    :class="[
+                        'h-1.5 flex-1 rounded-full transition-all',
+                        step.done ? 'bg-emerald-500' : 'bg-gray-100',
+                    ]"
+                />
             </div>
         </div>
+        <!-- ══ /PRIMEIROS PASSOS ══════════════════════════════════════════════ -->
 
         <!-- START | INÍCIO -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
@@ -910,6 +1133,71 @@ const goToCardsPage = () => {
                 </button>
             </div>
         </div>
+
+        <!-- ══ SEÇÃO BLOG ══════════════════════════════════════════════ -->
+        <div class="mt-6">
+            <!-- Header da seção -->
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 bg-emerald-50 rounded-lg flex items-center justify-center">
+                        <BookOpen class="w-4 h-4 text-emerald-600" />
+                    </div>
+                    <div>
+                        <h2 class="text-sm font-bold text-gray-800">Blog Organizze</h2>
+                        <p class="text-[10px] text-gray-400">Dicas financeiras para você</p>
+                    </div>
+                </div>
+                <RouterLink
+                    to="/blog"
+                    class="flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:text-emerald-700 transition-colors"
+                >
+                    Ver todos os artigos <ArrowRight class="w-3.5 h-3.5" />
+                </RouterLink>
+            </div>
+
+            <!-- Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <RouterLink
+                    v-for="post in blogPosts"
+                    :key="post.id"
+                    :to="`/blog/post/${post.slug}`"
+                    class="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-emerald-100 transition-all overflow-hidden flex flex-col"
+                >
+                    <!-- Thumb placeholder com gradiente -->
+                    <div class="h-2 w-full bg-gradient-to-r from-emerald-400 to-teal-400 group-hover:from-emerald-500 group-hover:to-teal-500 transition-colors" />
+
+                    <div class="p-5 flex flex-col flex-1">
+                        <!-- Tag -->
+                        <span :class="post.tagColor ?? 'bg-gray-100 text-gray-500'"
+                            class="self-start text-[10px] font-bold px-2 py-0.5 rounded-full mb-3">
+                            {{ post.tag ?? 'Finanças' }}
+                        </span>
+
+                        <!-- Título -->
+                        <h3 class="text-sm font-bold text-gray-800 leading-snug mb-2 group-hover:text-emerald-700 transition-colors line-clamp-2">
+                            {{ post.title }}
+                        </h3>
+
+                        <!-- Excerpt -->
+                        <p class="text-[11px] text-gray-400 leading-relaxed flex-1 line-clamp-3">
+                            {{ post.excerpt ?? excerpt(post.content) }}
+                        </p>
+
+                        <!-- Meta -->
+                        <div class="flex items-center gap-3 mt-4 pt-3 border-t border-gray-50 text-[10px] text-gray-400">
+                            <span class="flex items-center gap-1">
+                                <Clock class="w-3 h-3" /> {{ post.reading_time ?? 5 }} min
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <Eye class="w-3 h-3" /> {{ (post.views ?? 0).toLocaleString('pt-BR') }}
+                            </span>
+                            <span class="ml-auto font-medium">{{ fmtDate(post.published_at) }}</span>
+                        </div>
+                    </div>
+                </RouterLink>
+            </div>
+        </div>
+        <!-- ══ /BLOG ══════════════════════════════════════════════════ -->
 
         <AppFooter  />
     </main>

@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Route;
  */
 use App\Http\Controllers\Blog\Post\ListPostsController;
 use App\Http\Controllers\Blog\Post\ShowPostController;
+use App\Http\Controllers\Web\HomeController;
 
-// Route::get("/", )->name();
+Route::get("/", HomeController::class)->name("home");
 
 /**
  * Blog - Grupo de rotas do Blog
@@ -25,8 +26,11 @@ Route::prefix("blog")->group(function(){
     /** Blog post { SLUG } **/
     Route::get("/post/{slug}", ShowPostController::class)->name("blog.post");
 
-    /** Blog Categorys { SLUG } **/
-    // Route::get("/categoria/{category}", CategoryController::class)->name("blog.category");
+    /** Blog Categoria { SLUG } **/
+    Route::get("/categoria/{category}", ListPostsController::class)->name("blog.category");
+
+    /** Blog Artigos **/
+    Route::get("/artigos", ListPostsController::class)->name("blog.articles");
 
 });
 
