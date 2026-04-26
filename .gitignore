@@ -22,6 +22,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+/public/hot
 vite.config.js.timestamp-*
 .vite
 .eslintcache
