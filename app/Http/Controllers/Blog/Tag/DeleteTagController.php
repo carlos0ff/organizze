@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class DeleteTagController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
+    // Remove uma tag e desvincula todos os posts associados a ela
     public function __invoke(Request $request)
     {
         //

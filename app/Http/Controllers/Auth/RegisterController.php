@@ -15,4 +15,9 @@ class RegisterController extends Controller
     {
         return \Inertia\Inertia::render('Auth/Cadastro');
     }
+
+    public function authenticate(Request $request): \Inertia\Response
+    {
+        return  "hELL";
+    }
 }

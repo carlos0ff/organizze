@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class DeletePostController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
+    // Remove permanentemente um post do blog; apenas rascunhos e posts despublicados podem ser excluídos
     public function __invoke(Request $request)
     {
         //

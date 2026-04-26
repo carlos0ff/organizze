@@ -1,7 +1,7 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../../wayfinder'
 /**
-* @see \App\Http\Controllers\App\TransactionController::index
-* @see app/Http/Controllers/App/TransactionController.php:13
+* @see \App\Http\Controllers\App\Transaction\TransactionController::index
+* @see app/Http/Controllers/App/Transaction/TransactionController.php:14
 * @route '/app/lancamentos'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -15,8 +15,8 @@ index.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\TransactionController::index
-* @see app/Http/Controllers/App/TransactionController.php:13
+* @see \App\Http\Controllers\App\Transaction\TransactionController::index
+* @see app/Http/Controllers/App/Transaction/TransactionController.php:14
 * @route '/app/lancamentos'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -24,8 +24,8 @@ index.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\App\TransactionController::index
-* @see app/Http/Controllers/App/TransactionController.php:13
+* @see \App\Http\Controllers\App\Transaction\TransactionController::index
+* @see app/Http/Controllers/App/Transaction/TransactionController.php:14
 * @route '/app/lancamentos'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,8 +34,8 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\TransactionController::index
-* @see app/Http/Controllers/App/TransactionController.php:13
+* @see \App\Http\Controllers\App\Transaction\TransactionController::index
+* @see app/Http/Controllers/App/Transaction/TransactionController.php:14
 * @route '/app/lancamentos'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({

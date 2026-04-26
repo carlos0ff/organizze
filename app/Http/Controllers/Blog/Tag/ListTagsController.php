@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class ListTagsController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
+    // Retorna todas as tags disponíveis com a contagem de posts vinculados a cada uma
     public function __invoke(Request $request)
     {
         //

@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class DeleteCategoryController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
+    // Remove uma categoria do blog; impede a exclusão se houver posts vinculados
     public function __invoke(Request $request)
     {
         //

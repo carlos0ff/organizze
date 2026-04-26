@@ -10,9 +10,7 @@ use Inertia\Inertia;
 
 class ListPostsController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
+    // Lista todos os posts com paginação, filtro por categoria/tag/status e ordenação por data de publicação
     public function __invoke(Request $request)
     {
 

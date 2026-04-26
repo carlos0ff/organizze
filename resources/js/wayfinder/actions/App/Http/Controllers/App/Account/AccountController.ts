@@ -1,7 +1,7 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../../wayfinder'
 /**
-* @see \App\Http\Controllers\App\AccountController::index
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::index
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/contas'
 */
 const index97d1bce32d14980a02a1da8f4d371174 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -15,8 +15,8 @@ index97d1bce32d14980a02a1da8f4d371174.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\AccountController::index
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::index
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/contas'
 */
 index97d1bce32d14980a02a1da8f4d371174.url = (options?: RouteQueryOptions) => {
@@ -24,8 +24,8 @@ index97d1bce32d14980a02a1da8f4d371174.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\App\AccountController::index
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::index
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/contas'
 */
 index97d1bce32d14980a02a1da8f4d371174.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,8 +34,8 @@ index97d1bce32d14980a02a1da8f4d371174.get = (options?: RouteQueryOptions): Route
 })
 
 /**
-* @see \App\Http\Controllers\App\AccountController::index
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::index
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/contas'
 */
 index97d1bce32d14980a02a1da8f4d371174.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,8 +44,8 @@ index97d1bce32d14980a02a1da8f4d371174.head = (options?: RouteQueryOptions): Rout
 })
 
 /**
-* @see \App\Http\Controllers\App\AccountController::index
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::index
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/cartao'
 */
 const index5e4dfecc8881dd3d1b338607e78bf9b5 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -59,8 +59,8 @@ index5e4dfecc8881dd3d1b338607e78bf9b5.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\AccountController::index
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::index
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/cartao'
 */
 index5e4dfecc8881dd3d1b338607e78bf9b5.url = (options?: RouteQueryOptions) => {
@@ -68,8 +68,8 @@ index5e4dfecc8881dd3d1b338607e78bf9b5.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\App\AccountController::index
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::index
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/cartao'
 */
 index5e4dfecc8881dd3d1b338607e78bf9b5.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -78,8 +78,8 @@ index5e4dfecc8881dd3d1b338607e78bf9b5.get = (options?: RouteQueryOptions): Route
 })
 
 /**
-* @see \App\Http\Controllers\App\AccountController::index
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::index
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/cartao'
 */
 index5e4dfecc8881dd3d1b338607e78bf9b5.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -93,8 +93,8 @@ export const index = {
 }
 
 /**
-* @see \App\Http\Controllers\App\AccountController::signature
-* @see app/Http/Controllers/App/AccountController.php:64
+* @see \App\Http\Controllers\App\Account\AccountController::signature
+* @see app/Http/Controllers/App/Account/AccountController.php:63
 * @route '/app/assinatura'
 */
 export const signature = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -108,8 +108,8 @@ signature.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\AccountController::signature
-* @see app/Http/Controllers/App/AccountController.php:64
+* @see \App\Http\Controllers\App\Account\AccountController::signature
+* @see app/Http/Controllers/App/Account/AccountController.php:63
 * @route '/app/assinatura'
 */
 signature.url = (options?: RouteQueryOptions) => {
@@ -117,8 +117,8 @@ signature.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\App\AccountController::signature
-* @see app/Http/Controllers/App/AccountController.php:64
+* @see \App\Http\Controllers\App\Account\AccountController::signature
+* @see app/Http/Controllers/App/Account/AccountController.php:63
 * @route '/app/assinatura'
 */
 signature.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -127,8 +127,8 @@ signature.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\AccountController::signature
-* @see app/Http/Controllers/App/AccountController.php:64
+* @see \App\Http\Controllers\App\Account\AccountController::signature
+* @see app/Http/Controllers/App/Account/AccountController.php:63
 * @route '/app/assinatura'
 */
 signature.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({

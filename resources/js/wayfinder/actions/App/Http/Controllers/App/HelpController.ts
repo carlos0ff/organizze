@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\App\HelpController::index
-* @see app/Http/Controllers/App/HelpController.php:11
+* @see [unknown]:0
 * @route '/app/ajuda'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\App\HelpController::index
-* @see app/Http/Controllers/App/HelpController.php:11
+* @see [unknown]:0
 * @route '/app/ajuda'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\App\HelpController::index
-* @see app/Http/Controllers/App/HelpController.php:11
+* @see [unknown]:0
 * @route '/app/ajuda'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\App\HelpController::index
-* @see app/Http/Controllers/App/HelpController.php:11
+* @see [unknown]:0
 * @route '/app/ajuda'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({

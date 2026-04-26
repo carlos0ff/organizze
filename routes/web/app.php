@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\App\Account\AccountController;
+use App\Http\Controllers\App\BankConnectionController;
+use App\Http\Controllers\App\DashboardController;
+use App\Http\Controllers\App\HelpController;
+use App\Http\Controllers\App\PlanController;
+use App\Http\Controllers\App\ProfileController;
+use App\Http\Controllers\App\SettingsController;
+use App\Http\Controllers\App\SpendingLimitController;
+use App\Http\Controllers\App\Transaction\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /**
  * Auth Controllers
  * Controllers relacionados à autenticação, como login, registro, recuperação de senha, etc.
  */
-use App\Http\Controllers\App\DashboardController;
-use App\Http\Controllers\App\SettingsController;
-use App\Http\Controllers\App\AccountController;
-use App\Http\Controllers\App\TransactionController;
-use App\Http\Controllers\App\SpendingLimitController;
-use App\Http\Controllers\App\BankConnectionController;
-use App\Http\Controllers\App\ProfileController;
-use App\Http\Controllers\App\HelpController;
-use App\Http\Controllers\App\PlanController;
 
 
 /**

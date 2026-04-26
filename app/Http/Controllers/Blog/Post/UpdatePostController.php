@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class UpdatePostController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
+    // Atualiza título, conteúdo, categoria, tags e imagem de capa de um post existente
     public function __invoke(Request $request)
     {
         //

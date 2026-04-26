@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class PublishPostController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
+    // Publica um rascunho definindo o status como publicado e registrando a data de publicação
     public function __invoke(Request $request)
     {
         //

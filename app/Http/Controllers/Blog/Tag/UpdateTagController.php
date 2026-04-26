@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class UpdateTagController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
+    // Atualiza o nome e o slug de uma tag existente
     public function __invoke(Request $request)
     {
         //

@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\App;
+namespace App\Http\Controllers\App\Account;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use Inertia\Inertia;
 
 class AccountController extends Controller

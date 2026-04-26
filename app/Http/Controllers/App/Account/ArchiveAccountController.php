@@ -4,6 +4,7 @@ namespace App\Http\Controllers\App\Account;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ArchiveAccountController extends Controller
 {
@@ -12,6 +13,6 @@ class ArchiveAccountController extends Controller
      */
     public function __invoke(Request $request)
     {
-        //
+        return Inertia::render('Account/ArchiveAccount');
     }
 }

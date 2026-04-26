@@ -1,7 +1,7 @@
 import DashboardController from './DashboardController'
-import AccountController from './AccountController'
+import Account from './Account'
 import SettingsController from './SettingsController'
-import TransactionController from './TransactionController'
+import Transaction from './Transaction'
 import SpendingLimitController from './SpendingLimitController'
 import BankConnectionController from './BankConnectionController'
 import ProfileController from './ProfileController'
@@ -10,9 +10,9 @@ import HelpController from './HelpController'
 
 const App = {
     DashboardController: Object.assign(DashboardController, DashboardController),
-    AccountController: Object.assign(AccountController, AccountController),
+    Account: Object.assign(Account, Account),
     SettingsController: Object.assign(SettingsController, SettingsController),
-    TransactionController: Object.assign(TransactionController, TransactionController),
+    Transaction: Object.assign(Transaction, Transaction),
     SpendingLimitController: Object.assign(SpendingLimitController, SpendingLimitController),
     BankConnectionController: Object.assign(BankConnectionController, BankConnectionController),
     ProfileController: Object.assign(ProfileController, ProfileController),

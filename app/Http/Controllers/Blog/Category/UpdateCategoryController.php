@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class UpdateCategoryController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
+    // Atualiza o nome, slug e descrição de uma categoria existente do blog
     public function __invoke(Request $request)
     {
         //

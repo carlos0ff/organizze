@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 
 class CreateTagController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
+    // Cria uma nova tag com nome e slug para ser usada na categorização de posts
     public function __invoke(Request $request)
     {
-        //
+
     }
 }

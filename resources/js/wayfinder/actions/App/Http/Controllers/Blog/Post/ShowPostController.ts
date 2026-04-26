@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Blog\Post\ShowPostController::__invoke
-* @see app/Http/Controllers/Blog/Post/ShowPostController.php:13
+* @see app/Http/Controllers/Blog/Post/ShowPostController.php:11
 * @route '/blog/post/{slug}'
 */
 const ShowPostController = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ ShowPostController.definition = {
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ShowPostController::__invoke
-* @see app/Http/Controllers/Blog/Post/ShowPostController.php:13
+* @see app/Http/Controllers/Blog/Post/ShowPostController.php:11
 * @route '/blog/post/{slug}'
 */
 ShowPostController.url = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -43,7 +43,7 @@ ShowPostController.url = (args: { slug: string | number } | [slug: string | numb
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ShowPostController::__invoke
-* @see app/Http/Controllers/Blog/Post/ShowPostController.php:13
+* @see app/Http/Controllers/Blog/Post/ShowPostController.php:11
 * @route '/blog/post/{slug}'
 */
 ShowPostController.get = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -53,7 +53,7 @@ ShowPostController.get = (args: { slug: string | number } | [slug: string | numb
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ShowPostController::__invoke
-* @see app/Http/Controllers/Blog/Post/ShowPostController.php:13
+* @see app/Http/Controllers/Blog/Post/ShowPostController.php:11
 * @route '/blog/post/{slug}'
 */
 ShowPostController.head = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({

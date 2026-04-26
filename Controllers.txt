@@ -1,0 +1,31 @@
+ Criados — Support/Ticket/:
+
+  ┌────────────────────────┬────────────────────────────────────────────────────────┐
+  │       Controller       │                    Responsabilidade                    │
+  ├────────────────────────┼────────────────────────────────────────────────────────┤
+  │ ListTicketsController  │ Lista todos os tickets do usuário filtrados por status │
+  ├────────────────────────┼────────────────────────────────────────────────────────┤
+  │ CreateTicketController │ Cria um novo ticket com assunto, descrição e categoria │
+  ├────────────────────────┼────────────────────────────────────────────────────────┤
+  │ ShowTicketController   │ Exibe detalhes e histórico de mensagens de um ticket   │
+  ├────────────────────────┼────────────────────────────────────────────────────────┤
+  │ ReplyTicketController  │ Adiciona uma nova resposta a um ticket existente       │
+  ├────────────────────────┼────────────────────────────────────────────────────────┤
+  │ CloseTicketController  │ Fecha/marca um ticket como resolvido                   │
+  ├────────────────────────┼────────────────────────────────────────────────────────┤
+  │ ReopenTicketController │ Reabre um ticket fechado para continuar o atendimento  │
+  ├────────────────────────┼────────────────────────────────────────────────────────┤
+  │ RateTicketController   │ Registra a avaliação de satisfação após encerramento   │
+  └────────────────────────┴────────────────────────────────────────────────────────┘
+
+  Criados — Support/Faq/:
+
+  ┌─────────────────────┬────────────────────────────────────────────────────┐
+  │     Controller      │                  Responsabilidade                  │
+  ├─────────────────────┼────────────────────────────────────────────────────┤
+  │ ListFaqController   │ Lista perguntas frequentes agrupadas por categoria │
+  ├─────────────────────┼────────────────────────────────────────────────────┤
+  │ ShowFaqController   │ Exibe o conteúdo completo de uma FAQ específica    │
+  ├─────────────────────┼────────────────────────────────────────────────────┤
+  │ SearchFaqController │ Busca FAQs pelo termo digitado pelo usuário        │
+  └─────────────────────┴────────────────────────────────────────────────────┘

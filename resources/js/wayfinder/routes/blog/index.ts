@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
 * @route '/blog'
 */
 export const home = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ home.definition = {
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
 * @route '/blog'
 */
 home.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ home.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
 * @route '/blog'
 */
 home.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ home.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
 * @route '/blog'
 */
 home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ShowPostController::__invoke
-* @see app/Http/Controllers/Blog/Post/ShowPostController.php:13
+* @see app/Http/Controllers/Blog/Post/ShowPostController.php:11
 * @route '/blog/post/{slug}'
 */
 export const post = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -60,7 +60,7 @@ post.definition = {
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ShowPostController::__invoke
-* @see app/Http/Controllers/Blog/Post/ShowPostController.php:13
+* @see app/Http/Controllers/Blog/Post/ShowPostController.php:11
 * @route '/blog/post/{slug}'
 */
 post.url = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -87,7 +87,7 @@ post.url = (args: { slug: string | number } | [slug: string | number ] | string 
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ShowPostController::__invoke
-* @see app/Http/Controllers/Blog/Post/ShowPostController.php:13
+* @see app/Http/Controllers/Blog/Post/ShowPostController.php:11
 * @route '/blog/post/{slug}'
 */
 post.get = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -97,7 +97,7 @@ post.get = (args: { slug: string | number } | [slug: string | number ] | string 
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ShowPostController::__invoke
-* @see app/Http/Controllers/Blog/Post/ShowPostController.php:13
+* @see app/Http/Controllers/Blog/Post/ShowPostController.php:11
 * @route '/blog/post/{slug}'
 */
 post.head = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -107,7 +107,7 @@ post.head = (args: { slug: string | number } | [slug: string | number ] | string
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
 * @route '/blog/categoria/{category}'
 */
 export const category = (args: { category: string | number } | [category: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -122,7 +122,7 @@ category.definition = {
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
 * @route '/blog/categoria/{category}'
 */
 category.url = (args: { category: string | number } | [category: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -149,7 +149,7 @@ category.url = (args: { category: string | number } | [category: string | number
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
 * @route '/blog/categoria/{category}'
 */
 category.get = (args: { category: string | number } | [category: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -159,7 +159,7 @@ category.get = (args: { category: string | number } | [category: string | number
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
 * @route '/blog/categoria/{category}'
 */
 category.head = (args: { category: string | number } | [category: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -169,7 +169,7 @@ category.head = (args: { category: string | number } | [category: string | numbe
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
 * @route '/blog/artigos'
 */
 export const articles = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -184,7 +184,7 @@ articles.definition = {
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
 * @route '/blog/artigos'
 */
 articles.url = (options?: RouteQueryOptions) => {
@@ -193,7 +193,7 @@ articles.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
 * @route '/blog/artigos'
 */
 articles.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -203,7 +203,7 @@ articles.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:16
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
 * @route '/blog/artigos'
 */
 articles.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({

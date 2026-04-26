@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class GetFeedController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
+    // Gera e retorna o feed RSS/Atom com os posts publicados mais recentes do blog
     public function __invoke(Request $request)
     {
         //

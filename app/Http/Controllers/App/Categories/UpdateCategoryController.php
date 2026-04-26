@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\App\Category;
+namespace App\Http\Controllers\App\Categories;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,10 +8,12 @@ use Illuminate\Http\Request;
 class UpdateCategoryController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Atualiza uma categoria existente.
+     * @param int $id
+     * @return void
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): void
     {
-        //
+
     }
 }

@@ -44,8 +44,8 @@ dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\AccountController::conta
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::conta
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/contas'
 */
 export const conta = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -59,8 +59,8 @@ conta.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\AccountController::conta
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::conta
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/contas'
 */
 conta.url = (options?: RouteQueryOptions) => {
@@ -68,8 +68,8 @@ conta.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\App\AccountController::conta
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::conta
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/contas'
 */
 conta.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -78,8 +78,8 @@ conta.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\AccountController::conta
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::conta
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/contas'
 */
 conta.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -88,8 +88,8 @@ conta.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\AccountController::cards
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::cards
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/cartao'
 */
 export const cards = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -103,8 +103,8 @@ cards.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\AccountController::cards
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::cards
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/cartao'
 */
 cards.url = (options?: RouteQueryOptions) => {
@@ -112,8 +112,8 @@ cards.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\App\AccountController::cards
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::cards
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/cartao'
 */
 cards.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -122,8 +122,8 @@ cards.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\AccountController::cards
-* @see app/Http/Controllers/App/AccountController.php:16
+* @see \App\Http\Controllers\App\Account\AccountController::cards
+* @see app/Http/Controllers/App/Account/AccountController.php:15
 * @route '/app/cartao'
 */
 cards.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -176,8 +176,8 @@ settings.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\TransactionController::lancamentos
-* @see app/Http/Controllers/App/TransactionController.php:13
+* @see \App\Http\Controllers\App\Transaction\TransactionController::lancamentos
+* @see app/Http/Controllers/App/Transaction/TransactionController.php:14
 * @route '/app/lancamentos'
 */
 export const lancamentos = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -191,8 +191,8 @@ lancamentos.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\TransactionController::lancamentos
-* @see app/Http/Controllers/App/TransactionController.php:13
+* @see \App\Http\Controllers\App\Transaction\TransactionController::lancamentos
+* @see app/Http/Controllers/App/Transaction/TransactionController.php:14
 * @route '/app/lancamentos'
 */
 lancamentos.url = (options?: RouteQueryOptions) => {
@@ -200,8 +200,8 @@ lancamentos.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\App\TransactionController::lancamentos
-* @see app/Http/Controllers/App/TransactionController.php:13
+* @see \App\Http\Controllers\App\Transaction\TransactionController::lancamentos
+* @see app/Http/Controllers/App/Transaction/TransactionController.php:14
 * @route '/app/lancamentos'
 */
 lancamentos.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -210,8 +210,8 @@ lancamentos.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\TransactionController::lancamentos
-* @see app/Http/Controllers/App/TransactionController.php:13
+* @see \App\Http\Controllers\App\Transaction\TransactionController::lancamentos
+* @see app/Http/Controllers/App/Transaction/TransactionController.php:14
 * @route '/app/lancamentos'
 */
 lancamentos.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -308,8 +308,8 @@ conexaoBancaria.head = (options?: RouteQueryOptions): RouteDefinition<'head'> =>
 })
 
 /**
-* @see \App\Http\Controllers\App\AccountController::signature
-* @see app/Http/Controllers/App/AccountController.php:64
+* @see \App\Http\Controllers\App\Account\AccountController::signature
+* @see app/Http/Controllers/App/Account/AccountController.php:63
 * @route '/app/assinatura'
 */
 export const signature = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -323,8 +323,8 @@ signature.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\AccountController::signature
-* @see app/Http/Controllers/App/AccountController.php:64
+* @see \App\Http\Controllers\App\Account\AccountController::signature
+* @see app/Http/Controllers/App/Account/AccountController.php:63
 * @route '/app/assinatura'
 */
 signature.url = (options?: RouteQueryOptions) => {
@@ -332,8 +332,8 @@ signature.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\App\AccountController::signature
-* @see app/Http/Controllers/App/AccountController.php:64
+* @see \App\Http\Controllers\App\Account\AccountController::signature
+* @see app/Http/Controllers/App/Account/AccountController.php:63
 * @route '/app/assinatura'
 */
 signature.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -342,8 +342,8 @@ signature.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\AccountController::signature
-* @see app/Http/Controllers/App/AccountController.php:64
+* @see \App\Http\Controllers\App\Account\AccountController::signature
+* @see app/Http/Controllers/App/Account/AccountController.php:63
 * @route '/app/assinatura'
 */
 signature.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -441,7 +441,7 @@ plano.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\App\HelpController::ajuda
-* @see app/Http/Controllers/App/HelpController.php:11
+* @see [unknown]:0
 * @route '/app/ajuda'
 */
 export const ajuda = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -456,7 +456,7 @@ ajuda.definition = {
 
 /**
 * @see \App\Http\Controllers\App\HelpController::ajuda
-* @see app/Http/Controllers/App/HelpController.php:11
+* @see [unknown]:0
 * @route '/app/ajuda'
 */
 ajuda.url = (options?: RouteQueryOptions) => {
@@ -465,7 +465,7 @@ ajuda.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\App\HelpController::ajuda
-* @see app/Http/Controllers/App/HelpController.php:11
+* @see [unknown]:0
 * @route '/app/ajuda'
 */
 ajuda.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -475,7 +475,7 @@ ajuda.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\App\HelpController::ajuda
-* @see app/Http/Controllers/App/HelpController.php:11
+* @see [unknown]:0
 * @route '/app/ajuda'
 */
 ajuda.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
