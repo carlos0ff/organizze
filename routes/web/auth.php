@@ -12,15 +12,15 @@ use App\Http\Controllers\Auth\RegisterController;
 Route::prefix('auth')->middleware('guest')->group(function(){
 
     /**  Rota de login **/
-    Route::get('/entrar', [LoginController::class, "index"])->name('auth.login');
+    Route::get('/entrar', [LoginController::class, "index"])->name('auth.login.form');
     Route::post('/entrar', [LoginController::class, "authenticate"])->name('auth.login');
 
     /** Rota de cadastro de usuário **/
-    Route::get('/cadastro', [RegisterController::class, "index"])->name('auth.register');
+    Route::get('/cadastro', [RegisterController::class, "index"])->name('auth.register.form');
     Route::post('/cadastro', [RegisterController::class, "authenticate"])->name('auth.register');
 
     /** Rota de recuperação de senha **/
-    Route::get('/recuperar', [ForgotPasswordController::class, "index"])->name('auth.forget');
+    Route::get('/recuperar', [ForgotPasswordController::class, "index"])->name('auth.forget.form');
     Route::get('/recuperar', [ForgotPasswordController::class, "index"])->name('auth.forget');
 });
 
