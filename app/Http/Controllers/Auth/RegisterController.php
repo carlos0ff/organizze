@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/** Responsável pelo registro de novos usuários. */
 class RegisterController extends Controller
 {
     /**

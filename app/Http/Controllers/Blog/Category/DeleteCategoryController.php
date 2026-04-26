@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Blog\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/** Responsável por excluir uma categoria do blog. */
 class DeleteCategoryController extends Controller
 {
     // Remove uma categoria do blog; impede a exclusão se houver posts vinculados

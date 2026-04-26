@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+/** Responsável pelo gerenciamento de limites de gastos via API. */
 class SpendingLimitController extends Controller
 {
     public function index(Request $request): JsonResponse

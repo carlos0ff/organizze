@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
+/** Responsável pelo gerenciamento de transações via API. */
 class TransactionController extends Controller
 {
     public function index(Request $request): JsonResponse

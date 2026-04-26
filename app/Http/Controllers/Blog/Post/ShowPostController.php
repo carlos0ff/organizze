@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Blog\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/** Responsável por exibir o detalhe de um post do blog. */
 class ShowPostController extends Controller
 {
     // Exibe o conteúdo completo de um post publicado pelo slug, com categoria, tags e posts relacionados

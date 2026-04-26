@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/** Responsável por iniciar o fluxo de recuperação de senha. */
 class ForgotPasswordController extends Controller
 {
     /**

@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/all.css') }} ">
 
     <!-- Core stylesheet -->
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.ts'])
+
     @inertiaHead
 
 </head>
@@ -23,8 +24,6 @@
 <!-- Inertia.js root element -->
 @inertia
 
-<!-- Core JavaScript -->
-@vite('resources/js/app.ts')
 
 </body>
 </html>

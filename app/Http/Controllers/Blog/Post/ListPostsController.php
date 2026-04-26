@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use Inertia\Inertia;
 
+/** Responsável por listar os posts publicados do blog. */
 class ListPostsController extends Controller
 {
     // Lista todos os posts com paginação, filtro por categoria/tag/status e ordenação por data de publicação

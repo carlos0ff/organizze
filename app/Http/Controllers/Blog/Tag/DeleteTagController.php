@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Blog\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/** Responsável por excluir uma tag do blog. */
 class DeleteTagController extends Controller
 {
     // Remove uma tag e desvincula todos os posts associados a ela

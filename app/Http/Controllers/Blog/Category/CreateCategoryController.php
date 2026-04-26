@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Blog\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/** Responsável por criar uma nova categoria do blog. */
 class CreateCategoryController extends Controller
 {
     // Valida os dados e cria uma nova categoria do blog (nome, slug, descrição)

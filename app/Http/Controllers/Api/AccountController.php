@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/** Responsável pelo gerenciamento de contas via API. */
 class AccountController extends Controller
 {
     /**

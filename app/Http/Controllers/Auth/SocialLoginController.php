@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Laravel\Socialite\Facades\Socialite;
 
+/** Responsável pelo login social via provedores OAuth (Google, Facebook, etc.). */
 class SocialLoginController extends Controller
 {
     /**

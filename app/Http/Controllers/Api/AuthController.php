@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
+/** Responsável pela autenticação via API (emissão e revogação de tokens). */
 class AuthController extends Controller
 {
     public function login(Request $request): JsonResponse

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 
 use Inertia\Inertia;
 
+/** Responsável pela autenticação do usuário (login e logout). */
 class LoginController extends Controller
 {
     /**
