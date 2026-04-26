@@ -12,7 +12,9 @@ use App\Http\Controllers\Blog\Post\ListPostsController;
 use App\Http\Controllers\Blog\Post\ShowPostController;
 use App\Http\Controllers\Web\HomeController;
 
-Route::get("/", HomeController::class)->name("home");
+Route::get("/", function (){
+    redirect("/app");
+})->name("home");
 
 /**
  * Blog - Grupo de rotas do Blog
