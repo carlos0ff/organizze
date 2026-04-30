@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import Navbar from '@/Components/layout/Navbar.vue';
+import Navbar from '@/Componentes/Layout/Navbar.vue';
 import {
     Search, MessageCircle, BookOpen, Video, Mail,
     ChevronDown, ChevronUp, ExternalLink, Phone,

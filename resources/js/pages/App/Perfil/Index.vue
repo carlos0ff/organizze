@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import Navbar from '@/Components/layout/Navbar.vue';
+import Navbar from '@/Componentes/Layout/Navbar.vue';
 import {
     User, Mail, Phone, Lock, Camera, Save, Eye, EyeOff,
     Bell, Shield, Trash2, ChevronRight, Check,

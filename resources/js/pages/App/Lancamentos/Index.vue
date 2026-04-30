@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue';
 import { router } from '@inertiajs/vue3';
 import { useRouter } from 'vue-router';
-import Navbar from '@/Components/layout/Navbar.vue';
+import Navbar from '@/Componentes/Layout/Navbar.vue';
 
 const vueRouter = useRouter();
 import {

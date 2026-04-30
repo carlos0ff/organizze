@@ -34,8 +34,7 @@ logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Web\HomeController::__invoke
-* @see app/Http/Controllers/Web/HomeController.php:13
+* @see routes/web/public.php:15
 * @route '/'
 */
 export const home = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -49,8 +48,7 @@ home.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\HomeController::__invoke
-* @see app/Http/Controllers/Web/HomeController.php:13
+* @see routes/web/public.php:15
 * @route '/'
 */
 home.url = (options?: RouteQueryOptions) => {
@@ -58,8 +56,7 @@ home.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\HomeController::__invoke
-* @see app/Http/Controllers/Web/HomeController.php:13
+* @see routes/web/public.php:15
 * @route '/'
 */
 home.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -68,8 +65,7 @@ home.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Web\HomeController::__invoke
-* @see app/Http/Controllers/Web/HomeController.php:13
+* @see routes/web/public.php:15
 * @route '/'
 */
 home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({

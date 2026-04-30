@@ -1,0 +1,344 @@
+<script setup>
+import Navbar from '@/pages/Blog/Componentes/Navegacao/Navbar.vue'
+import Footer from '@/pages/Blog/Componentes/Layout/Footer.vue';
+
+</script>
+
+
+<template>
+    <Navbar />
+
+    <main class="flex-1 pt-12 lg:pt-20">
+
+        <!-- Hero Blogger artigos -->
+        <section class="max-w-7xl mx-auto px-4 py-10">
+            <div class="relative flex flex-col md:flex-row overflow-hidden rounded-md shadow-lg">
+                <div class="relative md:w-2/3 h-65 md:h-90">
+                    <img
+                        src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"
+                        alt="Controle de gastos"
+                        class="w-full h-full object-cover"
+                    />
+                    <span class="absolute bottom-4 left-4 bg-[#1F3D2B] text-white text-xs px-3 py-1 rounded-full"> Controle de Gastos</span>
+
+                    <button
+                        class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition"
+                    >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+
+                    <button
+                        class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition"
+                    >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="md:w-1/3 bg-[#2F4F3F] p-6 md:p-8 flex flex-col justify-center">
+                    <h2 class="text-white text-xl md:text-2xl font-semibold leading-snug">
+                        Gastos diários: como mapear, reduzir e controlar sem sofrimento
+                    </h2>
+                    <p class="mt-4 text-sm text-gray-300 leading-relaxed line-clamp-3">
+                        Manter as finanças pessoais organizadas não precisa ser complicado. Neste artigo, você vai aprender como identificar seus
+                        gastos diários, entender para onde seu dinheiro está indo e aplicar estratégias simples para reduzir desperdícios e tomar
+                        decisões financeiras mais conscientes.
+                    </p>
+
+                    <div class="mt-5 flex items-center gap-4 text-xs text-gray-300">
+                        <span class="flex items-center gap-2 capitalize">
+                            <img src="https://i.pravatar.cc/40?img=12" alt="Autor" class="w-5 h-5 rounded-full object-cover" />
+                            Carlos Júnior
+                        </span>
+                        <span>23/01/2026</span>
+                        <span>7 min de leitura</span>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-4 right-4 flex gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-400"></span>
+                    <span class="w-2 h-2 rounded-full bg-white/40"></span>
+                    <span class="w-2 h-2 rounded-full bg-white/40"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Artigos -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section class="mt-10 mb-10">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+                    <div class="md:max-w-sm">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-3">Temas</h2>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Explore os assuntos mais relevantes e encontre conteúdos criados para facilitar suas decisões financeiras no dia a dia.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 flex-1">
+                        <a href="#" class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300"
+                        >
+                            <img src="https://www.organizze.com.br/blog/wp-content/uploads/MEI-280x210-1.jpg"
+                                alt="MEI" class="w-full h-44 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <span class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-90"></span>
+                            <div class="absolute bottom-0 p-4">
+                                <h3 class="text-white font-semibold text-base">MEI & Empreendedorismo</h3>
+                                <p class="text-white/80 text-xs mt-1">Obrigações, impostos e dicas</p>
+                            </div>
+                        </a>
+
+                        <a href="#" class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300" >
+                            <img
+                                src="https://www.organizze.com.br/blog/wp-content/uploads/Investimento-280x210-1.jpg"
+                                alt="Investimentos"
+                                class="w-full h-44 object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
+                            <div class="absolute bottom-0 p-4">
+                                <h3 class="text-white font-semibold text-base">Investimentos</h3>
+                                <p class="text-white/80 text-xs mt-1">Renda fixa e variável</p>
+                            </div>
+                        </a>
+
+                        <a
+                            href="#"
+                            class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300"
+                        >
+                            <img
+                                src="https://www.organizze.com.br/blog/wp-content/uploads/Direitos-do-consumidor-280x210-1.jpg"
+                                alt="Orçamento"
+                                class="w-full h-44 object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
+                            <div class="absolute bottom-0 p-4">
+                                <h3 class="text-white font-semibold text-base">Orçamento</h3>
+                                <p class="text-white/80 text-xs mt-1">Controle financeiro</p>
+                            </div>
+                        </a>
+
+                        <a
+                            href="#"
+                            class="group relative overflow-hidden rounded-xl bg-gray-100 shadow-sm hover:shadow-lg transition-all duration-300"
+                        >
+                            <img
+                                src="https://www.organizze.com.br/blog/wp-content/uploads/D%C2%A1vidas-280x210-1.jpg"
+                                alt="Impostos"
+                                class="w-full h-44 object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
+                            <div class="absolute bottom-0 p-4">
+                                <h3 class="text-white font-semibold text-base">Impostos</h3>
+                                <p class="text-white/80 text-xs mt-1">Declarações e taxas</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Seção de Artigos -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+
+            <!-- Artigos listagem -->
+            <section class="max-w-7xl mx-auto px-6 py-8">
+                <div class="mb-8 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">Mais artigos</h2>
+                        <p class="mt-1 text-sm text-gray-600">Conteúdos recentes para te ajudar a organizar melhor suas finanças.</p>
+                    </div>
+
+                    <a href="/artigos" class="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-green-700 hover:text-green-800 transition" >
+                        Ver todos
+                        <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- GRID -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
+                    <!-- Artigo 1 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full" >
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full">Tecnologia</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold line-clamp-2">Apps de finanças: como escolher o ideal</h3>
+                            <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed mt-2">
+                                Aprenda os critérios essenciais para escolher um app financeiro eficiente.
+                            </p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs font-semibold text-gray-700">Equipe Organizze</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artigo 2 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1454165205744-3b78555e5572?q=80&w=1470&auto=format&fit=crop" alt="Pessoa mexendo no tablet com planilha aberta" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full font-medium">
+                                Orçamento
+                            </span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-green-700 transition-colors">
+                                <a href="#">Como montar um orçamento que realmente funciona</a>
+                            </h3>
+                            <p class="text-sm text-gray-600 line-clamp-3 mt-2 leading-relaxed">
+                                Esqueça planilhas complexas e aprenda um método realista para controlar seu orçamento.
+                            </p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs font-semibold text-gray-700">Equipe Organizze</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artigo 3 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f" class="absolute inset-0 w-full h-full object-cover" />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full"> Organização </span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold text-gray-900">Como organizar suas finanças em menos de 30 minutos</h3>
+                            <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed mt-2">
+                                Um método simples para sair da bagunça financeira e ganhar clareza sobre seu dinheiro.
+                            </p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs font-semibold text-gray-700">Equipe Organizze</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artigo 4 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1470&auto=format&fit=crop" alt="Mão segurando faturas e papel" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full font-medium"> Dívidas </span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-green-700 transition-colors">
+                                <a href="#">Estratégias práticas para sair das dívidas</a>
+                            </h3>
+                            <p class="text-sm text-gray-600 line-clamp-3 mt-2 leading-relaxed">
+                                Técnicas simples para renegociar dívidas e retomar o controle da sua vida financeira.
+                            </p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs font-semibold text-gray-700">Equipe Organizze</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artigo 5 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1508385082359-f38ae991e8f2" class="absolute inset-0 w-full h-full object-cover" />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full">Empreendedorismo</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold line-clamp-2">MEI: como organizar suas finanças</h3>
+                            <p class="text-sm text-gray-600 line-clamp-3 mt-2">Dicas essenciais para manter o controle financeiro sendo MEI.</p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs font-semibold text-gray-700">Equipe Organizze</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artigo 6 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e" class="absolute inset-0 w-full h-full object-cover" />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full">Educação Financeira</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold line-clamp-2">Educação financeira para iniciantes</h3>
+                            <p class="text-sm text-gray-600 line-clamp-3 mt-2">Conceitos básicos para transformar sua vida financeira.</p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs font-semibold text-gray-700">Equipe Organizze</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artigo 7 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1470&auto=format&fit=crop" alt="Planilha financeira em tela" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full font-medium">Orçamento</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-green-700 transition-colors">
+                                <a href="#">Como montar um orçamento que realmente funciona</a>
+                            </h3>
+                            <p class="text-sm text-gray-600 line-clamp-3 mt-2 leading-relaxed">
+                                Esqueça planilhas complexas e aprenda um método realista para controlar seu orçamento.
+                            </p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs font-semibold text-gray-700">Equipe Organizze</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artigo 8 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df" class="absolute inset-0 w-full h-full object-cover" />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full">Cartão de crédito</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold line-clamp-1">Como usar cartão sem se endividar</h3>
+                            <p class="text-sm text-gray-600 line-clamp-2 leading-relaxed mt-2">
+                                Evite armadilhas e use seu cartão de crédito com inteligência, mantendo o controle dos gastos no dia a dia.
+                            </p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs font-semibold text-gray-700">Equipe Organizze</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artigo 9 -->
+                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
+                        <div class="relative h-48">
+                            <img src="https://images.unsplash.com/photo-1529078155058-5d716f45d604?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full"> Controle Financeiro </span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <h3 class="text-lg font-semibold text-gray-900 line-clamp-2">Como fazer controle financeiro sem planilha complicada</h3>
+                            <p class="text-sm text-gray-600 line-clamp-2 leading-relaxed mt-2">
+                                Métodos simples e rápidos que realmente funcionam para quem odeia planilhas ou apps cheios de funcionalidades.
+                            </p>
+                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
+                                <span class="text-xs font-semibold text-gray-700">Equipe Organizze</span>
+                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Loading Posts -->
+                <div class="mt-12 flex justify-center">
+                    <button class="px-8 py-3 rounded-md border border-green-700 text-green-700 font-semibold hover:bg-green-700 hover:text-white hover:cursor-pointer transition-colors" >
+                        Carregar mais
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <Footer />
+    </main>
+</template>
+

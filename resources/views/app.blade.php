@@ -24,6 +24,5 @@
 <!-- Inertia.js root element -->
 @inertia
 
-
 </body>
 </html>

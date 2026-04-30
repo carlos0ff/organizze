@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { RouterLink } from 'vue-router';
-import AppFooter from '@/Components/layout/Footer.vue';
-import Navbar from '@/Components/layout/Navbar.vue';
+import AppFooter from '@/Componentes/Layout/Footer.vue';
+import Navbar from '@/Componentes/Layout/Navbar.vue';
 
 // ==================== IMPORTS LUCIDE ====================
 import {

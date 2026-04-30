@@ -8,7 +8,10 @@ use App\Http\Controllers\App\DashboardController;
 //use App\Http\Controllers\App\Suporte\AjudaController;
 use App\Http\Controllers\App\PlanoController;
 use App\Http\Controllers\App\PerfilController;
-use App\Http\Controllers\App\ConfiguracoesController;
+use App\Http\Controllers\App\Configuracoes\ExibirConfiguracoesController;
+use App\Http\Controllers\App\Configuracoes\AtualizarConfiguracoesController;
+use App\Http\Controllers\App\Configuracoes\AlterarSenhaController;
+use App\Http\Controllers\App\Configuracoes\ExcluirContaController as ExcluirContaConfigController;
 use App\Http\Controllers\App\LimiteGastosController;
 use App\Http\Controllers\App\Lancamento\LancamentoController;
 use Illuminate\Support\Facades\Route;
@@ -29,8 +32,11 @@ Route::prefix("app")->group(function () {
     /** **/
     Route::get('/cartao', [ContaController::class, "index"])->name('app.cards');
 
-    /** Rota para listar configurações **/
-    Route::get('/configuracao', [ConfiguracoesController::class, "index"])->name('app.settings');
+    /** Configurações da conta **/
+    Route::get('/configuracao', ExibirConfiguracoesController::class)->name('app.configuracoes');
+    Route::put('/configuracao', AtualizarConfiguracoesController::class)->name('app.configuracoes.atualizar');
+    Route::put('/configuracao/senha', AlterarSenhaController::class)->name('app.configuracoes.senha');
+    Route::delete('/configuracao/conta', ExcluirContaConfigController::class)->name('app.configuracoes.excluir-conta');
 
     /** Lançamentos **/
     Route::get('/lancamentos', [LancamentoController::class, 'index'])->name('app.lancamentos');
@@ -51,5 +57,5 @@ Route::prefix("app")->group(function () {
     Route::get('/plano', [PlanoController::class, 'index'])->name('app.plano');
 
     /** Ajuda & Suporte **/
-//    Route::get('/ajuda', [AjudaController::class, 'index'])->name('app.ajuda');
+    // Route::get('/ajuda', [AjudaController::class, 'index'])->name('app.ajuda');
 });

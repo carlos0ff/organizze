@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\Api\TransactionController::index
-* @see app/Http/Controllers/Api/TransactionController.php:14
+* @see app/Http/Controllers/Api/TransactionController.php:15
 * @route '/api/transactions'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::index
-* @see app/Http/Controllers/Api/TransactionController.php:14
+* @see app/Http/Controllers/Api/TransactionController.php:15
 * @route '/api/transactions'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::index
-* @see app/Http/Controllers/Api/TransactionController.php:14
+* @see app/Http/Controllers/Api/TransactionController.php:15
 * @route '/api/transactions'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::index
-* @see app/Http/Controllers/Api/TransactionController.php:14
+* @see app/Http/Controllers/Api/TransactionController.php:15
 * @route '/api/transactions'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::store
-* @see app/Http/Controllers/Api/TransactionController.php:35
+* @see app/Http/Controllers/Api/TransactionController.php:36
 * @route '/api/transactions'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -60,7 +60,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::store
-* @see app/Http/Controllers/Api/TransactionController.php:35
+* @see app/Http/Controllers/Api/TransactionController.php:36
 * @route '/api/transactions'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -69,7 +69,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::store
-* @see app/Http/Controllers/Api/TransactionController.php:35
+* @see app/Http/Controllers/Api/TransactionController.php:36
 * @route '/api/transactions'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -79,7 +79,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::show
-* @see app/Http/Controllers/Api/TransactionController.php:57
+* @see app/Http/Controllers/Api/TransactionController.php:58
 * @route '/api/transactions/{transaction}'
 */
 export const show = (args: { transaction: number | { id: number } } | [transaction: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -94,7 +94,7 @@ show.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::show
-* @see app/Http/Controllers/Api/TransactionController.php:57
+* @see app/Http/Controllers/Api/TransactionController.php:58
 * @route '/api/transactions/{transaction}'
 */
 show.url = (args: { transaction: number | { id: number } } | [transaction: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -127,7 +127,7 @@ show.url = (args: { transaction: number | { id: number } } | [transaction: numbe
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::show
-* @see app/Http/Controllers/Api/TransactionController.php:57
+* @see app/Http/Controllers/Api/TransactionController.php:58
 * @route '/api/transactions/{transaction}'
 */
 show.get = (args: { transaction: number | { id: number } } | [transaction: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -137,7 +137,7 @@ show.get = (args: { transaction: number | { id: number } } | [transaction: numbe
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::show
-* @see app/Http/Controllers/Api/TransactionController.php:57
+* @see app/Http/Controllers/Api/TransactionController.php:58
 * @route '/api/transactions/{transaction}'
 */
 show.head = (args: { transaction: number | { id: number } } | [transaction: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -147,7 +147,7 @@ show.head = (args: { transaction: number | { id: number } } | [transaction: numb
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::update
-* @see app/Http/Controllers/Api/TransactionController.php:64
+* @see app/Http/Controllers/Api/TransactionController.php:65
 * @route '/api/transactions/{transaction}'
 */
 export const update = (args: { transaction: number | { id: number } } | [transaction: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -162,7 +162,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::update
-* @see app/Http/Controllers/Api/TransactionController.php:64
+* @see app/Http/Controllers/Api/TransactionController.php:65
 * @route '/api/transactions/{transaction}'
 */
 update.url = (args: { transaction: number | { id: number } } | [transaction: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -195,7 +195,7 @@ update.url = (args: { transaction: number | { id: number } } | [transaction: num
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::update
-* @see app/Http/Controllers/Api/TransactionController.php:64
+* @see app/Http/Controllers/Api/TransactionController.php:65
 * @route '/api/transactions/{transaction}'
 */
 update.put = (args: { transaction: number | { id: number } } | [transaction: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -205,7 +205,7 @@ update.put = (args: { transaction: number | { id: number } } | [transaction: num
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::update
-* @see app/Http/Controllers/Api/TransactionController.php:64
+* @see app/Http/Controllers/Api/TransactionController.php:65
 * @route '/api/transactions/{transaction}'
 */
 update.patch = (args: { transaction: number | { id: number } } | [transaction: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -215,7 +215,7 @@ update.patch = (args: { transaction: number | { id: number } } | [transaction: n
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::destroy
-* @see app/Http/Controllers/Api/TransactionController.php:84
+* @see app/Http/Controllers/Api/TransactionController.php:85
 * @route '/api/transactions/{transaction}'
 */
 export const destroy = (args: { transaction: number | { id: number } } | [transaction: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -230,7 +230,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::destroy
-* @see app/Http/Controllers/Api/TransactionController.php:84
+* @see app/Http/Controllers/Api/TransactionController.php:85
 * @route '/api/transactions/{transaction}'
 */
 destroy.url = (args: { transaction: number | { id: number } } | [transaction: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -263,7 +263,7 @@ destroy.url = (args: { transaction: number | { id: number } } | [transaction: nu
 
 /**
 * @see \App\Http\Controllers\Api\TransactionController::destroy
-* @see app/Http/Controllers/Api/TransactionController.php:84
+* @see app/Http/Controllers/Api/TransactionController.php:85
 * @route '/api/transactions/{transaction}'
 */
 destroy.delete = (args: { transaction: number | { id: number } } | [transaction: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({

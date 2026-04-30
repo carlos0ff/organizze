@@ -13,6 +13,6 @@ class RelatorioController extends Controller
 {
     public function index(): \Inertia\Response
     {
-        return Inertia::render('Panel/Reports/Index');
+        return Inertia::render('Painel/Relatorios/Index');
     }
 }

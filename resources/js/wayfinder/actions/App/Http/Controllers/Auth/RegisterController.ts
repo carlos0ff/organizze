@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Auth\RegisterController::index
-* @see app/Http/Controllers/Auth/RegisterController.php:14
+* @see app/Http/Controllers/Auth/RegisterController.php:15
 * @route '/auth/cadastro'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\RegisterController::index
-* @see app/Http/Controllers/Auth/RegisterController.php:14
+* @see app/Http/Controllers/Auth/RegisterController.php:15
 * @route '/auth/cadastro'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\RegisterController::index
-* @see app/Http/Controllers/Auth/RegisterController.php:14
+* @see app/Http/Controllers/Auth/RegisterController.php:15
 * @route '/auth/cadastro'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\RegisterController::index
-* @see app/Http/Controllers/Auth/RegisterController.php:14
+* @see app/Http/Controllers/Auth/RegisterController.php:15
 * @route '/auth/cadastro'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\RegisterController::authenticate
-* @see app/Http/Controllers/Auth/RegisterController.php:0
+* @see app/Http/Controllers/Auth/RegisterController.php:20
 * @route '/auth/cadastro'
 */
 export const authenticate = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -60,7 +60,7 @@ authenticate.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\RegisterController::authenticate
-* @see app/Http/Controllers/Auth/RegisterController.php:0
+* @see app/Http/Controllers/Auth/RegisterController.php:20
 * @route '/auth/cadastro'
 */
 authenticate.url = (options?: RouteQueryOptions) => {
@@ -69,7 +69,7 @@ authenticate.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\RegisterController::authenticate
-* @see app/Http/Controllers/Auth/RegisterController.php:0
+* @see app/Http/Controllers/Auth/RegisterController.php:20
 * @route '/auth/cadastro'
 */
 authenticate.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({

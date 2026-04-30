@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { router } from '@inertiajs/vue3';
-import Navbar from '@/Components/layout/Navbar.vue';
+import Navbar from '@/Componentes/Layout/Navbar.vue';
 import {
     Plus, X, Pencil, Trash2, ChevronLeft, ChevronRight,
     ShoppingCart, Car, Utensils, Home, Wifi, HeartPulse,

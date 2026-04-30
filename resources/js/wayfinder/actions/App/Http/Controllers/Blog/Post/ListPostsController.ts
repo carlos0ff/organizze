@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:15
 * @route '/blog'
 */
 const ListPostsController0281689d11c3db12eb0f0bc21b3e4ed4 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ ListPostsController0281689d11c3db12eb0f0bc21b3e4ed4.definition = {
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:15
 * @route '/blog'
 */
 ListPostsController0281689d11c3db12eb0f0bc21b3e4ed4.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ ListPostsController0281689d11c3db12eb0f0bc21b3e4ed4.url = (options?: RouteQueryO
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:15
 * @route '/blog'
 */
 ListPostsController0281689d11c3db12eb0f0bc21b3e4ed4.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ ListPostsController0281689d11c3db12eb0f0bc21b3e4ed4.get = (options?: RouteQueryO
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:15
 * @route '/blog'
 */
 ListPostsController0281689d11c3db12eb0f0bc21b3e4ed4.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ ListPostsController0281689d11c3db12eb0f0bc21b3e4ed4.head = (options?: RouteQuery
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:15
 * @route '/blog/categoria/{category}'
 */
 const ListPostsController8b8b0aaf3d778c86dd5b4b2d9cdc3152 = (args: { category: string | number } | [category: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -60,7 +60,7 @@ ListPostsController8b8b0aaf3d778c86dd5b4b2d9cdc3152.definition = {
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:15
 * @route '/blog/categoria/{category}'
 */
 ListPostsController8b8b0aaf3d778c86dd5b4b2d9cdc3152.url = (args: { category: string | number } | [category: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -87,7 +87,7 @@ ListPostsController8b8b0aaf3d778c86dd5b4b2d9cdc3152.url = (args: { category: str
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:15
 * @route '/blog/categoria/{category}'
 */
 ListPostsController8b8b0aaf3d778c86dd5b4b2d9cdc3152.get = (args: { category: string | number } | [category: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -97,7 +97,7 @@ ListPostsController8b8b0aaf3d778c86dd5b4b2d9cdc3152.get = (args: { category: str
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:15
 * @route '/blog/categoria/{category}'
 */
 ListPostsController8b8b0aaf3d778c86dd5b4b2d9cdc3152.head = (args: { category: string | number } | [category: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -107,7 +107,7 @@ ListPostsController8b8b0aaf3d778c86dd5b4b2d9cdc3152.head = (args: { category: st
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:15
 * @route '/blog/artigos'
 */
 const ListPostsControllerff59f9de7d174cf68e8b1ecde5aae125 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -122,7 +122,7 @@ ListPostsControllerff59f9de7d174cf68e8b1ecde5aae125.definition = {
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:15
 * @route '/blog/artigos'
 */
 ListPostsControllerff59f9de7d174cf68e8b1ecde5aae125.url = (options?: RouteQueryOptions) => {
@@ -131,7 +131,7 @@ ListPostsControllerff59f9de7d174cf68e8b1ecde5aae125.url = (options?: RouteQueryO
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:15
 * @route '/blog/artigos'
 */
 ListPostsControllerff59f9de7d174cf68e8b1ecde5aae125.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -141,7 +141,7 @@ ListPostsControllerff59f9de7d174cf68e8b1ecde5aae125.get = (options?: RouteQueryO
 
 /**
 * @see \App\Http\Controllers\Blog\Post\ListPostsController::__invoke
-* @see app/Http/Controllers/Blog/Post/ListPostsController.php:14
+* @see app/Http/Controllers/Blog/Post/ListPostsController.php:15
 * @route '/blog/artigos'
 */
 ListPostsControllerff59f9de7d174cf68e8b1ecde5aae125.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({

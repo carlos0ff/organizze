@@ -17,6 +17,6 @@ class ListPostsController extends Controller
 
         // $post = Post::all();
 
-        return inertia('Blog/Posts/List');
+        return inertia('Blog/Postagens/List');
     }
 }

@@ -15,7 +15,7 @@ class ContaController extends Controller
      */
     public function index() : \Inertia\Response
     {
-        return Inertia::render('App/Cards/Index');
+        return Inertia::render('App/Cartoes/Index');
     }
 
     /**
@@ -65,6 +65,6 @@ class ContaController extends Controller
     {
         // PROVISORIO
 
-        return Inertia::render('App/Signature/Index');
+        return Inertia::render('App/Assinatura/Index');
     }
 }

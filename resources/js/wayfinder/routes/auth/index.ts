@@ -1,22 +1,22 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\Auth\LoginController::login
-* @see app/Http/Controllers/Auth/LoginController.php:19
+* @see app/Http/Controllers/Auth/LoginController.php:30
 * @route '/auth/entrar'
 */
-export const login = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const login = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: login.url(options),
-    method: 'get',
+    method: 'post',
 })
 
 login.definition = {
-    methods: ["get","head"],
+    methods: ["post"],
     url: '/auth/entrar',
-} satisfies RouteDefinition<["get","head"]>
+} satisfies RouteDefinition<["post"]>
 
 /**
 * @see \App\Http\Controllers\Auth\LoginController::login
-* @see app/Http/Controllers/Auth/LoginController.php:19
+* @see app/Http/Controllers/Auth/LoginController.php:30
 * @route '/auth/entrar'
 */
 login.url = (options?: RouteQueryOptions) => {
@@ -25,110 +25,32 @@ login.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\LoginController::login
-* @see app/Http/Controllers/Auth/LoginController.php:19
+* @see app/Http/Controllers/Auth/LoginController.php:30
 * @route '/auth/entrar'
 */
-login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+login.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: login.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\LoginController::login
-* @see app/Http/Controllers/Auth/LoginController.php:19
-* @route '/auth/entrar'
-*/
-login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: login.url(options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\LoginController::authenticate
-* @see app/Http/Controllers/Auth/LoginController.php:29
-* @route '/auth/entrar'
-*/
-export const authenticate = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: authenticate.url(options),
-    method: 'post',
-})
-
-authenticate.definition = {
-    methods: ["post"],
-    url: '/auth/entrar',
-} satisfies RouteDefinition<["post"]>
-
-/**
-* @see \App\Http\Controllers\Auth\LoginController::authenticate
-* @see app/Http/Controllers/Auth/LoginController.php:29
-* @route '/auth/entrar'
-*/
-authenticate.url = (options?: RouteQueryOptions) => {
-    return authenticate.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Auth\LoginController::authenticate
-* @see app/Http/Controllers/Auth/LoginController.php:29
-* @route '/auth/entrar'
-*/
-authenticate.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: authenticate.url(options),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\RegisterController::authenticate
-* @see app/Http/Controllers/Auth/RegisterController.php:0
-* @route '/auth/cadastro'
-*/
-export const authenticate = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: authenticate.url(options),
-    method: 'post',
-})
-
-authenticate.definition = {
-    methods: ["post"],
-    url: '/auth/cadastro',
-} satisfies RouteDefinition<["post"]>
-
-/**
-* @see \App\Http\Controllers\Auth\RegisterController::authenticate
-* @see app/Http/Controllers/Auth/RegisterController.php:0
-* @route '/auth/cadastro'
-*/
-authenticate.url = (options?: RouteQueryOptions) => {
-    return authenticate.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Auth\RegisterController::authenticate
-* @see app/Http/Controllers/Auth/RegisterController.php:0
-* @route '/auth/cadastro'
-*/
-authenticate.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: authenticate.url(options),
     method: 'post',
 })
 
 /**
 * @see \App\Http\Controllers\Auth\RegisterController::register
-* @see app/Http/Controllers/Auth/RegisterController.php:14
+* @see app/Http/Controllers/Auth/RegisterController.php:20
 * @route '/auth/cadastro'
 */
-export const register = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const register = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: register.url(options),
-    method: 'get',
+    method: 'post',
 })
 
 register.definition = {
-    methods: ["get","head"],
+    methods: ["post"],
     url: '/auth/cadastro',
-} satisfies RouteDefinition<["get","head"]>
+} satisfies RouteDefinition<["post"]>
 
 /**
 * @see \App\Http\Controllers\Auth\RegisterController::register
-* @see app/Http/Controllers/Auth/RegisterController.php:14
+* @see app/Http/Controllers/Auth/RegisterController.php:20
 * @route '/auth/cadastro'
 */
 register.url = (options?: RouteQueryOptions) => {
@@ -137,27 +59,17 @@ register.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\RegisterController::register
-* @see app/Http/Controllers/Auth/RegisterController.php:14
+* @see app/Http/Controllers/Auth/RegisterController.php:20
 * @route '/auth/cadastro'
 */
-register.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+register.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: register.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Auth\RegisterController::register
-* @see app/Http/Controllers/Auth/RegisterController.php:14
-* @route '/auth/cadastro'
-*/
-register.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: register.url(options),
-    method: 'head',
+    method: 'post',
 })
 
 /**
 * @see \App\Http\Controllers\Auth\ForgotPasswordController::forget
-* @see app/Http/Controllers/Auth/ForgotPasswordController.php:14
+* @see app/Http/Controllers/Auth/ForgotPasswordController.php:15
 * @route '/auth/recuperar'
 */
 export const forget = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -172,7 +84,7 @@ forget.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\ForgotPasswordController::forget
-* @see app/Http/Controllers/Auth/ForgotPasswordController.php:14
+* @see app/Http/Controllers/Auth/ForgotPasswordController.php:15
 * @route '/auth/recuperar'
 */
 forget.url = (options?: RouteQueryOptions) => {
@@ -181,7 +93,7 @@ forget.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\ForgotPasswordController::forget
-* @see app/Http/Controllers/Auth/ForgotPasswordController.php:14
+* @see app/Http/Controllers/Auth/ForgotPasswordController.php:15
 * @route '/auth/recuperar'
 */
 forget.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -191,7 +103,7 @@ forget.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\ForgotPasswordController::forget
-* @see app/Http/Controllers/Auth/ForgotPasswordController.php:14
+* @see app/Http/Controllers/Auth/ForgotPasswordController.php:15
 * @route '/auth/recuperar'
 */
 forget.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -201,7 +113,6 @@ forget.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 const auth = {
     login: Object.assign(login, login),
-    authenticate: Object.assign(authenticate, authenticate),
     register: Object.assign(register, register),
     forget: Object.assign(forget, forget),
 }

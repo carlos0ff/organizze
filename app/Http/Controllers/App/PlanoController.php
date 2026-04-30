@@ -11,6 +11,6 @@ class PlanoController extends Controller
 {
     public function index(): \Inertia\Response
     {
-        return inertia('App/Plan/Index');
+        return inertia('App/Plano/Index');
     }
 }

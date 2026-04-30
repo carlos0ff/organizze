@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\Api\AuthController::auth
-* @see app/Http/Controllers/Api/AuthController.php:12
+* @see app/Http/Controllers/Api/AuthController.php:13
 * @route '/api/auth'
 */
 export const auth = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -16,7 +16,7 @@ auth.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AuthController::auth
-* @see app/Http/Controllers/Api/AuthController.php:12
+* @see app/Http/Controllers/Api/AuthController.php:13
 * @route '/api/auth'
 */
 auth.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ auth.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\AuthController::auth
-* @see app/Http/Controllers/Api/AuthController.php:12
+* @see app/Http/Controllers/Api/AuthController.php:13
 * @route '/api/auth'
 */
 auth.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({

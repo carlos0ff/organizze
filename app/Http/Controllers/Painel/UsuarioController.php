@@ -29,7 +29,7 @@ class UsuarioController extends Controller
 
         $users = $query->latest()->paginate(20)->withQueryString();
 
-        return Inertia::render('Panel/Users/Index', [
+        return Inertia::render('Painel/Usuarios/Index', [
             'users'   => $users,
             'filters' => $request->only(['search', 'plan', 'status', 'role']),
         ]);
@@ -39,7 +39,7 @@ class UsuarioController extends Controller
     {
         $user->load([]);
 
-        return Inertia::render('Panel/Users/Show', [
+        return Inertia::render('Painel/Usuarios/Show', [
             'user' => $user,
         ]);
     }

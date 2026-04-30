@@ -1,23 +1,21 @@
 import DashboardController from './DashboardController'
-import Account from './Account'
-import SettingsController from './SettingsController'
-import Transaction from './Transaction'
-import SpendingLimitController from './SpendingLimitController'
-import BankConnectionController from './BankConnectionController'
-import ProfileController from './ProfileController'
-import PlanController from './PlanController'
-import HelpController from './HelpController'
+import Conta from './Conta'
+import Configuracoes from './Configuracoes'
+import Lancamento from './Lancamento'
+import LimiteGastosController from './LimiteGastosController'
+import ConexaoBancariaController from './ConexaoBancariaController'
+import PerfilController from './PerfilController'
+import PlanoController from './PlanoController'
 
 const App = {
     DashboardController: Object.assign(DashboardController, DashboardController),
-    Account: Object.assign(Account, Account),
-    SettingsController: Object.assign(SettingsController, SettingsController),
-    Transaction: Object.assign(Transaction, Transaction),
-    SpendingLimitController: Object.assign(SpendingLimitController, SpendingLimitController),
-    BankConnectionController: Object.assign(BankConnectionController, BankConnectionController),
-    ProfileController: Object.assign(ProfileController, ProfileController),
-    PlanController: Object.assign(PlanController, PlanController),
-    HelpController: Object.assign(HelpController, HelpController),
+    Conta: Object.assign(Conta, Conta),
+    Configuracoes: Object.assign(Configuracoes, Configuracoes),
+    Lancamento: Object.assign(Lancamento, Lancamento),
+    LimiteGastosController: Object.assign(LimiteGastosController, LimiteGastosController),
+    ConexaoBancariaController: Object.assign(ConexaoBancariaController, ConexaoBancariaController),
+    PerfilController: Object.assign(PerfilController, PerfilController),
+    PlanoController: Object.assign(PlanoController, PlanoController),
 }
 
 export default App

@@ -11,6 +11,6 @@ class ShowPostController extends Controller
     // Exibe o conteúdo completo de um post publicado pelo slug, com categoria, tags e posts relacionados
     public function __invoke(Request $request)
     {
-        return inertia('Blog/Posts/Show');
+        return inertia('Blog/Postagens/Show');
     }
 }

@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Api\SpendingLimitController::index
-* @see app/Http/Controllers/Api/SpendingLimitController.php:15
+* @see app/Http/Controllers/Api/SpendingLimitController.php:16
 * @route '/api/spending-limits'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\SpendingLimitController::index
-* @see app/Http/Controllers/Api/SpendingLimitController.php:15
+* @see app/Http/Controllers/Api/SpendingLimitController.php:16
 * @route '/api/spending-limits'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\SpendingLimitController::index
-* @see app/Http/Controllers/Api/SpendingLimitController.php:15
+* @see app/Http/Controllers/Api/SpendingLimitController.php:16
 * @route '/api/spending-limits'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Api\SpendingLimitController::index
-* @see app/Http/Controllers/Api/SpendingLimitController.php:15
+* @see app/Http/Controllers/Api/SpendingLimitController.php:16
 * @route '/api/spending-limits'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Api\SpendingLimitController::store
-* @see app/Http/Controllers/Api/SpendingLimitController.php:38
+* @see app/Http/Controllers/Api/SpendingLimitController.php:39
 * @route '/api/spending-limits'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -60,7 +60,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\SpendingLimitController::store
-* @see app/Http/Controllers/Api/SpendingLimitController.php:38
+* @see app/Http/Controllers/Api/SpendingLimitController.php:39
 * @route '/api/spending-limits'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -69,7 +69,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\SpendingLimitController::store
-* @see app/Http/Controllers/Api/SpendingLimitController.php:38
+* @see app/Http/Controllers/Api/SpendingLimitController.php:39
 * @route '/api/spending-limits'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -79,7 +79,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\Api\SpendingLimitController::update
-* @see app/Http/Controllers/Api/SpendingLimitController.php:55
+* @see app/Http/Controllers/Api/SpendingLimitController.php:56
 * @route '/api/spending-limits/{spending_limit}'
 */
 export const update = (args: { spending_limit: number | { id: number } } | [spending_limit: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -94,7 +94,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\SpendingLimitController::update
-* @see app/Http/Controllers/Api/SpendingLimitController.php:55
+* @see app/Http/Controllers/Api/SpendingLimitController.php:56
 * @route '/api/spending-limits/{spending_limit}'
 */
 update.url = (args: { spending_limit: number | { id: number } } | [spending_limit: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -127,7 +127,7 @@ update.url = (args: { spending_limit: number | { id: number } } | [spending_limi
 
 /**
 * @see \App\Http\Controllers\Api\SpendingLimitController::update
-* @see app/Http/Controllers/Api/SpendingLimitController.php:55
+* @see app/Http/Controllers/Api/SpendingLimitController.php:56
 * @route '/api/spending-limits/{spending_limit}'
 */
 update.put = (args: { spending_limit: number | { id: number } } | [spending_limit: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -137,7 +137,7 @@ update.put = (args: { spending_limit: number | { id: number } } | [spending_limi
 
 /**
 * @see \App\Http\Controllers\Api\SpendingLimitController::update
-* @see app/Http/Controllers/Api/SpendingLimitController.php:55
+* @see app/Http/Controllers/Api/SpendingLimitController.php:56
 * @route '/api/spending-limits/{spending_limit}'
 */
 update.patch = (args: { spending_limit: number | { id: number } } | [spending_limit: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -147,7 +147,7 @@ update.patch = (args: { spending_limit: number | { id: number } } | [spending_li
 
 /**
 * @see \App\Http\Controllers\Api\SpendingLimitController::destroy
-* @see app/Http/Controllers/Api/SpendingLimitController.php:71
+* @see app/Http/Controllers/Api/SpendingLimitController.php:72
 * @route '/api/spending-limits/{spending_limit}'
 */
 export const destroy = (args: { spending_limit: number | { id: number } } | [spending_limit: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -162,7 +162,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\SpendingLimitController::destroy
-* @see app/Http/Controllers/Api/SpendingLimitController.php:71
+* @see app/Http/Controllers/Api/SpendingLimitController.php:72
 * @route '/api/spending-limits/{spending_limit}'
 */
 destroy.url = (args: { spending_limit: number | { id: number } } | [spending_limit: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -195,7 +195,7 @@ destroy.url = (args: { spending_limit: number | { id: number } } | [spending_lim
 
 /**
 * @see \App\Http\Controllers\Api\SpendingLimitController::destroy
-* @see app/Http/Controllers/Api/SpendingLimitController.php:71
+* @see app/Http/Controllers/Api/SpendingLimitController.php:72
 * @route '/api/spending-limits/{spending_limit}'
 */
 destroy.delete = (args: { spending_limit: number | { id: number } } | [spending_limit: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({

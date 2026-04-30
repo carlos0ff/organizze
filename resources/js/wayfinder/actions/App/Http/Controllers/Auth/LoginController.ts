@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Auth\LoginController::index
-* @see app/Http/Controllers/Auth/LoginController.php:19
+* @see app/Http/Controllers/Auth/LoginController.php:20
 * @route '/auth/entrar'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\LoginController::index
-* @see app/Http/Controllers/Auth/LoginController.php:19
+* @see app/Http/Controllers/Auth/LoginController.php:20
 * @route '/auth/entrar'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\LoginController::index
-* @see app/Http/Controllers/Auth/LoginController.php:19
+* @see app/Http/Controllers/Auth/LoginController.php:20
 * @route '/auth/entrar'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\LoginController::index
-* @see app/Http/Controllers/Auth/LoginController.php:19
+* @see app/Http/Controllers/Auth/LoginController.php:20
 * @route '/auth/entrar'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\LoginController::authenticate
-* @see app/Http/Controllers/Auth/LoginController.php:29
+* @see app/Http/Controllers/Auth/LoginController.php:30
 * @route '/auth/entrar'
 */
 export const authenticate = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -60,7 +60,7 @@ authenticate.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\LoginController::authenticate
-* @see app/Http/Controllers/Auth/LoginController.php:29
+* @see app/Http/Controllers/Auth/LoginController.php:30
 * @route '/auth/entrar'
 */
 authenticate.url = (options?: RouteQueryOptions) => {
@@ -69,7 +69,7 @@ authenticate.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\LoginController::authenticate
-* @see app/Http/Controllers/Auth/LoginController.php:29
+* @see app/Http/Controllers/Auth/LoginController.php:30
 * @route '/auth/entrar'
 */
 authenticate.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
