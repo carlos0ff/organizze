@@ -21,8 +21,11 @@ Route::prefix("blog")->group(function(){
     /** Blog Home **/
     Route::get("/", [BlogController::class , "index"])->name("blog.home");
 
+    /** Blog Artigos **/
+    Route::get("/artigos", [BlogController::class, "articles"])->name("blog.articles");
+
     /** Blog post { SLUG } **/
-    Route::get("/post/", [BlogController::class , "post"])->name("blog.post");
+    Route::get("/post/{slug?}", [BlogController::class , "post"])->name("blog.post");
 
     /** Blog Categorys { SLUG } **/
     Route::get("/categoria/{category}", [CategoryController::class , "show"])->name("blog.category");

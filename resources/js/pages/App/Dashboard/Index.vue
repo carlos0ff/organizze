@@ -1,97 +1,60 @@
 <script setup>
 import { ref, computed } from 'vue';
-// Importação agrupada por categoria para melhor organização
 import {
-    // Social
-    Github,
-    Linkedin,
-    Youtube,
-    Twitter,
-
-    // Navegação e UI
-    ChevronDown,
-    ChevronRight,
-    Menu,
-    X,
-    Ellipsis,
-
-    // Ações
-    EyeOff,
-    Info,
-    Download,
-    Plus,
-    Minus,
-    LogOut,
-    Settings,
-
-    // Calendário e Tempo
-    CalendarRange,
-    CloudSun,
-
-    // Finanças e Compras
-    CreditCard,
-    Wallet,
-    TrendingUp,
-    ArrowRightLeft,
-
-    // Categorias
-    Home,
-    Wifi,
-    Car,
-    Utensils,
-    TvMinimalPlay,
-    GraduationCap,
-    HeartPulse,
-    TreePalm,
-    Gift,
-    ShoppingCart,
-    Gamepad2,
-
-    // Geral
-    CirclePlus,
-    Scale,
-    Layers,
-    User,
-    Gem,
-    Bell,
-    Star,
-    Square,
-    Circle,
+    Github, Linkedin, Youtube, Twitter,
+    ChevronDown, ChevronRight, X, Ellipsis,
+    EyeOff, Download, Plus, Minus, LogOut, Settings,
+    CalendarRange, Sun, Sunset, Moon,
+    TrendingUp, ArrowRightLeft, ArrowUpCircle, ArrowDownCircle,
+    Home, Car, Utensils, TvMinimalPlay, GraduationCap,
+    HeartPulse, TreePalm, Gift, ShoppingCart, Gamepad2,
+    CirclePlus, Scale, Layers, User, Gem, Bell, Star,
 } from 'lucide-vue-next';
 
-const isModalOpen = ref(false);
+// Saudação dinâmica baseada no horário
+const hour = new Date().getHours();
+const greeting    = hour < 12 ? 'Bom dia' : hour < 18 ? 'Boa tarde' : 'Boa noite';
+const greetingIcon  = hour < 12 ? Sun : hour < 18 ? Sunset : Moon;
+const greetingColor = hour < 12 ? 'text-yellow-400' : hour < 18 ? 'text-orange-400' : 'text-indigo-400';
 
-const toggleModal = (id) => {
-    const modal = document.getElementById(id);
+// Dados financeiros
+const receita = ref(5500.00);
+const despesa = ref(2470.80);
+const saldo   = computed(() => receita.value - despesa.value);
+const spentPct = computed(() => Math.round((despesa.value / receita.value) * 100));
+const hideSaldo = ref(false);
 
-    if (!modal) return;
-
-    const isHidden = modal.classList.contains('opacity-0');
-
-    if (isHidden) {
-        modal.classList.remove('opacity-0', 'pointer-events-none');
-        modal.classList.add('opacity-100', 'pointer-events-auto');
-        document.body.classList.add('modal-active');
-    } else {
-        modal.classList.add('opacity-0', 'pointer-events-none');
-        modal.classList.remove('opacity-100', 'pointer-events-auto');
-        document.body.classList.remove('modal-active');
-    }
-};
-
-// lista de cartões
-const cards = ref([
-    { bank: 'Banco do Brasil', number: '•••• 5544', value: 'R$ 3.400,00', status: 'Aberta' },
-    { bank: 'Santander', number: '•••• 9876', value: 'R$ 860,00', status: 'Fechada' },
-    { bank: 'Inter', number: '•••• 4321', value: 'R$ 1.240,00', status: 'Aberta' },
-    { bank: 'Inter', number: '•••• 4321', value: 'R$ 1.240,00', status: 'Aberta' },
+// Contas bancárias
+const contas = ref([
+    { nome: 'Nubank',   tipo: 'Conta Corrente', saldo: 2150.00, cor: 'bg-purple-600', inicial: 'NU', logo: 'https://app2.organizze.com.br/images/institutions/ofnubank_br/small-icon-16c0f468c53212697f4a313fe153530b.svg?vsn=d' },
+    { nome: 'Itaú',     tipo: 'Conta Corrente', saldo: 1890.20, cor: 'bg-orange-500', inicial: 'IT', logo: 'https://app2.organizze.com.br/images/institutions/ofitau_br/small-icon-bd90d464ce1e1882138179cce56399ee.svg?vsn=d' },
+    { nome: 'Carteira', tipo: 'Dinheiro',        saldo:  989.00, cor: 'bg-emerald-500', inicial: '💵', logo: null },
 ]);
 
-// limite máximo
-const MAX_CARDS = 4;
+const fmtMoney = (value) =>
+    value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-// verificação
+// Modal
+const isModalOpen = ref(false);
+const openModal = (tipo) => { /* futura implementação por tipo */ };
+const goToCardsPage = () => { window.location.href = '/app/cards'; };
+
+// Lista de cartões
+const cards = ref([
+    { bank: 'Nubank',    number: '•••• 5544', value: 'R$ 3.400,00', status: 'Aberta',  logo: 'https://app2.organizze.com.br/images/institutions/ofnubank_br/small-icon-16c0f468c53212697f4a313fe153530b.svg?vsn=d' },
+    { bank: 'Santander', number: '•••• 9876', value: 'R$ 860,00',   status: 'Fechada', logo: 'https://app2.organizze.com.br/images/institutions/ofsantander_br/small-icon-48ab948aa91e7eb84f00a77e735b468b.svg?vsn=d' },
+    { bank: 'Itaú',      number: '•••• 4321', value: 'R$ 1.240,00', status: 'Aberta',  logo: 'https://app2.organizze.com.br/images/institutions/ofitau_br/small-icon-bd90d464ce1e1882138179cce56399ee.svg?vsn=d' },
+    { bank: 'Bradesco',  number: '•••• 7788', value: 'R$ 980,00',   status: 'Aberta',  logo: 'https://app2.organizze.com.br/images/institutions/ofbradesco_br/small-icon-26351a92499d4ca36a3c1327d5bcb7ff.svg?vsn=d' },
+]);
+
+const MAX_CARDS = 4;
 const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
+
+// Trial bar
+const trialDays  = ref(7);
+const trialTotal = 30;
+const trialPct   = computed(() => Math.round(((trialTotal - trialDays.value) / trialTotal) * 100));
+const trialBarDismissed = ref(false);
 </script>
 
 <template>
@@ -222,72 +185,157 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
         </div>
     </nav>
 
-    <!-- Content -->
-    <main class="max-w-7xl mx-auto px-4 pt-24 pb-12">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-4">
-            <div class="lg:col-span-2 bg-white rounded-md shadow-sm p-6">
-                <div class="flex justify-between items-start mb-6">
-                    <h1 class="text-2xl font-semibold text-gray-800 flex items-center gap-2">
-                        Bom dia, { { Rogério Dória } } <CloudSun class="text-amber-400" />
-                    </h1>
-                    <button
-                        class="flex items-center text-xs text-emerald-600 font-medium border border-emerald-100 px-3 py-1 rounded hover:bg-emerald-50"
-                    >
-                        <TrendingUp class="w-3 h-3 mr-1" /> ver relatórios
-                    </button>
+    <!-- ── Trial bar ── -->
+    <div v-if="!trialBarDismissed"
+        class="fixed top-16 left-0 w-full z-40 bg-amber-50 border-b border-amber-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-11 flex items-center justify-between gap-4">
+
+            <!-- Plano -->
+            <div class="flex items-center gap-2 shrink-0">
+                <span class="text-sm font-bold text-amber-900">Teste grátis</span>
+                <span class="hidden sm:inline text-[11px] font-semibold text-amber-700 bg-amber-100 border border-amber-200 px-2 py-0.5 rounded-full">
+                    Plano manual
+                </span>
+            </div>
+
+            <!-- Progresso + dias -->
+            <div class="flex items-center gap-3 flex-1 max-w-sm">
+                <span class="text-xs text-amber-700 whitespace-nowrap font-medium">
+                    {{ trialDays }} dias restantes
+                </span>
+                <div class="flex-1 h-1.5 bg-amber-200 rounded-full overflow-hidden">
+                    <div class="h-full bg-amber-500 rounded-full transition-all duration-500"
+                        :style="`width: ${trialPct}%`" />
                 </div>
-                <div class="grid grid-cols-3 gap-4">
-                    <div>
-                        <p class="text-[10px] text-gray-400 uppercase font-bold">receita mensal</p>
-                        <p class="text-xl font-bold text-emerald-600">R$ 5.500,00</p>
+                <span class="text-[11px] text-amber-500 font-medium hidden md:inline">{{ trialPct }}%</span>
+            </div>
+
+            <!-- CTA + fechar -->
+            <div class="flex items-center gap-2 shrink-0">
+                <a href="/app/planos"
+                    class="text-xs font-bold text-white bg-amber-500 hover:bg-amber-600 px-4 py-1.5 rounded-lg transition-colors shadow-sm shadow-amber-200 whitespace-nowrap">
+                    Ver planos
+                </a>
+                <button @click="trialBarDismissed = true"
+                    class="text-amber-400 hover:text-amber-600 transition-colors p-0.5">
+                    <X class="w-4 h-4" />
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <main class="max-w-7xl mx-auto px-4 pb-12"
+        :class="trialBarDismissed ? 'pt-24' : 'pt-[7rem]'">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-4">
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col justify-between gap-5">
+                <!-- Linha 1: saudação + ações -->
+                <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-md bg-gray-200/40 flex items-center justify-center shrink-0">
+                            <component :is="greetingIcon" :class="greetingColor" class="w-6 h-6" />
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">{{ greeting }},</p>
+                            <h1 class="text-lg font-bold text-gray-800 leading-tight">Thiago Santos</h1>
+                        </div>
                     </div>
-                    <div>
-                        <p class="text-[10px] text-gray-400 uppercase font-bold">despesa mensal</p>
-                        <p class="text-xl font-bold text-red-500">R$ 2.470,80</p>
+
+                    <div class="flex items-center gap-2">
+                        <a href="/app/lancamentos" class="flex items-center gap-1 text-xs text-gray-500 font-medium border border-gray-200
+                           px-3 py-1.5 rounded-md hover:bg-gray-50 transition-color hover:cursor-point  hover:cursor-point capitalize">
+                            lançamentos <ChevronRight class="w-3 h-3" />
+                        </a>
+                        <button
+                            class="flex items-center gap-1 text-xs text-emerald-600 font-medium border
+                            border-emerald-100 px-3 py-1.5 rounded-md hover:bg-emerald-50 transition-colors  hover:cursor-point capitalize">
+                            <TrendingUp class="w-3 h-3" /> Relatórios
+                        </button>
                     </div>
-                    <div class="group cursor-pointer">
-                        <p class="text-[10px] text-gray-400 uppercase font-bold flex items-center">saldo geral <EyeOff class="ml-1 w-3 h-3" /></p>
-                        <p class="text-xl font-bold text-emerald-600">R$ ---</p>
+                </div>
+
+                <!-- Linha 2: métricas -->
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="bg-emerald-50 rounded-md p-4">
+                        <div class="flex items-center gap-1.5 mb-1">
+                            <ArrowUpCircle class="w-4 h-4 text-green-500" />
+
+                            <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-wide">Receitas</p>
+                        </div>
+                        <p class="text-lg font-black text-emerald-700">{{ fmtMoney(receita) }}</p>
+                    </div>
+
+                    <div class="bg-red-50 rounded-md p-4">
+                        <div class="flex items-center gap-1.5 mb-1">
+                            <ArrowDownCircle class="w-4 h-4 text-red-400" />
+                            <p class="text-[10px] font-bold text-red-500 uppercase tracking-wide">Despesas</p>
+                        </div>
+                        <p class="text-lg font-black text-red-600">{{ fmtMoney(despesa) }}</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-md p-4 cursor-pointer group " @click="hideSaldo = !hideSaldo">
+                        <div class="flex items-center gap-1.5 mb-1">
+                            <EyeOff class="w-3.5 h-3.5 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Saldo</p>
+                        </div>
+                        <p class="text-lg font-black text-gray-700 ">
+                            {{ hideSaldo ? '••••••' : fmtMoney(saldo) }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Linha 3: barra receita vs despesa -->
+                <div class="block">
+                    <div class="flex justify-between text-[10px] font-semibold text-gray-400 mb-1.5">
+                        <span>Despesas representam <b class="text-gray-600">{{ spentPct }}%</b> das receitas</span>
+                        <span :class="spentPct >= 90 ? 'text-red-400' : spentPct >= 70 ? 'text-orange-400' : 'text-emerald-500'">
+                            {{ spentPct >= 90 ? 'Atenção!' : spentPct >= 70 ? 'Moderado' : 'Saudável' }}
+                        </span>
+                    </div>
+                    <div class="h-2 bg-gray-100 rounded-full overflow-hidden ">
+                        <div class="h-full rounded-full transition-all duration-700"
+                             :class="spentPct >= 90 ? 'bg-red-400' : spentPct >= 70 ? 'bg-orange-400' : 'bg-emerald-500'"
+                             :style="`width: ${spentPct}%`" ></div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-md shadow-sm p-6">
-                <p class="text-[10px] font-bold text-gray-400 uppercase mb-4">Acesso rápido</p>
-                <div class="flex justify-between items-center">
-                    <div class="text-center group cursor-pointer">
-                        <div
-                            class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-red-400 mb-2 group-hover:bg-red-100 transition-colors"
-                        >
-                            <Minus class="w-6 h-6" />
-                        </div>
-                        <span class="text-[10px] uppercase font-bold text-gray-500">Despesa</span>
+            <!-- Botões de Acesso Rápido -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 grid grid-cols-2 gap-3">
+                <!-- Despesa -->
+                <button @click="openModal('despesa')" class="group flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-red-100 bg-red-50 hover:bg-red-100 hover:border-red-200 transition-all">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-red-400 shadow-sm group-hover:scale-110 transition-transform">
+                        <Minus class="w-5 h-5" />
                     </div>
-                    <div class="text-center group cursor-pointer">
-                        <div
-                            class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-500 mb-2 group-hover:bg-emerald-100 transition-colors"
-                        >
-                            <Plus class="w-6 h-6" />
-                        </div>
-                        <span class="text-[10px] uppercase font-bold text-gray-500">Receita</span>
+                    <span class="text-[11px] uppercase font-bold text-red-500 tracking-wide">Despesa</span>
+                </button>
+
+                <!-- Receita -->
+                <button @click="openModal('receita')"
+                        class="group flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-emerald-100 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-200 transition-all">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-emerald-500 shadow-sm group-hover:scale-110 transition-transform">
+                        <Plus class="w-5 h-5" />
                     </div>
-                    <div class="text-center group cursor-pointer">
-                        <div
-                            class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-400 mb-2 group-hover:bg-blue-100 transition-colors"
-                        >
-                            <ArrowRightLeft class="w-6 h-6" />
-                        </div>
-                        <span class="text-[10px] uppercase font-bold text-gray-500">Transf.</span>
+                    <span class="text-[11px] uppercase font-bold text-emerald-600 tracking-wide">Receita</span>
+                </button>
+
+                <!-- Transferência -->
+                <button @click="openModal('transfer')"
+                        class="group flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-blue-100 bg-blue-50 hover:bg-blue-100 hover:border-blue-200 transition-all">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-400 shadow-sm group-hover:scale-110 transition-transform">
+                        <ArrowRightLeft class="w-5 h-5" />
                     </div>
-                    <div class="text-center group cursor-pointer">
-                        <div
-                            class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-600 mb-2 group-hover:bg-emerald-100 transition-colors"
-                        >
-                            <Download class="w-6 h-6" />
-                        </div>
-                        <span class="text-[10px] uppercase font-bold text-gray-500">Importar</span>
+                    <span class="text-[11px] uppercase font-bold text-blue-500 tracking-wide">Transferência</span>
+                </button>
+
+                <!-- Importar -->
+                <button @click="openModal('import')"
+                        class="group flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-violet-100 bg-violet-50 hover:bg-violet-100 hover:border-violet-200 transition-all">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-violet-500 shadow-sm group-hover:scale-110 transition-transform">
+                        <Download class="w-5 h-5" />
                     </div>
-                </div>
+                    <span class="text-[11px] uppercase font-bold text-violet-500 tracking-wide">Importar</span>
+                </button>
             </div>
         </div>
 
@@ -330,96 +378,35 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                     </button>
                 </div>
 
-                <!-- Empty State -->
-                <div class="flex-1 flex flex-col items-center justify-center text-center space-y-3">
-                    <div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-gray-300">
-                        <Plus class="w-6 h-6" />
+                <!-- Lista de contas -->
+                <div class="flex-1 overflow-hidden pr-1">
+                    <div class="space-y-1">
+                        <div
+                            v-for="conta in contas"
+                            :key="conta.nome"
+                            class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100"
+                        >
+                            <div class="flex items-center space-x-3">
+                                <div :class="conta.logo ? 'bg-white border border-gray-200 shadow-md' : conta.cor"
+                                    class="w-11 h-11 rounded-xl flex items-center justify-center text-white text-sm font-black overflow-hidden shrink-0">
+                                    <img v-if="conta.logo" :src="conta.logo" :alt="conta.nome" class="w-full h-full object-cover" />
+                                    <span v-else>{{ conta.inicial }}</span>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-gray-800 leading-tight">{{ conta.nome }}</p>
+                                    <p class="text-[11px] text-gray-400 mt-0.5">{{ conta.tipo }}</p>
+                                </div>
+                            </div>
+                            <p class="text-sm font-bold text-emerald-600">{{ fmtMoney(conta.saldo) }}</p>
+                        </div>
                     </div>
-                    <div>
-                        <p class="text-sm font-bold text-gray-400">Nenhuma conta encontrada</p>
-                        <p class="text-[11px] text-gray-300">Conecte seu banco para gerenciar seu saldo.</p>
-                    </div>
-                    <button
-                        class="mt-2 px-4 py-1.5 text-[11px] font-bold text-emerald-600 border border-emerald-100 rounded-full hover:bg-emerald-50 transition-all uppercase"
-                    >
-                        Conectar Agora
-                    </button>
                 </div>
 
-                <!-- <div class="flex-1 overflow-hidden pr-1">
-                    <div class="space-y-1">
-                        <div class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                                    <Star class="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <p class="text-sm font-bold text-gray-800 leading-tight">Conta 1</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Conta Corrente</p>
-                                </div>
-                            </div>
-                            <p class="text-sm font-bold text-emerald-600">R$ 1.000,00</p>
-                        </div>
-
-                         <div class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                                    <Star class="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <p class="text-sm font-bold text-gray-800 leading-tight">Conta 2</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Conta Corrente</p>
-                                </div>
-                            </div>
-                            <p class="text-sm font-bold text-emerald-600">R$ 1.000,00</p>
-                        </div>
-
-                        <div class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                                    <Star class="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <p class="text-sm font-bold text-gray-800 leading-tight">Conta 3</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Conta Corrente</p>
-                                </div>
-                            </div>
-                            <p class="text-sm font-bold text-emerald-600">R$ 1.000,00</p>
-                        </div>
-
-                        <div class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                                    <Star class="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <p class="text-sm font-bold text-gray-800 leading-tight">Conta 4</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Conta Corrente</p>
-                                </div>
-                            </div>
-                            <p class="text-sm font-bold text-emerald-600">R$ 1.000,00</p>
-                        </div>
-
-                        <div class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                                    <Star class="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <p class="text-sm font-bold text-gray-800 leading-tight">Conta 5</p>
-                                    <p class="text-[11px] text-gray-400 mt-0.5">Conta Corrente</p>
-                                </div>
-                            </div>
-                            <p class="text-sm font-bold text-emerald-600">R$ 1.000,00</p>
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- <div class="mt-4 pt-4 border-t border-gray-50 flex-shrink-0">
+                <div class="mt-4 pt-4 border-t border-gray-50 flex-shrink-0">
                     <button class="w-full py-2.5 text-[11px] font-bold text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all uppercase tracking-widest flex items-center justify-center">
                         <Plus class="w-3 h-3 mr-2" /> Gerenciar Contas
                     </button>
-                </div> -->
+                </div>
             </div>
 
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col h-[460px]">
@@ -703,9 +690,14 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                         class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-lg shadow-orange-100 group transition-transform hover:scale-[1.01]"
                     >
                         <div class="flex justify-between items-start mb-6">
-                            <div>
-                                <p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Banco Inter</p>
-                                <p class="text-sm font-medium tracking-[0.2em]">•••• 4321</p>
+                            <div class="flex items-center gap-2">
+                                <img src="https://img.logo.dev/itau.com.br?token=live_6a1a28fd-6420-4492-aeb0-b297461d9de2&size=128&retina=true&format=png"
+                                    alt="Itaú" class="w-9 h-9 rounded-md p-0.5" style="filter: brightness(0) invert(1);"
+                                />
+                                <div>
+                                    <p class="text-[10px] uppercase opacity-80 font-semibold">Itaú</p>
+                                    <p class="text-sm font-medium tracking-[0.2em]">•••• 4321</p>
+                                </div>
                             </div>
                             <img
                                 src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg"
@@ -729,14 +721,16 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                         class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-red-500 to-red-700 text-white shadow-lg shadow-red-100 group transition-transform hover:scale-[1.01]"
                     >
                         <div class="flex justify-between items-start mb-6">
-                            <div>
-                                <p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Santander</p>
-                                <p class="text-sm font-medium tracking-[0.2em]">•••• 9876</p>
+                            <div class="flex items-center gap-2">
+                                <img src="https://assets.abstra.cloud/connectors/logos/santander.png"
+                                    alt="Santander" class="w-7 h-7 rounded-md p-0.5" style="filter: brightness(0) invert(1);" />
+                                <div>
+                                    <p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Santander</p>
+                                    <p class="text-sm font-medium tracking-[0.2em]">•••• 9876</p>
+                                </div>
                             </div>
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Visa_Inc._logo_%282005%E2%80%932014%29.svg/960px-Visa_Inc._logo_%282005%E2%80%932014%29.svg.png"
-                                alt="Visa"
-                                class="h-4 opacity-90 brightness-0 invert"
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Visa_Inc._logo_%282005%E2%80%932014%29.svg/960px-Visa_Inc._logo_%282005%E2%80%932014%29.svg.png"
+                                alt="Visa" class="h-4 opacity-90 brightness-0 invert"
                             />
                         </div>
                         <div class="flex justify-between items-end">
@@ -755,9 +749,14 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                         class="relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-800 text-white shadow-lg shadow-purple-100 group transition-transform hover:scale-[1.01]"
                     >
                         <div class="flex justify-between items-start mb-6">
-                            <div>
-                                <p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Nubank</p>
-                                <p class="text-sm font-medium tracking-[0.2em]">•••• 1122</p>
+                            <div class="flex items-center gap-2">
+                                <img src="https://logodownload.org/wp-content/uploads/2019/08/nubank-logo-3-1.png"
+                                    alt="Nubank" class="w-9 h-9  p-0.5" style="filter: brightness(0) invert(1);"
+                                />
+                                <div>
+                                    <p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Nubank</p>
+                                    <p class="text-sm font-medium tracking-[0.2em]">•••• 1122</p>
+                                </div>
                             </div>
                             <img
                                 src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg"
@@ -1058,14 +1057,10 @@ const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
                     class="p-4 border border-gray-300 rounded-md flex justify-between items-center hover:bg-gray-200 transition"
                 >
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-8 bg-blue-600 rounded-md flex items-center justify-center text-white text-[9px] font-bold">
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Visa_Inc._logo_%282005%E2%80%932014%29.svg/960px-Visa_Inc._logo_%282005%E2%80%932014%29.svg.png"
-                                alt="Visa"
-                                class="h-3 opacity-90 brightness-0 invert"
-                            />
+                        <div class="w-12 h-12 rounded-xl overflow-hidden border border-gray-200 bg-white shadow-sm flex items-center justify-center shrink-0">
+                            <img v-if="card.logo" :src="card.logo" :alt="card.bank" class="w-full h-full object-cover" />
+                            <span v-else class="text-xs font-bold text-gray-500">{{ card.bank.slice(0,2).toUpperCase() }}</span>
                         </div>
-
                         <div>
                             <p class="text-sm font-semibold text-gray-700">{{ card.bank }}</p>
                             <p class="text-xs text-gray-400">{{ card.number }}</p>

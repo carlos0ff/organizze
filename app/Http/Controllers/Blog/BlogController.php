@@ -18,12 +18,18 @@ class BlogController extends Controller
     }
 
     /**
-     * Exibe a página de posts do blog.
-     * @return \Inertia\Response
+     * Exibe a listagem de artigos.
      */
-    public function post(): \Inertia\Response
+    public function articles(): \Inertia\Response
     {
-        return inertia('Blog/Posts/Show');
+        return inertia('Blog/Articles/Index');
     }
 
+    /**
+     * Exibe a página de um post.
+     */
+    public function post(string $slug = ''): \Inertia\Response
+    {
+        return inertia('Blog/Posts/Show', ['slug' => $slug]);
+    }
 }

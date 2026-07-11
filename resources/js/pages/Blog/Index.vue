@@ -1,3 +1,85 @@
+<script setup>
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { Youtube, Linkedin, Github, Clock, ChevronLeft, ChevronRight } from 'lucide-vue-next';
+
+const HERO_SLIDES = [
+    {
+        slug: 'gastos-diarios-como-mapear-reduzir-controlar',
+        img: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&q=75',
+        cat: 'Controle de Gastos',
+        title: 'Gastos diários: como mapear, reduzir e controlar sem sofrimento',
+        excerpt: 'Manter as finanças pessoais organizadas não precisa ser complicado. Aprenda a identificar seus gastos diários e aplicar estratégias simples para reduzir desperdícios.',
+        author: 'Carlos Júnior',
+        authorImg: 'https://i.pravatar.cc/40?img=12',
+        date: '23/01/2026',
+        readTime: 7,
+    },
+    {
+        slug: 'reserva-de-emergencia-quanto-guardar',
+        img: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1200&q=75',
+        cat: 'Investimentos',
+        title: 'Reserva de emergência: quanto guardar e onde deixar seu dinheiro',
+        excerpt: 'Descubra o valor ideal para sua reserva de emergência, onde investir com segurança e liquidez, e como construir esse colchão financeiro do zero.',
+        author: 'Carlos Júnior',
+        authorImg: 'https://i.pravatar.cc/40?img=12',
+        date: '10/02/2026',
+        readTime: 5,
+    },
+    {
+        slug: 'orcamento-mensal-guia-definitivo',
+        img: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=75',
+        cat: 'Planejamento',
+        title: 'Orçamento mensal: o guia definitivo para nunca ficar no vermelho',
+        excerpt: 'Um orçamento bem feito é a base de qualquer vida financeira saudável. Veja como montar o seu do zero, com planilha e dicas práticas.',
+        author: 'Carlos Júnior',
+        authorImg: 'https://i.pravatar.cc/40?img=12',
+        date: '15/03/2026',
+        readTime: 9,
+    },
+];
+
+const slide = ref(0);
+let timer = null;
+const nextSlide = () => { slide.value = (slide.value + 1) % HERO_SLIDES.length; };
+const prevSlide = () => { slide.value = (slide.value - 1 + HERO_SLIDES.length) % HERO_SLIDES.length; };
+onMounted(() => { timer = setInterval(nextSlide, 6000); });
+onUnmounted(() => clearInterval(timer));
+
+// Busca navbar
+const searchOpen  = ref(false);
+const searchQuery = ref('');
+
+// Artigos
+const ALL_POSTS = [
+    { slug: 'apps-de-financas',         img: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=70', cat: 'Tecnologia',          title: 'Apps de finanças: como escolher o ideal',                         excerpt: 'Aprenda os critérios essenciais para escolher um app financeiro eficiente.',                                                          readTime: 7 },
+    { slug: 'orcamento-que-funciona',    img: 'https://images.unsplash.com/photo-1454165205744-3b78555e5572?w=600&q=70', cat: 'Orçamento',           title: 'Como montar um orçamento que realmente funciona',                  excerpt: 'Esqueça planilhas complexas e aprenda um método realista para controlar seu orçamento.',                                              readTime: 6 },
+    { slug: 'financas-30-minutos',       img: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=70',   cat: 'Organização',         title: 'Como organizar suas finanças em menos de 30 minutos',             excerpt: 'Um método simples para sair da bagunça financeira e ganhar clareza sobre seu dinheiro.',                                             readTime: 5 },
+    { slug: 'sair-das-dividas',          img: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=70',   cat: 'Dívidas',             title: 'Estratégias práticas para sair das dívidas',                      excerpt: 'Técnicas simples para renegociar dívidas e retomar o controle da sua vida financeira.',                                              readTime: 8 },
+    { slug: 'mei-financas',              img: 'https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?w=600&q=70', cat: 'Empreendedorismo',   title: 'MEI: como organizar suas finanças',                               excerpt: 'Dicas essenciais para manter o controle financeiro sendo MEI.',                                                                      readTime: 6 },
+    { slug: 'educacao-financeira',       img: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&q=70', cat: 'Educação Financeira', title: 'Educação financeira para iniciantes',                             excerpt: 'Conceitos básicos para transformar sua vida financeira.',                                                                            readTime: 7 },
+    { slug: 'orcamento-funciona-2',      img: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&q=70',   cat: 'Orçamento',           title: 'Método 50-30-20: o orçamento que cabe no bolso',                 excerpt: 'Aprenda a dividir sua renda em necessidades, desejos e investimentos de forma simples.',                                             readTime: 9 },
+    { slug: 'cartao-sem-divida',         img: 'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=600&q=70',   cat: 'Cartão de Crédito',  title: 'Como usar cartão sem se endividar',                               excerpt: 'Evite armadilhas e use seu cartão de crédito com inteligência, mantendo o controle dos gastos.',                                    readTime: 5 },
+    { slug: 'controle-sem-planilha',     img: 'https://images.unsplash.com/photo-1529078155058-5d716f45d604?w=600&q=70', cat: 'Controle Financeiro', title: 'Como fazer controle financeiro sem planilha complicada',          excerpt: 'Métodos simples e rápidos que realmente funcionam para quem odeia planilhas.',                                                       readTime: 6 },
+    { slug: 'reserva-emergencia',        img: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&q=70', cat: 'Investimentos',       title: 'Reserva de emergência: por onde começar',                         excerpt: 'Descubra o valor ideal para sua reserva e onde investir com segurança e liquidez.',                                                  readTime: 5 },
+    { slug: 'metas-financeiras',         img: 'https://images.unsplash.com/photo-1434626881859-194d67b2b86f?w=600&q=70', cat: 'Planejamento',        title: 'Como definir e atingir metas financeiras em 2026',               excerpt: 'Um guia prático para transformar seus objetivos financeiros em resultados reais.',                                                   readTime: 8 },
+    { slug: 'gastos-fixos-variaveis',    img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=70', cat: 'Organização',         title: 'Gastos fixos vs. variáveis: entenda a diferença',                 excerpt: 'Saber classificar seus gastos é o primeiro passo para um orçamento eficiente.',                                                      readTime: 4 },
+];
+
+const PAGE_SIZE     = 6;
+const visibleCount  = ref(PAGE_SIZE);
+const loading       = ref(false);
+const visiblePosts  = computed(() => ALL_POSTS.slice(0, visibleCount.value));
+const hasMore       = computed(() => visibleCount.value < ALL_POSTS.length);
+
+const loadMore = () => {
+    loading.value = true;
+    setTimeout(() => {
+        visibleCount.value = Math.min(visibleCount.value + 3, ALL_POSTS.length);
+        loading.value = false;
+    }, 600);
+};
+</script>
+
 <template>
     <!-- Navbar -->
     <nav class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white shadow-sm">
@@ -5,97 +87,70 @@
             <div class="flex h-16 items-center justify-between">
                 <!-- Logo -->
                 <div class="flex items-center shrink-0">
-                    <a href="#" class="flex items-center gap-2 transition-opacity hover:opacity-80">
-                        <img
-                            src="https://auth.organizze.com.br/images/auth/logo-909f6075bb5972376e589ed01866ee33.svg?vsn=d"
-                            alt="Organizze"
-                            class="h-8 w-auto"
-                        />
+                    <a href="/blog" class="flex items-center gap-2 transition-opacity hover:opacity-80">
+                        <img src="https://auth.organizze.com.br/images/auth/logo-909f6075bb5972376e589ed01866ee33.svg?vsn=d"
+                            alt="Organizze" class="h-8 w-auto" />
                         <span class="hidden text-sm font-medium text-gray-600 sm:inline">Blog</span>
                     </a>
                 </div>
 
-                <!-- Menu / Links Centralizado -->
+                <!-- Links -->
                 <div class="hidden md:flex items-center justify-center space-x-8 flex-1">
-                    <a
-                        href="#home"
-                        class="capitalize relative text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full"
-                    >
+                    <a href="/blog"
+                        class="capitalize relative text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full">
                         Home
                     </a>
-                    <a
-                        href="#categorias"
-                        class="capitalize relative text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full"
-                    >
+                    <a href="#categorias"
+                        class="capitalize relative text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full">
                         Categorias
                     </a>
-                    <a
-                        href="#artigos"
-                        class="capitalize relative text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full"
-                    >
+                    <a href="/blog/artigos"
+                        class="capitalize relative text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full">
                         Artigos
                     </a>
-                    <a
-                        href="#mais-lido"
-                        class="capitalize relative text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full"
-                    >
+                    <a href="#mais-lido"
+                        class="capitalize relative text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full">
                         Mais lido
                     </a>
                 </div>
 
                 <div class="flex items-center gap-3">
-                    <!-- Search Bar -->
+                    <!-- Busca -->
                     <div class="hidden md:flex items-center relative">
-                        <button class="p-2 text-gray-700 rounded-lg border border-gray-200 hover:bg-gray-100 transition cursor-pointer">
+                        <button @click="searchOpen = !searchOpen"
+                            class="p-2 text-gray-700 rounded-lg border border-gray-200 hover:bg-gray-100 transition cursor-pointer">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </button>
 
-                        <div class="absolute top-14 right-0 w-80">
-                            <div class="bg-white rounded-xl shadow-xl border border-gray-200 p-4 hidden">
+                        <div v-if="searchOpen" class="absolute top-14 right-0 w-80 z-50">
+                            <div class="bg-white rounded-xl shadow-xl border border-gray-200 p-4">
                                 <div class="relative">
-                                    <svg
-                                        class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                        />
+                                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                     </svg>
-                                    <input
-                                        type="text"
-                                        placeholder="Buscar artigos..."
-                                        class="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#16C64F]/30 focus:border-[#16C64F]"
-                                    />
+                                    <input v-model="searchQuery" autofocus type="text" placeholder="Buscar artigos..."
+                                        @keyup.escape="searchOpen = false"
+                                        class="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#16C64F]/30 focus:border-[#16C64F]" />
                                 </div>
-
                                 <div class="mt-4 text-sm">
                                     <p class="text-gray-500 font-medium mb-2">Buscas recentes:</p>
                                     <div class="space-y-1">
-                                        <a href="#" class="block text-gray-700 hover:text-[#16C64F] transition"> Como organizar finanças </a>
-                                        <a href="#" class="block text-gray-700 hover:text-[#16C64F] transition"> Dicas de produtividade </a>
+                                        <a href="#" class="block text-gray-700 hover:text-[#16C64F] transition">Como organizar finanças</a>
+                                        <a href="#" class="block text-gray-700 hover:text-[#16C64F] transition">Reserva de emergência</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- CTA Organizze -->
-                    <a href="#Organizze" class="relative overflow-hidden px-6 py-2 rounded-md font-medium text-white bg-[#117641] group">
-                        <span
-                            class="absolute inset-0 bg-[#006A33] -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
-                        ></span>
+                    <!-- CTA -->
+                    <a href="/auth/cadastro" class="relative overflow-hidden px-6 py-2 rounded-md font-medium text-white bg-[#117641] group">
+                        <span class="absolute inset-0 bg-[#006A33] -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></span>
                         <span class="relative z-10">Conheça o organizze</span>
                     </a>
                 </div>
@@ -104,57 +159,60 @@
     </nav>
 
     <main class="flex-1 pt-12 lg:pt-20">
-        <section class="max-w-7xl mx-auto px-4 py-10">
-            <div class="relative flex flex-col md:flex-row overflow-hidden rounded-md shadow-lg">
-                <div class="relative md:w-2/3 h-65 md:h-90">
-                    <img
-                        src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"
-                        alt="Controle de gastos"
-                        class="w-full h-full object-cover"
-                    />
-                    <span class="absolute bottom-4 left-4 bg-[#1F3D2B] text-white text-xs px-3 py-1 rounded-full"> Controle de Gastos</span>
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
+            <div class="relative overflow-hidden rounded-2xl shadow-lg bg-gray-900 h-[360px] md:h-[440px]">
+                <!-- Slide image -->
+                <transition name="fade" mode="out-in">
+                    <img :key="slide"
+                        :src="HERO_SLIDES[slide].img"
+                        :alt="HERO_SLIDES[slide].title"
+                        class="absolute inset-0 w-full h-full object-cover"
+                        loading="lazy" />
+                </transition>
 
-                    <button
-                        class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition"
-                    >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
+                <!-- Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
-                    <button
-                        class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition"
-                    >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
+                <!-- Content -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-white">
+                    <a :href="`/blog/post/${HERO_SLIDES[slide].slug}`"
+                        class="inline-block bg-[#22c75e] text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 hover:bg-emerald-500 transition">
+                        {{ HERO_SLIDES[slide].cat }}
+                    </a>
 
-                <div class="md:w-1/3 bg-[#2F4F3F] p-6 md:p-8 flex flex-col justify-center">
-                    <h2 class="text-white text-xl md:text-2xl font-semibold leading-snug">
-                        Gastos diários: como mapear, reduzir e controlar sem sofrimento
-                    </h2>
-                    <p class="mt-4 text-sm text-gray-300 leading-relaxed line-clamp-3">
-                        Manter as finanças pessoais organizadas não precisa ser complicado. Neste artigo, você vai aprender como identificar seus
-                        gastos diários, entender para onde seu dinheiro está indo e aplicar estratégias simples para reduzir desperdícios e tomar
-                        decisões financeiras mais conscientes.
+                    <h1 class="text-xl md:text-3xl font-bold leading-snug mb-3 max-w-2xl">
+                        <a :href="`/blog/post/${HERO_SLIDES[slide].slug}`" class="hover:underline">
+                            {{ HERO_SLIDES[slide].title }}
+                        </a>
+                    </h1>
+
+                    <p class="text-gray-200 text-sm leading-relaxed mb-4 max-w-xl line-clamp-2 hidden md:block">
+                        {{ HERO_SLIDES[slide].excerpt }}
                     </p>
 
-                    <div class="mt-5 flex items-center gap-4 text-xs text-gray-300">
-                        <span class="flex items-center gap-2 capitalize">
-                            <img src="https://i.pravatar.cc/40?img=12" alt="Autor" class="w-5 h-5 rounded-full object-cover" />
-                            Carlos Júnior
-                        </span>
-                        <span>23/01/2026</span>
-                        <span>7 min de leitura</span>
+                    <div class="flex items-center gap-4 text-sm text-gray-300">
+                        <img :src="HERO_SLIDES[slide].authorImg" class="w-7 h-7 rounded-full" loading="lazy" />
+                        <span>{{ HERO_SLIDES[slide].author }}</span>
+                        <span>• {{ HERO_SLIDES[slide].date }}</span>
+                        <span class="flex items-center gap-1"><Clock class="w-3.5 h-3.5" /> {{ HERO_SLIDES[slide].readTime }} min</span>
                     </div>
                 </div>
 
-                <div class="absolute bottom-4 right-4 flex gap-2">
-                    <span class="w-2 h-2 rounded-full bg-green-400"></span>
-                    <span class="w-2 h-2 rounded-full bg-white/40"></span>
-                    <span class="w-2 h-2 rounded-full bg-white/40"></span>
+                <!-- Arrows -->
+                <button @click="prevSlide"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition">
+                    <ChevronLeft class="w-5 h-5" />
+                </button>
+                <button @click="nextSlide"
+                    class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition">
+                    <ChevronRight class="w-5 h-5" />
+                </button>
+
+                <!-- Dots -->
+                <div class="absolute bottom-4 right-6 flex gap-1.5">
+                    <button v-for="(_, i) in HERO_SLIDES" :key="i" @click="slide = i"
+                        :class="i === slide ? 'bg-[#22c75e] w-5' : 'bg-white/40 w-2'"
+                        class="h-2 rounded-full transition-all duration-300" />
                 </div>
             </div>
         </section>
@@ -265,212 +323,43 @@
 
                 <!-- GRID -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
-                    <!-- Artigo 1 -->
                     <article
+                        v-for="post in visiblePosts"
+                        :key="post.slug"
                         class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full"
                     >
-                        <div class="relative h-48 overflow-hidden">
-                            <img
-                                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4"
+                        <a :href="`/blog/post/${post.slug}`" class="relative h-48 overflow-hidden block">
+                            <img :src="post.img" :alt="post.title"
                                 class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
-                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full">Tecnologia</span>
-                        </div>
+                                loading="lazy" />
+                            <span class="absolute bottom-3 left-3 bg-[#1F4D2E] text-white text-xs px-3 py-1 rounded-full">{{ post.cat }}</span>
+                        </a>
                         <div class="p-5 flex flex-col flex-1">
-                            <h3 class="text-lg font-semibold line-clamp-2">Apps de finanças: como escolher o ideal</h3>
-                            <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed mt-2">
-                                Aprenda os critérios essenciais para escolher um app financeiro eficiente.
-                            </p>
-                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
-                                <span class="text-xs">7 min</span>
-                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Artigo 2 -->
-                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
-                        <div class="relative h-48 overflow-hidden">
-                            <img
-                                src="https://images.unsplash.com/photo-1454165205744-3b78555e5572?q=80&w=1470&auto=format&fit=crop"
-                                alt="Pessoa mexendo no tablet com planilha aberta"
-                                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            />
-                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full font-medium">
-                                Orçamento
-                            </span>
-                        </div>
-                        <div class="p-5 flex flex-col flex-1">
-                            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-green-700 transition-colors">
-                                <a href="#">Como montar um orçamento que realmente funciona</a>
+                            <h3 class="text-base font-semibold text-gray-900 group-hover:text-[#22c75e] transition-colors line-clamp-2">
+                                <a :href="`/blog/post/${post.slug}`">{{ post.title }}</a>
                             </h3>
-                            <p class="text-sm text-gray-600 line-clamp-3 mt-2 leading-relaxed">
-                                Esqueça planilhas complexas e aprenda um método realista para controlar seu orçamento.
-                            </p>
-                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
-                                <span class="text-xs">6 min</span>
-                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Artigo 3 -->
-                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
-                        <div class="relative h-48 overflow-hidden">
-                            <img
-                                src="https://images.unsplash.com/photo-1554224155-6726b3ff858f"
-                                class="absolute inset-0 w-full h-full object-cover"
-                            />
-                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full"> Organização </span>
-                        </div>
-                        <div class="p-5 flex flex-col flex-1">
-                            <h3 class="text-lg font-semibold text-gray-900">Como organizar suas finanças em menos de 30 minutos</h3>
-                            <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed mt-2">
-                                Um método simples para sair da bagunça financeira e ganhar clareza sobre seu dinheiro.
-                            </p>
-                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
-                                <span class="text-xs">5 min</span>
-                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Artigo 4 -->
-                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
-                        <div class="relative h-48 overflow-hidden">
-                            <img
-                                src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1470&auto=format&fit=crop"
-                                alt="Mão segurando faturas e papel"
-                                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            />
-                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full font-medium"> Dívidas </span>
-                        </div>
-                        <div class="p-5 flex flex-col flex-1">
-                            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-green-700 transition-colors">
-                                <a href="#">Estratégias práticas para sair das dívidas</a>
-                            </h3>
-                            <p class="text-sm text-gray-600 line-clamp-3 mt-2 leading-relaxed">
-                                Técnicas simples para renegociar dívidas e retomar o controle da sua vida financeira.
-                            </p>
-                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
-                                <span class="text-xs">8 min</span>
-                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Artigo 5 -->
-                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
-                        <div class="relative h-48 overflow-hidden">
-                            <img
-                                src="https://images.unsplash.com/photo-1508385082359-f38ae991e8f2"
-                                class="absolute inset-0 w-full h-full object-cover"
-                            />
-                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full">Empreendedorismo</span>
-                        </div>
-                        <div class="p-5 flex flex-col flex-1">
-                            <h3 class="text-lg font-semibold line-clamp-2">MEI: como organizar suas finanças</h3>
-                            <p class="text-sm text-gray-600 line-clamp-3 mt-2">Dicas essenciais para manter o controle financeiro sendo MEI.</p>
-                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
-                                <span class="text-xs">6 min</span>
-                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Artigo 6 -->
-                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
-                        <div class="relative h-48 overflow-hidden">
-                            <img
-                                src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e"
-                                class="absolute inset-0 w-full h-full object-cover"
-                            />
-                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full">Educação Financeira</span>
-                        </div>
-                        <div class="p-5 flex flex-col flex-1">
-                            <h3 class="text-lg font-semibold line-clamp-2">Educação financeira para iniciantes</h3>
-                            <p class="text-sm text-gray-600 line-clamp-3 mt-2">Conceitos básicos para transformar sua vida financeira.</p>
-                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
-                                <span class="text-xs">7 min</span>
-                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Artigo 7 -->
-                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
-                        <div class="relative h-48 overflow-hidden">
-                            <img
-                                src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1470&auto=format&fit=crop"
-                                alt="Planilha financeira em tela"
-                                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            />
-                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full font-medium">Orçamento</span>
-                        </div>
-                        <div class="p-5 flex flex-col flex-1">
-                            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-green-700 transition-colors">
-                                <a href="#">Como montar um orçamento que realmente funciona</a>
-                            </h3>
-                            <p class="text-sm text-gray-600 line-clamp-3 mt-2 leading-relaxed">
-                                Esqueça planilhas complexas e aprenda um método realista para controlar seu orçamento.
-                            </p>
-                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
-                                <span class="text-xs">9 min</span>
-                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Artigo 8 -->
-                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
-                        <div class="relative h-48 overflow-hidden">
-                            <img
-                                src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df"
-                                class="absolute inset-0 w-full h-full object-cover"
-                            />
-                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full">Cartão de crédito</span>
-                        </div>
-                        <div class="p-5 flex flex-col flex-1">
-                            <h3 class="text-lg font-semibold line-clamp-1">Como usar cartão sem se endividar</h3>
-                            <p class="text-sm text-gray-600 line-clamp-2 leading-relaxed mt-2">
-                                Evite armadilhas e use seu cartão de crédito com inteligência, mantendo o controle dos gastos no dia a dia.
-                            </p>
-                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
-                                <span class="text-xs">5 min</span>
-                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Artigo 9 -->
-                    <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg flex flex-col h-full">
-                        <div class="relative h-48">
-                            <img
-                                src="https://images.unsplash.com/photo-1529078155058-5d716f45d604?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                            <span class="absolute bottom-3 left-3 bg-green-800 text-white text-xs px-3 py-1 rounded-full"> Controle Financeiro </span>
-                        </div>
-                        <div class="p-5 flex flex-col flex-1">
-                            <h3 class="text-lg font-semibold text-gray-900 line-clamp-2">Como fazer controle financeiro sem planilha complicada</h3>
-                            <p class="text-sm text-gray-600 line-clamp-2 leading-relaxed mt-2">
-                                Métodos simples e rápidos que realmente funcionam para quem odeia planilhas ou apps cheios de funcionalidades.
-                            </p>
-                            <div class="mt-auto flex justify-between pt-3 border-t border-gray-100">
-                                <span class="text-xs">6 min</span>
-                                <a href="#" class="text-xs text-green-700">Ler artigo →</a>
+                            <p class="text-sm text-gray-500 line-clamp-2 leading-relaxed mt-2">{{ post.excerpt }}</p>
+                            <div class="mt-auto flex items-center justify-between pt-3 border-t border-gray-100">
+                                <span class="flex items-center gap-1 text-xs text-gray-400"><Clock class="w-3 h-3" /> {{ post.readTime }} min</span>
+                                <a :href="`/blog/post/${post.slug}`" class="text-xs font-semibold text-[#22c75e] hover:underline">Ler artigo →</a>
                             </div>
                         </div>
                     </article>
                 </div>
 
-                <!-- BOTÃO -->
-                <div class="mt-12 flex justify-center">
-                    <button
-                        class="px-8 py-3 rounded-md border border-green-700 text-green-700 font-semibold hover:bg-green-700 hover:text-white hover:cursor-pointer transition-colors"
-                    >
-                        Carregar mais
+                <!-- CARREGAR MAIS -->
+                <div class="mt-10 flex flex-col items-center gap-3">
+                    <p class="text-xs text-gray-400">{{ visiblePosts.length }} de {{ ALL_POSTS.length }} artigos</p>
+                    <div class="w-48 h-1 bg-gray-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-[#22c75e] rounded-full transition-all duration-500"
+                             :style="`width: ${(visiblePosts.length / ALL_POSTS.length) * 100}%`" />
+                    </div>
+                    <button v-if="hasMore" @click="loadMore" :disabled="loading"
+                        class="mt-2 px-8 py-2.5 rounded-lg border border-[#22c75e] text-[#22c75e] font-semibold text-sm hover:bg-[#22c75e] hover:text-white transition-colors disabled:opacity-60 disabled:cursor-wait flex items-center gap-2">
+                        <span v-if="loading" class="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                        {{ loading ? 'Carregando...' : 'Carregar mais' }}
                     </button>
+                    <p v-else class="mt-2 text-sm text-gray-400 font-medium">Todos os artigos carregados ✓</p>
                 </div>
             </section>
         </div>
@@ -565,3 +454,8 @@
         </footer>
     </main>
 </template>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active { transition: opacity 0.5s ease; }
+.fade-enter-from,  .fade-leave-to      { opacity: 0; }
+</style>
