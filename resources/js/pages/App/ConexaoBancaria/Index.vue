@@ -15,9 +15,10 @@ const filters = [
 ]
 
 const connectedAccounts = ref([
-  { id: 1, bank: 'Nubank',      type: 'Conta Corrente', balance: 3842.50,  color: '#820AD1', abbr: 'NU', slug: 'nubank',     status: 'synced' },
-  { id: 2, bank: 'Banco Inter', type: 'Conta Corrente', balance: 12202.30, color: '#FF6B35', abbr: 'IN', slug: 'bancointer', status: 'synced' },
-  { id: 3, bank: 'Bradesco',    type: 'Poupança',       balance: 0,        color: '#CC0000', abbr: 'BR', slug: 'bradesco',   status: 'error'  },
+  { id: 1, bank: 'Nubank',      type: 'Conta Corrente', balance: 3842.50,  color: '#820AD1', abbr: 'NU', slug: 'nubank',       status: 'synced' },
+  { id: 2, bank: 'Banco Inter', type: 'Conta Corrente', balance: 12202.30, color: '#FF6B35', abbr: 'IN', slug: 'bancointer',   status: 'synced' },
+  { id: 3, bank: 'Bradesco',    type: 'Poupança',       balance: 0,        color: '#CC0000', abbr: 'BR', slug: 'bradesco',     status: 'error'  },
+  { id: 4, bank: 'Itaú',        type: 'Conta Corrente', balance: 5200.00,  color: '#F57F20', abbr: 'IT', slug: 'itauunibanco', status: 'synced' },
 ])
 
 const institutions = [
@@ -152,48 +153,48 @@ function confirmConnect() {
               <h2 class="font-semibold text-gray-800 text-base">Minhas contas</h2>
               <p class="text-xs text-gray-400 mt-1">{{ connectedAccounts.length }} contas conectadas</p>
             </div>
-            <button class="w-8 h-8 rounded-lg bg-emerald-50 hover:bg-emerald-100 flex items-center justify-center text-emerald-600 transition-colors">
+            <button class="w-9 h-9 rounded-xl bg-emerald-50 hover:bg-emerald-100 flex items-center justify-center text-emerald-600 transition-colors">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
               </svg>
             </button>
           </div>
 
-          <div class="divide-y divide-gray-100 flex-1">
+          <div class="divide-y divide-gray-100 overflow-y-auto" style="max-height: 340px; scrollbar-width: thin; scrollbar-color: #e5e7eb transparent;">
             <div
               v-for="acc in connectedAccounts"
               :key="acc.id"
-              class="flex items-center gap-4 px-6 py-5 hover:bg-gray-50/70 transition-colors"
+              class="flex items-center gap-4 px-6 py-6 hover:bg-gray-50/60 transition-colors"
             >
               <!-- bank logo -->
               <div
-                class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                :style="{ backgroundColor: acc.color + '18' }"
+                class="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0"
+                :style="{ backgroundColor: acc.color + '15' }"
               >
                 <img
                   v-if="acc.slug && !logoErrors[`acc-${acc.id}`]"
                   :src="logoUrl(acc.slug, acc.color)"
                   :alt="acc.bank"
-                  class="w-6 h-6 object-contain"
+                  class="w-7 h-7 object-contain"
                   @error="onLogoError(`acc-${acc.id}`)"
                 />
-                <span v-else class="text-xs font-bold" :style="{ color: acc.color }">{{ acc.abbr }}</span>
+                <span v-else class="text-sm font-bold" :style="{ color: acc.color }">{{ acc.abbr }}</span>
               </div>
 
               <div class="flex-1 min-w-0">
-                <div class="text-sm font-semibold text-gray-800">{{ acc.bank }}</div>
-                <div class="text-xs text-gray-400">{{ acc.type }}</div>
+                <div class="text-sm font-bold text-gray-800">{{ acc.bank }}</div>
+                <div class="text-xs text-gray-400 mt-0.5">{{ acc.type }}</div>
               </div>
               <div class="text-right shrink-0">
-                <div class="text-sm font-semibold text-gray-800">
+                <div class="text-sm font-bold text-gray-800">
                   {{ acc.status === 'error' ? '—' : fmt(acc.balance) }}
                 </div>
                 <div
-                  class="text-xs mt-0.5 flex items-center gap-1 justify-end"
-                  :class="acc.status === 'synced' ? 'text-emerald-500' : 'text-red-500'"
+                  class="text-xs mt-1 flex items-center gap-1 justify-end"
+                  :class="acc.status === 'synced' ? 'text-emerald-500' : 'text-red-400'"
                 >
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path v-if="acc.status === 'synced'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    <path v-if="acc.status === 'synced'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
                     <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                   </svg>
                   {{ acc.status === 'synced' ? 'Sincronizado' : 'Erro' }}
@@ -202,7 +203,7 @@ function confirmConnect() {
             </div>
           </div>
 
-          <div class="px-6 py-5 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+          <div class="px-6 py-5 bg-gray-50/80 border-t border-gray-200 flex items-center justify-between">
             <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Saldo Consolidado</span>
             <span class="text-base font-bold text-emerald-600">{{ fmt(totalBalance) }}</span>
           </div>
