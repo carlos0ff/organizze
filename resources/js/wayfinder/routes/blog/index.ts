@@ -1,165 +1,225 @@
-import { applyUrlDefaults, queryParams, type RouteDefinition, type RouteQueryOptions } from './../../wayfinder';
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../wayfinder'
 /**
- * @see \App\Http\Controllers\Blog\BlogController::home
- * @see app/Http/Controllers/Blog/BlogController.php:15
- * @route '/blog'
- */
+* @see \App\Http\Controllers\Blog\BlogController::home
+* @see app/Http/Controllers/Blog/BlogController.php:15
+* @route '/blog'
+*/
 export const home = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: home.url(options),
     method: 'get',
-});
+})
 
 home.definition = {
-    methods: ['get', 'head'],
+    methods: ["get","head"],
     url: '/blog',
-} satisfies RouteDefinition<['get', 'head']>;
+} satisfies RouteDefinition<["get","head"]>
 
 /**
- * @see \App\Http\Controllers\Blog\BlogController::home
- * @see app/Http/Controllers/Blog/BlogController.php:15
- * @route '/blog'
- */
+* @see \App\Http\Controllers\Blog\BlogController::home
+* @see app/Http/Controllers/Blog/BlogController.php:15
+* @route '/blog'
+*/
 home.url = (options?: RouteQueryOptions) => {
-    return home.definition.url + queryParams(options);
-};
+    return home.definition.url + queryParams(options)
+}
 
 /**
- * @see \App\Http\Controllers\Blog\BlogController::home
- * @see app/Http/Controllers/Blog/BlogController.php:15
- * @route '/blog'
- */
+* @see \App\Http\Controllers\Blog\BlogController::home
+* @see app/Http/Controllers/Blog/BlogController.php:15
+* @route '/blog'
+*/
 home.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: home.url(options),
     method: 'get',
-});
+})
 
 /**
- * @see \App\Http\Controllers\Blog\BlogController::home
- * @see app/Http/Controllers/Blog/BlogController.php:15
- * @route '/blog'
- */
+* @see \App\Http\Controllers\Blog\BlogController::home
+* @see app/Http/Controllers/Blog/BlogController.php:15
+* @route '/blog'
+*/
 home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: home.url(options),
     method: 'head',
-});
+})
 
 /**
- * @see \App\Http\Controllers\Blog\BlogController::post
- * @see app/Http/Controllers/Blog/BlogController.php:24
- * @route '/blog/post'
- */
-export const post = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: post.url(options),
+* @see \App\Http\Controllers\Blog\BlogController::articles
+* @see app/Http/Controllers/Blog/BlogController.php:23
+* @route '/blog/artigos'
+*/
+export const articles = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: articles.url(options),
     method: 'get',
-});
+})
+
+articles.definition = {
+    methods: ["get","head"],
+    url: '/blog/artigos',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\Blog\BlogController::articles
+* @see app/Http/Controllers/Blog/BlogController.php:23
+* @route '/blog/artigos'
+*/
+articles.url = (options?: RouteQueryOptions) => {
+    return articles.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Blog\BlogController::articles
+* @see app/Http/Controllers/Blog/BlogController.php:23
+* @route '/blog/artigos'
+*/
+articles.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: articles.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\Blog\BlogController::articles
+* @see app/Http/Controllers/Blog/BlogController.php:23
+* @route '/blog/artigos'
+*/
+articles.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: articles.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\Blog\BlogController::post
+* @see app/Http/Controllers/Blog/BlogController.php:31
+* @route '/blog/post/{slug?}'
+*/
+export const post = (args?: { slug?: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: post.url(args, options),
+    method: 'get',
+})
 
 post.definition = {
-    methods: ['get', 'head'],
-    url: '/blog/post',
-} satisfies RouteDefinition<['get', 'head']>;
+    methods: ["get","head"],
+    url: '/blog/post/{slug?}',
+} satisfies RouteDefinition<["get","head"]>
 
 /**
- * @see \App\Http\Controllers\Blog\BlogController::post
- * @see app/Http/Controllers/Blog/BlogController.php:24
- * @route '/blog/post'
- */
-post.url = (options?: RouteQueryOptions) => {
-    return post.definition.url + queryParams(options);
-};
+* @see \App\Http\Controllers\Blog\BlogController::post
+* @see app/Http/Controllers/Blog/BlogController.php:31
+* @route '/blog/post/{slug?}'
+*/
+post.url = (args?: { slug?: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { slug: args }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            slug: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    validateParameters(args, [
+        "slug",
+    ])
+
+    const parsedArgs = {
+        slug: args?.slug,
+    }
+
+    return post.definition.url
+            .replace('{slug?}', parsedArgs.slug?.toString() ?? '')
+            .replace(/\/+$/, '') + queryParams(options)
+}
 
 /**
- * @see \App\Http\Controllers\Blog\BlogController::post
- * @see app/Http/Controllers/Blog/BlogController.php:24
- * @route '/blog/post'
- */
-post.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: post.url(options),
+* @see \App\Http\Controllers\Blog\BlogController::post
+* @see app/Http/Controllers/Blog/BlogController.php:31
+* @route '/blog/post/{slug?}'
+*/
+post.get = (args?: { slug?: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: post.url(args, options),
     method: 'get',
-});
+})
 
 /**
- * @see \App\Http\Controllers\Blog\BlogController::post
- * @see app/Http/Controllers/Blog/BlogController.php:24
- * @route '/blog/post'
- */
-post.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: post.url(options),
+* @see \App\Http\Controllers\Blog\BlogController::post
+* @see app/Http/Controllers/Blog/BlogController.php:31
+* @route '/blog/post/{slug?}'
+*/
+post.head = (args?: { slug?: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: post.url(args, options),
     method: 'head',
-});
+})
 
 /**
- * @see \App\Http\Controllers\Blog\CategoryController::category
- * @see app/Http/Controllers/Blog/CategoryController.php:38
- * @route '/blog/categoria/{category}'
- */
-export const category = (
-    args: { category: string | number } | [category: string | number] | string | number,
-    options?: RouteQueryOptions,
-): RouteDefinition<'get'> => ({
+* @see \App\Http\Controllers\Blog\CategoryController::category
+* @see app/Http/Controllers/Blog/CategoryController.php:38
+* @route '/blog/categoria/{category}'
+*/
+export const category = (args: { category: string | number } | [category: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: category.url(args, options),
     method: 'get',
-});
+})
 
 category.definition = {
-    methods: ['get', 'head'],
+    methods: ["get","head"],
     url: '/blog/categoria/{category}',
-} satisfies RouteDefinition<['get', 'head']>;
+} satisfies RouteDefinition<["get","head"]>
 
 /**
- * @see \App\Http\Controllers\Blog\CategoryController::category
- * @see app/Http/Controllers/Blog/CategoryController.php:38
- * @route '/blog/categoria/{category}'
- */
-category.url = (args: { category: string | number } | [category: string | number] | string | number, options?: RouteQueryOptions) => {
+* @see \App\Http\Controllers\Blog\CategoryController::category
+* @see app/Http/Controllers/Blog/CategoryController.php:38
+* @route '/blog/categoria/{category}'
+*/
+category.url = (args: { category: string | number } | [category: string | number ] | string | number, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
-        args = { category: args };
+        args = { category: args }
     }
 
     if (Array.isArray(args)) {
         args = {
             category: args[0],
-        };
+        }
     }
 
-    args = applyUrlDefaults(args);
+    args = applyUrlDefaults(args)
 
     const parsedArgs = {
         category: args.category,
-    };
+    }
 
-    return category.definition.url.replace('{category}', parsedArgs.category.toString()).replace(/\/+$/, '') + queryParams(options);
-};
+    return category.definition.url
+            .replace('{category}', parsedArgs.category.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
 
 /**
- * @see \App\Http\Controllers\Blog\CategoryController::category
- * @see app/Http/Controllers/Blog/CategoryController.php:38
- * @route '/blog/categoria/{category}'
- */
-category.get = (
-    args: { category: string | number } | [category: string | number] | string | number,
-    options?: RouteQueryOptions,
-): RouteDefinition<'get'> => ({
+* @see \App\Http\Controllers\Blog\CategoryController::category
+* @see app/Http/Controllers/Blog/CategoryController.php:38
+* @route '/blog/categoria/{category}'
+*/
+category.get = (args: { category: string | number } | [category: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: category.url(args, options),
     method: 'get',
-});
+})
 
 /**
- * @see \App\Http\Controllers\Blog\CategoryController::category
- * @see app/Http/Controllers/Blog/CategoryController.php:38
- * @route '/blog/categoria/{category}'
- */
-category.head = (
-    args: { category: string | number } | [category: string | number] | string | number,
-    options?: RouteQueryOptions,
-): RouteDefinition<'head'> => ({
+* @see \App\Http\Controllers\Blog\CategoryController::category
+* @see app/Http/Controllers/Blog/CategoryController.php:38
+* @route '/blog/categoria/{category}'
+*/
+category.head = (args: { category: string | number } | [category: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: category.url(args, options),
     method: 'head',
-});
+})
 
 const blog = {
     home: Object.assign(home, home),
+    articles: Object.assign(articles, articles),
     post: Object.assign(post, post),
     category: Object.assign(category, category),
-};
+}
 
-export default blog;
+export default blog

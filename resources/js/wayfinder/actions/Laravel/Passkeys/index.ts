@@ -1,7 +1,7 @@
 import Http from './Http'
 
-const Sanctum = {
+const Passkeys = {
     Http: Object.assign(Http, Http),
 }
 
-export default Sanctum
+export default Passkeys
