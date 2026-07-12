@@ -144,7 +144,7 @@ function confirmConnect() {
       </div>
 
       <!-- ── Two columns ──────────────────────────────────────────────────── -->
-      <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
 
         <!-- Minhas contas -->
         <div class="lg:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
@@ -160,7 +160,7 @@ function confirmConnect() {
             </button>
           </div>
 
-          <div class="divide-y divide-gray-100 flex-1">
+          <div class="divide-y divide-gray-100">
             <div
               v-for="acc in connectedAccounts"
               :key="acc.id"
