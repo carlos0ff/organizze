@@ -1,227 +1,245 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import Navbar from '@/Components/layout/Navbar.vue';
 import {
-    ChevronDown, Check, X, Shield, RefreshCcw, Lock,
-    CreditCard, Star, Users, BarChart2, Link2, Target,
-    Zap, ArrowRight, BadgeCheck, Headphones,
+    Crown, User, Building2, Check, X,
+    CalendarCheck, CreditCard, Plus, Download,
+    MoreVertical,
 } from 'lucide-vue-next';
 
-const annual = ref(true);
+// --- Plano atual ---
+const currentPlan = {
+    name:    'Premium',
+    price:   'R$ 29,90/mês',
+    renewal: '15/11/2025',
+    card:    '•••• 4532',
+};
 
+// --- Planos disponíveis ---
 const plans = [
     {
-        id: 'manual', name: 'Plano Manual',
-        desc: 'Para quem gosta de acompanhar cada detalhe e lançar manualmente seus lançamentos.',
-        monthly: 19.90, annualTotal: 199.90,
-        trial: '7 dias de teste grátis', popular: false, current: true,
-        features: ['Lançamentos manuais ilimitados', 'Até 2 contas bancárias', 'Relatórios básicos', 'Categorias personalizadas', 'Orçamento mensal'],
+        id: 'gratuito', name: 'Gratuito', price: 'R$ 0', unit: 'por mês',
+        icon: User, iconBg: 'bg-gray-100', iconColor: 'text-gray-600',
+        priceColor: 'text-gray-900', popular: false, active: false,
+        features: [
+            { label: 'Até 100 transações/mês', ok: true  },
+            { label: '3 contas bancárias',       ok: true  },
+            { label: 'Relatórios básicos',        ok: true  },
+            { label: 'Conexão bancária',          ok: false },
+            { label: 'Metas financeiras',         ok: false },
+        ],
+        btnLabel: 'Plano Atual', btnClass: 'border border-gray-300 text-gray-700 hover:bg-gray-50',
     },
     {
-        id: 'conectado', name: 'Plano Conectado',
-        desc: 'Ideal para quem quer agilidade ao organizar suas finanças e tem poucas contas e cartões.',
-        monthly: 39.90, annualTotal: 399.90,
-        trial: null, popular: true, current: false,
-        features: ['Tudo do Plano Manual', 'Conexão bancária automática', 'Até 3 contas e cartões', 'Relatórios completos', 'Metas financeiras ilimitadas'],
+        id: 'premium', name: 'Premium', price: 'R$ 29,90', unit: 'por mês',
+        icon: Crown, iconBg: 'bg-emerald-100', iconColor: 'text-emerald-500',
+        priceColor: 'text-emerald-500', popular: true, active: true,
+        features: [
+            { label: 'Transações ilimitadas', ok: true },
+            { label: 'Contas ilimitadas',      ok: true },
+            { label: 'Relatórios avançados',   ok: true },
+            { label: 'Conexão bancária',       ok: true },
+            { label: 'Metas financeiras',      ok: true },
+            { label: 'Suporte prioritário',    ok: true },
+        ],
+        btnLabel: 'Plano Ativo', btnClass: 'bg-emerald-500 text-white hover:bg-emerald-600',
     },
     {
-        id: 'plus', name: 'Plano Conectado Plus',
-        desc: 'Feito para quem precisa gerenciar mais de 3 contas e cartões de forma automática.',
-        monthly: 59.90, annualTotal: 599.90,
-        trial: null, popular: false, current: false,
-        features: ['Tudo do Plano Conectado', 'Contas e cartões ilimitados', 'Múltiplos usuários (até 5)', 'Suporte dedicado', 'Exportação em Excel'],
+        id: 'business', name: 'Business', price: 'R$ 79,90', unit: 'por mês',
+        icon: Building2, iconBg: 'bg-purple-100', iconColor: 'text-purple-600',
+        priceColor: 'text-purple-600', popular: false, active: false,
+        features: [
+            { label: 'Tudo do Premium',             ok: true },
+            { label: 'Múltiplos usuários',           ok: true },
+            { label: 'API de integração',            ok: true },
+            { label: 'Relatórios personalizados',    ok: true },
+            { label: 'Suporte 24/7',                 ok: true },
+        ],
+        btnLabel: 'Fazer Upgrade', btnClass: 'bg-purple-600 text-white hover:bg-purple-700',
     },
 ];
 
-// Tabela comparativa
-const compareRows = [
-    { label: 'Lançamentos',          manual: 'Ilimitados',  conectado: 'Ilimitados',     plus: 'Ilimitados'       },
-    { label: 'Contas bancárias',     manual: 'Até 2',       conectado: 'Até 3',          plus: 'Ilimitadas'       },
-    { label: 'Conexão automática',   manual: false,         conectado: true,             plus: true               },
-    { label: 'Relatórios',           manual: 'Básico',      conectado: 'Completo',       plus: 'Completo'         },
-    { label: 'Metas financeiras',    manual: 'Até 3',       conectado: 'Ilimitadas',     plus: 'Ilimitadas'       },
-    { label: 'Exportação',           manual: false,         conectado: 'PDF e CSV',      plus: 'PDF, CSV, Excel'  },
-    { label: 'Múltiplos usuários',   manual: false,         conectado: false,            plus: 'Até 5 usuários'   },
-    { label: 'Suporte',              manual: 'E-mail',      conectado: 'Prioritário',    plus: 'Dedicado'         },
-    { label: 'Categorias custom',    manual: true,          conectado: true,             plus: true               },
-    { label: 'App mobile',           manual: true,          conectado: true,             plus: true               },
-    { label: 'Criptografia',         manual: true,          conectado: true,             plus: true               },
-];
-
-const testimonials = [
-    { name: 'Ana Clara',  role: 'Designer Freelancer', avatar: 'https://i.pravatar.cc/100?img=47', rating: 5, text: 'Finalmente consegui entender para onde meu dinheiro vai. O Organizze mudou minha relação com as finanças!' },
-    { name: 'Ricardo S.', role: 'Analista de TI',      avatar: 'https://i.pravatar.cc/100?img=12', rating: 5, text: 'A conexão bancária automática economiza muito tempo. Vale cada centavo do plano Conectado.' },
-    { name: 'Juliana M.', role: 'Empreendedora',       avatar: 'https://i.pravatar.cc/100?img=32', rating: 5, text: 'Uso com meu marido no plano Plus. Conseguimos organizar as finanças da família e do negócio juntos.' },
-];
-
-const faqs = [
-    { q: 'Posso cancelar a qualquer momento?',         a: 'Sim, sem multa ou fidelidade. Você mantém o acesso até o fim do período pago.' },
-    { q: 'O plano anual tem desconto?',                a: 'Sim, 15% de desconto em relação ao valor mensal. Pode ser pago à vista ou em 12x.' },
-    { q: 'Quais formas de pagamento são aceitas?',     a: 'Cartão de crédito (Visa, Mastercard, Elo, Amex), PIX e boleto bancário.' },
-    { q: 'Posso mudar de plano depois?',               a: 'Sim. Upgrade ou downgrade a qualquer momento, com ajuste proporcional de cobrança.' },
-    { q: 'Meus dados ficam seguros?',                  a: 'Todos os dados são criptografados com TLS e armazenados em servidores ISO 27001.' },
-    { q: 'O que é a conexão bancária automática?',     a: 'Integração com o Open Finance do Banco Central para importar transações automaticamente, sem precisar lançar manualmente.' },
-];
-
-const openFaq = ref(null);
-const openFeatures = ref({});
-function toggleFaq(i) { openFaq.value = openFaq.value === i ? null : i; }
-function toggleFeatures(id) { openFeatures.value[id] = !openFeatures.value[id]; }
-function fmtBRL(v) { return v.toLocaleString('pt-BR', { minimumFractionDigits: 2 }); }
-
-// Status do plano atual (mock)
-const usageStats = [
-    { label: 'Lançamentos',   used: 38, limit: '∞',    pct: 0   },
-    { label: 'Contas',        used: 1,  limit: '2',     pct: 50  },
-    { label: 'Metas',         used: 2,  limit: '3',     pct: 66  },
+// --- Histórico ---
+const history = [
+    { date: '15/10/2025', desc: 'Plano Premium - Outubro',  status: 'Pago', value: 'R$ 29,90' },
+    { date: '15/09/2025', desc: 'Plano Premium - Setembro', status: 'Pago', value: 'R$ 29,90' },
+    { date: '15/08/2025', desc: 'Plano Premium - Agosto',   status: 'Pago', value: 'R$ 29,90' },
+    { date: '15/07/2025', desc: 'Plano Premium - Julho',    status: 'Pago', value: 'R$ 29,90' },
 ];
 </script>
 
 <template>
     <Navbar />
 
-    <div class="min-h-screen bg-[#e8f5eb] pt-16">
-        <main class="max-w-5xl mx-auto px-4 py-12">
+    <div class="min-h-screen bg-gray-50 pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-            <!-- Ícone cluster -->
-            <div class="flex justify-center mb-6">
-                <img src="https://app.organizze.com.br/assets/application/plans/plans-logo-68d50f218f2b9c8df42afb0c0749fb4d1c0819157fec46657eb0fd59a8386e97.png"
-                    alt="Planos" class="h-20 w-auto" />
-            </div>
-
-            <!-- Título -->
-            <h1 class="text-2xl font-bold text-gray-900 text-center mb-8 leading-snug max-w-lg mx-auto">
-                Confira nossos planos e escolha a melhor forma<br>de cuidar do seu dinheiro.
-            </h1>
-
-            <!-- Toggle Anual -->
-            <div class="flex items-center justify-center gap-3 mb-10">
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" v-model="annual" class="sr-only peer" />
-                    <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-emerald-500 transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5"></div>
-                </label>
-                <span class="text-sm font-semibold text-gray-700">Anual</span>
-                <span v-if="annual" class="text-xs font-bold bg-emerald-500 text-white px-2 py-0.5 rounded-full">Economize 15%</span>
-            </div>
-
-            <!-- Cards de planos -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start mb-16">
-                <div v-for="plan in plans" :key="plan.id"
-                    class="relative bg-white rounded-2xl p-6 flex flex-col transition-shadow"
-                    :class="plan.popular ? 'border-2 border-emerald-500 shadow-lg' : 'border border-gray-200 shadow-sm'">
-
-                    <div v-if="plan.current" class="absolute -top-9 left-0">
-                        <div class="relative bg-gray-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg">
-                            Seu plano atual
-                            <span class="absolute -bottom-1.5 left-4 w-3 h-3 bg-gray-700 rotate-45 rounded-sm"></span>
+            <!-- Page Header -->
+            <div class="mb-8">
+                <div class="bg-white rounded-2xl shadow-sm p-8 border border-gray-100">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900 mb-2">Assinatura</h1>
+                            <p class="text-gray-600">Gerencie seu plano e faturamento</p>
                         </div>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-emerald-100 text-emerald-700">
+                            Plano Premium
+                        </span>
                     </div>
-                    <div v-if="plan.popular" class="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                        <span class="bg-orange-400 text-white text-[11px] font-bold px-3 py-1 rounded-full whitespace-nowrap">Mais popular</span>
-                    </div>
-
-                    <h2 class="text-lg font-bold text-gray-900 mb-2">{{ plan.name }}</h2>
-                    <p class="text-sm text-gray-500 leading-relaxed mb-4">{{ plan.desc }}</p>
-
-                    <button @click="toggleFeatures(plan.id)"
-                        class="flex items-center gap-1 text-sm font-semibold text-emerald-600 hover:text-emerald-700 mb-4 transition-colors">
-                        Ver recursos
-                        <ChevronDown class="w-4 h-4 transition-transform duration-200" :class="openFeatures[plan.id] ? 'rotate-180' : ''" />
-                    </button>
-                    <div v-if="openFeatures[plan.id]" class="mb-4 space-y-2">
-                        <div v-for="feat in plan.features" :key="feat" class="flex items-start gap-2">
-                            <Check class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                            <span class="text-xs text-gray-600">{{ feat }}</span>
-                        </div>
-                    </div>
-
-                    <div class="mb-1">
-                        <p class="text-xs text-gray-500 font-medium">12x de</p>
-                        <div class="flex items-end gap-1">
-                            <span class="text-3xl font-extrabold text-gray-900">R$ {{ fmtBRL(plan.monthly) }}</span>
-                            <span class="text-sm text-gray-400 mb-1">/mês</span>
-                        </div>
-                    </div>
-                    <div v-if="annual" class="flex items-center gap-2 mb-1">
-                        <span class="text-xs text-gray-400">ou R${{ fmtBRL(plan.annualTotal) }} à vista</span>
-                        <span class="text-[10px] font-bold border border-gray-400 text-gray-500 px-1.5 py-0.5 rounded-full">15% OFF</span>
-                    </div>
-                    <p class="text-xs mb-5" :class="plan.trial ? 'text-gray-500' : 'text-gray-300'">
-                        {{ plan.trial ?? 'sem teste grátis' }}
-                    </p>
-
-                    <button class="w-full py-3 rounded-xl text-sm font-bold transition-colors mt-auto"
-                        :class="plan.popular ? 'bg-emerald-500 text-white hover:bg-emerald-600' : 'border border-emerald-500 text-emerald-600 hover:bg-emerald-50'">
-                        {{ plan.current ? 'Plano atual' : 'Escolher este plano' }}
-                    </button>
                 </div>
             </div>
 
-            <!-- Status do plano atual -->
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-10">
-                <div class="flex items-start justify-between mb-5">
-                    <div>
-                        <div class="flex items-center gap-2 mb-1">
-                            <BadgeCheck class="w-5 h-5 text-emerald-500" />
-                            <h2 class="text-base font-bold text-gray-800">Seu plano atual: Manual</h2>
-                        </div>
-                        <p class="text-xs text-gray-400">Renovação em <span class="font-semibold text-gray-600">10/12/2025</span></p>
-                    </div>
-                    <a href="#" class="flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-lg transition-colors">
-                        Ver fatura <ArrowRight class="w-3.5 h-3.5" />
-                    </a>
+            <!-- Plano Atual -->
+            <div class="bg-white rounded-2xl shadow-sm p-8 border border-gray-100 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900">Plano Atual</h3>
+                    <button class="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors font-medium text-sm">
+                        Alterar Plano
+                    </button>
                 </div>
-                <div class="grid grid-cols-3 gap-4">
-                    <div v-for="stat in usageStats" :key="stat.label">
-                        <div class="flex items-center justify-between text-xs mb-1.5">
-                            <span class="text-gray-500">{{ stat.label }}</span>
-                            <span class="font-semibold text-gray-700">{{ stat.used }} / {{ stat.limit }}</span>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Nome + Preço -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <Crown class="w-8 h-8 text-emerald-500" />
                         </div>
-                        <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                            <div class="h-full rounded-full transition-all duration-700"
-                                :class="stat.pct >= 80 ? 'bg-amber-400' : 'bg-emerald-500'"
-                                :style="`width: ${stat.pct || 10}%`">
+                        <h4 class="font-semibold text-gray-900">{{ currentPlan.name }}</h4>
+                        <p class="text-2xl font-bold text-emerald-500">{{ currentPlan.price }}</p>
+                    </div>
+
+                    <!-- Próximo pagamento -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <CalendarCheck class="w-8 h-8 text-emerald-600" />
+                        </div>
+                        <h4 class="font-semibold text-gray-900">Próximo Pagamento</h4>
+                        <p class="text-lg font-medium text-gray-900">{{ currentPlan.renewal }}</p>
+                    </div>
+
+                    <!-- Método de pagamento -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <CreditCard class="w-8 h-8 text-blue-600" />
+                        </div>
+                        <h4 class="font-semibold text-gray-900">Método de Pagamento</h4>
+                        <p class="text-lg font-medium text-gray-900">{{ currentPlan.card }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Planos Disponíveis -->
+            <div class="mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-6">Planos Disponíveis</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div v-for="plan in plans" :key="plan.id"
+                        class="bg-white rounded-2xl shadow-sm p-6 relative"
+                        :class="plan.popular ? 'border-2 border-emerald-500' : 'border border-gray-100'">
+
+                        <!-- Badge popular -->
+                        <div v-if="plan.popular" class="absolute -top-3 left-1/2 -translate-x-1/2">
+                            <span class="bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap">
+                                Mais Popular
+                            </span>
+                        </div>
+
+                        <!-- Ícone + título + preço -->
+                        <div class="text-center mb-6">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3"
+                                :class="plan.iconBg">
+                                <component :is="plan.icon" class="w-8 h-8" :class="plan.iconColor" />
                             </div>
+                            <h4 class="text-xl font-semibold text-gray-900">{{ plan.name }}</h4>
+                            <p class="text-3xl font-bold mt-2" :class="plan.priceColor">{{ plan.price }}</p>
+                            <p class="text-gray-500 text-sm">{{ plan.unit }}</p>
                         </div>
+
+                        <!-- Features -->
+                        <ul class="space-y-3 mb-6">
+                            <li v-for="feat in plan.features" :key="feat.label" class="flex items-center gap-3">
+                                <Check v-if="feat.ok" class="w-4 h-4 text-emerald-500 shrink-0" />
+                                <X v-else class="w-4 h-4 text-gray-300 shrink-0" />
+                                <span class="text-sm" :class="feat.ok ? 'text-gray-600' : 'text-gray-400'">
+                                    {{ feat.label }}
+                                </span>
+                            </li>
+                        </ul>
+
+                        <button class="w-full px-4 py-2.5 rounded-lg font-medium text-sm transition-colors"
+                            :class="plan.btnClass">
+                            {{ plan.btnLabel }}
+                        </button>
                     </div>
-                </div>
-                <div class="mt-5 pt-4 border-t border-gray-100 flex items-center gap-3">
-                    <Zap class="w-4 h-4 text-amber-500 shrink-0" />
-                    <p class="text-xs text-gray-500">Você está usando 2 de 3 metas disponíveis. Faça <span class="font-semibold text-emerald-600">upgrade para o Plano Conectado</span> e tenha metas ilimitadas.</p>
                 </div>
             </div>
 
-            <!-- Tabela comparativa -->
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-10">
-                <div class="px-6 py-5 border-b border-gray-100">
-                    <h2 class="text-base font-bold text-gray-800">Comparativo completo de recursos</h2>
-                    <p class="text-xs text-gray-400 mt-0.5">Veja todos os detalhes antes de escolher seu plano</p>
+            <!-- Método de Pagamento -->
+            <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900">Método de Pagamento</h3>
+                    <button class="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium text-sm">
+                        <Plus class="w-4 h-4" /> Adicionar Cartão
+                    </button>
                 </div>
+
+                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-xl">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-8 bg-blue-600 rounded flex items-center justify-center shrink-0">
+                            <CreditCard class="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-900">•••• •••• •••• 4532</p>
+                            <p class="text-sm text-gray-500">Expira em 12/2027</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">
+                            Principal
+                        </span>
+                        <button class="text-gray-400 hover:text-gray-600 transition-colors">
+                            <MoreVertical class="w-5 h-5" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Histórico de Faturamento -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100">
+                <div class="p-6 border-b border-gray-100">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-gray-900">Histórico de Faturamento</h3>
+                        <button class="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium text-sm">
+                            <Download class="w-4 h-4" /> Baixar Todas
+                        </button>
+                    </div>
+                </div>
+
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead>
                             <tr class="bg-gray-50">
-                                <th class="text-left text-xs font-semibold text-gray-400 uppercase tracking-wide px-6 py-3 w-1/2">Recurso</th>
-                                <th v-for="plan in plans" :key="plan.id"
-                                    class="text-center text-xs font-bold px-4 py-3 w-[16%]"
-                                    :class="plan.id === 'conectado' ? 'text-emerald-600' : 'text-gray-600'">
-                                    {{ plan.name.replace('Plano ', '') }}
-                                </th>
+                                <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-6 py-3">Data</th>
+                                <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-6 py-3">Descrição</th>
+                                <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-6 py-3">Status</th>
+                                <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-6 py-3">Valor</th>
+                                <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-6 py-3">Ações</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-50">
-                            <tr v-for="row in compareRows" :key="row.label" class="hover:bg-gray-50/60 transition-colors">
-                                <td class="px-6 py-3 text-sm text-gray-700">{{ row.label }}</td>
-                                <td v-for="plan in plans" :key="plan.id" class="text-center px-4 py-3">
-                                    <template v-if="row[plan.id] === true">
-                                        <Check class="w-4 h-4 text-emerald-500 mx-auto" />
-                                    </template>
-                                    <template v-else-if="row[plan.id] === false">
-                                        <X class="w-4 h-4 text-gray-200 mx-auto" />
-                                    </template>
-                                    <template v-else>
-                                        <span class="text-xs text-gray-600 font-medium">{{ row[plan.id] }}</span>
-                                    </template>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr v-for="row in history" :key="row.date" class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 text-sm text-gray-600">{{ row.date }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900 font-medium">{{ row.desc }}</td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">
+                                        {{ row.status }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm font-semibold text-gray-900">{{ row.value }}</td>
+                                <td class="px-6 py-4">
+                                    <button class="p-1.5 text-gray-400 hover:text-emerald-500 transition-colors rounded-lg hover:bg-emerald-50">
+                                        <Download class="w-4 h-4" />
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -229,78 +247,6 @@ const usageStats = [
                 </div>
             </div>
 
-            <!-- Garantias -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-                <div v-for="g in [
-                    { icon: RefreshCcw, title: 'Cancele quando quiser',  desc: 'Sem multa ou fidelidade',       color: 'text-emerald-500', bg: 'bg-emerald-50' },
-                    { icon: Shield,     title: 'Dados protegidos',        desc: 'Criptografia TLS em tudo',      color: 'text-blue-500',    bg: 'bg-blue-50'    },
-                    { icon: Lock,       title: 'Pagamento seguro',        desc: 'PCI DSS · PIX · Boleto',        color: 'text-purple-500',  bg: 'bg-purple-50'  },
-                    { icon: Headphones, title: 'Suporte humano',          desc: 'Equipe brasileira disponível',  color: 'text-amber-500',   bg: 'bg-amber-50'   },
-                ]" :key="g.title"
-                    class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 text-center">
-                    <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3" :class="[g.bg, g.color]">
-                        <component :is="g.icon" class="w-5 h-5" />
-                    </div>
-                    <p class="text-sm font-bold text-gray-800 mb-0.5">{{ g.title }}</p>
-                    <p class="text-xs text-gray-400">{{ g.desc }}</p>
-                </div>
-            </div>
-
-            <!-- Depoimentos -->
-            <div class="mb-10">
-                <h2 class="text-lg font-bold text-gray-800 text-center mb-6">O que dizem nossos usuários</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div v-for="t in testimonials" :key="t.name"
-                        class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-                        <div class="flex items-center gap-0.5 mb-3">
-                            <Star v-for="i in t.rating" :key="i" class="w-4 h-4 text-amber-400 fill-amber-400" />
-                        </div>
-                        <p class="text-sm text-gray-600 leading-relaxed mb-4">"{{ t.text }}"</p>
-                        <div class="flex items-center gap-3">
-                            <img :src="t.avatar" :alt="t.name" class="w-9 h-9 rounded-full object-cover" />
-                            <div>
-                                <p class="text-sm font-semibold text-gray-800">{{ t.name }}</p>
-                                <p class="text-xs text-gray-400">{{ t.role }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ -->
-            <div class="mb-10">
-                <h2 class="text-lg font-bold text-gray-800 text-center mb-6">Perguntas frequentes</h2>
-                <div class="space-y-2 max-w-2xl mx-auto">
-                    <div v-for="(faq, i) in faqs" :key="i"
-                        class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                        <button @click="toggleFaq(i)"
-                            class="w-full flex items-center justify-between px-5 py-4 text-left">
-                            <span class="text-sm font-semibold text-gray-800">{{ faq.q }}</span>
-                            <ChevronDown class="w-4 h-4 text-gray-400 shrink-0 transition-transform duration-200"
-                                :class="openFaq === i ? 'rotate-180' : ''" />
-                        </button>
-                        <div v-if="openFaq === i" class="px-5 pb-4">
-                            <p class="text-sm text-gray-500 leading-relaxed">{{ faq.a }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CTA final -->
-            <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl p-8 text-center text-white">
-                <h2 class="text-xl font-extrabold mb-2">Pronto para organizar suas finanças?</h2>
-                <p class="text-emerald-100 text-sm mb-6">Mais de 500 mil pessoas já usam o Organizze para cuidar do dinheiro.</p>
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-                    <a href="/app" class="px-6 py-2.5 bg-white text-emerald-600 font-semibold text-sm rounded-xl hover:bg-emerald-50 transition-colors">
-                        Continuar no Gratuito
-                    </a>
-                    <button class="px-6 py-2.5 bg-emerald-700 text-white font-semibold text-sm rounded-xl hover:bg-emerald-800 transition-colors">
-                        Assinar Conectado — R$ {{ annual ? fmtBRL(33.25) : fmtBRL(39.90) }}/mês
-                    </button>
-                </div>
-                <p class="text-emerald-200 text-xs mt-4">Sem cartão de crédito necessário · Cancele quando quiser</p>
-            </div>
-
-        </main>
+        </div>
     </div>
 </template>
