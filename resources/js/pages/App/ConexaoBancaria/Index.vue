@@ -160,7 +160,7 @@ function confirmConnect() {
             </button>
           </div>
 
-          <div class="divide-y divide-gray-100 overflow-y-auto" style="max-height: 340px; scrollbar-width: thin; scrollbar-color: #e5e7eb transparent;">
+          <div class="divide-y divide-gray-100">
             <div
               v-for="acc in connectedAccounts"
               :key="acc.id"
