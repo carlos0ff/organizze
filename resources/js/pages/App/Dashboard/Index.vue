@@ -97,7 +97,7 @@ const displayCards = [
 const isLimitReached = computed(() => cards.value.length >= MAX_CARDS);
 
 // Próximas contas
-const MAX_BILLS = 4;
+const MAX_BILLS = 6;
 const upcomingBills = ref([
     { id: 1, name: 'Aluguel',          category: 'Casa',        dueDate: '10/11', daysLeft: 2,  amount: 1200.00, icon: Home,          iconBg: 'bg-blue-50',    iconText: 'text-blue-500',    paid: false },
     { id: 2, name: 'Internet',         category: 'Serviços',    dueDate: '12/11', daysLeft: 4,  amount: 99.90,  icon: Wifi,          iconBg: 'bg-purple-50',  iconText: 'text-purple-500',  paid: false },
