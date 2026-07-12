@@ -241,7 +241,7 @@ function confirmConnect() {
             </div>
           </div>
 
-          <div class="p-4 overflow-y-auto" style="max-height: 316px; scrollbar-width: thin; scrollbar-color: #e5e7eb transparent;">
+          <div class="p-4 flex-1 overflow-y-auto" style="scrollbar-width: thin; scrollbar-color: #e5e7eb transparent;">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-1">
               <button
                 v-for="inst in filteredInstitutions"
