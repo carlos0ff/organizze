@@ -211,7 +211,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
 
                                 <!-- Links -->
                                 <div class="p-1.5">
-                                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                                    <a href="/app/perfil" class="flex items-center gap-2.5 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
                                         <User class="w-4 h-4 text-gray-400" />
                                         Meu Perfil
                                     </a>
