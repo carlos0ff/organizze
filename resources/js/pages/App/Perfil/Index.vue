@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import Navbar from '@/Components/layout/Navbar.vue';
+import Footer from '@/Components/layout/Footer.vue';
 import {
     User, Settings, Shield, Bell, Link2, Download,
     Camera, Trash2, Save, AlertTriangle, Eye, EyeOff,
@@ -423,4 +424,5 @@ const confirmDelete = ref(false);
             </div>
         </div>
     </div>
+    <Footer />
 </template>

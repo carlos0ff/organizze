@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import Navbar from '@/Components/layout/Navbar.vue';
+import Footer from '@/Components/layout/Footer.vue';
 import {
     ChevronDown, Check, X,
     RefreshCcw, Shield, Lock, Headphones,
@@ -383,4 +384,5 @@ function toggleFaq(i) { openFaq.value = openFaq.value === i ? null : i; }
 
         </main>
     </div>
+    <Footer />
 </template>

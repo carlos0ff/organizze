@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import Navbar from '@/Components/layout/Navbar.vue';
+import Footer from '@/Components/layout/Footer.vue';
 import {
     ChevronLeft, ChevronRight, Download, TrendingUp, TrendingDown,
     ArrowUpCircle, ArrowDownCircle, BarChart2, Calendar, Scale,
@@ -216,5 +217,6 @@ function barH(v) { return Math.round((v / maxVal.value) * 120); }
                 </table>
             </div>
         </div>
+        <Footer />
     </main>
 </template>

@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import Navbar from '@/Components/layout/Navbar.vue';
+import Footer from '@/Components/layout/Footer.vue';
 import {
     ChevronLeft, ChevronRight, TrendingUp, TrendingDown,
     ArrowUpCircle, ArrowDownCircle, Download, BarChart2,
@@ -453,5 +454,6 @@ const hoverX = ref(0), hoverY = ref(0);
             </div>
         </div>
 
+        <Footer />
     </main>
 </template>

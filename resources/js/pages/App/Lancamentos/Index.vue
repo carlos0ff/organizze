@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import Navbar from '@/Components/layout/Navbar.vue';
+import Footer from '@/Components/layout/Footer.vue';
 import {
     ChevronLeft, ChevronRight, Plus, Search, Filter,
     ArrowUpCircle, ArrowDownCircle, ArrowRightLeft,
@@ -267,6 +268,7 @@ function removeTransaction(id) {
                 </div>
             </div>
         </div>
+        <Footer />
     </main>
 
     <!-- Modal nova transação -->

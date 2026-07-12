@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import Navbar from '@/Components/layout/Navbar.vue';
+import Footer from '@/Components/layout/Footer.vue';
 import {
     ChevronLeft, ChevronRight, Download, TrendingUp, TrendingDown,
     ArrowUpCircle, ArrowDownCircle, BarChart2, Calendar, Scale,
@@ -240,5 +241,6 @@ function hPct(v) { return (v / maxH.value * 100).toFixed(1); }
                 </div>
             </div>
         </div>
+        <Footer />
     </main>
 </template>

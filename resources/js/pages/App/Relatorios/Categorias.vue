@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import Navbar from '@/Components/layout/Navbar.vue';
+import Footer from '@/Components/layout/Footer.vue';
 import {
     ChevronLeft, ChevronRight, Download, TrendingUp, TrendingDown,
     BarChart2, Calendar, Scale, Layers,
@@ -245,5 +246,6 @@ const segments = computed(() => {
             </div>
         </div>
 
+        <Footer />
     </main>
 </template>

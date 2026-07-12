@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import Navbar from '@/Components/layout/Navbar.vue';
+import Footer from '@/Components/layout/Footer.vue';
 import {
     Plus, X, Check, Pencil, Trash2, ChevronLeft, ChevronRight,
     Home, Car, Utensils, TvMinimalPlay, GraduationCap,
@@ -213,6 +214,7 @@ function removeBudget(id) { budgets.value = budgets.value.filter(b => b.id !== i
                 </div>
             </div>
         </div>
+        <Footer />
     </main>
 
     <!-- Modal -->
