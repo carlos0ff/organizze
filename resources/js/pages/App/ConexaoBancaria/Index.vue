@@ -144,7 +144,7 @@ function confirmConnect() {
       </div>
 
       <!-- ── Two columns ──────────────────────────────────────────────────── -->
-      <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
 
         <!-- Minhas contas -->
         <div class="lg:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
@@ -160,7 +160,7 @@ function confirmConnect() {
             </button>
           </div>
 
-          <div class="divide-y divide-gray-100">
+          <div class="divide-y divide-gray-100 flex-1">
             <div
               v-for="acc in connectedAccounts"
               :key="acc.id"
@@ -241,7 +241,7 @@ function confirmConnect() {
             </div>
           </div>
 
-          <div class="p-4 flex-1">
+          <div class="p-4 overflow-y-auto" style="max-height: 316px; scrollbar-width: thin; scrollbar-color: #e5e7eb transparent;">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-1">
               <button
                 v-for="inst in filteredInstitutions"
