@@ -160,7 +160,7 @@ function confirmConnect() {
             </button>
           </div>
 
-          <div class="divide-y divide-gray-100">
+          <div class="divide-y divide-gray-100 flex-1">
             <div
               v-for="acc in connectedAccounts"
               :key="acc.id"
