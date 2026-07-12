@@ -160,11 +160,12 @@ function confirmConnect() {
             </button>
           </div>
 
-          <div class="divide-y divide-gray-100 flex-1">
+          <div class="flex-1 flex flex-col">
             <div
-              v-for="acc in connectedAccounts"
+              v-for="(acc, i) in connectedAccounts"
               :key="acc.id"
-              class="flex items-center gap-4 px-6 py-6 hover:bg-gray-50/60 transition-colors"
+              class="flex-1 flex items-center gap-4 px-6 hover:bg-gray-50/60 transition-colors"
+              :class="i < connectedAccounts.length - 1 ? 'border-b border-gray-100' : ''"
             >
               <!-- bank logo -->
               <div
