@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         Model::shouldBeStrict(! app()->isProduction());
 
         // Bloqueia operações destrutivas fora de produção
-        DB::prohibitDestructiveCommands(! app()->isProduction());
+        DB::prohibitDestructiveCommands(app()->isProduction());
 
         // Otimizações do Vite
         Vite::useAggressivePrefetching();

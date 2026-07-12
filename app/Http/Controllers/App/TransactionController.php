@@ -13,7 +13,7 @@ class TransactionController extends Controller
      */
     public function index() : \Inertia\Response
     {
-        return inertia('App/Transactions/Index');
+        return inertia('App/Lancamentos/Index');
     }
 
     /**

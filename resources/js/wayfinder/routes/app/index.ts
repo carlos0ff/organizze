@@ -1,4 +1,5 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../wayfinder'
+import relatorios from './relatorios'
 /**
 * @see \App\Http\Controllers\App\DashboardController::dashboard
 * @see app/Http/Controllers/App/DashboardController.php:13
@@ -307,11 +308,192 @@ cards.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     method: 'head',
 })
 
+/**
+* @see \App\Http\Controllers\App\SubscriptionController::assinatura
+* @see app/Http/Controllers/App/SubscriptionController.php:9
+* @route '/app/assinatura'
+*/
+export const assinatura = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: assinatura.url(options),
+    method: 'get',
+})
+
+assinatura.definition = {
+    methods: ["get","head"],
+    url: '/app/assinatura',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\SubscriptionController::assinatura
+* @see app/Http/Controllers/App/SubscriptionController.php:9
+* @route '/app/assinatura'
+*/
+assinatura.url = (options?: RouteQueryOptions) => {
+    return assinatura.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\SubscriptionController::assinatura
+* @see app/Http/Controllers/App/SubscriptionController.php:9
+* @route '/app/assinatura'
+*/
+assinatura.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: assinatura.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\SubscriptionController::assinatura
+* @see app/Http/Controllers/App/SubscriptionController.php:9
+* @route '/app/assinatura'
+*/
+assinatura.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: assinatura.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\TransactionController::lancamentos
+* @see app/Http/Controllers/App/TransactionController.php:14
+* @route '/app/lancamentos'
+*/
+export const lancamentos = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: lancamentos.url(options),
+    method: 'get',
+})
+
+lancamentos.definition = {
+    methods: ["get","head"],
+    url: '/app/lancamentos',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\TransactionController::lancamentos
+* @see app/Http/Controllers/App/TransactionController.php:14
+* @route '/app/lancamentos'
+*/
+lancamentos.url = (options?: RouteQueryOptions) => {
+    return lancamentos.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\TransactionController::lancamentos
+* @see app/Http/Controllers/App/TransactionController.php:14
+* @route '/app/lancamentos'
+*/
+lancamentos.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: lancamentos.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\TransactionController::lancamentos
+* @see app/Http/Controllers/App/TransactionController.php:14
+* @route '/app/lancamentos'
+*/
+lancamentos.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: lancamentos.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\BudgetController::limites
+* @see app/Http/Controllers/App/BudgetController.php:9
+* @route '/app/limites'
+*/
+export const limites = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: limites.url(options),
+    method: 'get',
+})
+
+limites.definition = {
+    methods: ["get","head"],
+    url: '/app/limites',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\BudgetController::limites
+* @see app/Http/Controllers/App/BudgetController.php:9
+* @route '/app/limites'
+*/
+limites.url = (options?: RouteQueryOptions) => {
+    return limites.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\BudgetController::limites
+* @see app/Http/Controllers/App/BudgetController.php:9
+* @route '/app/limites'
+*/
+limites.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: limites.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\BudgetController::limites
+* @see app/Http/Controllers/App/BudgetController.php:9
+* @route '/app/limites'
+*/
+limites.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: limites.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\BankConnectionController::conexaoBancaria
+* @see app/Http/Controllers/App/BankConnectionController.php:9
+* @route '/app/conexao-bancaria'
+*/
+export const conexaoBancaria = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: conexaoBancaria.url(options),
+    method: 'get',
+})
+
+conexaoBancaria.definition = {
+    methods: ["get","head"],
+    url: '/app/conexao-bancaria',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\BankConnectionController::conexaoBancaria
+* @see app/Http/Controllers/App/BankConnectionController.php:9
+* @route '/app/conexao-bancaria'
+*/
+conexaoBancaria.url = (options?: RouteQueryOptions) => {
+    return conexaoBancaria.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\BankConnectionController::conexaoBancaria
+* @see app/Http/Controllers/App/BankConnectionController.php:9
+* @route '/app/conexao-bancaria'
+*/
+conexaoBancaria.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: conexaoBancaria.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\BankConnectionController::conexaoBancaria
+* @see app/Http/Controllers/App/BankConnectionController.php:9
+* @route '/app/conexao-bancaria'
+*/
+conexaoBancaria.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: conexaoBancaria.url(options),
+    method: 'head',
+})
+
 const app = {
     dashboard: Object.assign(dashboard, dashboard),
     settings: Object.assign(settings, settings),
     conta: Object.assign(conta, conta),
     cards: Object.assign(cards, cards),
+    assinatura: Object.assign(assinatura, assinatura),
+    lancamentos: Object.assign(lancamentos, lancamentos),
+    limites: Object.assign(limites, limites),
+    conexaoBancaria: Object.assign(conexaoBancaria, conexaoBancaria),
+    relatorios: Object.assign(relatorios, relatorios),
 }
 
 export default app
