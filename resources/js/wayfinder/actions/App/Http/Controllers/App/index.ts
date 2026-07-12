@@ -5,6 +5,7 @@ import SubscriptionController from './SubscriptionController'
 import TransactionController from './TransactionController'
 import BudgetController from './BudgetController'
 import BankConnectionController from './BankConnectionController'
+import ProfileController from './ProfileController'
 import ReportController from './ReportController'
 
 const App = {
@@ -15,6 +16,7 @@ const App = {
     TransactionController: Object.assign(TransactionController, TransactionController),
     BudgetController: Object.assign(BudgetController, BudgetController),
     BankConnectionController: Object.assign(BankConnectionController, BankConnectionController),
+    ProfileController: Object.assign(ProfileController, ProfileController),
     ReportController: Object.assign(ReportController, ReportController),
 }
 

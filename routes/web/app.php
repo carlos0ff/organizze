@@ -16,6 +16,7 @@ use App\Http\Controllers\App\SubscriptionController;
 use App\Http\Controllers\App\TransactionController;
 use App\Http\Controllers\App\BudgetController;
 use App\Http\Controllers\App\BankConnectionController;
+use App\Http\Controllers\App\ProfileController;
 
 
 /**
@@ -46,6 +47,9 @@ Route::prefix("app")->group(function () {
 
     /** Conexão Bancária **/
     Route::get('/conexao-bancaria', [BankConnectionController::class, 'index'])->name('app.conexao-bancaria');
+
+    /** Perfil **/
+    Route::get('/perfil', [ProfileController::class, 'index'])->name('app.perfil');
 
     /** Relatórios **/
     Route::prefix('relatorios')->group(function () {

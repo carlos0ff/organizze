@@ -484,6 +484,50 @@ conexaoBancaria.head = (options?: RouteQueryOptions): RouteDefinition<'head'> =>
     method: 'head',
 })
 
+/**
+* @see \App\Http\Controllers\App\ProfileController::perfil
+* @see app/Http/Controllers/App/ProfileController.php:11
+* @route '/app/perfil'
+*/
+export const perfil = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: perfil.url(options),
+    method: 'get',
+})
+
+perfil.definition = {
+    methods: ["get","head"],
+    url: '/app/perfil',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\ProfileController::perfil
+* @see app/Http/Controllers/App/ProfileController.php:11
+* @route '/app/perfil'
+*/
+perfil.url = (options?: RouteQueryOptions) => {
+    return perfil.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\ProfileController::perfil
+* @see app/Http/Controllers/App/ProfileController.php:11
+* @route '/app/perfil'
+*/
+perfil.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: perfil.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\ProfileController::perfil
+* @see app/Http/Controllers/App/ProfileController.php:11
+* @route '/app/perfil'
+*/
+perfil.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: perfil.url(options),
+    method: 'head',
+})
+
 const app = {
     dashboard: Object.assign(dashboard, dashboard),
     settings: Object.assign(settings, settings),
@@ -493,6 +537,7 @@ const app = {
     lancamentos: Object.assign(lancamentos, lancamentos),
     limites: Object.assign(limites, limites),
     conexaoBancaria: Object.assign(conexaoBancaria, conexaoBancaria),
+    perfil: Object.assign(perfil, perfil),
     relatorios: Object.assign(relatorios, relatorios),
 }
 
