@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import {
-    Github, Linkedin, Youtube, Twitter,
     ChevronDown, ChevronRight, X, Ellipsis,
     EyeOff, Download, Plus, Minus, LogOut, Settings,
     CalendarRange, Sun, Sunset, Moon,
@@ -11,7 +10,12 @@ import {
     CirclePlus, Scale, Layers, User, Gem, Bell, Star, HelpCircle,
     AlertTriangle, AlertCircle, Info, CheckCircle2, BarChart2,
     Wifi, Zap, CreditCard, Check,
+    Repeat, FileText, Paperclip, Tag,
 } from 'lucide-vue-next';
+
+import Footer from '@/Components/layout/Footer.vue';
+import Navbar from '@/Components/navigation/Navbar.vue';
+import Billing from '@/Components/billing/TrialBanner.vue';
 
 // Saudação dinâmica baseada no horário
 const hour = new Date().getHours();
@@ -67,10 +71,98 @@ const contas = ref([
 const fmtMoney = (value) =>
     value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-// Modal
+// Modal cartões
 const isModalOpen = ref(false);
-const openModal = (tipo) => { /* futura implementação por tipo */ };
-const goToCardsPage = () => { window.location.href = '/app/cards'; };
+const goToCardsPage = () => { window.location.href = '/app/cartao-credito'; };
+
+const todayISO = new Date().toISOString().split('T')[0];
+
+const contasOptions = [
+    'Nubank – Conta Corrente',
+    'Itaú – Conta Corrente',
+    'Carteira – Dinheiro',
+    'Cartão Itaú •••• 4321',
+    'Cartão Santander •••• 9876',
+    'Cartão Nubank •••• 1122',
+];
+
+const categoriasOptions = [
+    'Alimentação', 'Transporte', 'Casa', 'Saúde',
+    'Lazer', 'Educação', 'Assinaturas', 'Vestuário',
+    'Compras', 'Presentes', 'Outros',
+];
+
+const repeticaoOpcoes = [
+    { val: 'diario',   label: 'Diário'   },
+    { val: 'semanal',  label: 'Semanal'  },
+    { val: 'mensal',   label: 'Mensal'   },
+    { val: 'anual',    label: 'Anual'    },
+];
+
+const emptyTxForm = () => ({
+    descricao: '', valor: '', data: todayISO, conta: '', categoria: '',
+    observacao: '', repeticao: '', arquivo: null, tagInput: '', tags: [],
+});
+const emptyExtras = () => ({ repetir: false, obs: false, anexo: false, tags: false });
+
+function addTag(form) {
+    const val = form.tagInput.trim().replace(/,/g, '');
+    if (val && !form.tags.includes(val)) form.tags.push(val);
+    form.tagInput = '';
+}
+function removeTag(form, tag) { form.tags = form.tags.filter(t => t !== tag); }
+function onTagKeydown(e, form) {
+    if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); addTag(form); }
+}
+
+// Modal Nova Despesa
+const showDespesaModal = ref(false);
+const despesaForm = ref(emptyTxForm());
+const despesaActiveExtras = ref(emptyExtras());
+function openDespesaModal() {
+    despesaForm.value = emptyTxForm();
+    despesaActiveExtras.value = emptyExtras();
+    showDespesaModal.value = true;
+}
+function closeDespesaModal() { showDespesaModal.value = false; }
+
+// Modal Nova Receita
+const showReceitaModal = ref(false);
+const receitaForm = ref(emptyTxForm());
+const receitaActiveExtras = ref(emptyExtras());
+function openReceitaModal() {
+    receitaForm.value = emptyTxForm();
+    receitaActiveExtras.value = emptyExtras();
+    showReceitaModal.value = true;
+}
+function closeReceitaModal() { showReceitaModal.value = false; }
+
+// Modal Transferência
+const showTransferenciaModal = ref(false);
+const transferenciaForm = ref({ descricao: '', valor: '', data: todayISO, contaOrigem: '', contaDestino: '', observacao: '', repeticao: '', arquivo: null, tagInput: '', tags: [] });
+const transferenciaActiveExtras = ref(emptyExtras());
+function openTransferenciaModal() {
+    transferenciaForm.value = { descricao: '', valor: '', data: todayISO, contaOrigem: '', contaDestino: '', observacao: '', repeticao: '', arquivo: null, tagInput: '', tags: [] };
+    transferenciaActiveExtras.value = emptyExtras();
+    showTransferenciaModal.value = true;
+}
+function closeTransferenciaModal() { showTransferenciaModal.value = false; }
+
+// Modal Importar
+const showImportModal = ref(false);
+const importFile = ref(null);
+const importDragOver = ref(false);
+function openImportModal() { importFile.value = null; showImportModal.value = true; }
+function closeImportModal() { showImportModal.value = false; }
+function handleImportFile(e) { importFile.value = e.target.files[0] ?? null; }
+function handleImportDrop(e) { importDragOver.value = false; importFile.value = e.dataTransfer.files[0] ?? null; }
+
+function openModal(tipo) {
+    if (tipo === 'despesa')  openDespesaModal();
+    if (tipo === 'receita')  openReceitaModal();
+    if (tipo === 'transfer') openTransferenciaModal();
+    if (tipo === 'import')   openImportModal();
+}
 
 // Lista de cartões
 const cards = ref([
@@ -83,9 +175,18 @@ const cards = ref([
 const MAX_CARDS = 4;
 
 const displayCards = [
-    { bank: 'Itaú',      number: '4321', limit: 5000, value: 1240, status: 'Aberta',  dueDate: '10 Nov',
-      cardClass: 'from-orange-400 to-orange-600', shadow: 'shadow-orange-100', bandeira: 'mastercard',
-      logoUrl: 'https://img.logo.dev/itau.com.br?token=live_6a1a28fd-6420-4492-aeb0-b297461d9de2&size=128&retina=true&format=png' },
+    {
+        bank: 'Itaú',
+        number: '4321',
+        limit: 5000,
+        value: 1240,
+        status: 'Aberta',
+        dueDate: '10 Nov',
+        cardClass: 'from-orange-400 to-orange-600',
+        shadow: 'shadow-orange-100',
+        bandeira: 'mastercard',
+        logoUrl: 'https://img.logo.dev/itau.com.br?token=live_6a1a28fd-6420-4492-aeb0-b297461d9de2&size=128&retina=true&format=png'
+    },
     { bank: 'Santander', number: '9876', limit: 3000, value:  860, status: 'Fechada', dueDate: '15 Nov',
       cardClass: 'from-red-500 to-red-700',       shadow: 'shadow-red-100',   bandeira: 'visa',
       logoUrl: 'https://assets.abstra.cloud/connectors/logos/santander.png',
@@ -122,12 +223,6 @@ function billUrgencyLabel(days) {
     return `${days} dias`;
 }
 
-// Trial bar
-const trialDays  = ref(7);
-const trialTotal = 30;
-const trialPct   = computed(() => Math.round(((trialTotal - trialDays.value) / trialTotal) * 100));
-const trialBarDismissed = ref(false);
-
 // Dropdown de perfil
 const profileOpen = ref(false);
 const profileRef  = ref(null);
@@ -159,308 +254,11 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 </script>
 
 <template>
-    <nav class="bg-[#22c75e] shadow-lg fixed top-0 left-0 w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
+    <-- -->
+    <Navbar />
 
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <div class="shrink-0 flex items-center">
-                        <img
-                            style="filter: brightness(0) invert(1)"
-                            src="https://auth.organizze.com.br/images/auth/logo-909f6075bb5972376e589ed01866ee33.svg?vsn=d"
-                            alt="Organizze"
-                            class="logo h-8 w-auto"
-                        />
-                    </div>
-                </div>
-
-                <!-- Nav links -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="/app"
-                        class="relative text-white font-medium text-sm after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
-                        Visão Geral
-                    </a>
-                    <a href="/app/lancamentos"
-                        class="relative text-white font-medium text-sm after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
-                        Lançamentos
-                    </a>
-
-                    <!-- Dropdown Relatórios -->
-                    <div class="relative group">
-                        <a href="/app/relatorios/mensal"
-                            class="flex items-center gap-1 text-white font-medium text-sm relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
-                            Relatórios
-                            <ChevronDown class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" />
-                        </a>
-
-                        <div class="absolute left-0 top-full mt-3 w-72 rounded-xl bg-white shadow-xl border border-gray-100 opacity-0 invisible translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-50">
-                            <div class="p-1.5">
-                                <a href="/app/relatorios/mensal"
-                                    class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors">
-                                    <span class="w-8 h-8 flex items-center justify-center rounded-lg bg-indigo-50 text-indigo-500 shrink-0">
-                                        <CalendarRange class="w-4 h-4" />
-                                    </span>
-                                    <div>
-                                        <p class="text-sm font-medium text-gray-800">Mensal</p>
-                                        <p class="text-xs text-gray-400">Resumo do mês atual</p>
-                                    </div>
-                                </a>
-                                <a href="/app/relatorios/anual"
-                                    class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors">
-                                    <span class="w-8 h-8 flex items-center justify-center rounded-lg bg-blue-50 text-blue-500 shrink-0">
-                                        <BarChart2 class="w-4 h-4" />
-                                    </span>
-                                    <div>
-                                        <p class="text-sm font-medium text-gray-800">Anual</p>
-                                        <p class="text-xs text-gray-400">Evolução nos últimos 12 meses</p>
-                                    </div>
-                                </a>
-                                <a href="/app/relatorios/categorias"
-                                    class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors">
-                                    <span class="w-8 h-8 flex items-center justify-center rounded-lg bg-purple-50 text-purple-500 shrink-0">
-                                        <Layers class="w-4 h-4" />
-                                    </span>
-                                    <div>
-                                        <p class="text-sm font-medium text-gray-800">Por Categoria</p>
-                                        <p class="text-xs text-gray-400">Gastos detalhados por categoria</p>
-                                    </div>
-                                </a>
-                                <a href="/app/relatorios/receitas-despesas"
-                                    class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors">
-                                    <span class="w-8 h-8 flex items-center justify-center rounded-lg bg-emerald-50 text-emerald-500 shrink-0">
-                                        <Scale class="w-4 h-4" />
-                                    </span>
-                                    <div>
-                                        <p class="text-sm font-medium text-gray-800">Receitas vs Despesas</p>
-                                        <p class="text-xs text-gray-400">Comparativo de entradas e saídas</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="/app/limites"
-                        class="relative text-white font-medium text-sm after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
-                        Limite de Gastos
-                    </a>
-                    <a href="/app/conexao-bancaria"
-                        class="relative text-white font-medium text-sm after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
-                        Conexão Bancária
-                    </a>
-                </div>
-
-                <div class="flex items-center space-x-2">
-                    <!-- Notificações -->
-                    <div class="relative" ref="notifRef">
-                        <button
-                            @click.stop="notifOpen = !notifOpen"
-                            :aria-expanded="notifOpen"
-                            aria-haspopup="true"
-                            class="relative p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
-                        >
-                            <Bell class="w-5 h-5" />
-                            <Transition
-                                enter-active-class="transition duration-150 ease-out"
-                                enter-from-class="opacity-0 scale-50"
-                                enter-to-class="opacity-100 scale-100"
-                                leave-active-class="transition duration-100 ease-in"
-                                leave-from-class="opacity-100 scale-100"
-                                leave-to-class="opacity-0 scale-50"
-                            >
-                                <span v-if="unreadCount > 0" class="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
-                                    {{ unreadCount }}
-                                </span>
-                            </Transition>
-                        </button>
-
-                        <Transition
-                            enter-active-class="transition duration-150 ease-out"
-                            enter-from-class="opacity-0 scale-95 -translate-y-1"
-                            enter-to-class="opacity-100 scale-100 translate-y-0"
-                            leave-active-class="transition duration-100 ease-in"
-                            leave-from-class="opacity-100 scale-100 translate-y-0"
-                            leave-to-class="opacity-0 scale-95 -translate-y-1"
-                        >
-                            <div
-                                v-if="notifOpen"
-                                class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-100 origin-top-right z-50"
-                            >
-                                <!-- Cabeçalho -->
-                                <div class="px-4 pt-3 pb-2.5 border-b border-gray-100">
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-sm font-semibold text-gray-900">Notificações</span>
-                                        <button
-                                            v-if="unreadCount > 0"
-                                            @click="markAllRead"
-                                            class="text-xs font-medium text-[#22c75e] hover:text-green-700 whitespace-nowrap transition-colors"
-                                        >
-                                            Marcar lidas
-                                        </button>
-                                    </div>
-                                    <span v-if="unreadCount > 0" class="mt-1 inline-flex text-[11px] font-semibold bg-red-100 text-red-600 px-1.5 py-0.5 rounded-full">
-                                        {{ unreadCount }} novas
-                                    </span>
-                                </div>
-
-                                <!-- Lista -->
-                                <div class="divide-y divide-gray-50 max-h-72 overflow-y-auto">
-                                    <button
-                                        v-for="n in notifications"
-                                        :key="n.id"
-                                        @click="n.read = true"
-                                        class="w-full flex items-start gap-3 px-4 py-3 text-left transition-colors"
-                                        :class="n.read ? 'hover:bg-gray-50' : 'bg-green-50/40 hover:bg-green-50'"
-                                    >
-                                        <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
-                                            :class="{
-                                                'bg-amber-100 text-amber-500': n.type === 'warning',
-                                                'bg-red-100 text-red-500':    n.type === 'danger',
-                                                'bg-blue-100 text-blue-500':  n.type === 'info',
-                                                'bg-green-100 text-green-500':n.type === 'success',
-                                            }"
-                                        >
-                                            <AlertTriangle  v-if="n.type === 'warning'" class="w-4 h-4" />
-                                            <AlertCircle    v-else-if="n.type === 'danger'"  class="w-4 h-4" />
-                                            <Info           v-else-if="n.type === 'info'"    class="w-4 h-4" />
-                                            <CheckCircle2   v-else                            class="w-4 h-4" />
-                                        </span>
-                                        <div class="min-w-0 flex-1">
-                                            <p class="text-sm font-medium text-gray-900 truncate">{{ n.title }}</p>
-                                            <p class="text-xs text-gray-500 mt-0.5 leading-snug">{{ n.body }}</p>
-                                            <p class="text-[11px] text-gray-400 mt-1">{{ n.time }}</p>
-                                        </div>
-                                        <span v-if="!n.read" class="mt-1.5 h-2 w-2 rounded-full bg-[#22c75e] shrink-0"></span>
-                                    </button>
-                                </div>
-
-                                <!-- Rodapé -->
-                                <a
-                                    href="/notificacoes"
-                                    class="block text-center text-sm font-medium text-gray-600 hover:text-gray-900 px-4 py-3 border-t border-gray-100 hover:bg-gray-50 rounded-b-xl transition-colors"
-                                >
-                                    Ver todas as notificações →
-                                </a>
-                            </div>
-                        </Transition>
-                    </div>
-
-                    <div class="relative" ref="profileRef">
-                        <button
-                            @click.stop="profileOpen = !profileOpen"
-                            :aria-expanded="profileOpen"
-                            aria-haspopup="true"
-                            class="flex items-center gap-2.5 rounded-xl px-2 py-1.5 hover:bg-white/10 transition-colors"
-                        >
-                            <div class="relative">
-                                <img src="https://i.pravatar.cc/100?img=12" class="h-9 w-9 rounded-full object-cover ring-2 ring-white/30" />
-                                <span class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-[#22c75e]"></span>
-                            </div>
-                            <div class="hidden lg:flex flex-col items-start leading-tight">
-                                <span class="text-sm text-white font-medium">Thiago Santos</span>
-                                <span class="text-[10px] text-white/70">Plano Gratuito</span>
-                            </div>
-                            <ChevronDown
-                                class="w-4 h-4 text-white/70 transition-transform duration-200"
-                                :class="{ 'rotate-180': profileOpen }"
-                            />
-                        </button>
-
-                        <Transition
-                            enter-active-class="transition duration-150 ease-out"
-                            enter-from-class="opacity-0 scale-95 -translate-y-1"
-                            enter-to-class="opacity-100 scale-100 translate-y-0"
-                            leave-active-class="transition duration-100 ease-in"
-                            leave-from-class="opacity-100 scale-100 translate-y-0"
-                            leave-to-class="opacity-0 scale-95 -translate-y-1"
-                        >
-                            <div
-                                v-if="profileOpen"
-                                class="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-100 origin-top-right z-50"
-                            >
-                                <!-- Cabeçalho -->
-                                <div class="p-3 border-b border-gray-100">
-                                    <div class="flex items-center gap-3">
-                                        <img src="https://i.pravatar.cc/100?img=12" class="h-10 w-10 rounded-full object-cover shrink-0" />
-                                        <div class="min-w-0">
-                                            <p class="text-sm font-semibold text-gray-900 truncate">Thiago Santos</p>
-                                            <p class="text-xs text-gray-500 truncate">thiago@exemplo.com</p>
-                                        </div>
-                                    </div>
-                                    <div class="mt-2.5 flex items-center gap-1.5 bg-amber-50 border border-amber-100 rounded-lg px-2.5 py-1.5">
-                                        <Gem class="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                                        <span class="text-xs font-medium text-amber-700">Plano Gratuito</span>
-                                        <a href="/app/assinatura" class="ml-auto text-xs font-semibold text-amber-600 hover:text-amber-800 whitespace-nowrap">
-                                            Fazer upgrade →
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <!-- Links -->
-                                <div class="p-1.5">
-                                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
-                                        <User class="w-4 h-4 text-gray-400" /> Meu Perfil
-                                    </a>
-                                    <a href="/configuracoes" class="flex items-center gap-2.5 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
-                                        <Settings class="w-4 h-4 text-gray-400" /> Configurações
-                                    </a>
-                                    <a href="/help" class="flex items-center gap-2.5 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
-                                        <HelpCircle class="w-4 h-4 text-gray-400" /> Ajuda & Suporte
-                                    </a>
-                                </div>
-
-                                <!-- Sair -->
-                                <div class="p-1.5 border-t border-gray-100">
-                                    <button class="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors">
-                                        <LogOut class="w-4 h-4" /> Sair da conta
-                                    </button>
-                                </div>
-                            </div>
-                        </Transition>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- ── Trial bar ── -->
-    <div v-if="!trialBarDismissed"
-        class="fixed top-16 left-0 w-full z-40 bg-amber-50 border-b border-amber-200/80 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-11 flex items-center justify-between gap-4">
-
-            <!-- Plano -->
-            <div class="flex items-center gap-2 shrink-0">
-                <span class="text-sm font-bold text-amber-900">Teste grátis</span>
-                <span class="hidden sm:inline text-[11px] font-semibold text-amber-700 bg-amber-100 border border-amber-200 px-2 py-0.5 rounded-full">
-                    Plano manual
-                </span>
-            </div>
-
-            <!-- Progresso + dias -->
-            <div class="flex items-center gap-3 flex-1 max-w-sm">
-                <span class="text-xs text-amber-700 whitespace-nowrap font-medium">
-                    {{ trialDays }} dias restantes
-                </span>
-                <div class="flex-1 h-1.5 bg-amber-200 rounded-full overflow-hidden">
-                    <div class="h-full bg-amber-500 rounded-full transition-all duration-500"
-                        :style="`width: ${trialPct}%`" />
-                </div>
-                <span class="text-[11px] text-amber-500 font-medium hidden md:inline">{{ trialPct }}%</span>
-            </div>
-
-            <!-- CTA + fechar -->
-            <div class="flex items-center gap-2 shrink-0">
-                <a href="/app/planos"
-                    class="text-xs font-bold text-white bg-amber-500 hover:bg-amber-600 px-4 py-1.5 rounded-lg transition-colors shadow-sm shadow-amber-200 whitespace-nowrap">
-                    Ver planos
-                </a>
-                <button @click="trialBarDismissed = true"
-                    class="text-amber-400 hover:text-amber-600 transition-colors p-0.5">
-                    <X class="w-4 h-4" />
-                </button>
-            </div>
-        </div>
-    </div>
+    <-- -->
+    <Billing />
 
     <!-- Content -->
     <main class="max-w-7xl mx-auto px-4 pb-12"
@@ -577,7 +375,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
             </div>
         </div>
 
-        <!-- CARD DE TUTORIAL -->
+        <!-- TUTORIAL -->
         <div class="bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-gray-50 p-6 mb-4">
             <div class="flex items-center justify-between mb-6">
                 <div class="flex items-center gap-4">
@@ -619,14 +417,9 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
                 <!-- Lista de contas -->
                 <div class="flex-1 overflow-hidden">
                     <div class="space-y-2">
-                        <div
-                            v-for="conta in contas"
-                            :key="conta.nome"
-                            class="flex justify-between items-center px-3 py-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100"
-                        >
+                        <div v-for="conta in contas" :key="conta.nome" class="flex justify-between items-center px-3 py-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-all group border border-transparent hover:border-gray-100" >
                             <div class="flex items-center gap-3.5">
-                                <div :class="conta.logo ? 'bg-white border border-gray-200 shadow-sm' : conta.cor"
-                                    class="w-11 h-11 rounded-xl flex items-center justify-center text-white text-sm font-black overflow-hidden shrink-0">
+                                <div :class="conta.logo ? 'bg-white border border-gray-200 shadow-sm' : conta.cor" class="w-11 h-11 rounded-xl flex items-center justify-center text-white text-sm font-black overflow-hidden shrink-0">
                                     <img v-if="conta.logo" :src="conta.logo" :alt="conta.nome" class="w-full h-full object-cover" />
                                     <span v-else>{{ conta.inicial }}</span>
                                 </div>
@@ -739,14 +532,8 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
                     <!-- LISTA -->
                     <div class="flex-1 space-y-1.5 self-center">
-                        <div
-                            v-for="cat in spendingCategories"
-                            :key="cat.label"
-                            class="flex items-center gap-3 px-3 py-1.5 rounded-xl transition-colors border"
-                            :class="cat.highlight
-                                ? 'bg-purple-50/80 border-purple-100'
-                                : 'hover:bg-gray-50 border-transparent hover:border-gray-100'"
-                        >
+                        <div v-for="cat in spendingCategories" :key="cat.label" class="flex items-center gap-3 px-3 py-1.5 rounded-xl transition-colors border"
+                            :class="cat.highlight ? 'bg-purple-50/80 border-purple-100' : 'hover:bg-gray-50 border-transparent hover:border-gray-100'" >
                             <div class="w-8 h-8 shrink-0 flex items-center justify-center rounded-xl"
                                 :class="[cat.iconBg, cat.iconText, cat.highlight ? 'shadow-sm shadow-purple-200' : '']">
                                 <component :is="cat.icon" class="w-4 h-4" />
@@ -784,71 +571,87 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
             <!-- SEÇÃO: CARTÃO DE CRÉDITO -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col h-full min-h-[720px]">
-                <div class="flex justify-between items-start mb-6">
+                <div class="flex justify-between items-center mb-6">
                     <div>
-                        <h2 class="text-base font-bold text-gray-800">Meus Cartões</h2>
-                        <p class="text-xs text-gray-400 mt-0.5">{{ cards.length }} cartões cadastrados</p>
+                        <h2 class="text-lg font-bold text-gray-800">Meus Cartões</h2>
+                        <p class="text-xs text-gray-500">Exibindo os últimos 3 cartões</p>
                     </div>
-                    <button
-                        @click="isModalOpen = true"
-                        class="text-xs font-semibold text-emerald-600 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-lg hover:bg-emerald-100 transition-colors"
-                    >
-                        Ver todos
+                    <button @click="isModalOpen = true" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 bg-emerald-50 px-3 py-1.5 rounded-lg transition-all">
+                        Ver Todos
                     </button>
                 </div>
 
-                <div class="flex-1 flex flex-col gap-3">
-                    <div
-                        v-for="c in displayCards"
-                        :key="c.bank"
-                        class="relative overflow-hidden p-5 rounded-2xl text-white shadow-lg transition-all duration-300 hover:scale-[1.01] hover:shadow-xl bg-gradient-to-br"
-                        :class="[c.cardClass, c.shadow]"
-                    >
-                        <!-- Círculos decorativos -->
-                        <div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/10 pointer-events-none"></div>
-                        <div class="absolute right-6 top-14 w-16 h-16 rounded-full bg-white/5 pointer-events-none"></div>
-
-                        <!-- Topo: banco + bandeira -->
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center shrink-0">
-                                    <img :src="c.logoUrl" :alt="c.bank" class="w-6 h-6 object-contain" style="filter: brightness(0) invert(1);" />
-                                </div>
-                                <div>
-                                    <p class="text-[10px] uppercase tracking-widest font-bold opacity-80 leading-tight">{{ c.bank }}</p>
-                                    <p class="text-sm font-mono tracking-[0.15em] opacity-90">•••• {{ c.number }}</p>
-                                </div>
+                <!-- Lista de Cartões (Espaçada para alinhar com 6 metas) -->
+                <div class="flex-1 flex flex-col justify-start space-y-6">
+                    <!-- Cartão 1 -->
+                    <div class="relative overflow-hidden p-6 rounded-md bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-lg shadow-orange-100 group transition-transform hover:scale-[1.01]">
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Banco Inter</p>
+                                <p class="text-sm font-medium tracking-[0.2em]">•••• 4321</p>
                             </div>
-                            <!-- Bandeira de pagamento -->
                             <img
-                                v-if="c.bandeira === 'mastercard'"
-                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='28' viewBox='0 0 46 28'%3E%3Ccircle cx='15' cy='14' r='13' fill='%23EB001B'/%3E%3Ccircle cx='31' cy='14' r='13' fill='%23F79E1B'/%3E%3C/svg%3E"
+                                src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg"
                                 alt="Mastercard"
-                                class="h-7 shrink-0"
+                                class="h-6 opacity-90"
                             />
-                            <img v-else :src="c.bandeiraUrl" :alt="c.bank" class="h-5 opacity-80 brightness-0 invert shrink-0" />
                         </div>
-
-                        <!-- Rodapé: fatura + status -->
                         <div class="flex justify-between items-end">
                             <div>
-                                <p class="text-[9px] uppercase tracking-wide opacity-60 font-semibold mb-0.5">Fatura atual</p>
-                                <p class="text-xl font-extrabold leading-tight">{{ fmtMoney(c.value) }}</p>
-                                <p class="text-[10px] opacity-60 mt-1">Vence {{ c.dueDate }}</p>
+                                <p class="text-[10px] opacity-70 mb-1 font-semibold uppercase">Fatura Atual</p>
+                                <p class="text-xl font-extrabold">R$ 1.240,00</p>
                             </div>
-                            <span class="text-[10px] font-semibold px-2.5 py-1 rounded-full border"
-                                :class="c.status === 'Aberta'
-                                    ? 'bg-white/20 border-white/30'
-                                    : 'bg-black/20 border-white/10 opacity-80'">
-                                {{ c.status }}
-                            </span>
+                            <span class="text-[10px] font-bold bg-white/20 backdrop-blur-md px-3 py-1 rounded-2xl border border-white/30">Aberta</span >
+                        </div>
+                    </div>
+
+                    <!-- Cartão 2 -->
+                    <div class="relative overflow-hidden p-6 rounded-md bg-gradient-to-br from-red-500 to-red-700 text-white shadow-lg shadow-red-100 group transition-transform hover:scale-[1.01]" >
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Santander</p>
+                                <p class="text-sm font-medium tracking-[0.2em]">•••• 9876</p>
+                            </div>
+                            <img
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Visa_Inc._logo_%282005%E2%80%932014%29.svg/960px-Visa_Inc._logo_%282005%E2%80%932014%29.svg.png"
+                                class="h-4 opacity-90 brightness-0 invert" alt="Visa"
+                            />
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <p class="text-[10px] opacity-70 mb-1 font-semibold uppercase">Fatura Atual</p>
+                                <p class="text-xl font-extrabold">R$ 860,00</p>
+                            </div>
+                            <span class="text-[10px] font-bold bg-black/20 backdrop-blur-md px-3 py-1 roudend-2xl border border-white/10">Fechada</span>
+                        </div>
+                    </div>
+
+                    <!-- Cartão 3 -->
+                    <div class="relative overflow-hidden p-6 rounded-md bg-gradient-to-br from-purple-600 to-indigo-800 text-white shadow-lg shadow-purple-100 group transition-transform hover:scale-[1.01]">
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Nubank</p>
+                                <p class="text-sm font-medium tracking-[0.2em]">•••• 1122</p>
+                            </div>
+                            <img
+                                src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg"
+                                alt="Mastercard"
+                                class="h-6 opacity-90"
+                            />
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <p class="text-[10px] opacity-70 mb-1 font-semibold uppercase">Fatura Atual</p>
+                                <p class="text-xl font-extrabold">R$ 2.150,00</p>
+                            </div>
+                            <span class="text-[10px] font-bold bg-white/20 backdrop-blur-md px-3 py-1 rounded-2xl border border-white/30">Aberta</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-4 pt-4 border-t border-gray-100">
-                    <button class="w-full flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors">
-                        <Plus class="w-3.5 h-3.5" /> Adicionar cartão
+                <div class="mt-8 pt-4 border-t border-gray-50">
+                    <button class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-gray-50 text-gray-600 font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-emerald-600 hover:text-white transition-all duration-300">
+                        <Plus class="w-4 h-4" /> Novo Cartão
                     </button>
                 </div>
             </div>
@@ -885,12 +688,12 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
                             :class="[g.iconBg, g.iconText]">
                             <component :is="g.icon" class="w-5 h-5" />
                         </div>
+
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center justify-between mb-1.5">
                                 <div class="flex items-center gap-1.5">
                                     <span class="text-sm font-semibold text-gray-800">{{ g.label }}</span>
-                                    <span class="text-[10px] font-semibold px-1.5 py-0.5 rounded-full leading-none"
-                                        :class="goalStatus(pctOf(g)).cls">
+                                    <span class="text-[10px] font-semibold px-1.5 py-0.5 rounded-full leading-none" :class="goalStatus(pctOf(g)).cls">
                                         {{ goalStatus(pctOf(g)).label }}
                                     </span>
                                 </div>
@@ -935,11 +738,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
             <!-- Lista -->
             <div class="divide-y divide-gray-50">
-                <div
-                    v-for="bill in visibleBills"
-                    :key="bill.id"
-                    class="flex items-center gap-4 px-6 py-4 hover:bg-gray-50/60 transition-colors"
-                >
+                <div v-for="bill in visibleBills" :key="bill.id" class="flex items-center gap-4 px-6 py-4 hover:bg-gray-50/60 transition-colors">
                     <!-- Ícone -->
                     <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
                         :class="[bill.iconBg, bill.iconText]">
@@ -961,11 +760,9 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
                     <!-- Valor + ação -->
                     <div class="flex items-center gap-3 shrink-0">
                         <span class="text-sm font-bold text-gray-800 tabular-nums">{{ fmtMoney(bill.amount) }}</span>
-                        <button
-                            @click="bill.paid = true"
+                        <button @click="bill.paid = true"
                             class="w-7 h-7 flex items-center justify-center rounded-lg border border-gray-200 text-gray-300 hover:border-emerald-400 hover:text-emerald-500 hover:bg-emerald-50 transition-all"
-                            title="Marcar como pago"
-                        >
+                            title="Marcar como pago" >
                             <Check class="w-3.5 h-3.5" />
                         </button>
                     </div>
@@ -985,18 +782,189 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
             </div>
         </div>
 
-        <!-- footer -->
-        <footer class="mt-12 pt-8 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-400">
-            <p class="mb-4 sm:mb-0">&copy; {{ new Date().getFullYear() }} Organizze. Todos os direitos reservados.</p>
-
-            <div class="flex space-x-6">
-                <Github class="w-5 h-5 text-gray-400 cursor-pointer transition-colors duration-200 hover:text-gray-600" />
-                <Linkedin class="w-5 h-5 text-gray-400 cursor-pointer transition-colors duration-200 hover:text-blue-600" />
-                <Youtube class="w-5 h-5 text-gray-400 cursor-pointer transition-colors duration-200 hover:text-red-600" />
-                <Twitter class="w-5 h-5 text-gray-400 cursor-pointer transition-colors duration-200 hover:text-blue-400" />
-            </div>
-        </footer>
+        <!-- Footer -->
+        <Footer />
     </main>
+
+    <!-- Modal de nova despesa -->
+    <div id="expense-modal" class="hidden   fixed inset-0 z-[9999] grid place-items-center bg-black/60 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="expense-modal-title">
+        <div class="flex max-h-[calc(100dvh-2rem)] w-full max-w-lg flex-col overflow-hidden rounded-xl bg-white shadow-[0_24px_80px_rgba(15,23,42,0.35)]">
+            <!-- Cabeçalho -->
+            <header class="flex shrink-0 items-center justify-between border-b border-gray-200/70 px-6 py-5">
+                <div>
+                    <!-- p class="text-xs font-semibold uppercase tracking-[0.16em] text-red-500">Lançamento</p -->
+                    <h2 id="expense-modal-title" class="mt-1 text-lg font-semibold text-slate-800">Nova despesa</h2>
+                </div>
+
+                <button id="close-expense-modal" type="button" aria-label="Fechar modal" class="flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 transition hover:bg-slate-100 hover:text-slate-700 focus:outline-none focus:ring-4 focus:ring-red-500/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </button>
+            </header>
+
+            <!-- Formulário -->
+            <form id="expense-form" class="flex min-h-0 flex-1 flex-col">
+                <!-- Conteúdo com rolagem -->
+                <div class="min-h-0 flex-1 space-y-6 overflow-y-auto p-6">
+                    <!-- Descrição -->
+                    <div>
+                        <label for="expense-description" class="mb-1.5 block text-xs font-medium text-slate-500">Descrição</label>
+                        <input
+                            id="expense-description"
+                            name="description"
+                            type="text"
+                            placeholder="Ex.: Aluguel, supermercado..."
+                            autocomplete="off"
+                            class="w-full rounded-md border border-slate-300 px-4 py-3 text-sm text-slate-800
+                            outline-none transition placeholder:text-slate-400 "/>
+                    </div>
+
+                    <!-- Valor e data -->
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <div>
+                            <label for="expense-value" class="mb-1.5 block text-xs font-medium text-slate-500">Valor</label>
+                            <div class="relative">
+                                <span class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-400">R$</span>
+                                <input
+                                    id="expense-value"
+                                    name="value"
+                                    type="number"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="0,00"
+                                    class="w-full rounded-md border border-slate-300 py-3 pl-11 pr-4 text-lg
+                                    font-semibold text-slate-800 outline-none transition placeholder:text-slate-400 "
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="expense-date" class="mb-1.5 block text-xs font-medium text-slate-500">Data</label>
+                            <input
+                                id="expense-date"
+                                name="date"
+                                type="date"
+                                class="w-full rounded-md border border-slate-300 px-4 py-3 text-sm text-slate-700 outline-none transition "
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Conta e categoria -->
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <div>
+                            <label for="expense-account" class="mb-1.5 block text-xs font-medium text-slate-500">Conta / Cartão</label>
+                            <select
+                                id="expense-account"
+                                name="account"
+                                class="w-full rounded-md border border-slate-300 bg-white px-4 py-3 text-sm
+                                text-slate-700 outline-none transition  "
+                            >
+                                <option value="">Selecione a conta...</option>
+                                <option value="conta-corrente">Conta corrente</option>
+                                <option value="cartao-credito">Cartão de crédito</option>
+                                <option value="carteira">Carteira</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="expense-category" class="mb-1.5 block text-xs font-medium text-slate-500">Categoria</label>
+                            <select id="expense-category" name="category" class="w-full rounded-md border border-slate-300 bg-white px-4 py-3 text-sm text-slate-700 transition-all duration-200 outline-none ">
+                                <option value="">Selecione a categoria...</option>
+                                <option value="alimentacao">Alimentação</option>
+                                <option value="moradia">Moradia</option>
+                                <option value="transporte">Transporte</option>
+                                <option value="lazer">Lazer</option>
+                                <option value="saude">Saúde</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Observação -->
+                    <div>
+                        <label for="expense-note" class="mb-1.5 block text-xs font-medium text-slate-500">
+                            Observação
+                            <span class="font-normal text-slate-400">(opcional)</span>
+                        </label>
+                        <textarea
+                            id="expense-note"
+                            name="note"
+                            rows="3"
+                            placeholder="Adicione uma observação..."
+                            class="min-h-24 w-full resize-y rounded-md border border-slate-300 px-4 py-3 text-sm
+                            text-slate-800 outline-none transition placeholder:text-slate-400 "></textarea>
+                    </div>
+
+                    <!-- Mais opções -->
+                    <fieldset>
+                        <legend class="mb-3 text-xs font-medium text-slate-500">Mais opções</legend>
+                        <div class="grid grid-cols-4 gap-2 sm:gap-3">
+                            <!-- Repetir -->
+                            <button type="button" class="group flex flex-col items-center gap-2 p-2 text-center transition ">
+                                <span class="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-100 text-slate-500 transition-all duration-200 group-hover:bg-[#E8FFF7] group-hover:text-[#00BC7D] group-hover:scale-105">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6" aria-hidden="true">
+                                        <path d="m17 2 4 4-4 4" />
+                                        <path d="M3 11v-1a4 4 0 0 1 4-4h14" />
+                                        <path d="m7 22-4-4 4-4" />
+                                        <path d="M21 13v1a4 4 0 0 1-4 4H3" />
+                                    </svg>
+                                </span>
+                                <span class="text-[10px] font-bold uppercase tracking-wide text-slate-500">Repetir</span>
+                            </button>
+
+                            <!-- Observação -->
+                            <button type="button" class="group flex flex-col items-center gap-2 p-2 text-center transition ">
+                                <span class="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-100 text-slate-500 transition-all duration-200 group-hover:bg-[#E8FFF7] group-hover:text-[#00BC7D] group-hover:scale-105">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6" aria-hidden="true">
+                                        <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/>
+                                        <path d="M7 11h10" />
+                                        <path d="M7 15h6" />
+                                        <path d="M7 7h8" />
+                                    </svg>
+                                </span>
+                                <span class="text-[10px] font-bold uppercase tracking-wide text-slate-500">Obs.</span>
+                            </button>
+
+                            <!-- Anexo -->
+                            <button type="button" class="group flex flex-col items-center gap-2 border border-transparent p-2 text-center transition ">
+                                <span class="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-100 text-slate-500 transition-all duration-200 group-hover:bg-[#E8FFF7] group-hover:text-[#00BC7D] group-hover:scale-105">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6" aria-hidden="true">
+                                        <path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"/>
+                                    </svg>
+                                </span>
+                                <span class="text-[10px] font-bold uppercase tracking-wide text-slate-500">Anexo</span>
+                            </button>
+
+                            <!-- Tags -->
+                            <button type="button" class="group flex flex-col items-center gap-2 p-2 text-center transition ">
+                                <span class="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-100 text-slate-500 transition-all duration-200 group-hover:bg-[#E8FFF7] group-hover:text-[#00BC7D] group-hover:scale-105">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6" aria-hidden="true">
+                                        <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/>
+                                        <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>
+                                    </svg>
+                                </span>
+                                <span class="text-[10px] font-bold uppercase tracking-wide text-slate-500">Tags</span>
+                            </button>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- Rodapé -->
+                <footer class="flex shrink-0 flex-col-reverse gap-3 border-t border-slate-200 bg-slate-50/80 px-6 py-4 sm:flex-row sm:justify-end">
+                    <button id="cancel-expense-modal" type="button" class="rounded-md border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-500/10">
+                        Cancelar
+                    </button>
+
+                    <button type="submit" class="rounded-md bg-red-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-500/20">
+                        Salvar despesa
+                    </button>
+                </footer>
+            </form>
+        </div>
+    </div>
+
 
     <!-- MODAL DE CARTÕES -->
     <div v-if="isModalOpen" class="fixed inset-0 z-50 flex items-center justify-center">
@@ -1017,15 +985,18 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
             <!-- LISTAGEM -->
             <div class="p-6 flex-1 overflow-y-auto space-y-4">
-                <div
-                    v-for="(card, index) in cards"
-                    :key="index"
-                    class="p-4 border border-gray-300 rounded-md flex justify-between items-center hover:bg-gray-200 transition"
-                >
+                <div v-for="(card, index) in cards" :key="index" class="p-4 border border-gray-300 rounded-md flex justify-between items-center hover:bg-gray-200 transition">
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl overflow-hidden border border-gray-200 bg-white shadow-sm flex items-center justify-center shrink-0">
-                            <img v-if="card.logo" :src="card.logo" :alt="card.bank" class="w-full h-full object-cover" />
-                            <span v-else class="text-xs font-bold text-gray-500">{{ card.bank.slice(0,2).toUpperCase() }}</span>
+                        <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-200 bg-white shadow-xs p-0 flex items-center justify-center shrink-0">
+                            <img
+                                v-if="card.logo"
+                                :src="card.logo"
+                                :alt="card.bank"
+                                class="w-full h-full object-cover"
+                            />
+                            <span v-else class="text-xs font-bold text-gray-500">
+                                {{ card.bank.slice(0,2).toUpperCase() }}
+                            </span>
                         </div>
                         <div>
                             <p class="text-sm font-semibold text-gray-700">{{ card.bank }}</p>
@@ -1048,19 +1019,13 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
                 <div v-if="isLimitReached" class="space-y-3 text-center">
                     <p class="text-xs text-red-400 font-semibold">Limite de cartões atingido</p>
 
-                    <button
-                        @click="goToCardsPage"
-                        class="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gray-900 text-white text-sm font-semibold hover:bg-black transition"
-                    >
+                    <button @click="goToCardsPage" class="hover:cursor-point w-full flex items-center justify-center gap-2 py-2.5 rounded-md bg-gray-900 text-white text-sm font-semibold hover:bg-black transition">
                         Ver todos os cartões
                     </button>
                 </div>
 
                 <!-- NORMAL -->
-                <button
-                    v-else
-                    class="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-emerald-500 text-white text-sm font-semibold hover:bg-emerald-600 transition"
-                >
+                <button v-else class="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-emerald-500 text-white text-sm font-semibold hover:bg-emerald-600 transition">
                     <Plus class="w-4 h-4" />
                     Adicionar Novo Cartão
                 </button>
@@ -1068,37 +1033,3 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
         </div>
     </div>
 </template>
-
-<style>
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f8fafc;
-}
-
-.modal-active {
-    overflow: hidden;
-}
-
-.modal {
-    transition: opacity 0.25s ease;
-}
-
-.shadow-3xl {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-@keyframes pulse-ring {
-    0% {
-        transform: scale(0.95);
-        opacity: 0.5;
-    }
-    100% {
-        transform: scale(1.05);
-        opacity: 0;
-    }
-}
-
-.group:hover .pulse-ring {
-    animation: pulse-ring 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-</style>

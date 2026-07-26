@@ -1,7 +1,7 @@
 <script setup>
-import { ref, computed } from 'vue';
-import Navbar from '@/Components/layout/Navbar.vue';
-import Footer from '@/Components/layout/Footer.vue';
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import Navbar from '@/Components/navigation/Navbar.vue';
+
 import {
     ChevronLeft, ChevronRight, Plus, Search, Filter,
     ArrowUpCircle, ArrowDownCircle, ArrowRightLeft,
@@ -10,6 +10,11 @@ import {
     Briefcase, Coffee, Shirt, Dumbbell, X, Check,
     Pencil, Trash2, MoreHorizontal, SlidersHorizontal,
 } from 'lucide-vue-next';
+
+import Footer from '@/Components/layout/Footer.vue';
+
+// ── Emits ──────────────────────────────────────────────────
+const emit = defineEmits(['filter-applied', 'filter-cleared']);
 
 // ── Navegação de mês ─────────────────────────────────────────
 const MONTHS = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
@@ -67,6 +72,140 @@ const filtered = computed(() => {
     return list;
 });
 
+// ── Filtro de Data ──────────────────────────────────────────
+const currentDate = ref(new Date(2026, 6, 1)); // Julho 2026
+const showDateFilter = ref(false);
+const startDate = ref(null);
+const endDate = ref(null);
+const isFilterActive = ref(false);
+const activePreset = ref(null);
+
+const datePresets = [
+    { label: 'Hoje', value: 'today' },
+    { label: 'Esta semana', value: 'week' },
+    { label: 'Este mês', value: 'month' },
+    { label: 'Este ano', value: 'year' }
+];
+
+const currentMonthName = computed(() => {
+    const month = currentDate.value.toLocaleString('pt-BR', { month: 'long' });
+    return month.charAt(0).toUpperCase() + month.slice(1);
+});
+
+// ── Métodos do Filtro de Data ──────────────────────────────
+function previousMonth() {
+    const newDate = new Date(currentDate.value);
+    newDate.setMonth(newDate.getMonth() - 1);
+    currentDate.value = newDate;
+    clearPreset();
+}
+
+function nextMonth() {
+    const newDate = new Date(currentDate.value);
+    newDate.setMonth(newDate.getMonth() + 1);
+    currentDate.value = newDate;
+    clearPreset();
+}
+
+function toggleFilter() {
+    showDateFilter.value = !showDateFilter.value;
+}
+
+function closeFilter() {
+    showDateFilter.value = false;
+}
+
+function applyPreset(value) {
+    const today = new Date();
+    let start, end;
+
+    switch(value) {
+        case 'today':
+            start = end = new Date(today);
+            break;
+        case 'week':
+            start = new Date(today);
+            start.setDate(today.getDate() - today.getDay());
+            end = new Date(start);
+            end.setDate(start.getDate() + 6);
+            break;
+        case 'month':
+            start = new Date(today.getFullYear(), today.getMonth(), 1);
+            end = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+            break;
+        case 'quarter':
+            const qMonth = Math.floor(today.getMonth() / 3) * 3;
+            start = new Date(today.getFullYear(), qMonth, 1);
+            end = new Date(today.getFullYear(), qMonth + 3, 0);
+            break;
+        case 'year':
+            start = new Date(today.getFullYear(), 0, 1);
+            end = new Date(today.getFullYear(), 11, 31);
+            break;
+    }
+
+    startDate.value = formatDateInput(start);
+    endDate.value = formatDateInput(end);
+    activePreset.value = value;
+    isFilterActive.value = true;
+
+    applyDateFilter();
+}
+
+function clearPreset() {
+    activePreset.value = null;
+}
+
+function formatDateInput(date) {
+    if (!date) return null;
+    const d = new Date(date);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+function formatDateRange(start, end) {
+    const format = (date) => {
+        const d = new Date(date);
+        return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+    };
+    return `${format(start)} até ${format(end)}`;
+}
+
+function applyDateFilter() {
+    if (!startDate.value || !endDate.value) {
+        return;
+    }
+
+    if (new Date(startDate.value) > new Date(endDate.value)) {
+        alert('A data inicial deve ser anterior à data final.');
+        return;
+    }
+
+    isFilterActive.value = true;
+    activePreset.value = null;
+    showDateFilter.value = false;
+
+    emit('filter-applied', {
+        startDate: startDate.value,
+        endDate: endDate.value
+    });
+
+    console.log('Filtro aplicado:', {
+        start: startDate.value,
+        end: endDate.value
+    });
+}
+
+function clearDateFilter() {
+    startDate.value = null;
+    endDate.value = null;
+    isFilterActive.value = false;
+    activePreset.value = null;
+    showDateFilter.value = false;
+
+    emit('filter-cleared');
+    console.log('Filtro limpo');
+}
+
 // ── Agrupamento por data ─────────────────────────────────────
 const grouped = computed(() => {
     const map = new Map();
@@ -96,278 +235,296 @@ function removeTransaction(id) {
     transactions.value = transactions.value.filter(t => t.id !== id);
     openMenu.value = null;
 }
+
+// ── Lifecycle ────────────────────────────────────────────────
+function handleClickOutside(e) {
+    if (showDateFilter.value && !e.target.closest('.relative')) {
+        showDateFilter.value = false;
+    }
+}
+
+onMounted(() => {
+    document.addEventListener('click', handleClickOutside);
+});
+
+onBeforeUnmount(() => {
+    document.removeEventListener('click', handleClickOutside);
+});
+
+// ── Expor métodos para uso no template ──────────────────────
+defineExpose({
+    previousMonth,
+    nextMonth,
+    applyDateFilter,
+    clearDateFilter,
+    toggleFilter,
+    closeFilter
+});
 </script>
 
 <template>
+
     <Navbar />
 
-    <main class="max-w-5xl mx-auto px-4 pt-24 pb-12">
+    <div class="flex min-h-screen flex-col">
+        <main class="mx-auto max-w-7xl px-4 pb-12 pt-24 sm:px-6 lg:px-8">
 
-        <!-- Header -->
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-            <div>
-                <h1 class="text-xl font-bold text-gray-800">Lançamentos</h1>
-                <p class="text-xs text-gray-400 mt-0.5">Controle todas as suas movimentações financeiras</p>
-            </div>
-            <button
-                @click="openModal"
-                class="flex items-center gap-2 px-4 py-2.5 bg-emerald-500 text-white text-sm font-semibold rounded-xl hover:bg-emerald-600 transition-colors shadow-sm shadow-emerald-100"
-            >
-                <Plus class="w-4 h-4" /> Nova transação
-            </button>
-        </div>
+            <!-- Cabeçalho -->
+            <header class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <!-- Navegação entre meses -->
+                <div class="relative flex items-center justify-between gap-2">
+                    <!-- Mês anterior -->
+                    <button type="button" aria-label="Mês anterior" class="group flex h-10 w-10 items-center justify-center rounded-full text-gray-400 transition-all duration-200 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 active:scale-90" @click="previousMonth">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-0.5" aria-hidden="true">
+                            <path d="m15 18-6-6 6-6" />
+                        </svg>
+                    </button>
 
-        <!-- Navegação de mês -->
-        <div class="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-3 py-2 shadow-sm w-fit mb-6">
-            <button @click="navigate(-1)" class="p-0.5 rounded hover:bg-gray-100 transition-colors">
-                <ChevronLeft class="w-4 h-4 text-gray-500" />
-            </button>
-            <span class="text-sm font-semibold text-gray-700 w-44 text-center capitalize">{{ monthLabel }}</span>
-            <button @click="navigate(1)" class="p-0.5 rounded hover:bg-gray-100 transition-colors">
-                <ChevronRight class="w-4 h-4 text-gray-500" />
-            </button>
-        </div>
+                    <!-- Botão do filtro -->
+                    <button type="button" class="group relative flex items-center gap-2 rounded-full border border-gray-200/60 bg-white/80 px-3 py-2  backdrop-blur-sm transition-all duration-300 " @click="toggleFilter" aria-expanded="showDateFilter" aria-haspopup="true">
+                        <!-- Ícone de calendário -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-gray-400 transition-colors group-hover:text-gray-700/70" aria-hidden="true">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
 
-        <!-- KPIs -->
-        <div class="grid grid-cols-3 gap-4 mb-6">
-            <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-4">
-                <div class="flex items-center gap-2 mb-2">
-                    <div class="w-7 h-7 rounded-lg bg-emerald-50 flex items-center justify-center">
-                        <ArrowUpCircle class="w-4 h-4 text-emerald-500" />
-                    </div>
-                    <span class="text-xs font-semibold text-gray-400 uppercase tracking-wide">Receitas</span>
-                </div>
-                <p class="text-xl font-extrabold text-emerald-600">{{ fmtMoney(totalReceitas) }}</p>
-            </div>
-            <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-4">
-                <div class="flex items-center gap-2 mb-2">
-                    <div class="w-7 h-7 rounded-lg bg-red-50 flex items-center justify-center">
-                        <ArrowDownCircle class="w-4 h-4 text-red-400" />
-                    </div>
-                    <span class="text-xs font-semibold text-gray-400 uppercase tracking-wide">Despesas</span>
-                </div>
-                <p class="text-xl font-extrabold text-red-500">{{ fmtMoney(totalDespesas) }}</p>
-            </div>
-            <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-4">
-                <div class="flex items-center gap-2 mb-2">
-                    <div class="w-7 h-7 rounded-lg flex items-center justify-center" :class="saldo >= 0 ? 'bg-emerald-50' : 'bg-red-50'">
-                        <ArrowRightLeft class="w-4 h-4" :class="saldo >= 0 ? 'text-emerald-500' : 'text-red-400'" />
-                    </div>
-                    <span class="text-xs font-semibold text-gray-400 uppercase tracking-wide">Saldo</span>
-                </div>
-                <p class="text-xl font-extrabold" :class="saldo >= 0 ? 'text-emerald-600' : 'text-red-500'">
-                    {{ saldo >= 0 ? '' : '-' }}{{ fmtMoney(saldo) }}
-                </p>
-            </div>
-        </div>
-
-        <!-- Filtros -->
-        <div class="flex flex-col sm:flex-row gap-3 mb-5">
-            <!-- Busca -->
-            <div class="relative flex-1">
-                <Search class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <input
-                    v-model="search"
-                    type="text"
-                    placeholder="Buscar lançamento..."
-                    class="w-full pl-9 pr-4 py-2.5 text-sm bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:border-transparent"
-                />
-            </div>
-            <!-- Tipo -->
-            <div class="flex bg-white border border-gray-200 rounded-xl p-1 gap-1">
-                <button v-for="opt in [
-                    { key: 'todos',   label: 'Todos' },
-                    { key: 'receita', label: 'Receitas' },
-                    { key: 'despesa', label: 'Despesas' },
-                    { key: 'transf',  label: 'Transf.' },
-                ]" :key="opt.key"
-                    @click="typeFilter = opt.key"
-                    class="px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors"
-                    :class="typeFilter === opt.key
-                        ? 'bg-emerald-500 text-white'
-                        : 'text-gray-500 hover:bg-gray-100'"
-                >
-                    {{ opt.label }}
-                </button>
-            </div>
-        </div>
-
-        <!-- Lista agrupada por data -->
-        <div class="space-y-5">
-            <div v-if="grouped.length === 0" class="text-center py-16 text-gray-400">
-                <SlidersHorizontal class="w-10 h-10 mx-auto mb-3 opacity-30" />
-                <p class="text-sm">Nenhum lançamento encontrado.</p>
-            </div>
-
-            <div v-for="[date, txs] in grouped" :key="date">
-                <!-- Cabeçalho do dia -->
-                <div class="flex items-center justify-between mb-2 px-1">
-                    <span class="text-xs font-bold text-gray-500 capitalize">{{ fmtDate(date) }}</span>
-                    <span class="text-xs font-semibold tabular-nums"
-                        :class="dayTotal(txs) >= 0 ? 'text-emerald-600' : 'text-red-500'">
-                        {{ dayTotal(txs) >= 0 ? '+' : '' }}{{ (dayTotal(txs) < 0 ? '-' : '') }}{{ fmtMoney(dayTotal(txs)) }}
+                        <!-- Título com mês/ano -->
+                        <span class="text-base font-semibold tracking-tight text-gray-900">
+                        {{ currentMonthName }}
+                        <span class="ml-1 font-normal text-gray-500">{{ currentYear }}</span>
                     </span>
+
+                        <!-- Ícone da seta -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-gray-400 transition-transform duration-300" :class="{ 'rotate-180': showDateFilter }" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+
+                    <!-- Próximo mês -->
+                    <button type="button" aria-label="Próximo mês" class="group flex h-10 w-10 items-center justify-center rounded-full text-gray-400 transition-all duration-200 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2" @click="nextMonth">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                            <path d="m9 18 6-6-6-6" />
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown do filtro -->
+                    <transition enter-active-class="transition duration-200 ease-out" enter-from-class="opacity-0 scale-95 -translate-y-2" enter-to-class="opacity-100 scale-100 translate-y-0" leave-active-class="transition duration-150 ease-in" leave-from-class="opacity-100 scale-100 translate-y-0" leave-to-class="opacity-0 scale-95 -translate-y-2">
+                        <div v-if="showDateFilter" class="absolute left-1/2 top-full z-50 mt-3 w-[340px] -translate-x-1/2 rounded-2xl border border-gray-200/80 bg-white/95 p-5 shadow-xl backdrop-blur-sm" role="dialog" aria-label="Filtro de data" @click.stop>
+                            <!-- Cabeçalho do dropdown -->
+                            <div class="mb-4 flex items-start justify-between">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-900">Filtrar por período</h3>
+                                    <p class="mt-1 text-xs text-gray-500">Selecione um intervalo de datas</p>
+                                </div>
+                                <button type="button" class="rounded-lg p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600" @click="closeFilter" aria-label="Fechar filtro">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                                        <path d="M18 6 6 18" />
+                                        <path d="m6 6 12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Filtros rápidos -->
+                            <div class="mb-4 flex justify-center gap-2">
+                                <button v-for="preset in datePresets" :key="preset.label" type="button" class="whitespace-nowrap rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 transition-all hover:bg-gray-300/60" :class="{'bg-gray-900 text-white': activePreset === preset.value}" @click="applyPreset(preset.value)">
+                                    {{ preset.label }}
+                                </button>
+                            </div>
+
+                            <!-- Divisor -->
+                            <div class="relative my-4">
+                                <div class="absolute inset-0 flex items-center">
+                                    <div class="w-full border-t border-gray-200"></div>
+                                </div>
+                                <div class="relative flex justify-center text-xs">
+                                    <span class="bg-white px-2 text-gray-400">ou escolha manualmente</span>
+                                </div>
+                            </div>
+
+                            <!-- Inputs de data -->
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label for="start-date" class="mb-1.5 block text-xs font-medium text-gray-600">Data inicial</label>
+                                    <input id="start-date" v-model="startDate" type="date" class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 outline-none transition focus:border-gray-400 focus:ring-2 focus:ring-gray-200 hover:border-gray-300" :max="endDate || undefined"/>
+                                </div>
+
+                                <div>
+                                    <label for="end-date" class="mb-1.5 block text-xs font-medium text-gray-600">Data final</label>
+                                    <input id="end-date" v-model="endDate" type="date" class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 outline-none transition focus:border-gray-400 focus:ring-2 focus:ring-gray-200 hover:border-gray-300" :min="startDate || undefined"/>
+                                </div>
+                            </div>
+
+                            <!-- Preview do período selecionado -->
+                            <div v-if="startDate && endDate" class="mt-3 rounded-lg bg-gray-50 px-3 py-2 text-center text-xs text-gray-600">
+                                <span class="font-medium">Período selecionado:</span>
+                                {{ formatDateRange(startDate, endDate) }}
+                            </div>
+
+                            <!-- Botões de ação -->
+                            <div class="mt-4 flex items-center justify-end gap-2 border-t border-gray-100 pt-4">
+                                <button type="button" class="rounded-md border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-500 transition hover:bg-gray-100 hover:text-gray-700" @click="clearDateFilter">Limpar</button>
+
+                                <button type="button" class="rounded-md bg-gray-900 px-3 py-1.5 text-sm font-medium text-white transition-all hover:bg-gray-800 hover:shadow-xs " @click="applyDateFilter" :disabled="!startDate || !endDate" :class="{ 'cursor-not-allowed opacity-50': !startDate || !endDate }">
+                                    Aplicar filtro
+                                </button>
+                            </div>
+                        </div>
+                    </transition>
                 </div>
 
-                <!-- Transações do dia -->
-                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm divide-y divide-gray-50">
-                    <div
-                        v-for="t in txs"
-                        :key="t.id"
-                        class="flex items-center gap-4 px-5 py-3.5 hover:bg-gray-50/60 transition-colors group relative"
-                    >
-                        <!-- Ícone -->
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                            :class="[t.iconBg, t.iconText]">
-                            <component :is="t.icon" class="w-4 h-4" />
-                        </div>
+                <div class="grid grid-cols-2 gap-2 sm:flex">
+                    <button type="button" class="inline-flex items-center justify-center gap-1.5 rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
+                            <path d="M5 12h14" />
+                        </svg>
+                        <span>Despesa</span>
+                    </button>
 
-                        <!-- Info -->
-                        <div class="flex-1 min-w-0">
-                            <div class="flex items-center gap-2">
-                                <span class="text-sm font-semibold text-gray-800 truncate">{{ t.desc }}</span>
-                                <span v-if="t.status === 'pendente'"
-                                    class="text-[10px] font-semibold bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full shrink-0">
-                                    Pendente
-                                </span>
-                            </div>
-                            <p class="text-xs text-gray-400">{{ t.cat }} · {{ t.account }}</p>
-                        </div>
+                    <button type="button" class="inline-flex items-center justify-center gap-1.5 rounded-md bg-emerald-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
+                            <path d="M5 12h14" />
+                            <path d="M12 5v14" />
+                        </svg>
+                        <span>Receita</span>
+                    </button>
 
-                        <!-- Valor -->
-                        <span class="text-sm font-bold tabular-nums shrink-0"
-                            :class="{
-                                'text-emerald-600': t.type === 'receita',
-                                'text-red-500':     t.type === 'despesa',
-                                'text-gray-500':    t.type === 'transf',
-                            }">
-                            {{ t.type === 'receita' ? '+' : t.type === 'despesa' ? '-' : '' }}{{ fmtMoney(t.amount) }}
+                    <button type="button" class="col-span-2 inline-flex items-center justify-center gap-1.5 rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:col-span-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
+                            <path d="m16 3 4 4-4 4" />
+                            <path d="M20 7H4" />
+                            <path d="m8 21-4-4 4-4" />
+                            <path d="M4 17h16" />
+                        </svg>
+                        <span>Transferência</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Resumo financeiro -->
+            <section aria-label="Resumo financeiro do mês" class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+
+                <!-- Receitas -->
+                <div class="group relative flex items-center gap-4 rounded-md bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all ">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-10 w-10 shrink-0 text-emerald-500" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="m16 12-4-4-4 4" />
+                        <path d="M12 16V8" />
+                    </svg>
+
+                    <div class="flex flex-1 items-center justify-between">
+                        <dl>
+                            <dt class="text-xs font-bold uppercase tracking-wide text-gray-400">Receitas</dt>
+                            <dd class="text-2xl font-bold text-emerald-600">R$ 0,00</dd>
+                        </dl>
+
+                        <div class="flex flex-col items-end gap-0.5">
+                        <span class="flex items-center gap-1 rounded-full bg-gray-50 px-2 py-1 text-xs font-semibold text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
+                                <path d="M5 12h14" />
+                            </svg>
+                            0%
                         </span>
-
-                        <!-- Menu ações -->
-                        <div class="relative">
-                            <button
-                                @click.stop="openMenu = openMenu === t.id ? null : t.id"
-                                class="p-1.5 rounded-lg text-gray-300 hover:text-gray-500 hover:bg-gray-100 transition-colors opacity-0 group-hover:opacity-100"
-                            >
-                                <MoreHorizontal class="w-4 h-4" />
-                            </button>
-                            <div v-if="openMenu === t.id"
-                                class="absolute right-0 top-full mt-1 w-36 bg-white rounded-xl border border-gray-100 shadow-lg z-10 py-1">
-                                <button class="w-full flex items-center gap-2 px-3 py-2 text-xs text-gray-700 hover:bg-gray-50 transition-colors">
-                                    <Pencil class="w-3.5 h-3.5 text-gray-400" /> Editar
-                                </button>
-                                <button
-                                    @click="removeTransaction(t.id)"
-                                    class="w-full flex items-center gap-2 px-3 py-2 text-xs text-red-600 hover:bg-red-50 transition-colors">
-                                    <Trash2 class="w-3.5 h-3.5" /> Excluir
-                                </button>
-                            </div>
+                            <span class="text-xs text-gray-400">vs. mês anterior</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+
+                <!-- Despesas -->
+                <div class="group relative flex items-center gap-4 rounded-sm bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-10 w-10 shrink-0 text-red-500" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 8v8" />
+                        <path d="m8 12 4 4 4-4" />
+                    </svg>
+
+                    <div class="flex flex-1 items-center justify-between">
+                        <dl>
+                            <dt class="text-xs font-bold uppercase tracking-wide text-gray-400">Despesas</dt>
+                            <dd class="text-2xl font-bold text-red-500">R$ 0,00</dd>
+                        </dl>
+
+                        <div class="flex flex-col items-end gap-0.5">
+                        <span class="flex items-center gap-1 rounded-full bg-gray-50 px-2 py-1 text-xs font-semibold text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
+                                <path d="M5 12h14" />
+                            </svg>
+                            0%
+                        </span>
+                            <span class="text-xs text-gray-400">vs. mês anterior</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saldo -->
+                <div class="group relative flex items-center gap-4 rounded-md bg-white p-6 shadow-xs ring-1 ring-gray-100 transition-all ">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-10 w-10 shrink-0 text-emerald-500" aria-hidden="true">
+                        <line x1="12" y1="2" x2="12" y2="22" />
+                        <path d="M17 6.5A4 4 0 0 0 13.5 4H10a4 4 0 0 0 0 8h4a4 4 0 0 1 0 8H9.5A4 4 0 0 1 6 17" />
+                    </svg>
+
+                    <div class="flex flex-1 items-center justify-between">
+                        <dl>
+                            <dt class="text-xs font-bold uppercase tracking-wide text-gray-400">Saldo</dt>
+                            <dd class="text-2xl font-bold text-emerald-600">R$ 0,00</dd>
+                        </dl>
+
+                        <div class="flex flex-col items-end gap-0.5">
+                        <span class="flex items-center gap-1 rounded-full bg-gray-50 px-2 py-1 text-xs font-semibold text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
+                                <path d="M5 12h14" />
+                            </svg>
+                            0%
+                        </span>
+                            <span class="text-xs text-gray-400">vs. mês anterior</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filtros -->
+            <nav aria-label="Filtros de lançamentos" class="mb-6 flex gap-2 overflow-x-auto pb-1">
+                <button type="button" aria-pressed="true" class="shrink-0 rounded-lg border border-emerald-500 bg-emerald-500 px-4 py-1.5 text-xs font-semibold text-white transition-colors">
+                    Todos
+                </button>
+
+                <button type="button" aria-pressed="false" class="shrink-0 rounded-lg border border-gray-200 bg-white px-4 py-1.5 text-xs font-semibold text-gray-500 transition-colors hover:border-emerald-300 hover:text-emerald-600">
+                    Receitas
+                </button>
+
+                <button type="button" aria-pressed="false" class="shrink-0 rounded-lg border border-gray-200 bg-white px-4 py-1.5 text-xs font-semibold text-gray-500 transition-colors hover:border-emerald-300 hover:text-emerald-600">
+                    Despesas
+                </button>
+
+                <button type="button" aria-pressed="false" class="shrink-0 rounded-lg border border-gray-200 bg-white px-4 py-1.5 text-xs font-semibold text-gray-500 transition-colors hover:border-emerald-300 hover:text-emerald-600">
+                    Transferências
+                </button>
+            </nav>
+
+            <!-- Lista de lançamentos -->
+            <section aria-label="Lançamentos financeiros">
+                <!-- Estado vazio -->
+                <div class="rounded-xl bg-white px-6 py-12 text-center text-gray-400 shadow-sm" >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"  stroke-linejoin="round" class="mx-auto mb-3 h-10 w-10 text-gray-300" aria-hidden="true">
+                        <path d="M8 2v4" />
+                        <path d="M16 2v4" />
+                        <rect width="18" height="18" x="3" y="4" rx="2" />
+                        <path d="M3 10h18" />
+                        <path d="M8 14h.01" />
+                        <path d="M12 14h.01" />
+                        <path d="M16 14h.01" />
+                        <path d="M8 18h.01" />
+                        <path d="M12 18h.01" />
+                    </svg>
+                    <p class="text-sm font-medium text-gray-500"> Nenhum lançamento em julho de 2026</p>
+                    <p class="mt-1 text-xs">Use os botões acima para adicionar uma nova movimentação.</p>
+                </div>
+            </section>
+
+        </main>
+
         <Footer />
-    </main>
+    </div>
 
-    <!-- Modal nova transação -->
-    <Transition
-        enter-active-class="transition duration-200 ease-out"
-        enter-from-class="opacity-0"
-        enter-to-class="opacity-100"
-        leave-active-class="transition duration-150 ease-in"
-        leave-from-class="opacity-100"
-        leave-to-class="opacity-0"
-    >
-        <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" @click="closeModal"></div>
-            <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
-                <div class="flex items-center justify-between mb-5">
-                    <h2 class="text-base font-bold text-gray-800">Nova Transação</h2>
-                    <button @click="closeModal" class="p-1.5 rounded-lg hover:bg-gray-100 transition-colors">
-                        <X class="w-4 h-4 text-gray-500" />
-                    </button>
-                </div>
-
-                <!-- Tipo -->
-                <div class="flex gap-2 mb-4">
-                    <button v-for="opt in [
-                        { key: 'despesa', label: 'Despesa', cls: 'bg-red-500' },
-                        { key: 'receita', label: 'Receita', cls: 'bg-emerald-500' },
-                        { key: 'transf',  label: 'Transferência', cls: 'bg-gray-500' },
-                    ]" :key="opt.key"
-                        @click="form.type = opt.key"
-                        class="flex-1 py-2 rounded-xl text-xs font-semibold border transition-all"
-                        :class="form.type === opt.key
-                            ? opt.cls + ' text-white border-transparent'
-                            : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300'"
-                    >
-                        {{ opt.label }}
-                    </button>
-                </div>
-
-                <div class="space-y-3">
-                    <div>
-                        <label class="text-xs font-semibold text-gray-500 mb-1 block">Descrição</label>
-                        <input v-model="form.desc" type="text" placeholder="Ex: Supermercado"
-                            class="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-300" />
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="text-xs font-semibold text-gray-500 mb-1 block">Valor (R$)</label>
-                            <input v-model="form.amount" type="number" step="0.01" placeholder="0,00"
-                                class="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-300" />
-                        </div>
-                        <div>
-                            <label class="text-xs font-semibold text-gray-500 mb-1 block">Data</label>
-                            <input v-model="form.date" type="date"
-                                class="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-300" />
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="text-xs font-semibold text-gray-500 mb-1 block">Categoria</label>
-                            <select v-model="form.cat"
-                                class="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-300 bg-white">
-                                <option value="">Selecionar</option>
-                                <option>Alimentação</option>
-                                <option>Casa</option>
-                                <option>Transporte</option>
-                                <option>Saúde</option>
-                                <option>Lazer</option>
-                                <option>Assinaturas</option>
-                                <option>Vestuário</option>
-                                <option>Educação</option>
-                                <option>Renda</option>
-                                <option>Outros</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="text-xs font-semibold text-gray-500 mb-1 block">Conta</label>
-                            <select v-model="form.account"
-                                class="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-300 bg-white">
-                                <option value="">Selecionar</option>
-                                <option>Nubank</option>
-                                <option>Itaú</option>
-                                <option>Santander</option>
-                                <option>Dinheiro</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex gap-3 mt-6">
-                    <button @click="closeModal"
-                        class="flex-1 py-2.5 border border-gray-200 text-sm font-semibold text-gray-500 rounded-xl hover:bg-gray-50 transition-colors">
-                        Cancelar
-                    </button>
-                    <button @click="closeModal"
-                        class="flex-1 py-2.5 bg-emerald-500 text-white text-sm font-semibold rounded-xl hover:bg-emerald-600 transition-colors">
-                        <Check class="w-4 h-4 inline mr-1" /> Salvar
-                    </button>
-                </div>
-            </div>
-        </div>
-    </Transition>
 </template>

@@ -34,9 +34,11 @@ class DashboardController extends Controller
     /**
      * Exibe o perfil do usuário.
      */
-    public function profile()
+    public function profile():  \Inertia\Response
     {
         // Lógica para exibir o perfil do usuário
+
+        return inertia('App/Dashboard/Perfil/Index');
     }
 
 }

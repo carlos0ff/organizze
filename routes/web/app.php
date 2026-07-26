@@ -16,7 +16,10 @@ use App\Http\Controllers\App\SubscriptionController;
 use App\Http\Controllers\App\TransactionController;
 use App\Http\Controllers\App\BudgetController;
 use App\Http\Controllers\App\BankConnectionController;
+use App\Http\Controllers\App\CartaoCreditoController;
+use App\Http\Controllers\App\NotificationController;
 use App\Http\Controllers\App\ProfileController;
+use App\Http\Controllers\App\SuporteController;
 
 
 /**
@@ -30,8 +33,8 @@ Route::prefix("app")->group(function () {
 
     Route::get('/contas', [AccountController::class, "index"])->name('app.conta');
 
-    /** **/
-    Route::get('/cards', [AccountController::class, "index"])->name('app.cards');
+    /** Cartão de Crédito **/
+    Route::get('/cartao-credito', [CartaoCreditoController::class, "index"])->name('app.cartao-credito');
 
     /** Rota para listar contas **/
     Route::get('/configuracao', [SettingsController::class, "index"])->name('app.settings');
@@ -48,8 +51,14 @@ Route::prefix("app")->group(function () {
     /** Conexão Bancária **/
     Route::get('/conexao-bancaria', [BankConnectionController::class, 'index'])->name('app.conexao-bancaria');
 
+    /** Notificações **/
+    Route::get('/notificacoes', [NotificationController::class, 'index'])->name('app.notificacoes');
+
     /** Perfil **/
     Route::get('/perfil', [ProfileController::class, 'index'])->name('app.perfil');
+
+    /** Suporte **/
+    Route::get('/suporte', [SuporteController::class, 'index'])->name('app.suporte');
 
     /** Relatórios **/
     Route::prefix('relatorios')->group(function () {

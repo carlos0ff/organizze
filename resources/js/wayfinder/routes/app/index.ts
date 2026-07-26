@@ -265,46 +265,46 @@ conta.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\AccountController::cards
-* @see app/Http/Controllers/App/AccountController.php:14
-* @route '/app/cards'
+* @see \App\Http\Controllers\App\CartaoCreditoController::cartaoCredito
+* @see app/Http/Controllers/App/CartaoCreditoController.php:11
+* @route '/app/cartao-credito'
 */
-export const cards = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: cards.url(options),
+export const cartaoCredito = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: cartaoCredito.url(options),
     method: 'get',
 })
 
-cards.definition = {
+cartaoCredito.definition = {
     methods: ["get","head"],
-    url: '/app/cards',
+    url: '/app/cartao-credito',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\AccountController::cards
-* @see app/Http/Controllers/App/AccountController.php:14
-* @route '/app/cards'
+* @see \App\Http\Controllers\App\CartaoCreditoController::cartaoCredito
+* @see app/Http/Controllers/App/CartaoCreditoController.php:11
+* @route '/app/cartao-credito'
 */
-cards.url = (options?: RouteQueryOptions) => {
-    return cards.definition.url + queryParams(options)
+cartaoCredito.url = (options?: RouteQueryOptions) => {
+    return cartaoCredito.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\App\AccountController::cards
-* @see app/Http/Controllers/App/AccountController.php:14
-* @route '/app/cards'
+* @see \App\Http\Controllers\App\CartaoCreditoController::cartaoCredito
+* @see app/Http/Controllers/App/CartaoCreditoController.php:11
+* @route '/app/cartao-credito'
 */
-cards.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: cards.url(options),
+cartaoCredito.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: cartaoCredito.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\App\AccountController::cards
-* @see app/Http/Controllers/App/AccountController.php:14
-* @route '/app/cards'
+* @see \App\Http\Controllers\App\CartaoCreditoController::cartaoCredito
+* @see app/Http/Controllers/App/CartaoCreditoController.php:11
+* @route '/app/cartao-credito'
 */
-cards.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: cards.url(options),
+cartaoCredito.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: cartaoCredito.url(options),
     method: 'head',
 })
 
@@ -485,6 +485,50 @@ conexaoBancaria.head = (options?: RouteQueryOptions): RouteDefinition<'head'> =>
 })
 
 /**
+* @see \App\Http\Controllers\App\NotificationController::notificacoes
+* @see app/Http/Controllers/App/NotificationController.php:11
+* @route '/app/notificacoes'
+*/
+export const notificacoes = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: notificacoes.url(options),
+    method: 'get',
+})
+
+notificacoes.definition = {
+    methods: ["get","head"],
+    url: '/app/notificacoes',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\NotificationController::notificacoes
+* @see app/Http/Controllers/App/NotificationController.php:11
+* @route '/app/notificacoes'
+*/
+notificacoes.url = (options?: RouteQueryOptions) => {
+    return notificacoes.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\NotificationController::notificacoes
+* @see app/Http/Controllers/App/NotificationController.php:11
+* @route '/app/notificacoes'
+*/
+notificacoes.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: notificacoes.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\NotificationController::notificacoes
+* @see app/Http/Controllers/App/NotificationController.php:11
+* @route '/app/notificacoes'
+*/
+notificacoes.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: notificacoes.url(options),
+    method: 'head',
+})
+
+/**
 * @see \App\Http\Controllers\App\ProfileController::perfil
 * @see app/Http/Controllers/App/ProfileController.php:11
 * @route '/app/perfil'
@@ -528,16 +572,62 @@ perfil.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     method: 'head',
 })
 
+/**
+* @see \App\Http\Controllers\App\SuporteController::suporte
+* @see app/Http/Controllers/App/SuporteController.php:11
+* @route '/app/suporte'
+*/
+export const suporte = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: suporte.url(options),
+    method: 'get',
+})
+
+suporte.definition = {
+    methods: ["get","head"],
+    url: '/app/suporte',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\SuporteController::suporte
+* @see app/Http/Controllers/App/SuporteController.php:11
+* @route '/app/suporte'
+*/
+suporte.url = (options?: RouteQueryOptions) => {
+    return suporte.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\SuporteController::suporte
+* @see app/Http/Controllers/App/SuporteController.php:11
+* @route '/app/suporte'
+*/
+suporte.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: suporte.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\SuporteController::suporte
+* @see app/Http/Controllers/App/SuporteController.php:11
+* @route '/app/suporte'
+*/
+suporte.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: suporte.url(options),
+    method: 'head',
+})
+
 const app = {
     dashboard: Object.assign(dashboard, dashboard),
     settings: Object.assign(settings, settings),
     conta: Object.assign(conta, conta),
-    cards: Object.assign(cards, cards),
+    cartaoCredito: Object.assign(cartaoCredito, cartaoCredito),
     assinatura: Object.assign(assinatura, assinatura),
     lancamentos: Object.assign(lancamentos, lancamentos),
     limites: Object.assign(limites, limites),
     conexaoBancaria: Object.assign(conexaoBancaria, conexaoBancaria),
+    notificacoes: Object.assign(notificacoes, notificacoes),
     perfil: Object.assign(perfil, perfil),
+    suporte: Object.assign(suporte, suporte),
     relatorios: Object.assign(relatorios, relatorios),
 }
 

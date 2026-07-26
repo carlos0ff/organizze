@@ -227,6 +227,4 @@ MIT © [carlos0ff](https://github.com/carlos0ff)
 
 ---
 
-<p align="center">
-  Feito com ☕ e Laravel no Brasil
-</p>
+<p align="center"> Feito com ☕ e Laravel no Brasil </p>

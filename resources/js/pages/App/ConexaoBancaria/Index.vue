@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, reactive } from 'vue'
-import Navbar from '@/Components/layout/Navbar.vue'
+import Navbar from '@/Components/navigation/Navbar.vue'
+import Footer from "@/Components/layout/Footer.vue";
 
 const search = ref('')
 const activeFilter = ref('todos')
@@ -84,64 +85,55 @@ function confirmConnect() {
 </script>
 
 <template>
-  <Navbar />
+
+    <-- Navbar -->
+    <Navbar />
+
   <main class="max-w-6xl mx-auto px-4 pt-24 pb-12">
-    <div class="min-h-screen bg-gray-50 space-y-6">
+    <div class="min-h-screen space-y-6">
 
-      <!-- ── Hero ─────────────────────────────────────────────────────────── -->
-      <div
-        class="rounded-2xl p-7 text-white"
-        style="background: linear-gradient(135deg, #1b2845 0%, #0d1624 100%)"
-      >
-        <div class="flex flex-col gap-5">
-          <!-- top row -->
-          <div class="flex items-start justify-between gap-6 flex-wrap">
-            <div class="flex-1 min-w-64">
-              <span class="inline-block text-xs font-bold tracking-widest text-emerald-400 bg-emerald-400/10 border border-emerald-400/25 rounded-full px-3 py-1 mb-3 uppercase">
-                Open Finance · BACEN
-              </span>
-              <h1 class="text-3xl font-bold mb-2">Conexão Bancária</h1>
-              <p class="text-slate-400 text-sm leading-relaxed max-w-lg">
-                Conecte suas contas e carteiras para sincronizar transações automaticamente, em tempo real.
-              </p>
-            </div>
+        <div class="rounded-md p-7 text-white" style="background: linear-gradient(135deg, #1b2845 0%, #0d1624 100%)">
+            <div class="flex flex-col gap-5">
+                <!-- top row -->
+                <div class="flex justify-between gap-6 flex-wrap">
+                    <div class="flex-1 min-w-64">
+                        <span class="inline-block text-xs font-bold tracking-widest text-emerald-400 bg-emerald-400/10 border border-emerald-400/25 rounded-full px-3 py-1 mb-3 uppercase">
+                          Open Finance · BACEN
+                        </span>
+                        <h1 class="text-3xl font-bold mb-2">Conexão Bancária</h1>
+                        <p class="text-slate-400 text-sm leading-relaxed max-w-lg">
+                            Conecte suas contas e carteiras para sincronizar transações automaticamente, em tempo real.
+                        </p>
+                    </div>
 
-            <div class="flex items-center gap-6 shrink-0">
-              <div class="text-center">
-                <div class="text-3xl font-bold">{{ connectedAccounts.length }}</div>
-                <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Contas</div>
-              </div>
-              <div class="w-px h-10 bg-white/10"></div>
-              <div class="text-center">
-                <div class="text-2xl font-bold">{{ fmt(totalBalance) }}</div>
-                <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Saldo Total</div>
-              </div>
-              <button
-                class="ml-2 flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white font-semibold text-sm px-5 py-3 rounded-xl transition-colors"
-              >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
-                </svg>
-                Conectar conta
-              </button>
-            </div>
-          </div>
+                    <!-- stats alinhados com o título -->
+                    <div class="flex items-center gap-6 shrink-0 mt-1">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">{{ connectedAccounts.length }}</div>
+                            <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Contas</div>
+                        </div>
+                        <div class="w-px h-10 bg-white/10"></div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">{{ fmt(totalBalance) }}</div>
+                            <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Saldo Total</div>
+                        </div>
+                    </div>
+                </div>
 
-          <!-- feature badges -->
-          <div class="flex items-center gap-6 flex-wrap pt-2 border-t border-white/10">
-            <div
-              v-for="f in ['Criptografia AES-256','Regulamentado pelo BACEN','Sincronização a cada hora','Dados em tempo real']"
-              :key="f"
-              class="flex items-center gap-2 text-xs text-slate-400"
-            >
-              <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              {{ f }}
+                <!-- bottom row: badges + botão -->
+                <div class="flex items-center justify-between gap-4 flex-wrap pt-2 border-t border-white/10">
+                    <!-- badges à esquerda -->
+                    <div class="flex items-center gap-6 flex-wrap">
+                        <div v-for="f in ['Criptografia AES-256','Regulamentado pelo BACEN','Sincronização a cada hora','Dados em tempo real']" :key="f" class="flex items-center gap-2 text-xs text-slate-400">
+                            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            {{ f }}
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
 
       <!-- ── Two columns ──────────────────────────────────────────────────── -->
       <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
@@ -318,9 +310,11 @@ function confirmConnect() {
       </div>
 
     </div>
+
+      <!-- Footer -->
+      <Footer />
   </main>
 
-  <!-- ── Modal de conexão ──────────────────────────────────────────────── -->
   <Transition
     enter-active-class="transition duration-200 ease-out"
     enter-from-class="opacity-0"
@@ -422,4 +416,8 @@ function confirmConnect() {
       </div>
     </div>
   </Transition>
+
+
+    <div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"><div class="bg-white rounded-2xl shadow-xl w-full max-w-md mx-4"><div class="flex items-center justify-between px-6 py-4 border-b border-gray-100"><div class="flex items-center gap-2"><div class="bg-red-100 text-red-500 w-8 h-8 rounded-full flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide w-4 h-4 lucide-minus-icon lucide-minus w-4 h-4" aria-hidden="true"><path d="M5 12h14"></path></svg></div><h2 class="text-base font-semibold text-gray-800">Nova Despesa</h2></div><button class="p-1 rounded-lg hover:bg-gray-100 text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide w-5 h-5 lucide-x-icon lucide-x w-5 h-5" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div><div class="flex border-b border-gray-100"><button class="border-b-2 border-red-400 text-red-500 font-semibold flex-1 py-2.5 text-xs capitalize transition-colors">despesa</button><button class="text-gray-400 flex-1 py-2.5 text-xs capitalize transition-colors">receita</button><button class="text-gray-400 flex-1 py-2.5 text-xs capitalize transition-colors">transferencia</button></div><div class="px-6 py-5 space-y-4"><div><label class="block text-xs font-semibold text-gray-500 mb-1">Descrição *</label><input type="text" placeholder="Ex.: Supermercado" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"></div><div class="grid grid-cols-2 gap-3"><div><label class="block text-xs font-semibold text-gray-500 mb-1">Valor *</label><input type="number" min="0.01" step="0.01" placeholder="0,00" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"></div><div><label class="block text-xs font-semibold text-gray-500 mb-1">Data *</label><input type="date" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"></div></div><div class="grid grid-cols-2 gap-3"><div><label class="block text-xs font-semibold text-gray-500 mb-1">Conta</label><input type="text" placeholder="Ex.: Nubank" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"></div><div><label class="block text-xs font-semibold text-gray-500 mb-1">Categoria</label><input type="text" placeholder="Ex.: Alimentação" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"></div></div><div><label class="block text-xs font-semibold text-gray-500 mb-1">Observação</label><textarea rows="2" placeholder="Opcional..." class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 resize-none"></textarea></div><label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="w-4 h-4 accent-emerald-500"><span class="text-sm text-gray-600">Já foi pago / recebido</span></label></div><div class="flex justify-end gap-2 px-6 py-4 border-t border-gray-100"><button class="px-4 py-2 text-sm text-gray-500 hover:text-gray-700 transition-colors">Cancelar</button><button class="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm font-semibold text-white rounded-lg transition-colors">Adicionar</button></div></div></div>
+
 </template>

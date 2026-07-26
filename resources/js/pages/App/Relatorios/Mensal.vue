@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
-import Navbar from '@/Components/layout/Navbar.vue';
+import Navbar from '@/Components/navigation/Navbar.vue';
 import Footer from '@/Components/layout/Footer.vue';
 import {
     ChevronLeft, ChevronRight, TrendingUp, TrendingDown,

@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import Navbar from '@/Components/layout/Navbar.vue';
+import Navbar from '@/Components/navigation/Navbar.vue';
 import Footer from '@/Components/layout/Footer.vue';
 import {
     User, Settings, Shield, Bell, Link2, Download,
