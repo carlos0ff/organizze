@@ -16,7 +16,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
 </script>
 
 <template>
-    <nav class="bg-[#22c75e] shadow-lg fixed top-0 left-0 w-full z-50">
+    <nav class="bg-[#22c75e] shadow-lg  top-0 left-0 w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
 
@@ -62,8 +62,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
                                         <p class="text-xs text-gray-400">Resumo do mês atual</p>
                                     </div>
                                 </a>
-                                <a href="/app/relatorios/anual"
-                                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors">
+                                <a href="/app/relatorios/anual" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors">
                                     <span class="w-8 h-8 flex items-center justify-center rounded-lg bg-blue-50 text-blue-500 shrink-0">
                                         <BarChart2 class="w-4 h-4" />
                                     </span>
@@ -72,8 +71,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
                                         <p class="text-xs text-gray-400">Evolução nos últimos 12 meses</p>
                                     </div>
                                 </a>
-                                <a href="/app/relatorios/categorias"
-                                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors">
+                                <a href="/app/relatorios/categorias" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors">
                                     <span class="w-8 h-8 flex items-center justify-center rounded-lg bg-purple-50 text-purple-500 shrink-0">
                                         <Layers class="w-4 h-4" />
                                     </span>
@@ -82,8 +80,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
                                         <p class="text-xs text-gray-400">Gastos detalhados por categoria</p>
                                     </div>
                                 </a>
-                                <a href="/app/relatorios/receitas-despesas"
-                                   class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors">
+                                <a href="/app/relatorios/receitas-despesas" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors">
                                     <span class="w-8 h-8 flex items-center justify-center rounded-lg bg-emerald-50 text-emerald-500 shrink-0">
                                         <Scale class="w-4 h-4" />
                                     </span>
@@ -96,12 +93,10 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
                         </div>
                     </div>
 
-                    <a href="/app/limites"
-                       class="relative text-white font-medium text-sm after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
+                    <a href="/app/limites" class="relative text-white font-medium text-sm after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
                         Limite de Gastos
                     </a>
-                    <a href="/app/conexao-bancaria"
-                       class="relative text-white font-medium text-sm after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
+                    <a href="/app/conexao-bancaria" class="relative text-white font-medium text-sm after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
                         Conexão Bancária
                     </a>
                 </div>
@@ -109,48 +104,22 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
                 <div class="flex items-center space-x-2">
                     <!-- Notificações -->
                     <div class="relative" ref="notifRef">
-                        <button
-                            @click.stop="notifOpen = !notifOpen"
-                            :aria-expanded="notifOpen"
-                            aria-haspopup="true"
-                            class="relative p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
-                        >
+                        <button @click.stop="notifOpen = !notifOpen" :aria-expanded="notifOpen" aria-haspopup="true" class="relative p-2 text-white hover:bg-white/10 rounded-lg transition-colors">
                             <Bell class="w-5 h-5" />
-                            <Transition
-                                enter-active-class="transition duration-150 ease-out"
-                                enter-from-class="opacity-0 scale-50"
-                                enter-to-class="opacity-100 scale-100"
-                                leave-active-class="transition duration-100 ease-in"
-                                leave-from-class="opacity-100 scale-100"
-                                leave-to-class="opacity-0 scale-50"
-                            >
+                            <Transition enter-active-class="transition duration-150 ease-out" enter-from-class="opacity-0 scale-50" enter-to-class="opacity-100 scale-100" leave-active-class="transition duration-100 ease-in" leave-from-class="opacity-100 scale-100" leave-to-class="opacity-0 scale-50">
                                 <span v-if="unreadCount > 0" class="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
                                     {{ unreadCount }}
                                 </span>
                             </Transition>
                         </button>
 
-                        <Transition
-                            enter-active-class="transition duration-150 ease-out"
-                            enter-from-class="opacity-0 scale-95 -translate-y-1"
-                            enter-to-class="opacity-100 scale-100 translate-y-0"
-                            leave-active-class="transition duration-100 ease-in"
-                            leave-from-class="opacity-100 scale-100 translate-y-0"
-                            leave-to-class="opacity-0 scale-95 -translate-y-1"
-                        >
-                            <div
-                                v-if="notifOpen"
-                                class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-100 origin-top-right z-50"
-                            >
+                        <Transition enter-active-class="transition duration-150 ease-out" enter-from-class="opacity-0 scale-95 -translate-y-1" enter-to-class="opacity-100 scale-100 translate-y-0" leave-active-class="transition duration-100 ease-in" leave-from-class="opacity-100 scale-100 translate-y-0" leave-to-class="opacity-0 scale-95 -translate-y-1">
+                            <div v-if="notifOpen" class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-100 origin-top-right z-50">
                                 <!-- Cabeçalho -->
                                 <div class="px-4 pt-3 pb-2.5 border-b border-gray-100">
                                     <div class="flex items-center justify-between">
                                         <span class="text-sm font-semibold text-gray-900">Notificações</span>
-                                        <button
-                                            v-if="unreadCount > 0"
-                                            @click="markAllRead"
-                                            class="text-xs font-medium text-[#22c75e] hover:text-green-700 whitespace-nowrap transition-colors"
-                                        >
+                                        <button v-if="unreadCount > 0" @click="markAllRead" class="text-xs font-medium text-[#22c75e] hover:text-green-700 whitespace-nowrap transition-colors">
                                             Marcar lidas
                                         </button>
                                     </div>
@@ -161,21 +130,14 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
 
                                 <!-- Lista -->
                                 <div class="divide-y divide-gray-50 max-h-72 overflow-y-auto">
-                                    <button
-                                        v-for="n in notifications"
-                                        :key="n.id"
-                                        @click="n.read = true"
-                                        class="w-full flex items-start gap-3 px-4 py-3 text-left transition-colors"
-                                        :class="n.read ? 'hover:bg-gray-50' : 'bg-green-50/40 hover:bg-green-50'"
-                                    >
+                                    <button v-for="n in notifications" :key="n.id" @click="n.read = true" class="w-full flex items-start gap-3 px-4 py-3 text-left transition-colors" :class="n.read ? 'hover:bg-gray-50' : 'bg-green-50/40 hover:bg-green-50'">
                                         <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
                                               :class="{
                                                 'bg-amber-100 text-amber-500': n.type === 'warning',
                                                 'bg-red-100 text-red-500':    n.type === 'danger',
                                                 'bg-blue-100 text-blue-500':  n.type === 'info',
                                                 'bg-green-100 text-green-500':n.type === 'success',
-                                            }"
-                                        >
+                                            }">
                                             <AlertTriangle  v-if="n.type === 'warning'" class="w-4 h-4" />
                                             <AlertCircle    v-else-if="n.type === 'danger'"  class="w-4 h-4" />
                                             <Info           v-else-if="n.type === 'info'"    class="w-4 h-4" />
@@ -191,10 +153,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
                                 </div>
 
                                 <!-- Rodapé -->
-                                <a
-                                    href="/notificacoes"
-                                    class="block text-center text-sm font-medium text-gray-600 hover:text-gray-900 px-4 py-3 border-t border-gray-100 hover:bg-gray-50 rounded-b-xl transition-colors"
-                                >
+                                <a href="/notificacoes" class="block text-center text-sm font-medium text-gray-600 hover:text-gray-900 px-4 py-3 border-t border-gray-100 hover:bg-gray-50 rounded-b-xl transition-colors">
                                     Ver todas as notificações →
                                 </a>
                             </div>
@@ -202,12 +161,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
                     </div>
 
                     <div class="relative" ref="profileRef">
-                        <button
-                            @click.stop="profileOpen = !profileOpen"
-                            :aria-expanded="profileOpen"
-                            aria-haspopup="true"
-                            class="flex items-center gap-2.5 rounded-xl px-2 py-1.5 hover:bg-white/10 transition-colors"
-                        >
+                        <button @click.stop="profileOpen = !profileOpen" :aria-expanded="profileOpen" aria-haspopup="true" class="flex items-center gap-2.5 rounded-xl px-2 py-1.5 hover:bg-white/10 transition-colors">
                             <div class="relative">
                                 <img src="https://i.pravatar.cc/100?img=12" class="h-9 w-9 rounded-full object-cover ring-2 ring-white/30" />
                                 <span class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-[#22c75e]"></span>
@@ -222,18 +176,8 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
                             />
                         </button>
 
-                        <Transition
-                            enter-active-class="transition duration-150 ease-out"
-                            enter-from-class="opacity-0 scale-95 -translate-y-1"
-                            enter-to-class="opacity-100 scale-100 translate-y-0"
-                            leave-active-class="transition duration-100 ease-in"
-                            leave-from-class="opacity-100 scale-100 translate-y-0"
-                            leave-to-class="opacity-0 scale-95 -translate-y-1"
-                        >
-                            <div
-                                v-if="profileOpen"
-                                class="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-100 origin-top-right z-50"
-                            >
+                        <Transition enter-active-class="transition duration-150 ease-out" enter-from-class="opacity-0 scale-95 -translate-y-1" enter-to-class="opacity-100 scale-100 translate-y-0" leave-active-class="transition duration-100 ease-in" leave-from-class="opacity-100 scale-100 translate-y-0" leave-to-class="opacity-0 scale-95 -translate-y-1">
+                            <div v-if="profileOpen" class="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-100 origin-top-right z-50">
                                 <!-- Cabeçalho -->
                                 <div class="p-3 border-b border-gray-100">
                                     <div class="flex items-center gap-3">
@@ -267,9 +211,9 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
 
                                 <!-- Sair -->
                                 <div class="p-1.5 border-t border-gray-100">
-                                    <button class="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                                    <a href="/sair" class="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors">
                                         <LogOut class="w-4 h-4" /> Sair da conta
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </Transition>

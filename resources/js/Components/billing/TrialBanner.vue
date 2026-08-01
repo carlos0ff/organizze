@@ -11,7 +11,7 @@ const trialBarDismissed = ref(false);
 
 <template>
 
-    <div v-if="!trialBarDismissed" class="fixed top-16 left-0 w-full z-40 bg-amber-50 border-b border-amber-200/80 shadow-sm">
+    <div v-if="!trialBarDismissed" class="left-0 w-full z-40 bg-amber-50 border-b border-amber-200/80 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-11 flex items-center justify-between gap-4">
 
             <!-- Plano -->

@@ -254,10 +254,10 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 </script>
 
 <template>
-    <-- -->
+    <!-- -->
     <Navbar />
 
-    <-- -->
+    <!-- -->
     <Billing />
 
     <!-- Content -->
