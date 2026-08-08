@@ -1,9 +1,5 @@
 <h1 align="center">
-  <br>
-  <img src="https://raw.githubusercontent.com/carlos0ff/organizze/main/public/images/logo-organizze.svg" alt="Organizze" width="180">
-  <br>
-  Organizze
-  <br>
+  <br /> <img src="" alt="Organizze logo" width="180"> <br /> Organizze <br />
 </h1>
 
 <p align="center">
