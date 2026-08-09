@@ -27,11 +27,11 @@ Mas o ponto mais importante: em nenhum momento simplesmente copiei código sem e
 
 Pedi ao Claude para criar um **desafio técnico real para devs PHP/Laravel júnior** — o tipo que uma empresa usaria num processo seletivo.
 
-O resultado? O **desafio-backend-workfacilit**: uma API REST completa de workflows de aprovação dinâmica (etapas, condicionais, aprovação múltipla, auditoria, Redis, testes com Pest).
+O resultado? O **desafio-backend-workfacilit**: uma API REST de workflows de aprovação dinâmica (etapas, condicionais, aprovação múltipla, auditoria, Redis, testes com Pest).
 
-O nível de detalhe foi impressionante — critérios de avaliação claros, requisitos técnicos e funcionais separados, e casos de borda bem especificados.
+A IA gerou toda a estrutura — requisitos funcionais e técnicos, critérios de avaliação, casos de borda. A implementação está em andamento, sendo desenvolvida progressivamente.
 
-👉 https://github.com/carlos0ff/desafio-backend-workfacilit
+👉 https://github.com/carlos0ff/desafio-backend-workfacilit *(em desenvolvimento)*
 
 ---
 

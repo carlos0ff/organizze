@@ -161,21 +161,26 @@ function copyLink()       { linkCopied.value = true; setTimeout(() => (linkCopie
                                 para desenvolvedores PHP/Laravel — o tipo de desafio que uma empresa usaria num processo seletivo.
                             </p>
                             <p class="leading-relaxed text-gray-600">
-                                O resultado foi o <strong>desafio-backend-workfacilit</strong>: um projeto completo simulando o core
-                                de uma plataforma de automação de processos. O desafio pede que o candidato construa uma API REST
+                                O resultado foi o <strong>desafio-backend-workfacilit</strong>: um projeto em desenvolvimento que simula o core
+                                de uma plataforma de automação de processos. A proposta é construir uma API REST
                                 que gerencie <strong>fluxos de aprovação dinâmicos</strong> — onde admins definem templates com etapas
                                 sequenciais e instâncias avançam conforme aprovações ou reprovações.
                             </p>
 
                             <!-- Desafio destaque -->
                             <div class="bg-gray-900 text-white rounded-xl p-6">
-                                <div class="flex items-center gap-2 mb-4">
-                                    <Terminal class="w-4 h-4 text-emerald-400" />
-                                    <span class="text-sm font-bold text-gray-300">desafio-backend-workfacilit</span>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center gap-2">
+                                        <Terminal class="w-4 h-4 text-emerald-400" />
+                                        <span class="text-sm font-bold text-gray-300">desafio-backend-workfacilit</span>
+                                    </div>
+                                    <span class="text-[10px] font-bold px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">
+                                        Em desenvolvimento
+                                    </span>
                                 </div>
                                 <p class="text-sm text-gray-300 leading-relaxed mb-4">
                                     Desafio técnico para devs PHP/Laravel júnior, criado com IA. Simula o core de uma plataforma de automação:
-                                    workflows configuráveis com etapas, aprovações, condicionais e integrações.
+                                    workflows configuráveis com etapas, aprovações, condicionais e integrações. Ainda em construção.
                                 </p>
                                 <div class="grid grid-cols-2 gap-3 mb-4">
                                     <div v-for="item in [
@@ -197,14 +202,15 @@ function copyLink()       { linkCopied.value = true; setTimeout(() => (linkCopie
                             </div>
 
                             <p class="leading-relaxed text-gray-600">
-                                O nível de detalhe foi impressionante: critérios de avaliação claros, requisitos funcionais e técnicos
-                                separados, casos de borda especificados (etapas condicionais, aprovação múltipla, histórico de auditoria),
-                                e até os critérios diferenciadores que separam um candidato mediano de um excelente.
+                                O nível de detalhe da estrutura gerada pela IA foi impressionante: critérios de avaliação claros,
+                                requisitos funcionais e técnicos separados, casos de borda especificados (etapas condicionais,
+                                aprovação múltipla, histórico de auditoria). A implementação está em andamento — o repositório
+                                já está no GitHub e sendo desenvolvido progressivamente.
                             </p>
                             <p class="leading-relaxed text-gray-600">
-                                A lição aqui não é "a IA pode criar desafios". É que, quando você sabe o que quer e consegue
-                                descrever com clareza — a IA entrega algo que normalmente levaria horas de trabalho em minutos.
-                                <strong>O prompt é o skill.</strong>
+                                A lição aqui não é "a IA pode criar desafios prontos". É que, quando você sabe o que quer e
+                                consegue descrever com clareza — a IA entrega uma base sólida que normalmente levaria horas
+                                para estruturar do zero. <strong>O prompt é o skill.</strong>
                             </p>
 
                             <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">O que aprendi sobre trabalhar com IA</h2>
@@ -331,6 +337,7 @@ function copyLink()       { linkCopied.value = true; setTimeout(() => (linkCopie
                             <p class="text-xs text-gray-500 leading-relaxed mb-4">
                                 Desafio técnico para devs PHP/Laravel júnior. Criado com Claude.
                                 Workflows de aprovação dinâmica com Docker, Redis e testes.
+                                <span class="font-semibold text-yellow-600">Em desenvolvimento.</span>
                             </p>
                             <a href="https://github.com/carlos0ff/desafio-backend-workfacilit" target="_blank"
                                 class="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 hover:text-emerald-700 transition-colors">
