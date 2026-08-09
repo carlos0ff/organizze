@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
@@ -17,7 +19,7 @@ class BlogController extends Controller
     /**
      * Exibe a listagem de artigos.
      */
-    public function articles(): \Inertia\Response
+    public function artigos(): \Inertia\Response
     {
         return inertia('Blog/Articles/Index');
     }

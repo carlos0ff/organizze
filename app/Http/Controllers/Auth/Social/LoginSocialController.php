@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+declare(strict_types=1);
+
+namespace App\Http\Controllers\Auth\Social;
 
 use App\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
 
-class SocialLoginController extends Controller
+class LoginSocialController extends Controller
 {
     /**
      * Redireciona o usuário para a autenticação via provedor social (Google).
      */
-    public function redirectToProvider(): \Illuminate\Http\RedirectResponse
+    public function redirecionar(): \Illuminate\Http\RedirectResponse
     {
         // TODO: return Socialite::driver('google')->redirect();
     }
@@ -18,7 +20,7 @@ class SocialLoginController extends Controller
     /**
      * Recebe o callback do provedor e autentica o usuário.
      */
-    public function handleProviderCallback(): \Illuminate\Http\RedirectResponse
+    public function callback(): \Illuminate\Http\RedirectResponse
     {
         // TODO: $user = Socialite::driver('google')->user();
     }

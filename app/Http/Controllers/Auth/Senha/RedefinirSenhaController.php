@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+declare(strict_types=1);
+
+namespace App\Http\Controllers\Auth\Senha;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
-class ResetPasswordController extends Controller
+class RedefinirSenhaController extends Controller
 {
     /**
      * Exibe o formulário de redefinição de senha.
      */
     public function index(): \Inertia\Response
     {
-        return \Inertia\Inertia::render('Auth/Redefinir');
+        return Inertia::render('Auth/Redefinir');
     }
 
     /**

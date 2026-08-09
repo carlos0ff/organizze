@@ -1,26 +1,31 @@
 <?php
 
-/** Auth Controllers  **/
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\Login\LoginController;
+use App\Http\Controllers\Auth\Registro\RegistroController;
+use App\Http\Controllers\Auth\Senha\RecuperarSenhaController;
+use App\Http\Controllers\Auth\Senha\RedefinirSenhaController;
+use App\Http\Controllers\Auth\Social\LoginSocialController;
 
-/**
- * Auth Routes - Grupo de rotas de autenticação
- * Todas as rotas deste grupo terão prefixo "auth"
-*/
-Route::prefix('auth')->middleware('guest')->group(function(){
+Route::prefix('auth')->middleware('guest')->group(function () {
 
-    /**  Rota de login **/
-    Route::get('/entrar', [LoginController::class, "index"])->name('auth.login');
-    Route::post('/entrar', [LoginController::class, "authenticate"])->name('auth.authenticate');
+    /** Login **/
+    Route::get('/entrar',  [LoginController::class, 'index'])->name('auth.login');
+    Route::post('/entrar', [LoginController::class, 'authenticate'])->name('auth.authenticate');
+    Route::post('/sair',   [LoginController::class, 'logout'])->name('auth.logout')->withoutMiddleware('guest');
 
-    /** Rota de cadastro de usuário **/
-    Route::get('/cadastro', [RegisterController::class, "index"])->name('auth.register');
-    Route::post('/cadastro', [RegisterController::class, "authenticate"])->name('auth.authenticate');
+    /** Cadastro **/
+    Route::get('/cadastro',  [RegistroController::class, 'index'])->name('auth.register');
+    Route::post('/cadastro', [RegistroController::class, 'store'])->name('auth.register.store');
 
-    /** Rota de recuperação de senha **/
-    Route::get('/recuperar', [ForgotPasswordController::class, "index"])->name('auth.forget');
-    Route::post('/recuperar', [ForgotPasswordController::class, "sendResetLinkEmail"])->name('auth.forgot.send');
+    /** Recuperação de senha **/
+    Route::get('/recuperar',  [RecuperarSenhaController::class, 'index'])->name('auth.forgot');
+    Route::post('/recuperar', [RecuperarSenhaController::class, 'enviar'])->name('auth.forgot.send');
+
+    /** Redefinição de senha **/
+    Route::get('/redefinir/{token}', [RedefinirSenhaController::class, 'index'])->name('auth.reset');
+    Route::post('/redefinir',        [RedefinirSenhaController::class, 'update'])->name('auth.reset.update');
+
+    /** Login social **/
+    Route::get('/social/redirecionar', [LoginSocialController::class, 'redirecionar'])->name('auth.social.redirect');
+    Route::get('/social/callback',     [LoginSocialController::class, 'callback'])->name('auth.social.callback');
 });
-

@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+declare(strict_types=1);
+
+namespace App\Http\Controllers\Auth\Registro;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
-class RegisterController extends Controller
+class RegistroController extends Controller
 {
     /**
      * Exibe o formulário de cadastro.
      */
     public function index(): \Inertia\Response
     {
-        return \Inertia\Inertia::render('Auth/Cadastro');
+        return Inertia::render('Auth/Cadastro');
     }
 
     /**
