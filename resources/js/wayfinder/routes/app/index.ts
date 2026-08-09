@@ -1,8 +1,19 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../wayfinder'
+import dashboard074181035978 from './dashboard'
+import contas1f7ed9 from './contas'
+import lancamentos5ee860 from './lancamentos'
+import cartoesB32811 from './cartoes'
+import categoriasC782cd from './categorias'
 import relatorios from './relatorios'
+import limitesBff468 from './limites'
+import perfil9785a8 from './perfil'
+import configuracoes0197ca from './configuracoes'
+import conexaoBancaria182595 from './conexao-bancaria'
+import plano44ff36 from './plano'
+import chamados2b39c2 from './chamados'
 /**
 * @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see [unknown]:0
 * @route '/panel'
 */
 export const dashboard = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -17,7 +28,7 @@ dashboard.definition = {
 
 /**
 * @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see [unknown]:0
 * @route '/panel'
 */
 dashboard.url = (options?: RouteQueryOptions) => {
@@ -26,7 +37,7 @@ dashboard.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see [unknown]:0
 * @route '/panel'
 */
 dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -36,7 +47,7 @@ dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see [unknown]:0
 * @route '/panel'
 */
 dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,8 +56,8 @@ dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see \App\Http\Controllers\App\Dashboard\DashboardController::dashboard
+* @see app/Http/Controllers/App/Dashboard/DashboardController.php:14
 * @route '/app'
 */
 export const dashboard = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -60,8 +71,8 @@ dashboard.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see \App\Http\Controllers\App\Dashboard\DashboardController::dashboard
+* @see app/Http/Controllers/App/Dashboard/DashboardController.php:14
 * @route '/app'
 */
 dashboard.url = (options?: RouteQueryOptions) => {
@@ -69,8 +80,8 @@ dashboard.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see \App\Http\Controllers\App\Dashboard\DashboardController::dashboard
+* @see app/Http/Controllers/App/Dashboard/DashboardController.php:14
 * @route '/app'
 */
 dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -79,8 +90,8 @@ dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see app/Http/Controllers/App/DashboardController.php:13
+* @see \App\Http\Controllers\App\Dashboard\DashboardController::dashboard
+* @see app/Http/Controllers/App/Dashboard/DashboardController.php:14
 * @route '/app'
 */
 dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -90,7 +101,7 @@ dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\App\SettingsController::settings
-* @see app/Http/Controllers/App/SettingsController.php:13
+* @see [unknown]:0
 * @route '/panel/configuracoes'
 */
 export const settings = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -105,7 +116,7 @@ settings.definition = {
 
 /**
 * @see \App\Http\Controllers\App\SettingsController::settings
-* @see app/Http/Controllers/App/SettingsController.php:13
+* @see [unknown]:0
 * @route '/panel/configuracoes'
 */
 settings.url = (options?: RouteQueryOptions) => {
@@ -114,7 +125,7 @@ settings.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\App\SettingsController::settings
-* @see app/Http/Controllers/App/SettingsController.php:13
+* @see [unknown]:0
 * @route '/panel/configuracoes'
 */
 settings.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -124,52 +135,8 @@ settings.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\App\SettingsController::settings
-* @see app/Http/Controllers/App/SettingsController.php:13
+* @see [unknown]:0
 * @route '/panel/configuracoes'
-*/
-settings.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: settings.url(options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\App\SettingsController::settings
-* @see app/Http/Controllers/App/SettingsController.php:13
-* @route '/app/configuracao'
-*/
-export const settings = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: settings.url(options),
-    method: 'get',
-})
-
-settings.definition = {
-    methods: ["get","head"],
-    url: '/app/configuracao',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\App\SettingsController::settings
-* @see app/Http/Controllers/App/SettingsController.php:13
-* @route '/app/configuracao'
-*/
-settings.url = (options?: RouteQueryOptions) => {
-    return settings.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\App\SettingsController::settings
-* @see app/Http/Controllers/App/SettingsController.php:13
-* @route '/app/configuracao'
-*/
-settings.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: settings.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\App\SettingsController::settings
-* @see app/Http/Controllers/App/SettingsController.php:13
-* @route '/app/configuracao'
 */
 settings.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: settings.url(options),
@@ -178,7 +145,7 @@ settings.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\App\AccountController::conta
-* @see app/Http/Controllers/App/AccountController.php:14
+* @see [unknown]:0
 * @route '/panel/contas'
 */
 export const conta = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -193,7 +160,7 @@ conta.definition = {
 
 /**
 * @see \App\Http\Controllers\App\AccountController::conta
-* @see app/Http/Controllers/App/AccountController.php:14
+* @see [unknown]:0
 * @route '/panel/contas'
 */
 conta.url = (options?: RouteQueryOptions) => {
@@ -202,7 +169,7 @@ conta.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\App\AccountController::conta
-* @see app/Http/Controllers/App/AccountController.php:14
+* @see [unknown]:0
 * @route '/panel/contas'
 */
 conta.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -212,7 +179,7 @@ conta.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\App\AccountController::conta
-* @see app/Http/Controllers/App/AccountController.php:14
+* @see [unknown]:0
 * @route '/panel/contas'
 */
 conta.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -221,140 +188,52 @@ conta.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\AccountController::conta
-* @see app/Http/Controllers/App/AccountController.php:14
+* @see \App\Http\Controllers\App\Conta\ContaController::contas
+* @see app/Http/Controllers/App/Conta/ContaController.php:15
 * @route '/app/contas'
 */
-export const conta = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: conta.url(options),
+export const contas = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: contas.url(options),
     method: 'get',
 })
 
-conta.definition = {
+contas.definition = {
     methods: ["get","head"],
     url: '/app/contas',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\AccountController::conta
-* @see app/Http/Controllers/App/AccountController.php:14
+* @see \App\Http\Controllers\App\Conta\ContaController::contas
+* @see app/Http/Controllers/App/Conta/ContaController.php:15
 * @route '/app/contas'
 */
-conta.url = (options?: RouteQueryOptions) => {
-    return conta.definition.url + queryParams(options)
+contas.url = (options?: RouteQueryOptions) => {
+    return contas.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\App\AccountController::conta
-* @see app/Http/Controllers/App/AccountController.php:14
+* @see \App\Http\Controllers\App\Conta\ContaController::contas
+* @see app/Http/Controllers/App/Conta/ContaController.php:15
 * @route '/app/contas'
 */
-conta.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: conta.url(options),
+contas.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: contas.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\App\AccountController::conta
-* @see app/Http/Controllers/App/AccountController.php:14
+* @see \App\Http\Controllers\App\Conta\ContaController::contas
+* @see app/Http/Controllers/App/Conta/ContaController.php:15
 * @route '/app/contas'
 */
-conta.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: conta.url(options),
+contas.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: contas.url(options),
     method: 'head',
 })
 
 /**
-* @see \App\Http\Controllers\App\CartaoCreditoController::cartaoCredito
-* @see app/Http/Controllers/App/CartaoCreditoController.php:11
-* @route '/app/cartao-credito'
-*/
-export const cartaoCredito = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: cartaoCredito.url(options),
-    method: 'get',
-})
-
-cartaoCredito.definition = {
-    methods: ["get","head"],
-    url: '/app/cartao-credito',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\App\CartaoCreditoController::cartaoCredito
-* @see app/Http/Controllers/App/CartaoCreditoController.php:11
-* @route '/app/cartao-credito'
-*/
-cartaoCredito.url = (options?: RouteQueryOptions) => {
-    return cartaoCredito.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\App\CartaoCreditoController::cartaoCredito
-* @see app/Http/Controllers/App/CartaoCreditoController.php:11
-* @route '/app/cartao-credito'
-*/
-cartaoCredito.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: cartaoCredito.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\App\CartaoCreditoController::cartaoCredito
-* @see app/Http/Controllers/App/CartaoCreditoController.php:11
-* @route '/app/cartao-credito'
-*/
-cartaoCredito.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: cartaoCredito.url(options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\App\SubscriptionController::assinatura
-* @see app/Http/Controllers/App/SubscriptionController.php:9
-* @route '/app/assinatura'
-*/
-export const assinatura = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: assinatura.url(options),
-    method: 'get',
-})
-
-assinatura.definition = {
-    methods: ["get","head"],
-    url: '/app/assinatura',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\App\SubscriptionController::assinatura
-* @see app/Http/Controllers/App/SubscriptionController.php:9
-* @route '/app/assinatura'
-*/
-assinatura.url = (options?: RouteQueryOptions) => {
-    return assinatura.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\App\SubscriptionController::assinatura
-* @see app/Http/Controllers/App/SubscriptionController.php:9
-* @route '/app/assinatura'
-*/
-assinatura.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: assinatura.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\App\SubscriptionController::assinatura
-* @see app/Http/Controllers/App/SubscriptionController.php:9
-* @route '/app/assinatura'
-*/
-assinatura.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: assinatura.url(options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\App\TransactionController::lancamentos
-* @see app/Http/Controllers/App/TransactionController.php:14
+* @see \App\Http\Controllers\App\Lancamento\LancamentoController::lancamentos
+* @see app/Http/Controllers/App/Lancamento/LancamentoController.php:15
 * @route '/app/lancamentos'
 */
 export const lancamentos = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -368,8 +247,8 @@ lancamentos.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\TransactionController::lancamentos
-* @see app/Http/Controllers/App/TransactionController.php:14
+* @see \App\Http\Controllers\App\Lancamento\LancamentoController::lancamentos
+* @see app/Http/Controllers/App/Lancamento/LancamentoController.php:15
 * @route '/app/lancamentos'
 */
 lancamentos.url = (options?: RouteQueryOptions) => {
@@ -377,8 +256,8 @@ lancamentos.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\App\TransactionController::lancamentos
-* @see app/Http/Controllers/App/TransactionController.php:14
+* @see \App\Http\Controllers\App\Lancamento\LancamentoController::lancamentos
+* @see app/Http/Controllers/App/Lancamento/LancamentoController.php:15
 * @route '/app/lancamentos'
 */
 lancamentos.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -387,8 +266,8 @@ lancamentos.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\TransactionController::lancamentos
-* @see app/Http/Controllers/App/TransactionController.php:14
+* @see \App\Http\Controllers\App\Lancamento\LancamentoController::lancamentos
+* @see app/Http/Controllers/App/Lancamento/LancamentoController.php:15
 * @route '/app/lancamentos'
 */
 lancamentos.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -397,8 +276,96 @@ lancamentos.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\BudgetController::limites
-* @see app/Http/Controllers/App/BudgetController.php:9
+* @see \App\Http\Controllers\App\CartaoCredito\CartaoController::cartoes
+* @see app/Http/Controllers/App/CartaoCredito/CartaoController.php:15
+* @route '/app/cartoes'
+*/
+export const cartoes = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: cartoes.url(options),
+    method: 'get',
+})
+
+cartoes.definition = {
+    methods: ["get","head"],
+    url: '/app/cartoes',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\CartaoCredito\CartaoController::cartoes
+* @see app/Http/Controllers/App/CartaoCredito/CartaoController.php:15
+* @route '/app/cartoes'
+*/
+cartoes.url = (options?: RouteQueryOptions) => {
+    return cartoes.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\CartaoCredito\CartaoController::cartoes
+* @see app/Http/Controllers/App/CartaoCredito/CartaoController.php:15
+* @route '/app/cartoes'
+*/
+cartoes.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: cartoes.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\CartaoCredito\CartaoController::cartoes
+* @see app/Http/Controllers/App/CartaoCredito/CartaoController.php:15
+* @route '/app/cartoes'
+*/
+cartoes.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: cartoes.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\Categorias\CategoriaController::categorias
+* @see app/Http/Controllers/App/Categorias/CategoriaController.php:15
+* @route '/app/categorias'
+*/
+export const categorias = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: categorias.url(options),
+    method: 'get',
+})
+
+categorias.definition = {
+    methods: ["get","head"],
+    url: '/app/categorias',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\Categorias\CategoriaController::categorias
+* @see app/Http/Controllers/App/Categorias/CategoriaController.php:15
+* @route '/app/categorias'
+*/
+categorias.url = (options?: RouteQueryOptions) => {
+    return categorias.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\Categorias\CategoriaController::categorias
+* @see app/Http/Controllers/App/Categorias/CategoriaController.php:15
+* @route '/app/categorias'
+*/
+categorias.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: categorias.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\Categorias\CategoriaController::categorias
+* @see app/Http/Controllers/App/Categorias/CategoriaController.php:15
+* @route '/app/categorias'
+*/
+categorias.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: categorias.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\LimiteGastos\LimiteGastosController::limites
+* @see app/Http/Controllers/App/LimiteGastos/LimiteGastosController.php:15
 * @route '/app/limites'
 */
 export const limites = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -412,8 +379,8 @@ limites.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\BudgetController::limites
-* @see app/Http/Controllers/App/BudgetController.php:9
+* @see \App\Http\Controllers\App\LimiteGastos\LimiteGastosController::limites
+* @see app/Http/Controllers/App/LimiteGastos/LimiteGastosController.php:15
 * @route '/app/limites'
 */
 limites.url = (options?: RouteQueryOptions) => {
@@ -421,8 +388,8 @@ limites.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\App\BudgetController::limites
-* @see app/Http/Controllers/App/BudgetController.php:9
+* @see \App\Http\Controllers\App\LimiteGastos\LimiteGastosController::limites
+* @see app/Http/Controllers/App/LimiteGastos/LimiteGastosController.php:15
 * @route '/app/limites'
 */
 limites.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -431,8 +398,8 @@ limites.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\BudgetController::limites
-* @see app/Http/Controllers/App/BudgetController.php:9
+* @see \App\Http\Controllers\App\LimiteGastos\LimiteGastosController::limites
+* @see app/Http/Controllers/App/LimiteGastos/LimiteGastosController.php:15
 * @route '/app/limites'
 */
 limites.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -441,96 +408,8 @@ limites.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\BankConnectionController::conexaoBancaria
-* @see app/Http/Controllers/App/BankConnectionController.php:9
-* @route '/app/conexao-bancaria'
-*/
-export const conexaoBancaria = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: conexaoBancaria.url(options),
-    method: 'get',
-})
-
-conexaoBancaria.definition = {
-    methods: ["get","head"],
-    url: '/app/conexao-bancaria',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\App\BankConnectionController::conexaoBancaria
-* @see app/Http/Controllers/App/BankConnectionController.php:9
-* @route '/app/conexao-bancaria'
-*/
-conexaoBancaria.url = (options?: RouteQueryOptions) => {
-    return conexaoBancaria.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\App\BankConnectionController::conexaoBancaria
-* @see app/Http/Controllers/App/BankConnectionController.php:9
-* @route '/app/conexao-bancaria'
-*/
-conexaoBancaria.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: conexaoBancaria.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\App\BankConnectionController::conexaoBancaria
-* @see app/Http/Controllers/App/BankConnectionController.php:9
-* @route '/app/conexao-bancaria'
-*/
-conexaoBancaria.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: conexaoBancaria.url(options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\App\NotificationController::notificacoes
-* @see app/Http/Controllers/App/NotificationController.php:11
-* @route '/app/notificacoes'
-*/
-export const notificacoes = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: notificacoes.url(options),
-    method: 'get',
-})
-
-notificacoes.definition = {
-    methods: ["get","head"],
-    url: '/app/notificacoes',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\App\NotificationController::notificacoes
-* @see app/Http/Controllers/App/NotificationController.php:11
-* @route '/app/notificacoes'
-*/
-notificacoes.url = (options?: RouteQueryOptions) => {
-    return notificacoes.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\App\NotificationController::notificacoes
-* @see app/Http/Controllers/App/NotificationController.php:11
-* @route '/app/notificacoes'
-*/
-notificacoes.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: notificacoes.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\App\NotificationController::notificacoes
-* @see app/Http/Controllers/App/NotificationController.php:11
-* @route '/app/notificacoes'
-*/
-notificacoes.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: notificacoes.url(options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\App\ProfileController::perfil
-* @see app/Http/Controllers/App/ProfileController.php:11
+* @see \App\Http\Controllers\App\Perfil\PerfilController::perfil
+* @see app/Http/Controllers/App/Perfil/PerfilController.php:15
 * @route '/app/perfil'
 */
 export const perfil = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -544,8 +423,8 @@ perfil.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\ProfileController::perfil
-* @see app/Http/Controllers/App/ProfileController.php:11
+* @see \App\Http\Controllers\App\Perfil\PerfilController::perfil
+* @see app/Http/Controllers/App/Perfil/PerfilController.php:15
 * @route '/app/perfil'
 */
 perfil.url = (options?: RouteQueryOptions) => {
@@ -553,8 +432,8 @@ perfil.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\App\ProfileController::perfil
-* @see app/Http/Controllers/App/ProfileController.php:11
+* @see \App\Http\Controllers\App\Perfil\PerfilController::perfil
+* @see app/Http/Controllers/App/Perfil/PerfilController.php:15
 * @route '/app/perfil'
 */
 perfil.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -563,8 +442,8 @@ perfil.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\ProfileController::perfil
-* @see app/Http/Controllers/App/ProfileController.php:11
+* @see \App\Http\Controllers\App\Perfil\PerfilController::perfil
+* @see app/Http/Controllers/App/Perfil/PerfilController.php:15
 * @route '/app/perfil'
 */
 perfil.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -573,62 +452,241 @@ perfil.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\SuporteController::suporte
-* @see app/Http/Controllers/App/SuporteController.php:11
-* @route '/app/suporte'
+* @see \App\Http\Controllers\App\Configuracoes\ConfiguracoesController::configuracoes
+* @see app/Http/Controllers/App/Configuracoes/ConfiguracoesController.php:15
+* @route '/app/configuracoes'
 */
-export const suporte = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: suporte.url(options),
+export const configuracoes = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: configuracoes.url(options),
     method: 'get',
 })
 
-suporte.definition = {
+configuracoes.definition = {
     methods: ["get","head"],
-    url: '/app/suporte',
+    url: '/app/configuracoes',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\SuporteController::suporte
-* @see app/Http/Controllers/App/SuporteController.php:11
-* @route '/app/suporte'
+* @see \App\Http\Controllers\App\Configuracoes\ConfiguracoesController::configuracoes
+* @see app/Http/Controllers/App/Configuracoes/ConfiguracoesController.php:15
+* @route '/app/configuracoes'
 */
-suporte.url = (options?: RouteQueryOptions) => {
-    return suporte.definition.url + queryParams(options)
+configuracoes.url = (options?: RouteQueryOptions) => {
+    return configuracoes.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\App\SuporteController::suporte
-* @see app/Http/Controllers/App/SuporteController.php:11
-* @route '/app/suporte'
+* @see \App\Http\Controllers\App\Configuracoes\ConfiguracoesController::configuracoes
+* @see app/Http/Controllers/App/Configuracoes/ConfiguracoesController.php:15
+* @route '/app/configuracoes'
 */
-suporte.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: suporte.url(options),
+configuracoes.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: configuracoes.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\App\SuporteController::suporte
-* @see app/Http/Controllers/App/SuporteController.php:11
-* @route '/app/suporte'
+* @see \App\Http\Controllers\App\Configuracoes\ConfiguracoesController::configuracoes
+* @see app/Http/Controllers/App/Configuracoes/ConfiguracoesController.php:15
+* @route '/app/configuracoes'
 */
-suporte.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: suporte.url(options),
+configuracoes.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: configuracoes.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\ConexaoBancaria\ConexaoBancariaController::conexaoBancaria
+* @see app/Http/Controllers/App/ConexaoBancaria/ConexaoBancariaController.php:15
+* @route '/app/conexao-bancaria'
+*/
+export const conexaoBancaria = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: conexaoBancaria.url(options),
+    method: 'get',
+})
+
+conexaoBancaria.definition = {
+    methods: ["get","head"],
+    url: '/app/conexao-bancaria',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\ConexaoBancaria\ConexaoBancariaController::conexaoBancaria
+* @see app/Http/Controllers/App/ConexaoBancaria/ConexaoBancariaController.php:15
+* @route '/app/conexao-bancaria'
+*/
+conexaoBancaria.url = (options?: RouteQueryOptions) => {
+    return conexaoBancaria.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\ConexaoBancaria\ConexaoBancariaController::conexaoBancaria
+* @see app/Http/Controllers/App/ConexaoBancaria/ConexaoBancariaController.php:15
+* @route '/app/conexao-bancaria'
+*/
+conexaoBancaria.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: conexaoBancaria.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\ConexaoBancaria\ConexaoBancariaController::conexaoBancaria
+* @see app/Http/Controllers/App/ConexaoBancaria/ConexaoBancariaController.php:15
+* @route '/app/conexao-bancaria'
+*/
+conexaoBancaria.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: conexaoBancaria.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\Plano\PlanoController::plano
+* @see app/Http/Controllers/App/Plano/PlanoController.php:15
+* @route '/app/plano'
+*/
+export const plano = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: plano.url(options),
+    method: 'get',
+})
+
+plano.definition = {
+    methods: ["get","head"],
+    url: '/app/plano',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\Plano\PlanoController::plano
+* @see app/Http/Controllers/App/Plano/PlanoController.php:15
+* @route '/app/plano'
+*/
+plano.url = (options?: RouteQueryOptions) => {
+    return plano.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\Plano\PlanoController::plano
+* @see app/Http/Controllers/App/Plano/PlanoController.php:15
+* @route '/app/plano'
+*/
+plano.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: plano.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\Plano\PlanoController::plano
+* @see app/Http/Controllers/App/Plano/PlanoController.php:15
+* @route '/app/plano'
+*/
+plano.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: plano.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\Suporte\AjudaController::ajuda
+* @see app/Http/Controllers/App/Suporte/AjudaController.php:14
+* @route '/app/ajuda'
+*/
+export const ajuda = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: ajuda.url(options),
+    method: 'get',
+})
+
+ajuda.definition = {
+    methods: ["get","head"],
+    url: '/app/ajuda',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\Suporte\AjudaController::ajuda
+* @see app/Http/Controllers/App/Suporte/AjudaController.php:14
+* @route '/app/ajuda'
+*/
+ajuda.url = (options?: RouteQueryOptions) => {
+    return ajuda.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\Suporte\AjudaController::ajuda
+* @see app/Http/Controllers/App/Suporte/AjudaController.php:14
+* @route '/app/ajuda'
+*/
+ajuda.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: ajuda.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\Suporte\AjudaController::ajuda
+* @see app/Http/Controllers/App/Suporte/AjudaController.php:14
+* @route '/app/ajuda'
+*/
+ajuda.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: ajuda.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\Suporte\ChamadoController::chamados
+* @see app/Http/Controllers/App/Suporte/ChamadoController.php:15
+* @route '/app/chamados'
+*/
+export const chamados = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: chamados.url(options),
+    method: 'get',
+})
+
+chamados.definition = {
+    methods: ["get","head"],
+    url: '/app/chamados',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\Suporte\ChamadoController::chamados
+* @see app/Http/Controllers/App/Suporte/ChamadoController.php:15
+* @route '/app/chamados'
+*/
+chamados.url = (options?: RouteQueryOptions) => {
+    return chamados.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\Suporte\ChamadoController::chamados
+* @see app/Http/Controllers/App/Suporte/ChamadoController.php:15
+* @route '/app/chamados'
+*/
+chamados.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: chamados.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\Suporte\ChamadoController::chamados
+* @see app/Http/Controllers/App/Suporte/ChamadoController.php:15
+* @route '/app/chamados'
+*/
+chamados.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: chamados.url(options),
     method: 'head',
 })
 
 const app = {
-    dashboard: Object.assign(dashboard, dashboard),
+    dashboard: Object.assign(dashboard, dashboard074181035978),
     settings: Object.assign(settings, settings),
     conta: Object.assign(conta, conta),
-    cartaoCredito: Object.assign(cartaoCredito, cartaoCredito),
-    assinatura: Object.assign(assinatura, assinatura),
-    lancamentos: Object.assign(lancamentos, lancamentos),
-    limites: Object.assign(limites, limites),
-    conexaoBancaria: Object.assign(conexaoBancaria, conexaoBancaria),
-    notificacoes: Object.assign(notificacoes, notificacoes),
-    perfil: Object.assign(perfil, perfil),
-    suporte: Object.assign(suporte, suporte),
+    contas: Object.assign(contas, contas1f7ed9),
+    lancamentos: Object.assign(lancamentos, lancamentos5ee860),
+    cartoes: Object.assign(cartoes, cartoesB32811),
+    categorias: Object.assign(categorias, categoriasC782cd),
     relatorios: Object.assign(relatorios, relatorios),
+    limites: Object.assign(limites, limitesBff468),
+    perfil: Object.assign(perfil, perfil9785a8),
+    configuracoes: Object.assign(configuracoes, configuracoes0197ca),
+    conexaoBancaria: Object.assign(conexaoBancaria, conexaoBancaria182595),
+    plano: Object.assign(plano, plano44ff36),
+    ajuda: Object.assign(ajuda, ajuda),
+    chamados: Object.assign(chamados, chamados2b39c2),
 }
 
 export default app

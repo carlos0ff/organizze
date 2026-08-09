@@ -1,29 +1,35 @@
 import DashboardController from './DashboardController'
 import SettingsController from './SettingsController'
 import AccountController from './AccountController'
-import CartaoCreditoController from './CartaoCreditoController'
-import SubscriptionController from './SubscriptionController'
-import TransactionController from './TransactionController'
-import BudgetController from './BudgetController'
-import BankConnectionController from './BankConnectionController'
-import NotificationController from './NotificationController'
-import ProfileController from './ProfileController'
-import SuporteController from './SuporteController'
-import ReportController from './ReportController'
+import Dashboard from './Dashboard'
+import Conta from './Conta'
+import Lancamento from './Lancamento'
+import CartaoCredito from './CartaoCredito'
+import Categorias from './Categorias'
+import Relatorio from './Relatorio'
+import LimiteGastos from './LimiteGastos'
+import Perfil from './Perfil'
+import Configuracoes from './Configuracoes'
+import ConexaoBancaria from './ConexaoBancaria'
+import Plano from './Plano'
+import Suporte from './Suporte'
 
 const App = {
     DashboardController: Object.assign(DashboardController, DashboardController),
     SettingsController: Object.assign(SettingsController, SettingsController),
     AccountController: Object.assign(AccountController, AccountController),
-    CartaoCreditoController: Object.assign(CartaoCreditoController, CartaoCreditoController),
-    SubscriptionController: Object.assign(SubscriptionController, SubscriptionController),
-    TransactionController: Object.assign(TransactionController, TransactionController),
-    BudgetController: Object.assign(BudgetController, BudgetController),
-    BankConnectionController: Object.assign(BankConnectionController, BankConnectionController),
-    NotificationController: Object.assign(NotificationController, NotificationController),
-    ProfileController: Object.assign(ProfileController, ProfileController),
-    SuporteController: Object.assign(SuporteController, SuporteController),
-    ReportController: Object.assign(ReportController, ReportController),
+    Dashboard: Object.assign(Dashboard, Dashboard),
+    Conta: Object.assign(Conta, Conta),
+    Lancamento: Object.assign(Lancamento, Lancamento),
+    CartaoCredito: Object.assign(CartaoCredito, CartaoCredito),
+    Categorias: Object.assign(Categorias, Categorias),
+    Relatorio: Object.assign(Relatorio, Relatorio),
+    LimiteGastos: Object.assign(LimiteGastos, LimiteGastos),
+    Perfil: Object.assign(Perfil, Perfil),
+    Configuracoes: Object.assign(Configuracoes, Configuracoes),
+    ConexaoBancaria: Object.assign(ConexaoBancaria, ConexaoBancaria),
+    Plano: Object.assign(Plano, Plano),
+    Suporte: Object.assign(Suporte, Suporte),
 }
 
 export default App

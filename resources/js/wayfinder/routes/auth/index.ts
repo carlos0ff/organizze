@@ -1,7 +1,11 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../wayfinder'
+import register702019 from './register'
+import forgot05cbb4 from './forgot'
+import reset0fffd7 from './reset'
+import social from './social'
 /**
-* @see \App\Http\Controllers\Auth\LoginController::login
-* @see app/Http/Controllers/Auth/LoginController.php:19
+* @see \App\Http\Controllers\Auth\Login\LoginController::login
+* @see app/Http/Controllers/Auth/Login/LoginController.php:20
 * @route '/auth/entrar'
 */
 export const login = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -15,8 +19,8 @@ login.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Auth\LoginController::login
-* @see app/Http/Controllers/Auth/LoginController.php:19
+* @see \App\Http\Controllers\Auth\Login\LoginController::login
+* @see app/Http/Controllers/Auth/Login/LoginController.php:20
 * @route '/auth/entrar'
 */
 login.url = (options?: RouteQueryOptions) => {
@@ -24,8 +28,8 @@ login.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Auth\LoginController::login
-* @see app/Http/Controllers/Auth/LoginController.php:19
+* @see \App\Http\Controllers\Auth\Login\LoginController::login
+* @see app/Http/Controllers/Auth/Login/LoginController.php:20
 * @route '/auth/entrar'
 */
 login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,8 +38,8 @@ login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Auth\LoginController::login
-* @see app/Http/Controllers/Auth/LoginController.php:19
+* @see \App\Http\Controllers\Auth\Login\LoginController::login
+* @see app/Http/Controllers/Auth/Login/LoginController.php:20
 * @route '/auth/entrar'
 */
 login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,8 +48,8 @@ login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Auth\LoginController::authenticate
-* @see app/Http/Controllers/Auth/LoginController.php:29
+* @see \App\Http\Controllers\Auth\Login\LoginController::authenticate
+* @see app/Http/Controllers/Auth/Login/LoginController.php:30
 * @route '/auth/entrar'
 */
 export const authenticate = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -59,8 +63,8 @@ authenticate.definition = {
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\Auth\LoginController::authenticate
-* @see app/Http/Controllers/Auth/LoginController.php:29
+* @see \App\Http\Controllers\Auth\Login\LoginController::authenticate
+* @see app/Http/Controllers/Auth/Login/LoginController.php:30
 * @route '/auth/entrar'
 */
 authenticate.url = (options?: RouteQueryOptions) => {
@@ -68,8 +72,8 @@ authenticate.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Auth\LoginController::authenticate
-* @see app/Http/Controllers/Auth/LoginController.php:29
+* @see \App\Http\Controllers\Auth\Login\LoginController::authenticate
+* @see app/Http/Controllers/Auth/Login/LoginController.php:30
 * @route '/auth/entrar'
 */
 authenticate.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -78,42 +82,42 @@ authenticate.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Auth\RegisterController::authenticate
-* @see app/Http/Controllers/Auth/RegisterController.php:0
-* @route '/auth/cadastro'
+* @see \App\Http\Controllers\Auth\Login\LoginController::logout
+* @see app/Http/Controllers/Auth/Login/LoginController.php:57
+* @route '/auth/sair'
 */
-export const authenticate = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: authenticate.url(options),
+export const logout = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: logout.url(options),
     method: 'post',
 })
 
-authenticate.definition = {
+logout.definition = {
     methods: ["post"],
-    url: '/auth/cadastro',
+    url: '/auth/sair',
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\Auth\RegisterController::authenticate
-* @see app/Http/Controllers/Auth/RegisterController.php:0
-* @route '/auth/cadastro'
+* @see \App\Http\Controllers\Auth\Login\LoginController::logout
+* @see app/Http/Controllers/Auth/Login/LoginController.php:57
+* @route '/auth/sair'
 */
-authenticate.url = (options?: RouteQueryOptions) => {
-    return authenticate.definition.url + queryParams(options)
+logout.url = (options?: RouteQueryOptions) => {
+    return logout.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\Auth\RegisterController::authenticate
-* @see app/Http/Controllers/Auth/RegisterController.php:0
-* @route '/auth/cadastro'
+* @see \App\Http\Controllers\Auth\Login\LoginController::logout
+* @see app/Http/Controllers/Auth/Login/LoginController.php:57
+* @route '/auth/sair'
 */
-authenticate.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: authenticate.url(options),
+logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: logout.url(options),
     method: 'post',
 })
 
 /**
-* @see \App\Http\Controllers\Auth\RegisterController::register
-* @see app/Http/Controllers/Auth/RegisterController.php:14
+* @see \App\Http\Controllers\Auth\Registro\RegistroController::register
+* @see app/Http/Controllers/Auth/Registro/RegistroController.php:16
 * @route '/auth/cadastro'
 */
 export const register = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -127,8 +131,8 @@ register.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Auth\RegisterController::register
-* @see app/Http/Controllers/Auth/RegisterController.php:14
+* @see \App\Http\Controllers\Auth\Registro\RegistroController::register
+* @see app/Http/Controllers/Auth/Registro/RegistroController.php:16
 * @route '/auth/cadastro'
 */
 register.url = (options?: RouteQueryOptions) => {
@@ -136,8 +140,8 @@ register.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Auth\RegisterController::register
-* @see app/Http/Controllers/Auth/RegisterController.php:14
+* @see \App\Http\Controllers\Auth\Registro\RegistroController::register
+* @see app/Http/Controllers/Auth/Registro/RegistroController.php:16
 * @route '/auth/cadastro'
 */
 register.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -146,8 +150,8 @@ register.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Auth\RegisterController::register
-* @see app/Http/Controllers/Auth/RegisterController.php:14
+* @see \App\Http\Controllers\Auth\Registro\RegistroController::register
+* @see app/Http/Controllers/Auth/Registro/RegistroController.php:16
 * @route '/auth/cadastro'
 */
 register.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -156,54 +160,119 @@ register.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Auth\ForgotPasswordController::forget
-* @see app/Http/Controllers/Auth/ForgotPasswordController.php:14
+* @see \App\Http\Controllers\Auth\Senha\RecuperarSenhaController::forgot
+* @see app/Http/Controllers/Auth/Senha/RecuperarSenhaController.php:16
 * @route '/auth/recuperar'
 */
-export const forget = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: forget.url(options),
+export const forgot = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: forgot.url(options),
     method: 'get',
 })
 
-forget.definition = {
+forgot.definition = {
     methods: ["get","head"],
     url: '/auth/recuperar',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Auth\ForgotPasswordController::forget
-* @see app/Http/Controllers/Auth/ForgotPasswordController.php:14
+* @see \App\Http\Controllers\Auth\Senha\RecuperarSenhaController::forgot
+* @see app/Http/Controllers/Auth/Senha/RecuperarSenhaController.php:16
 * @route '/auth/recuperar'
 */
-forget.url = (options?: RouteQueryOptions) => {
-    return forget.definition.url + queryParams(options)
+forgot.url = (options?: RouteQueryOptions) => {
+    return forgot.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\Auth\ForgotPasswordController::forget
-* @see app/Http/Controllers/Auth/ForgotPasswordController.php:14
+* @see \App\Http\Controllers\Auth\Senha\RecuperarSenhaController::forgot
+* @see app/Http/Controllers/Auth/Senha/RecuperarSenhaController.php:16
 * @route '/auth/recuperar'
 */
-forget.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: forget.url(options),
+forgot.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: forgot.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\Auth\ForgotPasswordController::forget
-* @see app/Http/Controllers/Auth/ForgotPasswordController.php:14
+* @see \App\Http\Controllers\Auth\Senha\RecuperarSenhaController::forgot
+* @see app/Http/Controllers/Auth/Senha/RecuperarSenhaController.php:16
 * @route '/auth/recuperar'
 */
-forget.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: forget.url(options),
+forgot.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: forgot.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\Auth\Senha\RedefinirSenhaController::reset
+* @see app/Http/Controllers/Auth/Senha/RedefinirSenhaController.php:16
+* @route '/auth/redefinir/{token}'
+*/
+export const reset = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: reset.url(args, options),
+    method: 'get',
+})
+
+reset.definition = {
+    methods: ["get","head"],
+    url: '/auth/redefinir/{token}',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\Auth\Senha\RedefinirSenhaController::reset
+* @see app/Http/Controllers/Auth/Senha/RedefinirSenhaController.php:16
+* @route '/auth/redefinir/{token}'
+*/
+reset.url = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { token: args }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            token: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+        token: args.token,
+    }
+
+    return reset.definition.url
+            .replace('{token}', parsedArgs.token.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Auth\Senha\RedefinirSenhaController::reset
+* @see app/Http/Controllers/Auth/Senha/RedefinirSenhaController.php:16
+* @route '/auth/redefinir/{token}'
+*/
+reset.get = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: reset.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\Auth\Senha\RedefinirSenhaController::reset
+* @see app/Http/Controllers/Auth/Senha/RedefinirSenhaController.php:16
+* @route '/auth/redefinir/{token}'
+*/
+reset.head = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: reset.url(args, options),
     method: 'head',
 })
 
 const auth = {
     login: Object.assign(login, login),
     authenticate: Object.assign(authenticate, authenticate),
-    register: Object.assign(register, register),
-    forget: Object.assign(forget, forget),
+    logout: Object.assign(logout, logout),
+    register: Object.assign(register, register702019),
+    forgot: Object.assign(forgot, forgot05cbb4),
+    reset: Object.assign(reset, reset0fffd7),
+    social: Object.assign(social, social),
 }
 
 export default auth

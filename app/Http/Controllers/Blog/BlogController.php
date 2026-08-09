@@ -31,6 +31,15 @@ class BlogController extends Controller
      */
     public function post(string $slug = ''): \Inertia\Response
     {
+        $staticPosts = [
+            'construindo-organizze-com-ia' => 'Blog/Postagens/ProjetoOrganizze',
+            'fim-do-projeto'               => 'Blog/Postagens/FimDoProjeto',
+        ];
+
+        if (isset($staticPosts[$slug])) {
+            return inertia($staticPosts[$slug]);
+        }
+
         return inertia('Blog/Posts/Show', ['slug' => $slug]);
     }
 }

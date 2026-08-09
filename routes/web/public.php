@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\LandingController;
-use App\Http\Controllers\Blog\CategoryController;
+use App\Http\Controllers\Blog\Categoria\CategoriaController;
 use App\Http\Controllers\Blog\BlogController;
 
 /** Landing Page **/
@@ -28,6 +28,6 @@ Route::prefix("blog")->group(function(){
     Route::get("/post/{slug?}", [BlogController::class , "post"])->name("blog.post");
 
     /** Blog Categorys { SLUG } **/
-    Route::get("/categoria/{category}", [CategoryController::class , "show"])->name("blog.category");
+    Route::get("/categoria/{category}", [CategoriaController::class , "show"])->name("blog.category");
 
 });

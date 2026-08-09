@@ -1,11 +1,13 @@
-import LoginController from './LoginController'
-import RegisterController from './RegisterController'
-import ForgotPasswordController from './ForgotPasswordController'
+import Login from './Login'
+import Registro from './Registro'
+import Senha from './Senha'
+import Social from './Social'
 
 const Auth = {
-    LoginController: Object.assign(LoginController, LoginController),
-    RegisterController: Object.assign(RegisterController, RegisterController),
-    ForgotPasswordController: Object.assign(ForgotPasswordController, ForgotPasswordController),
+    Login: Object.assign(Login, Login),
+    Registro: Object.assign(Registro, Registro),
+    Senha: Object.assign(Senha, Senha),
+    Social: Object.assign(Social, Social),
 }
 
 export default Auth

@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults, validateParameters } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Blog\BlogController::index
-* @see app/Http/Controllers/Blog/BlogController.php:15
+* @see app/Http/Controllers/Blog/BlogController.php:14
 * @route '/blog'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\Blog\BlogController::index
-* @see app/Http/Controllers/Blog/BlogController.php:15
+* @see app/Http/Controllers/Blog/BlogController.php:14
 * @route '/blog'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Blog\BlogController::index
-* @see app/Http/Controllers/Blog/BlogController.php:15
+* @see app/Http/Controllers/Blog/BlogController.php:14
 * @route '/blog'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Blog\BlogController::index
-* @see app/Http/Controllers/Blog/BlogController.php:15
+* @see app/Http/Controllers/Blog/BlogController.php:14
 * @route '/blog'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Blog\BlogController::articles
-* @see app/Http/Controllers/Blog/BlogController.php:23
+* @see app/Http/Controllers/Blog/BlogController.php:0
 * @route '/blog/artigos'
 */
 export const articles = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -60,7 +60,7 @@ articles.definition = {
 
 /**
 * @see \App\Http\Controllers\Blog\BlogController::articles
-* @see app/Http/Controllers/Blog/BlogController.php:23
+* @see app/Http/Controllers/Blog/BlogController.php:0
 * @route '/blog/artigos'
 */
 articles.url = (options?: RouteQueryOptions) => {
@@ -69,7 +69,7 @@ articles.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Blog\BlogController::articles
-* @see app/Http/Controllers/Blog/BlogController.php:23
+* @see app/Http/Controllers/Blog/BlogController.php:0
 * @route '/blog/artigos'
 */
 articles.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -79,7 +79,7 @@ articles.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Blog\BlogController::articles
-* @see app/Http/Controllers/Blog/BlogController.php:23
+* @see app/Http/Controllers/Blog/BlogController.php:0
 * @route '/blog/artigos'
 */
 articles.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -89,7 +89,7 @@ articles.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Blog\BlogController::post
-* @see app/Http/Controllers/Blog/BlogController.php:31
+* @see app/Http/Controllers/Blog/BlogController.php:32
 * @route '/blog/post/{slug?}'
 */
 export const post = (args?: { slug?: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -104,7 +104,7 @@ post.definition = {
 
 /**
 * @see \App\Http\Controllers\Blog\BlogController::post
-* @see app/Http/Controllers/Blog/BlogController.php:31
+* @see app/Http/Controllers/Blog/BlogController.php:32
 * @route '/blog/post/{slug?}'
 */
 post.url = (args?: { slug?: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -135,7 +135,7 @@ post.url = (args?: { slug?: string | number } | [slug: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\Blog\BlogController::post
-* @see app/Http/Controllers/Blog/BlogController.php:31
+* @see app/Http/Controllers/Blog/BlogController.php:32
 * @route '/blog/post/{slug?}'
 */
 post.get = (args?: { slug?: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -145,7 +145,7 @@ post.get = (args?: { slug?: string | number } | [slug: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\Blog\BlogController::post
-* @see app/Http/Controllers/Blog/BlogController.php:31
+* @see app/Http/Controllers/Blog/BlogController.php:32
 * @route '/blog/post/{slug?}'
 */
 post.head = (args?: { slug?: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({

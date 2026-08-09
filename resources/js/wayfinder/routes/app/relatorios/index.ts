@@ -1,95 +1,51 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../wayfinder'
 /**
-* @see \App\Http\Controllers\App\ReportController::mensal
-* @see app/Http/Controllers/App/ReportController.php:9
-* @route '/app/relatorios/mensal'
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::index
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:15
+* @route '/app/relatorios'
 */
-export const mensal = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: mensal.url(options),
+export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: index.url(options),
     method: 'get',
 })
 
-mensal.definition = {
+index.definition = {
     methods: ["get","head"],
-    url: '/app/relatorios/mensal',
+    url: '/app/relatorios',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\ReportController::mensal
-* @see app/Http/Controllers/App/ReportController.php:9
-* @route '/app/relatorios/mensal'
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::index
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:15
+* @route '/app/relatorios'
 */
-mensal.url = (options?: RouteQueryOptions) => {
-    return mensal.definition.url + queryParams(options)
+index.url = (options?: RouteQueryOptions) => {
+    return index.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\App\ReportController::mensal
-* @see app/Http/Controllers/App/ReportController.php:9
-* @route '/app/relatorios/mensal'
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::index
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:15
+* @route '/app/relatorios'
 */
-mensal.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: mensal.url(options),
+index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: index.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\App\ReportController::mensal
-* @see app/Http/Controllers/App/ReportController.php:9
-* @route '/app/relatorios/mensal'
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::index
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:15
+* @route '/app/relatorios'
 */
-mensal.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: mensal.url(options),
+index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: index.url(options),
     method: 'head',
 })
 
 /**
-* @see \App\Http\Controllers\App\ReportController::anual
-* @see app/Http/Controllers/App/ReportController.php:14
-* @route '/app/relatorios/anual'
-*/
-export const anual = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: anual.url(options),
-    method: 'get',
-})
-
-anual.definition = {
-    methods: ["get","head"],
-    url: '/app/relatorios/anual',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\App\ReportController::anual
-* @see app/Http/Controllers/App/ReportController.php:14
-* @route '/app/relatorios/anual'
-*/
-anual.url = (options?: RouteQueryOptions) => {
-    return anual.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\App\ReportController::anual
-* @see app/Http/Controllers/App/ReportController.php:14
-* @route '/app/relatorios/anual'
-*/
-anual.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: anual.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\App\ReportController::anual
-* @see app/Http/Controllers/App/ReportController.php:14
-* @route '/app/relatorios/anual'
-*/
-anual.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: anual.url(options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\App\ReportController::categorias
-* @see app/Http/Controllers/App/ReportController.php:19
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::categorias
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:23
 * @route '/app/relatorios/categorias'
 */
 export const categorias = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -103,8 +59,8 @@ categorias.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\ReportController::categorias
-* @see app/Http/Controllers/App/ReportController.php:19
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::categorias
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:23
 * @route '/app/relatorios/categorias'
 */
 categorias.url = (options?: RouteQueryOptions) => {
@@ -112,8 +68,8 @@ categorias.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\App\ReportController::categorias
-* @see app/Http/Controllers/App/ReportController.php:19
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::categorias
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:23
 * @route '/app/relatorios/categorias'
 */
 categorias.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -122,8 +78,8 @@ categorias.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\ReportController::categorias
-* @see app/Http/Controllers/App/ReportController.php:19
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::categorias
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:23
 * @route '/app/relatorios/categorias'
 */
 categorias.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -132,54 +88,233 @@ categorias.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\ReportController::receitasDespesas
-* @see app/Http/Controllers/App/ReportController.php:24
-* @route '/app/relatorios/receitas-despesas'
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::contas
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:31
+* @route '/app/relatorios/contas'
 */
-export const receitasDespesas = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: receitasDespesas.url(options),
+export const contas = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: contas.url(options),
     method: 'get',
 })
 
-receitasDespesas.definition = {
+contas.definition = {
     methods: ["get","head"],
-    url: '/app/relatorios/receitas-despesas',
+    url: '/app/relatorios/contas',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\ReportController::receitasDespesas
-* @see app/Http/Controllers/App/ReportController.php:24
-* @route '/app/relatorios/receitas-despesas'
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::contas
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:31
+* @route '/app/relatorios/contas'
 */
-receitasDespesas.url = (options?: RouteQueryOptions) => {
-    return receitasDespesas.definition.url + queryParams(options)
+contas.url = (options?: RouteQueryOptions) => {
+    return contas.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\App\ReportController::receitasDespesas
-* @see app/Http/Controllers/App/ReportController.php:24
-* @route '/app/relatorios/receitas-despesas'
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::contas
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:31
+* @route '/app/relatorios/contas'
 */
-receitasDespesas.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: receitasDespesas.url(options),
+contas.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: contas.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\App\ReportController::receitasDespesas
-* @see app/Http/Controllers/App/ReportController.php:24
-* @route '/app/relatorios/receitas-despesas'
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::contas
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:31
+* @route '/app/relatorios/contas'
 */
-receitasDespesas.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: receitasDespesas.url(options),
+contas.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: contas.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::receitaVsDespesa
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:39
+* @route '/app/relatorios/receita-vs-despesa'
+*/
+export const receitaVsDespesa = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: receitaVsDespesa.url(options),
+    method: 'get',
+})
+
+receitaVsDespesa.definition = {
+    methods: ["get","head"],
+    url: '/app/relatorios/receita-vs-despesa',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::receitaVsDespesa
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:39
+* @route '/app/relatorios/receita-vs-despesa'
+*/
+receitaVsDespesa.url = (options?: RouteQueryOptions) => {
+    return receitaVsDespesa.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::receitaVsDespesa
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:39
+* @route '/app/relatorios/receita-vs-despesa'
+*/
+receitaVsDespesa.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: receitaVsDespesa.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::receitaVsDespesa
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:39
+* @route '/app/relatorios/receita-vs-despesa'
+*/
+receitaVsDespesa.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: receitaVsDespesa.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::tags
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:47
+* @route '/app/relatorios/tags'
+*/
+export const tags = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: tags.url(options),
+    method: 'get',
+})
+
+tags.definition = {
+    methods: ["get","head"],
+    url: '/app/relatorios/tags',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::tags
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:47
+* @route '/app/relatorios/tags'
+*/
+tags.url = (options?: RouteQueryOptions) => {
+    return tags.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::tags
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:47
+* @route '/app/relatorios/tags'
+*/
+tags.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: tags.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::tags
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:47
+* @route '/app/relatorios/tags'
+*/
+tags.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: tags.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::imprimir
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:63
+* @route '/app/relatorios/imprimir'
+*/
+export const imprimir = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: imprimir.url(options),
+    method: 'get',
+})
+
+imprimir.definition = {
+    methods: ["get","head"],
+    url: '/app/relatorios/imprimir',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::imprimir
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:63
+* @route '/app/relatorios/imprimir'
+*/
+imprimir.url = (options?: RouteQueryOptions) => {
+    return imprimir.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::imprimir
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:63
+* @route '/app/relatorios/imprimir'
+*/
+imprimir.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: imprimir.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::imprimir
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:63
+* @route '/app/relatorios/imprimir'
+*/
+imprimir.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: imprimir.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::baixar
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:55
+* @route '/app/relatorios/baixar'
+*/
+export const baixar = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: baixar.url(options),
+    method: 'get',
+})
+
+baixar.definition = {
+    methods: ["get","head"],
+    url: '/app/relatorios/baixar',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::baixar
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:55
+* @route '/app/relatorios/baixar'
+*/
+baixar.url = (options?: RouteQueryOptions) => {
+    return baixar.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::baixar
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:55
+* @route '/app/relatorios/baixar'
+*/
+baixar.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: baixar.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\App\Relatorio\RelatorioController::baixar
+* @see app/Http/Controllers/App/Relatorio/RelatorioController.php:55
+* @route '/app/relatorios/baixar'
+*/
+baixar.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: baixar.url(options),
     method: 'head',
 })
 
 const relatorios = {
-    mensal: Object.assign(mensal, mensal),
-    anual: Object.assign(anual, anual),
+    index: Object.assign(index, index),
     categorias: Object.assign(categorias, categorias),
-    receitasDespesas: Object.assign(receitasDespesas, receitasDespesas),
+    contas: Object.assign(contas, contas),
+    receitaVsDespesa: Object.assign(receitaVsDespesa, receitaVsDespesa),
+    tags: Object.assign(tags, tags),
+    imprimir: Object.assign(imprimir, imprimir),
+    baixar: Object.assign(baixar, baixar),
 }
 
 export default relatorios
