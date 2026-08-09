@@ -245,126 +245,192 @@ const stats = [
         </header>
 
         <!-- ───────────────── HERO ───────────────── -->
-        <section class="relative pt-24 pb-0 overflow-hidden bg-[#0B1F12]">
-            <!-- Grid decoration -->
-            <div class="absolute inset-0 opacity-[0.03]"
-                style="background-image: linear-gradient(#16C64F 1px, transparent 1px), linear-gradient(90deg, #16C64F 1px, transparent 1px); background-size: 60px 60px;">
-            </div>
-            <!-- Glow -->
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#16C64F]/20 rounded-full blur-[120px]"></div>
+        <section class="relative pt-20 pb-0 overflow-hidden bg-white">
 
-            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 pb-20">
-                <div class="inline-flex items-center gap-2 bg-[#16C64F]/10 border border-[#16C64F]/20 text-[#16C64F] text-xs font-semibold px-3 py-1.5 rounded-full mb-8">
-                    <Zap class="w-3.5 h-3.5" />
-                    Novo: integração com Open Finance disponível
-                </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-80px)] py-12 lg:py-0">
 
-                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tight mb-6">
-                    Suas finanças,<br />
-                    <span class="text-[#16C64F]">finalmente</span> sob controle.
-                </h1>
+                    <!-- Coluna esquerda — texto -->
+                    <div class="flex flex-col justify-center">
+                        <p class="text-[#16C64F] text-xs font-extrabold tracking-[0.2em] uppercase mb-5">
+                            Controle financeiro inteligente
+                        </p>
 
-                <p class="max-w-2xl mx-auto text-lg text-gray-400 mb-10 leading-relaxed">
-                    Controle receitas, despesas, cartões e investimentos em um só lugar.
-                    Simples o suficiente para usar todo dia. Poderoso o suficiente para realmente mudar sua vida financeira.
-                </p>
+                        <h1 class="text-[2.75rem] sm:text-5xl lg:text-[3.5rem] font-extrabold text-gray-900 leading-[1.1] tracking-tight mb-6">
+                            A melhor solução para organizar suas finanças pessoais
+                        </h1>
 
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-                    <a href="/auth/cadastro"
-                        class="flex items-center gap-2 bg-[#16C64F] hover:bg-[#12a842] text-white font-semibold px-7 py-3.5 rounded-xl text-base transition-all hover:shadow-lg hover:shadow-[#16C64F]/30">
-                        Começar grátis agora
-                        <ArrowRight class="w-4 h-4" />
-                    </a>
-                    <a href="#como-funciona"
-                        class="flex items-center gap-2 border border-white/10 hover:border-white/20 text-gray-300 hover:text-white font-medium px-7 py-3.5 rounded-xl text-base transition-all">
-                        Ver como funciona
-                    </a>
-                </div>
+                        <p class="text-gray-500 text-lg leading-relaxed mb-10 max-w-md">
+                            Controle receitas, despesas e cartões em um só lugar. Simples para usar todo dia, poderoso para transformar seus resultados.
+                        </p>
 
-                <!-- Dashboard mockup -->
-                <div class="relative mx-auto max-w-5xl">
-                    <div class="bg-[#0F2918] border border-white/10 rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
-                        <!-- Fake browser bar -->
-                        <div class="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-white/[0.02]">
-                            <div class="w-3 h-3 rounded-full bg-red-500/60"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500/60"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500/60"></div>
-                            <div class="flex-1 mx-4 bg-white/5 rounded-md h-6 flex items-center px-3">
-                                <span class="text-xs text-gray-500">app.organizze.com.br/dashboard</span>
-                            </div>
+                        <!-- CTAs -->
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10">
+                            <a href="/auth/cadastro"
+                                class="bg-[#16C64F] hover:bg-[#12a842] text-white font-bold px-8 py-4 rounded-xl text-base transition-all shadow-lg shadow-[#16C64F]/25 hover:shadow-[#16C64F]/40">
+                                Começar grátis agora
+                            </a>
+                            <a href="#como-funciona"
+                                class="flex items-center gap-2.5 text-gray-600 hover:text-gray-900 font-semibold text-base transition-colors">
+                                <span class="w-10 h-10 rounded-full border-2 border-gray-200 flex items-center justify-center hover:border-gray-300 transition-colors flex-shrink-0">
+                                    <svg class="w-3.5 h-3.5 ml-0.5" viewBox="0 0 12 14" fill="currentColor">
+                                        <path d="M1 1l10 6L1 13V1z"/>
+                                    </svg>
+                                </span>
+                                Ver demonstração
+                            </a>
                         </div>
 
-                        <!-- Dashboard content -->
-                        <div class="p-6 grid grid-cols-12 gap-4">
-                            <!-- Sidebar -->
-                            <div class="col-span-2 hidden lg:flex flex-col gap-2">
-                                <div v-for="i in 6" :key="i"
-                                    :class="i === 1 ? 'bg-[#16C64F]/20 border border-[#16C64F]/30' : 'bg-white/5'"
-                                    class="h-8 rounded-lg flex items-center px-3 gap-2">
-                                    <div :class="i === 1 ? 'bg-[#16C64F]' : 'bg-white/20'"
-                                        class="w-3.5 h-3.5 rounded-sm"></div>
-                                    <div :class="i === 1 ? 'bg-[#16C64F]/40' : 'bg-white/10'"
-                                        class="flex-1 h-2 rounded-full"></div>
+                        <!-- Social proof -->
+                        <div class="flex items-center gap-3">
+                            <div class="flex -space-x-2.5">
+                                <div v-for="(color, i) in ['bg-emerald-400','bg-blue-400','bg-violet-400','bg-amber-400']"
+                                    :key="i"
+                                    :class="color"
+                                    class="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center text-white text-[10px] font-bold">
+                                    {{ ['AS','RM','CT','JL'][i] }}
                                 </div>
                             </div>
-
-                            <!-- Main content -->
-                            <div class="col-span-12 lg:col-span-10 space-y-4">
-                                <!-- Stats row -->
-                                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                    <div v-for="(stat, i) in [
-                                        { label: 'Saldo total', value: 'R$ 8.420', color: 'text-[#16C64F]' },
-                                        { label: 'Receitas', value: 'R$ 12.500', color: 'text-blue-400' },
-                                        { label: 'Despesas', value: 'R$ 4.080', color: 'text-red-400' },
-                                        { label: 'Economias', value: 'R$ 2.100', color: 'text-purple-400' },
-                                    ]" :key="i" class="bg-white/5 border border-white/5 rounded-xl p-3">
-                                        <p class="text-xs text-gray-500 mb-1">{{ stat.label }}</p>
-                                        <p :class="stat.color" class="text-base font-bold">{{ stat.value }}</p>
-                                    </div>
-                                </div>
-
-                                <!-- Chart area -->
-                                <div class="bg-white/5 border border-white/5 rounded-xl p-4 h-28 flex items-end gap-1.5">
-                                    <div v-for="(h, i) in [30, 55, 40, 70, 45, 80, 60, 90, 50, 75, 85, 65]" :key="i"
-                                        class="flex-1 rounded-t-sm transition-all"
-                                        :style="`height: ${h}%`"
-                                        :class="i === 11 ? 'bg-[#16C64F]' : 'bg-[#16C64F]/30'">
-                                    </div>
-                                </div>
-
-                                <!-- Transactions -->
-                                <div class="bg-white/5 border border-white/5 rounded-xl divide-y divide-white/5">
-                                    <div v-for="(tx, i) in [
-                                        { name: 'Supermercado Extra', cat: 'Alimentação', value: '-R$ 284,50', color: 'text-red-400' },
-                                        { name: 'Salário', cat: 'Receita', value: '+R$ 6.500,00', color: 'text-[#16C64F]' },
-                                        { name: 'Netflix', cat: 'Assinatura', value: '-R$ 44,90', color: 'text-red-400' },
-                                    ]" :key="i" class="flex items-center justify-between px-4 py-2.5">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-7 h-7 rounded-lg bg-white/10"></div>
-                                            <div>
-                                                <p class="text-xs text-white font-medium">{{ tx.name }}</p>
-                                                <p class="text-[11px] text-gray-500">{{ tx.cat }}</p>
-                                            </div>
-                                        </div>
-                                        <span :class="tx.color" class="text-xs font-semibold">{{ tx.value }}</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <p class="text-sm text-gray-500">
+                                Mais de <span class="font-bold text-gray-800">150.000 brasileiros</span><br class="hidden sm:block" />
+                                já organizam suas finanças com o Organizze
+                            </p>
                         </div>
                     </div>
 
-                    <!-- Glow under mockup -->
-                    <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 w-2/3 h-20 bg-[#16C64F]/10 blur-3xl rounded-full"></div>
+                    <!-- Coluna direita — mockup -->
+                    <div class="relative flex items-center justify-end lg:h-[calc(100vh-80px)]">
+
+                        <!-- Blob de fundo verde -->
+                        <div class="absolute top-1/2 right-0 -translate-y-1/2 w-[480px] h-[480px] bg-[#16C64F]/10 rounded-full blur-3xl -z-0"></div>
+                        <div class="absolute top-1/4 right-1/4 w-64 h-64 bg-[#16C64F]/08 rounded-full blur-2xl -z-0"></div>
+
+                        <!-- Wrapper do mockup inclinado -->
+                        <div class="relative z-10 w-full max-w-[620px]" style="transform: perspective(1200px) rotateY(-8deg) rotateX(3deg);">
+
+                            <!-- Card principal — Dashboard -->
+                            <div class="bg-white rounded-2xl shadow-2xl shadow-gray-200/80 border border-gray-100 overflow-hidden">
+                                <!-- Topbar -->
+                                <div class="flex items-center justify-between px-4 py-3 border-b border-gray-100 bg-gray-50/50">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-2 h-2 rounded-full bg-red-400"></div>
+                                        <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
+                                        <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                                    </div>
+                                    <div class="bg-gray-100 rounded-md h-5 w-48 flex items-center px-2">
+                                        <span class="text-[10px] text-gray-400">app.organizze.com.br/dashboard</span>
+                                    </div>
+                                    <div class="w-12"></div>
+                                </div>
+
+                                <div class="p-4 grid grid-cols-12 gap-3">
+                                    <!-- Sidebar -->
+                                    <div class="col-span-3 space-y-1.5">
+                                        <div class="flex items-center gap-1.5 mb-3">
+                                            <div class="w-5 h-5 bg-[#16C64F] rounded-md"></div>
+                                            <span class="text-[10px] font-bold text-gray-800">Organizze</span>
+                                        </div>
+                                        <div v-for="(item, i) in ['Dashboard','Lançamentos','Contas','Cartões','Relatórios','Limites']" :key="i"
+                                            :class="i === 0 ? 'bg-[#16C64F]/10 text-[#16C64F]' : 'text-gray-400'"
+                                            class="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-[9px] font-medium">
+                                            <div :class="i === 0 ? 'bg-[#16C64F]' : 'bg-gray-200'" class="w-2 h-2 rounded-sm flex-shrink-0"></div>
+                                            {{ item }}
+                                        </div>
+                                    </div>
+
+                                    <!-- Conteúdo principal -->
+                                    <div class="col-span-9 space-y-3">
+                                        <!-- Saldo do mês -->
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-[9px] text-gray-400 font-medium">Saldo em agosto</p>
+                                                <p class="text-xl font-bold text-gray-900">R$ 8.420,00</p>
+                                                <span class="text-[9px] text-[#16C64F] font-semibold">+12,4% vs mês anterior</span>
+                                            </div>
+                                            <div class="bg-[#16C64F]/10 rounded-xl p-2 text-right">
+                                                <p class="text-[8px] text-gray-400">Economias</p>
+                                                <p class="text-sm font-bold text-[#16C64F]">R$ 2.100</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Stats row -->
+                                        <div class="grid grid-cols-3 gap-2">
+                                            <div v-for="(s, i) in [
+                                                { label:'Receitas', value:'R$ 12.500', color:'text-[#16C64F]', bg:'bg-[#16C64F]/5' },
+                                                { label:'Despesas', value:'R$ 4.080', color:'text-red-500', bg:'bg-red-50' },
+                                                { label:'Cartões', value:'R$ 1.340', color:'text-blue-500', bg:'bg-blue-50' },
+                                            ]" :key="i" :class="s.bg" class="rounded-xl p-2">
+                                                <p class="text-[8px] text-gray-400 mb-0.5">{{ s.label }}</p>
+                                                <p :class="s.color" class="text-[11px] font-bold">{{ s.value }}</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gráfico de barras -->
+                                        <div class="bg-gray-50 rounded-xl p-3">
+                                            <p class="text-[8px] text-gray-400 font-medium mb-2">Evolução mensal</p>
+                                            <div class="flex items-end gap-1 h-14">
+                                                <div v-for="(h, i) in [35,52,41,68,44,78,58,88,50,72,82,60]" :key="i"
+                                                    class="flex-1 rounded-t"
+                                                    :style="`height:${h}%`"
+                                                    :class="i === 11 ? 'bg-[#16C64F]' : 'bg-[#16C64F]/25'">
+                                                </div>
+                                            </div>
+                                            <div class="flex justify-between mt-1">
+                                                <span v-for="m in ['Jan','Abr','Jul','Dez']" :key="m" class="text-[7px] text-gray-300">{{ m }}</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Últimos lançamentos -->
+                                        <div class="space-y-1.5">
+                                            <p class="text-[8px] text-gray-400 font-medium">Últimos lançamentos</p>
+                                            <div v-for="(tx, i) in [
+                                                { icon:'🛒', name:'Supermercado', value:'-R$ 284', color:'text-red-500' },
+                                                { icon:'💰', name:'Salário', value:'+R$ 6.500', color:'text-[#16C64F]' },
+                                                { icon:'🎬', name:'Netflix', value:'-R$ 44', color:'text-red-500' },
+                                            ]" :key="i" class="flex items-center justify-between bg-gray-50 rounded-lg px-2.5 py-1.5">
+                                                <div class="flex items-center gap-1.5">
+                                                    <span class="text-xs">{{ tx.icon }}</span>
+                                                    <span class="text-[9px] text-gray-600 font-medium">{{ tx.name }}</span>
+                                                </div>
+                                                <span :class="tx.color" class="text-[9px] font-bold">{{ tx.value }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card flutuante — Saldo -->
+                            <div class="absolute -bottom-6 -left-8 bg-white rounded-2xl shadow-xl border border-gray-100 p-3 w-40">
+                                <p class="text-[9px] text-gray-400 mb-1">Meta mensal</p>
+                                <p class="text-sm font-bold text-gray-900 mb-1.5">R$ 3.000</p>
+                                <div class="w-full bg-gray-100 rounded-full h-1.5">
+                                    <div class="bg-[#16C64F] h-1.5 rounded-full" style="width: 70%"></div>
+                                </div>
+                                <p class="text-[8px] text-gray-400 mt-1">70% economizado</p>
+                            </div>
+
+                            <!-- Card flutuante — Notificação -->
+                            <div class="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl border border-gray-100 p-3 w-44">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <div class="w-6 h-6 bg-[#16C64F]/10 rounded-lg flex items-center justify-center">
+                                        <span class="text-xs">✅</span>
+                                    </div>
+                                    <p class="text-[9px] font-bold text-gray-800">Conta conectada</p>
+                                </div>
+                                <p class="text-[8px] text-gray-400">Nubank sincronizado via Open Finance</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- ───────────────── STATS ───────────────── -->
-        <section class="bg-[#0B1F12] border-t border-white/5">
+        <section class="bg-gray-50 border-t border-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                     <div v-for="stat in stats" :key="stat.label" class="text-center">
-                        <p class="text-3xl font-bold text-white mb-1">{{ stat.value }}</p>
+                        <p class="text-3xl font-bold text-gray-900 mb-1">{{ stat.value }}</p>
                         <p class="text-sm text-gray-500">{{ stat.label }}</p>
                     </div>
                 </div>
