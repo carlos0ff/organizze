@@ -247,33 +247,51 @@ const stats = [
         <!-- ───────────────── HERO ───────────────── -->
         <section class="relative pt-20 pb-0 overflow-hidden bg-white">
 
+            <!-- Textura de fundo sutil -->
+            <div class="absolute inset-0 opacity-[0.025]"
+                style="background-image: radial-gradient(circle, #16C64F 1px, transparent 1px); background-size: 28px 28px;">
+            </div>
+            <!-- Gradiente radial saindo do canto superior direito -->
+            <div class="absolute top-0 right-0 w-[700px] h-[700px] bg-gradient-to-bl from-[#16C64F]/10 via-emerald-50/30 to-transparent rounded-full -translate-y-1/4 translate-x-1/4 pointer-events-none"></div>
+
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-80px)] py-12 lg:py-0">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-80px)] py-16 lg:py-0">
 
-                    <!-- Coluna esquerda — texto -->
+                    <!-- ── Coluna esquerda: texto ── -->
                     <div class="flex flex-col justify-center">
-                        <p class="text-[#16C64F] text-xs font-extrabold tracking-[0.2em] uppercase mb-5">
-                            Controle financeiro inteligente
-                        </p>
 
-                        <h1 class="text-[2.75rem] sm:text-5xl lg:text-[3.5rem] font-extrabold text-gray-900 leading-[1.1] tracking-tight mb-6">
-                            A melhor solução para organizar suas finanças pessoais
+                        <!-- Badge pill -->
+                        <div class="inline-flex items-center gap-2 self-start mb-6 px-3.5 py-1.5 rounded-full border border-[#16C64F]/30 bg-[#16C64F]/5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#16C64F] animate-pulse"></span>
+                            <span class="text-[#16C64F] text-[11px] font-bold tracking-widest uppercase">Controle financeiro inteligente</span>
+                        </div>
+
+                        <!-- Headline -->
+                        <h1 class="text-[2.6rem] sm:text-5xl lg:text-[3.25rem] font-extrabold leading-[1.1] tracking-tight mb-5">
+                            <span class="text-gray-900">A melhor forma de</span><br />
+                            <span class="text-gray-900">organizar suas</span><br />
+                            <span style="background: linear-gradient(135deg, #16C64F 0%, #0ea843 60%, #059669 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                                finanças pessoais
+                            </span>
                         </h1>
 
-                        <p class="text-gray-500 text-lg leading-relaxed mb-10 max-w-md">
-                            Controle receitas, despesas e cartões em um só lugar. Simples para usar todo dia, poderoso para transformar seus resultados.
+                        <!-- Subtítulo -->
+                        <p class="text-gray-500 text-[1.05rem] leading-relaxed mb-8 max-w-[420px]">
+                            Controle receitas, despesas e cartões em um painel intuitivo. Conecte seus bancos via Open Finance e veja seu dinheiro trabalhar por você.
                         </p>
 
                         <!-- CTAs -->
                         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10">
                             <a href="/auth/cadastro"
-                                class="bg-[#16C64F] hover:bg-[#12a842] text-white font-bold px-8 py-4 rounded-xl text-base transition-all shadow-lg shadow-[#16C64F]/25 hover:shadow-[#16C64F]/40">
+                                class="group inline-flex items-center gap-2 text-white font-bold px-8 py-4 rounded-xl text-base transition-all"
+                                style="background: linear-gradient(135deg, #16C64F 0%, #12b845 100%); box-shadow: 0 8px 24px -4px rgba(22,198,79,0.35);">
                                 Começar grátis agora
+                                <ArrowRight class="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </a>
                             <a href="#como-funciona"
-                                class="flex items-center gap-2.5 text-gray-600 hover:text-gray-900 font-semibold text-base transition-colors">
-                                <span class="w-10 h-10 rounded-full border-2 border-gray-200 flex items-center justify-center hover:border-gray-300 transition-colors flex-shrink-0">
-                                    <svg class="w-3.5 h-3.5 ml-0.5" viewBox="0 0 12 14" fill="currentColor">
+                                class="group flex items-center gap-3 text-gray-600 hover:text-gray-900 font-semibold text-base transition-colors">
+                                <span class="w-11 h-11 rounded-full border-2 border-gray-200 group-hover:border-[#16C64F]/40 group-hover:bg-[#16C64F]/5 flex items-center justify-center transition-all flex-shrink-0">
+                                    <svg class="w-3.5 h-3.5 ml-0.5 text-gray-500 group-hover:text-[#16C64F]" viewBox="0 0 12 14" fill="currentColor">
                                         <path d="M1 1l10 6L1 13V1z"/>
                                     </svg>
                                 </span>
@@ -282,142 +300,244 @@ const stats = [
                         </div>
 
                         <!-- Social proof -->
-                        <div class="flex items-center gap-3">
-                            <div class="flex -space-x-2.5">
-                                <div v-for="(color, i) in ['bg-emerald-400','bg-blue-400','bg-violet-400','bg-amber-400']"
-                                    :key="i"
-                                    :class="color"
-                                    class="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center text-white text-[10px] font-bold">
-                                    {{ ['AS','RM','CT','JL'][i] }}
-                                </div>
+                        <div class="flex items-center gap-3 mb-8">
+                            <div class="flex -space-x-2">
+                                <img v-for="(id, i) in [10, 20, 30, 40]" :key="i"
+                                    :src="`https://i.pravatar.cc/40?img=${id}`"
+                                    class="w-9 h-9 rounded-full border-2 border-white object-cover" />
                             </div>
-                            <p class="text-sm text-gray-500">
-                                Mais de <span class="font-bold text-gray-800">150.000 brasileiros</span><br class="hidden sm:block" />
-                                já organizam suas finanças com o Organizze
-                            </p>
+                            <div>
+                                <div class="flex items-center gap-1 mb-0.5">
+                                    <span v-for="s in 5" :key="s" class="text-amber-400 text-xs">★</span>
+                                </div>
+                                <p class="text-[13px] text-gray-500">
+                                    <span class="font-bold text-gray-800">+150k usuários</span> confiam no Organizze
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Trust badges -->
+                        <div class="flex flex-wrap items-center gap-4">
+                            <div v-for="badge in [
+                                { icon: '🔒', text: 'SSL 256-bit' },
+                                { icon: '🏦', text: 'Open Finance BCB' },
+                                { icon: '⚡', text: 'Sync automático' },
+                            ]" :key="badge.text"
+                                class="flex items-center gap-1.5 text-[11px] text-gray-400 font-medium">
+                                <span>{{ badge.icon }}</span>
+                                {{ badge.text }}
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Coluna direita — mockup -->
-                    <div class="relative flex items-center justify-end lg:h-[calc(100vh-80px)]">
+                    <!-- ── Coluna direita: mockup ── -->
+                    <div class="relative flex items-center justify-center lg:justify-end lg:h-[calc(100vh-80px)]">
 
-                        <!-- Blob de fundo verde -->
-                        <div class="absolute top-1/2 right-0 -translate-y-1/2 w-[480px] h-[480px] bg-[#16C64F]/10 rounded-full blur-3xl -z-0"></div>
-                        <div class="absolute top-1/4 right-1/4 w-64 h-64 bg-[#16C64F]/08 rounded-full blur-2xl -z-0"></div>
+                        <!-- Blobs de cor em camadas -->
+                        <div class="absolute top-1/2 right-[-60px] -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none"
+                            style="background: radial-gradient(circle, rgba(22,198,79,0.12) 0%, rgba(22,198,79,0.04) 60%, transparent 100%);">
+                        </div>
+                        <div class="absolute top-1/3 right-1/4 w-48 h-48 rounded-full pointer-events-none"
+                            style="background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 70%);">
+                        </div>
 
-                        <!-- Wrapper do mockup inclinado -->
-                        <div class="relative z-10 w-full max-w-[620px]" style="transform: perspective(1200px) rotateY(-8deg) rotateX(3deg);">
+                        <!-- Wrapper com perspectiva 3D -->
+                        <div class="relative z-10 w-full max-w-[600px]"
+                            style="transform: perspective(1400px) rotateY(-10deg) rotateX(4deg) translateZ(0); filter: drop-shadow(0 40px 60px rgba(0,0,0,0.12));">
+
+                            <!-- Card de fundo (relatórios) -->
+                            <div class="absolute -bottom-8 -right-6 w-[88%] bg-white rounded-2xl border border-gray-100 overflow-hidden"
+                                style="box-shadow: 0 20px 40px -8px rgba(0,0,0,0.08);">
+                                <div class="px-4 py-3 border-b border-gray-100 bg-gray-50/60">
+                                    <p class="text-[9px] font-bold text-gray-500">RELATÓRIO — AGO 2026</p>
+                                </div>
+                                <div class="p-4 space-y-2">
+                                    <div v-for="(c, i) in [
+                                        { name:'Alimentação', pct:72, color:'bg-orange-400' },
+                                        { name:'Transporte', pct:45, color:'bg-blue-400' },
+                                        { name:'Lazer', pct:28, color:'bg-purple-400' },
+                                    ]" :key="i" class="space-y-1">
+                                        <div class="flex justify-between">
+                                            <span class="text-[8px] text-gray-500">{{ c.name }}</span>
+                                            <span class="text-[8px] font-bold text-gray-700">{{ c.pct }}%</span>
+                                        </div>
+                                        <div class="h-1.5 bg-gray-100 rounded-full">
+                                            <div :class="c.color" class="h-1.5 rounded-full" :style="`width:${c.pct}%`"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <!-- Card principal — Dashboard -->
-                            <div class="bg-white rounded-2xl shadow-2xl shadow-gray-200/80 border border-gray-100 overflow-hidden">
+                            <div class="relative bg-white rounded-2xl border border-gray-100/80 overflow-hidden"
+                                style="box-shadow: 0 32px 64px -12px rgba(0,0,0,0.14), 0 0 0 1px rgba(0,0,0,0.04);">
+
                                 <!-- Topbar -->
-                                <div class="flex items-center justify-between px-4 py-3 border-b border-gray-100 bg-gray-50/50">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-2 h-2 rounded-full bg-red-400"></div>
-                                        <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
-                                        <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                                <div class="flex items-center justify-between px-4 py-3 border-b border-gray-100 bg-gray-50/70">
+                                    <div class="flex items-center gap-1.5">
+                                        <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                                        <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
                                     </div>
-                                    <div class="bg-gray-100 rounded-md h-5 w-48 flex items-center px-2">
-                                        <span class="text-[10px] text-gray-400">app.organizze.com.br/dashboard</span>
+                                    <div class="bg-white border border-gray-200 rounded-lg h-5 w-52 flex items-center px-2 gap-1">
+                                        <div class="w-2 h-2 rounded-full bg-[#16C64F]"></div>
+                                        <span class="text-[9px] text-gray-400">app.organizze.com.br/dashboard</span>
                                     </div>
-                                    <div class="w-12"></div>
+                                    <div class="flex items-center gap-1.5">
+                                        <div class="w-4 h-4 rounded bg-gray-200"></div>
+                                        <div class="w-4 h-4 rounded bg-gray-200"></div>
+                                    </div>
                                 </div>
 
-                                <div class="p-4 grid grid-cols-12 gap-3">
+                                <div class="grid grid-cols-12 gap-0">
                                     <!-- Sidebar -->
-                                    <div class="col-span-3 space-y-1.5">
-                                        <div class="flex items-center gap-1.5 mb-3">
-                                            <div class="w-5 h-5 bg-[#16C64F] rounded-md"></div>
-                                            <span class="text-[10px] font-bold text-gray-800">Organizze</span>
+                                    <div class="col-span-3 border-r border-gray-100 p-3 space-y-1 bg-gray-50/30">
+                                        <div class="flex items-center gap-1.5 px-1 mb-4">
+                                            <div class="w-5 h-5 bg-[#16C64F] rounded-md flex items-center justify-center">
+                                                <div class="w-2 h-2 bg-white rounded-sm"></div>
+                                            </div>
+                                            <span class="text-[10px] font-extrabold text-gray-800">Organizze</span>
                                         </div>
-                                        <div v-for="(item, i) in ['Dashboard','Lançamentos','Contas','Cartões','Relatórios','Limites']" :key="i"
-                                            :class="i === 0 ? 'bg-[#16C64F]/10 text-[#16C64F]' : 'text-gray-400'"
-                                            class="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-[9px] font-medium">
-                                            <div :class="i === 0 ? 'bg-[#16C64F]' : 'bg-gray-200'" class="w-2 h-2 rounded-sm flex-shrink-0"></div>
-                                            {{ item }}
+                                        <div v-for="(item, i) in [
+                                            { label:'Dashboard', icon:'▪' },
+                                            { label:'Lançamentos', icon:'▪' },
+                                            { label:'Contas', icon:'▪' },
+                                            { label:'Cartões', icon:'▪' },
+                                            { label:'Relatórios', icon:'▪' },
+                                            { label:'Limites', icon:'▪' },
+                                        ]" :key="i"
+                                            :class="i === 0
+                                                ? 'bg-[#16C64F] text-white shadow-sm shadow-[#16C64F]/30'
+                                                : 'text-gray-400 hover:bg-gray-100'"
+                                            class="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-[9px] font-semibold cursor-pointer transition-colors">
+                                            <div :class="i === 0 ? 'bg-white/40' : 'bg-gray-300'" class="w-1.5 h-1.5 rounded-sm flex-shrink-0"></div>
+                                            {{ item.label }}
                                         </div>
                                     </div>
 
-                                    <!-- Conteúdo principal -->
-                                    <div class="col-span-9 space-y-3">
-                                        <!-- Saldo do mês -->
-                                        <div class="flex items-center justify-between">
+                                    <!-- Main content -->
+                                    <div class="col-span-9 p-4 space-y-3">
+
+                                        <!-- Header do dashboard -->
+                                        <div class="flex items-start justify-between">
                                             <div>
-                                                <p class="text-[9px] text-gray-400 font-medium">Saldo em agosto</p>
-                                                <p class="text-xl font-bold text-gray-900">R$ 8.420,00</p>
-                                                <span class="text-[9px] text-[#16C64F] font-semibold">+12,4% vs mês anterior</span>
-                                            </div>
-                                            <div class="bg-[#16C64F]/10 rounded-xl p-2 text-right">
-                                                <p class="text-[8px] text-gray-400">Economias</p>
-                                                <p class="text-sm font-bold text-[#16C64F]">R$ 2.100</p>
-                                            </div>
-                                        </div>
-
-                                        <!-- Stats row -->
-                                        <div class="grid grid-cols-3 gap-2">
-                                            <div v-for="(s, i) in [
-                                                { label:'Receitas', value:'R$ 12.500', color:'text-[#16C64F]', bg:'bg-[#16C64F]/5' },
-                                                { label:'Despesas', value:'R$ 4.080', color:'text-red-500', bg:'bg-red-50' },
-                                                { label:'Cartões', value:'R$ 1.340', color:'text-blue-500', bg:'bg-blue-50' },
-                                            ]" :key="i" :class="s.bg" class="rounded-xl p-2">
-                                                <p class="text-[8px] text-gray-400 mb-0.5">{{ s.label }}</p>
-                                                <p :class="s.color" class="text-[11px] font-bold">{{ s.value }}</p>
-                                            </div>
-                                        </div>
-
-                                        <!-- Gráfico de barras -->
-                                        <div class="bg-gray-50 rounded-xl p-3">
-                                            <p class="text-[8px] text-gray-400 font-medium mb-2">Evolução mensal</p>
-                                            <div class="flex items-end gap-1 h-14">
-                                                <div v-for="(h, i) in [35,52,41,68,44,78,58,88,50,72,82,60]" :key="i"
-                                                    class="flex-1 rounded-t"
-                                                    :style="`height:${h}%`"
-                                                    :class="i === 11 ? 'bg-[#16C64F]' : 'bg-[#16C64F]/25'">
+                                                <p class="text-[8px] text-gray-400 font-medium uppercase tracking-wider">Saldo em agosto</p>
+                                                <p class="text-[22px] font-extrabold text-gray-900 leading-tight">R$ 8.420<span class="text-sm text-gray-400 font-normal">,00</span></p>
+                                                <div class="flex items-center gap-1 mt-0.5">
+                                                    <span class="text-[#16C64F] text-[9px] font-bold">↑ +12,4%</span>
+                                                    <span class="text-[8px] text-gray-400">vs mês anterior</span>
                                                 </div>
                                             </div>
-                                            <div class="flex justify-between mt-1">
-                                                <span v-for="m in ['Jan','Abr','Jul','Dez']" :key="m" class="text-[7px] text-gray-300">{{ m }}</span>
+                                            <div class="text-right bg-gradient-to-br from-[#16C64F]/10 to-emerald-50 rounded-xl p-2.5">
+                                                <p class="text-[7px] text-gray-400 uppercase font-bold">Economias</p>
+                                                <p class="text-base font-extrabold text-[#16C64F]">R$ 2.100</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Cards de resumo -->
+                                        <div class="grid grid-cols-3 gap-1.5">
+                                            <div v-for="(s) in [
+                                                { label:'Receitas', value:'R$ 12.500', color:'text-[#16C64F]', dot:'bg-[#16C64F]', bg:'bg-[#16C64F]/5 border border-[#16C64F]/10' },
+                                                { label:'Despesas', value:'R$ 4.080', color:'text-red-500', dot:'bg-red-400', bg:'bg-red-50 border border-red-100' },
+                                                { label:'Cartões', value:'R$ 1.340', color:'text-blue-600', dot:'bg-blue-400', bg:'bg-blue-50 border border-blue-100' },
+                                            ]" :key="s.label" :class="s.bg" class="rounded-xl p-2.5">
+                                                <div class="flex items-center gap-1 mb-1">
+                                                    <div :class="s.dot" class="w-1.5 h-1.5 rounded-full"></div>
+                                                    <p class="text-[7px] text-gray-500 font-semibold uppercase">{{ s.label }}</p>
+                                                </div>
+                                                <p :class="s.color" class="text-[11px] font-extrabold">{{ s.value }}</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gráfico de barras + linha -->
+                                        <div class="bg-gray-50 border border-gray-100 rounded-xl p-3">
+                                            <div class="flex items-center justify-between mb-2">
+                                                <p class="text-[8px] font-bold text-gray-600">Evolução 2026</p>
+                                                <span class="text-[7px] text-[#16C64F] font-bold bg-[#16C64F]/10 px-2 py-0.5 rounded-full">+18% YTD</span>
+                                            </div>
+                                            <div class="relative flex items-end gap-1 h-16">
+                                                <!-- Linha de tendência SVG -->
+                                                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 120 64" preserveAspectRatio="none">
+                                                    <polyline
+                                                        points="5,52 15,40 25,47 35,28 45,35 55,18 65,26 75,8 85,18 95,14 105,10 115,16"
+                                                        fill="none" stroke="#16C64F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+                                                </svg>
+                                                <div v-for="(h, i) in [35,52,41,68,44,78,58,88,50,72,82,60]" :key="i"
+                                                    class="flex-1 rounded-t transition-all"
+                                                    :style="`height:${h}%`"
+                                                    :class="i === 7 ? 'bg-[#16C64F]' : 'bg-[#16C64F]/20'">
+                                                </div>
+                                            </div>
+                                            <div class="flex justify-between mt-1.5">
+                                                <span v-for="m in ['Jan','Mar','Mai','Jul','Set','Nov']" :key="m" class="text-[6.5px] text-gray-300 font-medium">{{ m }}</span>
                                             </div>
                                         </div>
 
                                         <!-- Últimos lançamentos -->
-                                        <div class="space-y-1.5">
-                                            <p class="text-[8px] text-gray-400 font-medium">Últimos lançamentos</p>
-                                            <div v-for="(tx, i) in [
-                                                { icon:'🛒', name:'Supermercado', value:'-R$ 284', color:'text-red-500' },
-                                                { icon:'💰', name:'Salário', value:'+R$ 6.500', color:'text-[#16C64F]' },
-                                                { icon:'🎬', name:'Netflix', value:'-R$ 44', color:'text-red-500' },
-                                            ]" :key="i" class="flex items-center justify-between bg-gray-50 rounded-lg px-2.5 py-1.5">
-                                                <div class="flex items-center gap-1.5">
-                                                    <span class="text-xs">{{ tx.icon }}</span>
-                                                    <span class="text-[9px] text-gray-600 font-medium">{{ tx.name }}</span>
+                                        <div class="space-y-1">
+                                            <p class="text-[8px] text-gray-400 font-bold uppercase tracking-wider">Recentes</p>
+                                            <div v-for="(tx) in [
+                                                { bg:'bg-orange-100', icon:'🛒', name:'Supermercado Extra', cat:'Alimentação', value:'-R$ 284,50', color:'text-red-500' },
+                                                { bg:'bg-green-100',  icon:'💰', name:'Salário',             cat:'Receita',     value:'+R$ 6.500,00', color:'text-[#16C64F]' },
+                                                { bg:'bg-purple-100', icon:'🎬', name:'Netflix',             cat:'Assinatura',  value:'-R$ 44,90',   color:'text-red-500' },
+                                            ]" :key="tx.name"
+                                                class="flex items-center justify-between py-1.5 border-b border-gray-50 last:border-0">
+                                                <div class="flex items-center gap-2">
+                                                    <div :class="tx.bg" class="w-6 h-6 rounded-lg flex items-center justify-center text-[10px]">{{ tx.icon }}</div>
+                                                    <div>
+                                                        <p class="text-[8.5px] text-gray-700 font-semibold leading-none">{{ tx.name }}</p>
+                                                        <p class="text-[7px] text-gray-400 mt-0.5">{{ tx.cat }}</p>
+                                                    </div>
                                                 </div>
-                                                <span :class="tx.color" class="text-[9px] font-bold">{{ tx.value }}</span>
+                                                <span :class="tx.color" class="text-[9px] font-extrabold">{{ tx.value }}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Card flutuante — Saldo -->
-                            <div class="absolute -bottom-6 -left-8 bg-white rounded-2xl shadow-xl border border-gray-100 p-3 w-40">
-                                <p class="text-[9px] text-gray-400 mb-1">Meta mensal</p>
-                                <p class="text-sm font-bold text-gray-900 mb-1.5">R$ 3.000</p>
-                                <div class="w-full bg-gray-100 rounded-full h-1.5">
-                                    <div class="bg-[#16C64F] h-1.5 rounded-full" style="width: 70%"></div>
+                            <!-- Card flutuante — Meta mensal (canto inferior esquerdo) -->
+                            <div class="absolute -bottom-5 -left-10 bg-white rounded-2xl p-3.5 w-44 z-20"
+                                style="box-shadow: 0 16px 40px -8px rgba(0,0,0,0.14), 0 0 0 1px rgba(0,0,0,0.05);">
+                                <div class="flex items-center justify-between mb-2">
+                                    <p class="text-[9px] font-bold text-gray-700">Meta de economia</p>
+                                    <span class="text-[8px] font-bold text-[#16C64F] bg-[#16C64F]/10 px-1.5 py-0.5 rounded-full">AGO</span>
                                 </div>
-                                <p class="text-[8px] text-gray-400 mt-1">70% economizado</p>
+                                <p class="text-base font-extrabold text-gray-900 mb-2">R$ 2.100 <span class="text-[9px] text-gray-400 font-normal">/ 3.000</span></p>
+                                <div class="w-full bg-gray-100 rounded-full h-2 mb-1">
+                                    <div class="bg-gradient-to-r from-[#16C64F] to-emerald-400 h-2 rounded-full" style="width: 70%"></div>
+                                </div>
+                                <p class="text-[7.5px] text-gray-400">70% da meta atingida 🎯</p>
                             </div>
 
-                            <!-- Card flutuante — Notificação -->
-                            <div class="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl border border-gray-100 p-3 w-44">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <div class="w-6 h-6 bg-[#16C64F]/10 rounded-lg flex items-center justify-center">
-                                        <span class="text-xs">✅</span>
+                            <!-- Card flutuante — Open Finance (topo direito) -->
+                            <div class="absolute -top-5 -right-8 bg-white rounded-2xl p-3 w-52 z-20"
+                                style="box-shadow: 0 16px 40px -8px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05);">
+                                <div class="flex items-center gap-2.5 mb-2">
+                                    <div class="relative w-8 h-8 bg-[#16C64F]/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <span class="text-sm">🏦</span>
+                                        <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[#16C64F] rounded-full border-2 border-white"></span>
                                     </div>
-                                    <p class="text-[9px] font-bold text-gray-800">Conta conectada</p>
+                                    <div>
+                                        <p class="text-[9px] font-extrabold text-gray-800 leading-none">Nubank conectado</p>
+                                        <p class="text-[7.5px] text-[#16C64F] font-semibold mt-0.5">● sincronizado agora</p>
+                                    </div>
                                 </div>
-                                <p class="text-[8px] text-gray-400">Nubank sincronizado via Open Finance</p>
+                                <div class="flex items-center justify-between bg-gray-50 rounded-lg px-2 py-1.5">
+                                    <span class="text-[8px] text-gray-500">Último acesso</span>
+                                    <span class="text-[8px] font-bold text-gray-700">há 2 min</span>
+                                </div>
+                            </div>
+
+                            <!-- Card flutuante — Transação em tempo real (lateral esquerda) -->
+                            <div class="absolute top-1/2 -left-12 -translate-y-1/2 bg-white rounded-xl p-2.5 w-36 z-20 hidden lg:block"
+                                style="box-shadow: 0 12px 32px -6px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04);">
+                                <div class="flex items-center gap-1.5 mb-1.5">
+                                    <div class="w-5 h-5 bg-green-100 rounded-lg flex items-center justify-center text-[10px]">💰</div>
+                                    <span class="text-[8px] font-bold text-gray-700">Salário recebido</span>
+                                </div>
+                                <p class="text-sm font-extrabold text-[#16C64F]">+R$ 6.500</p>
+                                <p class="text-[7px] text-gray-400 mt-0.5">Hoje, 08:42</p>
                             </div>
                         </div>
                     </div>
