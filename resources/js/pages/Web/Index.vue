@@ -551,7 +551,7 @@ const stats = [
                 <p class="text-center text-sm text-gray-400 mb-10 font-medium">
                     Integrado com os principais bancos e fintechs do Brasil
                 </p>
-                <div class="flex flex-wrap items-center justify-center gap-10 md:gap-16">
+                <div class="flex flex-wrap items-center justify-center gap-10 md:gap-14">
                     <img v-for="bank in [
                         { img: '/images/fintechs/nubank.png',    name: 'Nubank' },
                         { img: '/images/fintechs/itau.png',      name: 'Itaú' },
@@ -563,7 +563,7 @@ const stats = [
                     ]" :key="bank.name"
                         :src="bank.img"
                         :alt="bank.name"
-                        class="h-7 w-auto object-contain opacity-30 hover:opacity-70 transition-opacity duration-300 grayscale"
+                        class="h-8 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
                     />
                 </div>
             </div>
@@ -668,10 +668,10 @@ const stats = [
                             { img: '/images/fintechs/xp.png',        name: 'XP Inc.' },
                             { img: '/images/fintechs/picpay.png',    name: 'PicPay' },
                         ]" :key="bank.name"
-                            class="bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 aspect-square hover:bg-white/10 transition-colors group">
+                            class="bg-white rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 aspect-square hover:scale-105 transition-transform duration-200 shadow-sm">
                             <img :src="bank.img" :alt="bank.name"
-                                class="w-10 h-10 object-contain filter brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity" />
-                            <span class="text-[9px] text-gray-500 font-medium group-hover:text-gray-300 transition-colors">{{ bank.name }}</span>
+                                class="w-12 h-12 object-contain" />
+                            <span class="text-[9px] text-gray-500 font-semibold text-center">{{ bank.name }}</span>
                         </div>
                     </div>
                 </div>
