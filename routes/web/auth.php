@@ -21,6 +21,6 @@ Route::prefix('auth')->middleware('guest')->group(function(){
 
     /** Rota de recuperação de senha **/
     Route::get('/recuperar', [ForgotPasswordController::class, "index"])->name('auth.forget');
-    Route::get('/recuperar', [ForgotPasswordController::class, "index"])->name('auth.forget');
+    Route::post('/recuperar', [ForgotPasswordController::class, "sendResetLinkEmail"])->name('auth.forgot.send');
 });
 

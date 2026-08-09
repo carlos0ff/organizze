@@ -1,14 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 
-/** Elementos de entrada **/
-import EmailInput from '@/Components/inputs/EmailInput.vue';
-import BaseCard from '@/Components/layout/BaseCard.vue';
-
-/** Estado **/
 const email = ref('');
 
-/** Submit do formulário **/
 const submit = () => {
     console.log('Email para recuperação:', email.value);
 };
@@ -56,19 +50,12 @@ const submit = () => {
 
                 <div class="mb-6 flex w-full flex-col">
                     <input
+                        v-model="email"
                         type="email"
                         placeholder="exemplo@email.com"
                         class="focus:outline-none border border-[#DBDED8] bg-[#FEFDF9] h-12 w-full rounded-md px-4 mt-2"
                         required
                     />
-                    <!-- <EmailInput v-model="email" label="" placeholder="exemplo@email.com" /> -->
-                </div>
-
-                <div class="mb-6 w-full hidden">
-                    <p class="text-xs sm:text-sm text-[#5C5F5A] bg-blue-50 p-3 rounded-lg border border-blue-100">
-                        🔒 <span class="font-medium">Segurança garantida:</span>
-                        O link de recuperação é válido por 30 minutos e será enviado apenas para este e-mail.
-                    </p>
                 </div>
 
                 <button

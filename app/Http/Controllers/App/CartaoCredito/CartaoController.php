@@ -2,82 +2,82 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\App\Conta;
+namespace App\Http\Controllers\App\CartaoCredito;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ContaController extends Controller
+class CartaoController extends Controller
 {
     /**
-     * Lista todas as contas do usuário.
+     * Lista todos os cartões de crédito do usuário.
      */
     public function index(): \Inertia\Response
     {
-        return inertia('App/Conta/Index');
+        return inertia('App/CartaoCredito/Index');
     }
 
     /**
-     * Exibe o formulário de criação de conta.
+     * Exibe o formulário de criação de cartão.
      */
     public function create(): \Inertia\Response
     {
-        return inertia('App/Conta/Create');
+        return inertia('App/CartaoCredito/Create');
     }
 
     /**
-     * Salva uma nova conta.
+     * Salva um novo cartão de crédito.
      */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        // TODO: validar e salvar conta
+        // TODO: validar e salvar cartão
     }
 
     /**
-     * Exibe os detalhes de uma conta.
+     * Exibe os detalhes de um cartão específico.
      */
     public function show(int $id): \Inertia\Response
     {
-        return inertia('App/Conta/Show', ['id' => $id]);
+        return inertia('App/CartaoCredito/Show', ['id' => $id]);
     }
 
     /**
-     * Exibe o formulário de edição de conta.
+     * Exibe o formulário de edição do cartão.
      */
     public function edit(int $id): \Inertia\Response
     {
-        return inertia('App/Conta/Edit', ['id' => $id]);
+        return inertia('App/CartaoCredito/Edit', ['id' => $id]);
     }
 
     /**
-     * Atualiza os dados de uma conta.
+     * Atualiza os dados de um cartão.
      */
     public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
-        // TODO: validar e atualizar conta
+        // TODO: validar e atualizar cartão
     }
 
     /**
-     * Remove uma conta.
+     * Remove um cartão de crédito.
      */
     public function destroy(int $id): \Illuminate\Http\RedirectResponse
     {
-        // TODO: excluir conta
+        // TODO: excluir cartão
     }
 
     /**
-     * Arquiva uma conta (oculta dos lançamentos sem excluir).
+     * Arquiva um cartão de crédito.
      */
     public function arquivar(int $id): \Illuminate\Http\RedirectResponse
     {
-        // TODO: arquivar conta
+        // TODO: arquivar cartão
     }
 
     /**
-     * Desarquiva uma conta previamente arquivada.
+     * Desarquiva um cartão de crédito.
      */
     public function desarquivar(int $id): \Illuminate\Http\RedirectResponse
     {
-        // TODO: desarquivar conta
+        // TODO: desarquivar cartão
     }
 }

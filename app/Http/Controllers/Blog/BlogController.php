@@ -3,18 +3,15 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Inertia\Response;
 
 class BlogController extends Controller
 {
     /**
-     * Exibe a lista de posts do blog.
-     * @return \Inertia\Response
+     * Exibe a página inicial do blog.
      */
-    public function index() : \Inertia\Response
+    public function index(): \Inertia\Response
     {
-        return inertia('Blog/Index');
+        return inertia('Blog/Home/Index');
     }
 
     /**
@@ -26,7 +23,9 @@ class BlogController extends Controller
     }
 
     /**
-     * Exibe a página de um post.
+     * Exibe um post pelo slug.
+     *
+     * @param string $slug Slug do post
      */
     public function post(string $slug = ''): \Inertia\Response
     {

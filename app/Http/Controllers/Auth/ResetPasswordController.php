@@ -8,34 +8,25 @@ use Illuminate\Http\Request;
 class ResetPasswordController extends Controller
 {
     /**
-     * Mostra a página de redefinição de senha.
-     * @return \Inertia\Response
+     * Exibe o formulário de redefinição de senha.
      */
     public function index(): \Inertia\Response
     {
-        return \Inertia\Inertia::render('auth/ResetPassword');
+        return \Inertia\Inertia::render('Auth/Redefinir');
     }
 
     /**
-     * Processa a redefinição de senha.
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * Redefine a senha do usuário a partir do token enviado por e-mail.
      */
-    public function update(Request $request)
+    public function update(Request $request): \Illuminate\Http\RedirectResponse
     {
-        // Lógica para redefinir a senha do usuário
+        $request->validate([
+            'token'                 => ['required'],
+            'email'                 => ['required', 'email'],
+            'password'              => ['required', 'min:8', 'confirmed'],
+            'password_confirmation' => ['required'],
+        ]);
+
+        // TODO: validar token e redefinir senha
     }
-
-    /**
-     * Valida o token de redefinição de senha.
-     * @param  string  $token
-     * @return bool
-     */
-    protected function validateToken(string $token): bool
-    {
-        // Lógica para validar o token
-    }
-
-    
-
 }

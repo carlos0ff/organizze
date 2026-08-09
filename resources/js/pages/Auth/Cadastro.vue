@@ -1,7 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { Facebook } from 'lucide-vue-next';
-// import { router } from '@inertiajs/vue3';
 
 // Estados do formulário
 const email = ref('');
@@ -97,9 +95,6 @@ const handleFacebookLogin = () => {
                     @click="handleFacebookLogin"
                     class="hover:cursor-pointer w-full group flex items-center justify-center gap-3 rounded-lg bg-[#1877F2] px-8 py-3 text-sm sm:text-base font-medium text-white transition-all duration-200 hover:bg-[#166FE5] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#1877F2] focus:ring-offset-2"
                 >
-                    <!-- <Facebook
-            class="h-5 w-5 sm:h-6 sm:w-6 shrink-0 text-white transition-all duration-200 group-hover:scale-110"
-            /> -->
                     <svg
                         width="12"
                         height="24"

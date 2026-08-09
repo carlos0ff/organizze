@@ -2,15 +2,13 @@
 import { ref } from 'vue';
 </script>
 
-/** * Content Login */
 <template>
     <div class="bg-gray-100 w-full min-h-screen flex flex-col items-center justify-center pt-8 pb-12 px-4 sm:px-6">
         <div class="mb-8 sm:mb-10">
             <a href="#" class="flex items-center justify-center">
                 <img
                     src="https://auth.organizze.com.br/images/auth/logo-909f6075bb5972376e589ed01866ee33.svg?vsn=d"
-                    alt="Logo Organizze"
-                    class="h-10 sm:h-12 w-auto object-contain"
+                    class="h-10 sm:h-12 w-auto object-contain" alt="Logo Organizze"
                 />
             </a>
         </div>
