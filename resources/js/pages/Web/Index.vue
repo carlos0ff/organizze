@@ -643,22 +643,23 @@ const stats = [
                         </a>
                     </div>
 
-                    <!-- Bank logos simulation -->
-                    <div class="grid grid-cols-3 gap-4">
-                        <div v-for="(bank, i) in [
-                            { name: 'Nubank', color: 'bg-purple-500/20 border-purple-500/30 text-purple-400' },
-                            { name: 'Itaú', color: 'bg-orange-500/20 border-orange-500/30 text-orange-400' },
-                            { name: 'Bradesco', color: 'bg-red-500/20 border-red-500/30 text-red-400' },
-                            { name: 'Santander', color: 'bg-red-600/20 border-red-600/30 text-red-500' },
-                            { name: 'C6 Bank', color: 'bg-yellow-500/20 border-yellow-500/30 text-yellow-400' },
-                            { name: 'Inter', color: 'bg-orange-600/20 border-orange-600/30 text-orange-500' },
-                            { name: 'BTG', color: 'bg-blue-500/20 border-blue-500/30 text-blue-400' },
-                            { name: 'XP Inc.', color: 'bg-gray-500/20 border-gray-500/30 text-gray-400' },
-                            { name: 'PicPay', color: 'bg-green-500/20 border-green-500/30 text-green-400' },
-                        ]" :key="i"
-                            :class="bank.color"
-                            class="border rounded-xl p-4 flex items-center justify-center text-xs font-semibold text-center aspect-square">
-                            {{ bank.name }}
+                    <!-- Bank logos reais -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <div v-for="bank in [
+                            { img: '/images/fintechs/nubank.png',    name: 'Nubank' },
+                            { img: '/images/fintechs/itau.png',      name: 'Itaú' },
+                            { img: '/images/fintechs/bradesco.png',  name: 'Bradesco' },
+                            { img: '/images/fintechs/santander.png', name: 'Santander' },
+                            { img: '/images/fintechs/c6bank.png',    name: 'C6 Bank' },
+                            { img: '/images/fintechs/bb.png',        name: 'Banco do Brasil' },
+                            { img: '/images/fintechs/btgpactual.png',name: 'BTG Pactual' },
+                            { img: '/images/fintechs/xp.png',        name: 'XP Inc.' },
+                            { img: '/images/fintechs/picpay.png',    name: 'PicPay' },
+                        ]" :key="bank.name"
+                            class="bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 aspect-square hover:bg-white/10 transition-colors group">
+                            <img :src="bank.img" :alt="bank.name"
+                                class="w-10 h-10 object-contain filter brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity" />
+                            <span class="text-[9px] text-gray-500 font-medium group-hover:text-gray-300 transition-colors">{{ bank.name }}</span>
                         </div>
                     </div>
                 </div>
