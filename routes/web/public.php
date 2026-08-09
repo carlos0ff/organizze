@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
-
-/**
- * Blog Controller
- * Controllers relacionados ao blog, como exibição de posts, categorias, etc.
- */
+use App\Http\Controllers\Web\LandingController;
 use App\Http\Controllers\Blog\CategoryController;
 use App\Http\Controllers\Blog\BlogController;
+
+/** Landing Page **/
+Route::get('/', [LandingController::class, 'index'])->name('web.home');
+Route::get('/planos', [LandingController::class, 'planos'])->name('web.planos');
 
 
 /**
@@ -31,11 +31,3 @@ Route::prefix("blog")->group(function(){
     Route::get("/categoria/{category}", [CategoryController::class , "show"])->name("blog.category");
 
 });
-
-/**
- * http://localhost/blog
- * http://localhost/blog/post/como-viver-na-lagoa
- * http://localhost/blog/categoria/controle
- */
-
-
