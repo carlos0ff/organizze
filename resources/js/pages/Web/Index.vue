@@ -545,14 +545,26 @@ const stats = [
             </div>
         </section>
 
-        <!-- ───────────────── STATS ───────────────── -->
-        <section class="bg-gray-50 border-t border-gray-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                    <div v-for="stat in stats" :key="stat.label" class="text-center">
-                        <p class="text-3xl font-bold text-gray-900 mb-1">{{ stat.value }}</p>
-                        <p class="text-sm text-gray-500">{{ stat.label }}</p>
-                    </div>
+        <!-- ───────────────── TRUSTED BY ───────────────── -->
+        <section class="bg-white border-t border-gray-100 py-14">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="text-center text-sm text-gray-400 mb-10 font-medium">
+                    Integrado com os principais bancos e fintechs do Brasil
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-10 md:gap-16">
+                    <img v-for="bank in [
+                        { img: '/images/fintechs/nubank.png',    name: 'Nubank' },
+                        { img: '/images/fintechs/itau.png',      name: 'Itaú' },
+                        { img: '/images/fintechs/bradesco.png',  name: 'Bradesco' },
+                        { img: '/images/fintechs/santander.png', name: 'Santander' },
+                        { img: '/images/fintechs/c6bank.png',    name: 'C6 Bank' },
+                        { img: '/images/fintechs/bb.png',        name: 'Banco do Brasil' },
+                        { img: '/images/fintechs/caixa.png',     name: 'Caixa' },
+                    ]" :key="bank.name"
+                        :src="bank.img"
+                        :alt="bank.name"
+                        class="h-7 w-auto object-contain opacity-30 hover:opacity-70 transition-opacity duration-300 grayscale"
+                    />
                 </div>
             </div>
         </section>
