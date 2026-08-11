@@ -6,6 +6,7 @@ import {
     TrendingUp, Wallet, Target, RefreshCw, Star,
     Building2, Smartphone, FileText, Lock, ShoppingCart, Film
 } from 'lucide-vue-next';
+import Navbar from "@/pages/Web/Components/Navigation/Navbar.vue";
 
 const toggleFaq = (index: number) => {
     openFaq.value = openFaq.value === index ? null : index;
@@ -210,36 +211,6 @@ const testimonialsRow2 = [
     },
 ];
 
-const faqs = [
-    {
-        question: 'O Organizze é seguro?',
-        answer: 'Sim. Usamos criptografia de ponta a ponta, autenticação em dois fatores e nunca armazenamos suas senhas bancárias. A conexão via Open Finance é regulamentada pelo Banco Central.',
-    },
-    {
-        question: 'Posso usar no celular?',
-        answer: 'Sim, o Organizze funciona perfeitamente no navegador do celular e temos apps nativos para iOS e Android em desenvolvimento.',
-    },
-    {
-        question: 'Posso cancelar quando quiser?',
-        answer: 'Sim. Não há fidelidade nem multa. Você pode cancelar a qualquer momento pelo próprio painel de configurações.',
-    },
-    {
-        question: 'O plano grátis tem limite de tempo?',
-        answer: 'Não. O plano Básico é gratuito para sempre. Você só precisa assinar se quiser funcionalidades avançadas.',
-    },
-    {
-        question: 'Como funciona a importação bancária?',
-        answer: 'Você pode conectar sua conta via Open Finance (sincronização automática) ou importar extratos no formato OFX, CSV ou Excel.',
-    },
-];
-
-const navLinks = [
-    { label: 'Funcionalidades', href: '#funcionalidades' },
-    { label: 'Como funciona', href: '#como-funciona' },
-    { label: 'Planos', href: '#planos' },
-    { label: 'Blog', href: '/blog' },
-];
-
 const stats = [
     { value: '150k+', label: 'Usuários ativos' },
     { value: 'R$ 2bi+', label: 'Controlados mensalmente' },
@@ -252,66 +223,15 @@ const stats = [
     <div class="min-h-screen bg-white" style="font-family: 'Plus Jakarta Sans', sans-serif;">
 
         <!-- ───────────────── NAVBAR ───────────────── -->
-        <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-16">
-                    <!-- Logo -->
-                    <a href="/" class="flex items-center gap-2">
-                        <div class="w-8 h-8 bg-[#16C64F] rounded-lg flex items-center justify-center">
-                            <BarChart3 class="w-5 h-5 text-white" />
-                        </div>
-                        <span class="text-xl font-bold text-gray-900">Organizze</span>
-                    </a>
-
-                    <!-- Desktop nav -->
-                    <nav class="hidden md:flex items-center gap-8">
-                        <a v-for="link in navLinks" :key="link.label" :href="link.href"
-                            class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                            {{ link.label }}
-                        </a>
-                    </nav>
-
-                    <!-- CTA -->
-                    <div class="hidden md:flex items-center gap-3">
-                        <a href="/auth/entrar" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-                            Entrar
-                        </a>
-                        <a href="/auth/cadastro"
-                            class="bg-[#16C64F] hover:bg-[#12a842] text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
-                            Começar grátis
-                        </a>
-                    </div>
-
-                    <!-- Mobile toggle -->
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 text-gray-600">
-                        <X v-if="mobileMenuOpen" class="w-5 h-5" />
-                        <Menu v-else class="w-5 h-5" />
-                    </button>
-                </div>
-            </div>
-
-            <!-- Mobile menu -->
-            <div v-if="mobileMenuOpen" class="md:hidden border-t border-gray-100 bg-white px-4 py-4 flex flex-col gap-4">
-                <a v-for="link in navLinks" :key="link.label" :href="link.href"
-                    class="text-sm font-medium text-gray-700">{{ link.label }}</a>
-                <hr class="border-gray-100" />
-                <a href="/auth/entrar" class="text-sm font-medium text-gray-700">Entrar</a>
-                <a href="/auth/cadastro"
-                    class="bg-[#16C64F] text-white text-sm font-semibold px-4 py-2.5 rounded-lg text-center">
-                    Começar grátis
-                </a>
-            </div>
-        </header>
+        <Navbar />
 
         <!-- ───────────────── HERO ───────────────── -->
-        <section class="relative pt-20 pb-0 overflow-hidden bg-[#EDFDF2]">
+        <section class="relative pt-20 pb-0 overflow-hidden bg-gray-50">
 
-            <!-- Textura de fundo sutil -->
-            <div class="absolute inset-0 opacity-[0.03]"
-                style="background-image: radial-gradient(circle, #16C64F 1px, transparent 1px); background-size: 28px 28px;">
+            <!-- Gradiente sutil no fundo -->
+            <div class="absolute inset-0 pointer-events-none"
+                style="background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(22,198,79,0.07) 0%, transparent 70%);">
             </div>
-            <!-- Gradiente radial saindo do canto superior direito -->
-            <div class="absolute top-0 right-0 w-[700px] h-[700px] bg-gradient-to-bl from-[#16C64F]/12 via-[#EDFDF2]/60 to-transparent rounded-full -translate-y-1/4 translate-x-1/4 pointer-events-none"></div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-80px)] py-16 lg:py-0">
@@ -320,7 +240,7 @@ const stats = [
                     <div class="flex flex-col justify-center">
 
                         <!-- Badge pill -->
-                        <div class="inline-flex items-center gap-2 self-start mb-6 px-3.5 py-1.5 rounded-full border border-[#16C64F]/30 bg-[#16C64F]/5">
+                        <div class="inline-flex items-center gap-2 self-start mb-6 px-3.5 py-1.5 rounded-full border border-[#16C64F]/30 bg-white shadow-sm">
                             <span class="w-1.5 h-1.5 rounded-full bg-[#16C64F] animate-pulse"></span>
                             <span class="text-[#16C64F] text-[11px] font-bold tracking-widest uppercase">Controle financeiro inteligente</span>
                         </div>
@@ -347,7 +267,6 @@ const stats = [
                                 Começar grátis agora
                                 <ArrowRight class="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </a>
-
                         </div>
 
                         <!-- Social proof -->
@@ -381,218 +300,192 @@ const stats = [
                         </div>
                     </div>
 
-                    <!-- ── Coluna direita: mockup ── -->
+                    <!-- ── Coluna direita: mockup fiel ao /app ── -->
                     <div class="relative flex items-center justify-center lg:justify-end lg:h-[calc(100vh-80px)]">
 
-                        <!-- Blobs de cor em camadas -->
-                        <div class="absolute top-1/2 right-[-60px] -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none"
-                            style="background: radial-gradient(circle, rgba(22,198,79,0.12) 0%, rgba(22,198,79,0.04) 60%, transparent 100%);">
-                        </div>
-                        <div class="absolute top-1/3 right-1/4 w-48 h-48 rounded-full pointer-events-none"
-                            style="background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 70%);">
-                        </div>
+                        <!-- Sombra de profundidade atrás do app -->
+                        <div class="absolute inset-8 rounded-3xl pointer-events-none"
+                            style="background: radial-gradient(ellipse at 60% 50%, rgba(22,198,79,0.10) 0%, transparent 70%); filter: blur(32px);"></div>
 
-                        <!-- Wrapper com perspectiva 3D -->
-                        <div class="relative z-10 w-full max-w-[600px]"
-                            style="transform: perspective(1400px) rotateY(-10deg) rotateX(4deg) translateZ(0); filter: drop-shadow(0 40px 60px rgba(0,0,0,0.12));">
+                        <!-- Wrapper 3D -->
+                        <div class="relative z-10 w-full max-w-[580px]"
+                            style="transform: perspective(1600px) rotateY(-9deg) rotateX(3deg); filter: drop-shadow(0 32px 56px rgba(0,0,0,0.16));">
 
-                            <!-- Card de fundo (relatórios) -->
-                            <div class="absolute -bottom-8 -right-6 w-[88%] bg-white rounded-2xl border border-gray-100 overflow-hidden"
-                                style="box-shadow: 0 20px 40px -8px rgba(0,0,0,0.08);">
-                                <div class="px-4 py-3 border-b border-gray-100 bg-gray-50/60">
-                                    <p class="text-[9px] font-bold text-gray-500">RELATÓRIO — AGO 2026</p>
-                                </div>
-                                <div class="p-4 space-y-2">
-                                    <div v-for="(c, i) in [
-                                        { name:'Alimentação', pct:72, color:'bg-orange-400' },
-                                        { name:'Transporte', pct:45, color:'bg-blue-400' },
-                                        { name:'Lazer', pct:28, color:'bg-purple-400' },
-                                    ]" :key="i" class="space-y-1">
-                                        <div class="flex justify-between">
-                                            <span class="text-[8px] text-gray-500">{{ c.name }}</span>
-                                            <span class="text-[8px] font-bold text-gray-700">{{ c.pct }}%</span>
+                            <!-- ── App Shell (replica /app) ── -->
+                            <div class="bg-[#f3f4f6] rounded-2xl overflow-hidden border border-gray-200/60">
+
+                                <!-- Navbar verde idêntica ao app -->
+                                <div class="bg-[#16C64F] px-4 py-2.5 flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-6 h-6 bg-white rounded-lg flex items-center justify-center">
+                                            <div class="w-3 h-3 bg-[#16C64F] rounded-sm"></div>
                                         </div>
-                                        <div class="h-1.5 bg-gray-100 rounded-full">
-                                            <div :class="c.color" class="h-1.5 rounded-full" :style="`width:${c.pct}%`"></div>
+                                        <span class="text-white text-[11px] font-extrabold tracking-tight">organizze</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span v-for="nav in ['Visão Geral','Lançamentos','Relatórios','Limite de Gastos']" :key="nav"
+                                            class="text-white/85 text-[8px] font-semibold hidden sm:block">{{ nav }}</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
+                                            <span class="text-[7px] text-white font-black">CS</span>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Card principal — Dashboard -->
-                            <div class="relative bg-white rounded-2xl border border-gray-100/80 overflow-hidden"
-                                style="box-shadow: 0 32px 64px -12px rgba(0,0,0,0.14), 0 0 0 1px rgba(0,0,0,0.04);">
+                                <!-- Conteúdo principal -->
+                                <div class="p-3 space-y-2.5">
 
-                                <!-- Topbar -->
-                                <div class="flex items-center justify-between px-4 py-3 border-b border-gray-100 bg-gray-50/70">
-                                    <div class="flex items-center gap-1.5">
-                                        <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
-                                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
-                                        <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
-                                    </div>
-                                    <div class="bg-white border border-gray-200 rounded-lg h-5 w-52 flex items-center px-2 gap-1">
-                                        <div class="w-2 h-2 rounded-full bg-[#16C64F]"></div>
-                                        <span class="text-[9px] text-gray-400">app.organizze.com.br/dashboard</span>
-                                    </div>
-                                    <div class="flex items-center gap-1.5">
-                                        <div class="w-4 h-4 rounded bg-gray-200"></div>
-                                        <div class="w-4 h-4 rounded bg-gray-200"></div>
-                                    </div>
-                                </div>
-
-                                <div class="grid grid-cols-12 gap-0">
-                                    <!-- Sidebar -->
-                                    <div class="col-span-3 border-r border-gray-100 p-3 space-y-1 bg-gray-50/30">
-                                        <div class="flex items-center gap-1.5 px-1 mb-4">
-                                            <div class="w-5 h-5 bg-[#16C64F] rounded-md flex items-center justify-center">
-                                                <div class="w-2 h-2 bg-white rounded-sm"></div>
-                                            </div>
-                                            <span class="text-[10px] font-extrabold text-gray-800">Organizze</span>
-                                        </div>
-                                        <div v-for="(item, i) in [
-                                            { label:'Dashboard', icon:'▪' },
-                                            { label:'Lançamentos', icon:'▪' },
-                                            { label:'Contas', icon:'▪' },
-                                            { label:'Cartões', icon:'▪' },
-                                            { label:'Relatórios', icon:'▪' },
-                                            { label:'Limites', icon:'▪' },
-                                        ]" :key="i"
-                                            :class="i === 0
-                                                ? 'bg-[#16C64F] text-white shadow-sm shadow-[#16C64F]/30'
-                                                : 'text-gray-400 hover:bg-gray-100'"
-                                            class="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-[9px] font-semibold cursor-pointer transition-colors">
-                                            <div :class="i === 0 ? 'bg-white/40' : 'bg-gray-300'" class="w-1.5 h-1.5 rounded-sm flex-shrink-0"></div>
-                                            {{ item.label }}
-                                        </div>
-                                    </div>
-
-                                    <!-- Main content -->
-                                    <div class="col-span-9 p-4 space-y-3">
-
-                                        <!-- Header do dashboard -->
-                                        <div class="flex items-start justify-between">
+                                    <!-- Card de saudação + Receitas/Despesas/Saldo -->
+                                    <div class="bg-white rounded-xl p-3.5 shadow-sm">
+                                        <div class="flex items-center justify-between mb-3">
                                             <div>
-                                                <p class="text-[8px] text-gray-400 font-medium uppercase tracking-wider">Saldo em agosto</p>
-                                                <p class="text-[22px] font-extrabold text-gray-900 leading-tight">R$ 8.420<span class="text-sm text-gray-400 font-normal">,00</span></p>
-                                                <div class="flex items-center gap-1 mt-0.5">
-                                                    <span class="text-[#16C64F] text-[9px] font-bold">↑ +12,4%</span>
-                                                    <span class="text-[8px] text-gray-400">vs mês anterior</span>
-                                                </div>
+                                                <p class="text-[7.5px] text-gray-400 font-semibold uppercase tracking-wider">BOA TARDE,</p>
+                                                <p class="text-[13px] font-extrabold text-gray-900 leading-tight">Carlos Silva</p>
                                             </div>
-                                            <div class="text-right bg-gradient-to-br from-[#16C64F]/10 to-emerald-50 rounded-xl p-2.5">
-                                                <p class="text-[7px] text-gray-400 uppercase font-bold">Economias</p>
-                                                <p class="text-base font-extrabold text-[#16C64F]">R$ 2.100</p>
+                                            <div class="flex gap-1.5">
+                                                <span class="text-[7px] font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-lg cursor-default">Lançamentos</span>
+                                                <span class="text-[7px] font-semibold text-[#16C64F] bg-[#16C64F]/10 px-2 py-1 rounded-lg cursor-default">↗ Relatórios</span>
                                             </div>
                                         </div>
-
-                                        <!-- Cards de resumo -->
-                                        <div class="grid grid-cols-3 gap-1.5">
-                                            <div v-for="(s) in [
-                                                { label:'Receitas', value:'R$ 12.500', color:'text-[#16C64F]', dot:'bg-[#16C64F]', bg:'bg-[#16C64F]/5 border border-[#16C64F]/10' },
-                                                { label:'Despesas', value:'R$ 4.080', color:'text-red-500', dot:'bg-red-400', bg:'bg-red-50 border border-red-100' },
-                                                { label:'Cartões', value:'R$ 1.340', color:'text-blue-600', dot:'bg-blue-400', bg:'bg-blue-50 border border-blue-100' },
-                                            ]" :key="s.label" :class="s.bg" class="rounded-xl p-2.5">
+                                        <div class="grid grid-cols-3 gap-2 mb-3">
+                                            <div class="bg-[#16C64F]/8 border border-[#16C64F]/15 rounded-xl p-2.5">
                                                 <div class="flex items-center gap-1 mb-1">
-                                                    <div :class="s.dot" class="w-1.5 h-1.5 rounded-full"></div>
-                                                    <p class="text-[7px] text-gray-500 font-semibold uppercase">{{ s.label }}</p>
+                                                    <span class="text-[#16C64F] text-[9px] font-black">⊕</span>
+                                                    <p class="text-[6.5px] text-gray-400 font-bold uppercase tracking-wide">RECEITAS</p>
                                                 </div>
-                                                <p :class="s.color" class="text-[11px] font-extrabold">{{ s.value }}</p>
+                                                <p class="text-[11px] font-extrabold text-[#16C64F]">R$ 5.500,00</p>
+                                            </div>
+                                            <div class="bg-red-50 border border-red-100 rounded-xl p-2.5">
+                                                <div class="flex items-center gap-1 mb-1">
+                                                    <span class="text-red-400 text-[9px] font-black">⊖</span>
+                                                    <p class="text-[6.5px] text-gray-400 font-bold uppercase tracking-wide">DESPESAS</p>
+                                                </div>
+                                                <p class="text-[11px] font-extrabold text-red-500">R$ 2.470,80</p>
+                                            </div>
+                                            <div class="bg-gray-50 border border-gray-200 rounded-xl p-2.5">
+                                                <div class="flex items-center gap-1 mb-1">
+                                                    <span class="text-gray-400 text-[9px]">◎</span>
+                                                    <p class="text-[6.5px] text-gray-400 font-bold uppercase tracking-wide">SALDO</p>
+                                                </div>
+                                                <p class="text-[11px] font-extrabold text-gray-900">R$ 3.029,20</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center justify-between mb-1">
+                                                <p class="text-[7px] text-gray-400">Despesas representam <b class="text-gray-600">45%</b> das receitas</p>
+                                                <span class="text-[7px] font-bold text-[#16C64F]">Saudável</span>
+                                            </div>
+                                            <div class="h-1.5 bg-gray-100 rounded-full">
+                                                <div class="h-1.5 bg-[#16C64F] rounded-full" style="width:45%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Ações rápidas + Contas -->
+                                    <div class="grid grid-cols-2 gap-2.5">
+
+                                        <!-- Ações rápidas (Despesa/Receita/Transferência/Importar) -->
+                                        <div class="bg-white rounded-xl p-3 shadow-sm">
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <div v-for="action in [
+                                                    { label:'DESPESA',    bg:'bg-red-50',    icon:'−', iconBg:'bg-red-100',    color:'text-red-500',    text:'text-red-600' },
+                                                    { label:'RECEITA',    bg:'bg-green-50',  icon:'+', iconBg:'bg-[#16C64F]/15', color:'text-[#16C64F]', text:'text-[#16C64F]' },
+                                                    { label:'TRANSFER.',  bg:'bg-blue-50',   icon:'⇄', iconBg:'bg-blue-100',   color:'text-blue-500',   text:'text-blue-600' },
+                                                    { label:'IMPORTAR',   bg:'bg-purple-50', icon:'↓', iconBg:'bg-purple-100', color:'text-purple-500', text:'text-purple-600' },
+                                                ]" :key="action.label"
+                                                    :class="action.bg"
+                                                    class="flex flex-col items-center gap-1.5 p-2 rounded-xl cursor-default">
+                                                    <div :class="action.iconBg" class="w-8 h-8 rounded-xl flex items-center justify-center">
+                                                        <span :class="action.color" class="font-black text-sm leading-none">{{ action.icon }}</span>
+                                                    </div>
+                                                    <span :class="action.text" class="text-[6.5px] font-black tracking-wide">{{ action.label }}</span>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <!-- Gráfico de barras + linha -->
-                                        <div class="bg-gray-50 border border-gray-100 rounded-xl p-3">
+                                        <!-- Minhas Contas -->
+                                        <div class="bg-white rounded-xl p-3 shadow-sm">
                                             <div class="flex items-center justify-between mb-2">
-                                                <p class="text-[8px] font-bold text-gray-600">Evolução 2026</p>
-                                                <span class="text-[7px] text-[#16C64F] font-bold bg-[#16C64F]/10 px-2 py-0.5 rounded-full">+18% YTD</span>
+                                                <p class="text-[8px] font-extrabold text-gray-800">Minhas Contas</p>
+                                                <span class="text-[7px] text-[#16C64F] font-semibold cursor-default">Ver Todos ›</span>
                                             </div>
-                                            <div class="relative flex items-end gap-1 h-16">
-                                                <!-- Linha de tendência SVG -->
-                                                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 120 64" preserveAspectRatio="none">
-                                                    <polyline
-                                                        points="5,52 15,40 25,47 35,28 45,35 55,18 65,26 75,8 85,18 95,14 105,10 115,16"
-                                                        fill="none" stroke="#16C64F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-                                                </svg>
-                                                <div v-for="(h, i) in [35,52,41,68,44,78,58,88,50,72,82,60]" :key="i"
-                                                    class="flex-1 rounded-t transition-all"
-                                                    :style="`height:${h}%`"
-                                                    :class="i === 7 ? 'bg-[#16C64F]' : 'bg-[#16C64F]/20'">
-                                                </div>
-                                            </div>
-                                            <div class="flex justify-between mt-1.5">
-                                                <span v-for="m in ['Jan','Mar','Mai','Jul','Set','Nov']" :key="m" class="text-[6.5px] text-gray-300 font-medium">{{ m }}</span>
-                                            </div>
-                                        </div>
-
-                                        <!-- Últimos lançamentos -->
-                                        <div class="space-y-1">
-                                            <p class="text-[8px] text-gray-400 font-bold uppercase tracking-wider">Recentes</p>
-                                            <div v-for="(tx) in [
-                                                { bg:'bg-orange-100', icon: ShoppingCart, iconColor:'text-orange-500', name:'Supermercado Extra', cat:'Alimentação', value:'-R$ 284,50', color:'text-red-500' },
-                                                { bg:'bg-green-100',  icon: Wallet,       iconColor:'text-green-600',  name:'Salário',            cat:'Receita',     value:'+R$ 6.500,00', color:'text-[#16C64F]' },
-                                                { bg:'bg-purple-100', icon: Film,         iconColor:'text-purple-500', name:'Netflix',            cat:'Assinatura',  value:'-R$ 44,90',   color:'text-red-500' },
-                                            ]" :key="tx.name"
-                                                class="flex items-center justify-between py-1.5 border-b border-gray-50 last:border-0">
-                                                <div class="flex items-center gap-2">
-                                                    <div :class="tx.bg" class="w-6 h-6 rounded-lg flex items-center justify-center">
-                                                        <component :is="tx.icon" :class="tx.iconColor" class="w-3.5 h-3.5" />
+                                            <div class="space-y-2">
+                                                <div v-for="acc in [
+                                                    { abbr:'NU', bg:'bg-[#8B5CF6]', name:'Nubank',   sub:'Conta Corrente', val:'R$ 2.150,00' },
+                                                    { abbr:'IT', bg:'bg-orange-500', name:'Itaú',     sub:'Conta Corrente', val:'R$ 1.890,20' },
+                                                    { abbr:'C',  bg:'bg-[#16C64F]', name:'Carteira', sub:'Dinheiro',       val:'R$ 989,00' },
+                                                ]" :key="acc.name" class="flex items-center gap-2">
+                                                    <div :class="acc.bg" class="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0">
+                                                        <span class="text-white text-[6.5px] font-black">{{ acc.abbr }}</span>
                                                     </div>
-                                                    <div>
-                                                        <p class="text-[8.5px] text-gray-700 font-semibold leading-none">{{ tx.name }}</p>
-                                                        <p class="text-[7px] text-gray-400 mt-0.5">{{ tx.cat }}</p>
+                                                    <div class="flex-1 min-w-0">
+                                                        <p class="text-[8px] font-semibold text-gray-800 leading-none truncate">{{ acc.name }}</p>
+                                                        <p class="text-[6.5px] text-gray-400 mt-0.5">{{ acc.sub }}</p>
                                                     </div>
+                                                    <span class="text-[7.5px] font-extrabold text-[#16C64F] flex-shrink-0">{{ acc.val }}</span>
                                                 </div>
-                                                <span :class="tx.color" class="text-[9px] font-extrabold">{{ tx.value }}</span>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Maiores Gastos (resumo do donut) -->
+                                    <div class="bg-white rounded-xl p-3 shadow-sm">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <p class="text-[8px] font-extrabold text-gray-800">Maiores Gastos <span class="text-gray-400 font-normal">— Resumo do mês</span></p>
+                                            <span class="text-[7px] font-semibold text-[#16C64F] border border-[#16C64F]/30 px-2 py-0.5 rounded-full cursor-default">Relatório</span>
+                                        </div>
+                                        <div class="grid grid-cols-3 gap-2">
+                                            <div v-for="cat in [
+                                                { name:'Presentes', pct:'18,83%', color:'bg-purple-400', textColor:'text-purple-600' },
+                                                { name:'Compras',   pct:'9,20%',  color:'bg-red-400',    textColor:'text-red-600' },
+                                                { name:'Alimentação', pct:'6,18%', color:'bg-orange-400', textColor:'text-orange-600' },
+                                            ]" :key="cat.name" class="space-y-1">
+                                                <div class="flex items-center justify-between">
+                                                    <span class="text-[7px] text-gray-600 font-semibold">{{ cat.name }}</span>
+                                                    <span :class="cat.textColor" class="text-[7px] font-black">{{ cat.pct }}</span>
+                                                </div>
+                                                <div class="h-1 bg-gray-100 rounded-full">
+                                                    <div :class="cat.color" class="h-1 rounded-full"
+                                                        :style="`width:${parseFloat(cat.pct) * 4}%`"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Card flutuante — Meta mensal (canto inferior esquerdo) -->
-                            <div class="absolute -bottom-5 -left-10 bg-white rounded-2xl p-3.5 w-44 z-20"
-                                style="box-shadow: 0 16px 40px -8px rgba(0,0,0,0.14), 0 0 0 1px rgba(0,0,0,0.05);">
-                                <div class="flex items-center justify-between mb-2">
-                                    <p class="text-[9px] font-bold text-gray-700">Meta de economia</p>
-                                    <span class="text-[8px] font-bold text-[#16C64F] bg-[#16C64F]/10 px-1.5 py-0.5 rounded-full">AGO</span>
+                        <!-- Card flutuante — Transação recente -->
+                        <div class="absolute top-1/3 -left-10 bg-white rounded-2xl p-3 w-40 z-20 hidden lg:block"
+                            style="box-shadow: 0 16px 40px -8px rgba(0,0,0,0.13), 0 0 0 1px rgba(0,0,0,0.05);">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-6 h-6 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <Wallet class="w-3.5 h-3.5 text-green-600" />
                                 </div>
-                                <p class="text-base font-extrabold text-gray-900 mb-2">R$ 2.100 <span class="text-[9px] text-gray-400 font-normal">/ 3.000</span></p>
-                                <div class="w-full bg-gray-100 rounded-full h-2 mb-1">
-                                    <div class="bg-gradient-to-r from-[#16C64F] to-emerald-400 h-2 rounded-full" style="width: 70%"></div>
-                                </div>
-                                <p class="text-[7.5px] text-gray-400">70% da meta atingida 🎯</p>
+                                <span class="text-[8.5px] font-bold text-gray-800">Salário recebido</span>
                             </div>
+                            <p class="text-[15px] font-extrabold text-[#16C64F]">+R$ 6.500</p>
+                            <p class="text-[7px] text-gray-400 mt-0.5">Hoje, 08:42 · Conta Corrente</p>
+                        </div>
 
-                            <!-- Card flutuante — Open Finance (topo direito) -->
-                            <div class="absolute -top-5 -right-8 bg-white rounded-2xl p-3 w-52 z-20"
-                                style="box-shadow: 0 16px 40px -8px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05);">
-                                <div class="flex items-center gap-2.5 mb-2">
-                                    <div class="relative w-8 h-8 bg-[#16C64F]/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <span class="text-sm">🏦</span>
-                                        <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[#16C64F] rounded-full border-2 border-white"></span>
-                                    </div>
-                                    <div>
-                                        <p class="text-[9px] font-extrabold text-gray-800 leading-none">Nubank conectado</p>
-                                        <p class="text-[7.5px] text-[#16C64F] font-semibold mt-0.5">● sincronizado agora</p>
-                                    </div>
+                        <!-- Card flutuante — Nubank conectado -->
+                        <div class="absolute bottom-16 -right-6 bg-white rounded-2xl p-3 w-48 z-20 hidden lg:block"
+                            style="box-shadow: 0 16px 40px -8px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05);">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="relative w-8 h-8 bg-[#8B5CF6]/10 rounded-xl flex items-center justify-center">
+                                    <span class="text-sm font-black text-[#8B5CF6]">NU</span>
+                                    <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[#16C64F] rounded-full border-2 border-white"></span>
                                 </div>
-                                <div class="flex items-center justify-between bg-gray-50 rounded-lg px-2 py-1.5">
-                                    <span class="text-[8px] text-gray-500">Último acesso</span>
-                                    <span class="text-[8px] font-bold text-gray-700">há 2 min</span>
+                                <div>
+                                    <p class="text-[8.5px] font-extrabold text-gray-900 leading-none">Nubank conectado</p>
+                                    <p class="text-[7px] text-[#16C64F] font-semibold mt-0.5">● Open Finance ativo</p>
                                 </div>
                             </div>
-
-                            <!-- Card flutuante — Transação em tempo real (lateral esquerda) -->
-                            <div class="absolute top-1/2 -left-12 -translate-y-1/2 bg-white rounded-xl p-2.5 w-36 z-20 hidden lg:block"
-                                style="box-shadow: 0 12px 32px -6px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04);">
-                                <div class="flex items-center gap-1.5 mb-1.5">
-                                    <div class="w-5 h-5 bg-green-100 rounded-lg flex items-center justify-center">
-                                        <Wallet class="w-3 h-3 text-green-600" />
-                                    </div>
-                                    <span class="text-[8px] font-bold text-gray-700">Salário recebido</span>
-                                </div>
-                                <p class="text-sm font-extrabold text-[#16C64F]">+R$ 6.500</p>
-                                <p class="text-[7px] text-gray-400 mt-0.5">Hoje, 08:42</p>
+                            <div class="flex justify-between bg-gray-50 rounded-lg px-2 py-1.5">
+                                <span class="text-[7px] text-gray-500">Último sync</span>
+                                <span class="text-[7px] font-bold text-gray-700">há 2 min</span>
                             </div>
                         </div>
                     </div>
@@ -653,24 +546,133 @@ const stats = [
         <!-- ───────────────── HOW IT WORKS ───────────────── -->
         <section id="como-funciona" class="py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
+                <div class="text-center mb-14">
                     <span class="text-[#16C64F] text-sm font-semibold tracking-widest uppercase mb-3 block">Como funciona</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                        Comece em 3 passos simples
-                    </h2>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Comece em 3 passos simples</h2>
+                    <p class="text-gray-500 text-base max-w-md mx-auto">Sem planilha, sem complicação. Em minutos você já tem controle total das suas finanças.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-                    <!-- Connecting line -->
-                    <div class="hidden md:block absolute top-8 left-1/3 right-1/3 h-px bg-gradient-to-r from-[#16C64F]/40 via-[#16C64F] to-[#16C64F]/40"></div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                    <div v-for="step in steps" :key="step.number" class="relative text-center">
-                        <div class="w-16 h-16 rounded-2xl bg-[#16C64F] text-white text-xl font-bold flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#16C64F]/30">
-                            {{ step.number }}
+                    <!-- Passo 1 -->
+                    <div class="bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 hover:border-[#16C64F]/30 hover:shadow-lg hover:shadow-[#16C64F]/5 transition-all">
+                        <div class="bg-[#f3f4f6] p-4 border-b border-gray-200">
+                            <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                                <div class="bg-[#16C64F] px-3 py-2 flex items-center gap-1.5">
+                                    <div class="w-4 h-4 bg-white rounded-md flex items-center justify-center"><div class="w-2 h-2 bg-[#16C64F] rounded-sm"></div></div>
+                                    <span class="text-white text-[9px] font-extrabold">organizze</span>
+                                </div>
+                                <div class="px-4 py-3">
+                                    <p class="text-[9px] font-extrabold text-gray-800 mb-3">Crie sua conta grátis</p>
+                                    <div class="space-y-2">
+                                        <div class="h-6 bg-gray-100 rounded-lg flex items-center px-2.5"><span class="text-[7.5px] text-gray-400">nome@email.com</span></div>
+                                        <div class="h-6 bg-gray-100 rounded-lg flex items-center px-2.5"><span class="text-[7.5px] text-gray-400">••••••••</span></div>
+                                        <div class="h-6 bg-[#16C64F] rounded-lg flex items-center justify-center"><span class="text-[7.5px] font-bold text-white">Criar conta →</span></div>
+                                    </div>
+                                    <p class="text-[6.5px] text-gray-400 text-center mt-2">Grátis · Sem cartão de crédito</p>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ step.title }}</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed max-w-xs mx-auto">{{ step.description }}</p>
+                        <div class="p-5">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-8 h-8 rounded-full bg-[#16C64F] text-white text-sm font-extrabold flex items-center justify-center shadow-md shadow-[#16C64F]/30">1</div>
+                                <h3 class="text-base font-bold text-gray-900">Crie sua conta</h3>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed">Cadastro gratuito em menos de 2 minutos. Sem cartão de crédito, sem complicação.</p>
+                        </div>
                     </div>
+
+                    <!-- Passo 2 -->
+                    <div class="bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 hover:border-[#16C64F]/30 hover:shadow-lg hover:shadow-[#16C64F]/5 transition-all">
+                        <div class="bg-[#f3f4f6] p-4 border-b border-gray-200">
+                            <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                                <div class="bg-[#16C64F] px-3 py-2 flex items-center justify-between">
+                                    <span class="text-white text-[9px] font-extrabold">organizze</span>
+                                    <span class="text-white/80 text-[7.5px]">Lançamentos</span>
+                                </div>
+                                <div class="p-3 space-y-2">
+                                    <div class="grid grid-cols-3 gap-1.5">
+                                        <div class="bg-[#16C64F]/10 border border-[#16C64F]/20 rounded-lg p-2">
+                                            <p class="text-[6px] text-gray-400 font-bold uppercase mb-0.5">RECEITAS</p>
+                                            <p class="text-[9px] font-extrabold text-[#16C64F]">R$5.500</p>
+                                        </div>
+                                        <div class="bg-red-50 border border-red-100 rounded-lg p-2">
+                                            <p class="text-[6px] text-gray-400 font-bold uppercase mb-0.5">DESPESAS</p>
+                                            <p class="text-[9px] font-extrabold text-red-500">R$2.470</p>
+                                        </div>
+                                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-2">
+                                            <p class="text-[6px] text-gray-400 font-bold uppercase mb-0.5">SALDO</p>
+                                            <p class="text-[9px] font-extrabold text-gray-800">R$3.029</p>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-4 gap-1">
+                                        <div v-for="a in [
+                                            { icon:'−', bg:'bg-red-100',    c:'text-red-500',    label:'Despesa' },
+                                            { icon:'+', bg:'bg-green-100',  c:'text-[#16C64F]',  label:'Receita' },
+                                            { icon:'⇄', bg:'bg-blue-100',   c:'text-blue-500',   label:'Transfer' },
+                                            { icon:'↓', bg:'bg-purple-100', c:'text-purple-500', label:'Import' },
+                                        ]" :key="a.label" class="flex flex-col items-center gap-1">
+                                            <div :class="a.bg" class="w-7 h-7 rounded-lg flex items-center justify-center">
+                                                <span :class="a.c" class="font-black text-xs">{{ a.icon }}</span>
+                                            </div>
+                                            <span class="text-[5.5px] text-gray-500 font-semibold">{{ a.label }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-8 h-8 rounded-full bg-[#16C64F] text-white text-sm font-extrabold flex items-center justify-center shadow-md shadow-[#16C64F]/30">2</div>
+                                <h3 class="text-base font-bold text-gray-900">Lance suas transações</h3>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed">Adicione receitas e despesas ou conecte seus bancos via Open Finance para sync automático.</p>
+                        </div>
+                    </div>
+
+                    <!-- Passo 3 -->
+                    <div class="bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 hover:border-[#16C64F]/30 hover:shadow-lg hover:shadow-[#16C64F]/5 transition-all">
+                        <div class="bg-[#f3f4f6] p-4 border-b border-gray-200">
+                            <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                                <div class="bg-[#16C64F] px-3 py-2 flex items-center justify-between">
+                                    <span class="text-white text-[9px] font-extrabold">organizze</span>
+                                    <span class="text-white/80 text-[7.5px]">Relatórios</span>
+                                </div>
+                                <div class="p-3">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <p class="text-[8px] font-extrabold text-gray-800">Maiores Gastos</p>
+                                        <span class="text-[6.5px] font-semibold text-[#16C64F] border border-[#16C64F]/30 px-1.5 py-0.5 rounded-full">Agosto</span>
+                                    </div>
+                                    <div class="space-y-1.5">
+                                        <div v-for="cat in [
+                                            { name:'Presentes', pct:75, val:'R$ 465', color:'bg-purple-400', text:'text-purple-600' },
+                                            { name:'Compras',   pct:37, val:'R$ 230', color:'bg-red-400',    text:'text-red-600' },
+                                            { name:'Alimentação', pct:25, val:'R$ 152', color:'bg-orange-400', text:'text-orange-600' },
+                                            { name:'Lazer',     pct:15, val:'R$ 44',  color:'bg-blue-400',   text:'text-blue-600' },
+                                        ]" :key="cat.name" class="flex items-center gap-2">
+                                            <span class="text-[7px] text-gray-500 w-14 flex-shrink-0">{{ cat.name }}</span>
+                                            <div class="flex-1 h-1.5 bg-gray-100 rounded-full">
+                                                <div :class="cat.color" class="h-1.5 rounded-full" :style="`width:${cat.pct}%`"></div>
+                                            </div>
+                                            <span :class="cat.text" class="text-[7px] font-bold w-10 text-right flex-shrink-0">{{ cat.val }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 flex items-center justify-between bg-[#16C64F]/8 rounded-lg px-2.5 py-1.5">
+                                        <span class="text-[7px] text-gray-500">vs mês anterior</span>
+                                        <span class="text-[7.5px] font-extrabold text-[#16C64F]">↘ −5% nos gastos</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-8 h-8 rounded-full bg-[#16C64F] text-white text-sm font-extrabold flex items-center justify-center shadow-md shadow-[#16C64F]/30">3</div>
+                                <h3 class="text-base font-bold text-gray-900">Acompanhe tudo</h3>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed">Relatórios visuais, maiores gastos por categoria e comparativos mensais para decisões certeiras.</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
