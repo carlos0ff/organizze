@@ -1,21 +1,66 @@
-@import 'tailwindcss';
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+@import "tailwindcss";
+
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+@source "../../storage/framework/views/*.php";
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../**/*.vue";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @theme {
-    --font-sans:
-        'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 /** **/
 body {
     background-color: #f3f4f6;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@font-face {
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+.footer-link {
+    @apply relative inline-block text-white/50 transition-colors duration-300 hover:text-white/90;
+}
+
+.footer-link::after {
+    @apply absolute -bottom-1 left-0 h-px w-0 bg-white/50 transition-all duration-300 content-[''];
+}
+
+.footer-link:hover::after {
+    @apply w-full;
+}
+
+/* Testimonial marquee */
+@keyframes marquee-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+}
+
+.animate-marquee-left {
+    animation: marquee-left 35s linear infinite;
+}
+.animate-marquee-right {
+    animation: marquee-right 35s linear infinite;
+}
+
+@keyframes arrow-slide {
+    0%, 100% { transform: translateX(0); }
+    50%       { transform: translateX(5px); }
+}
+
+.animate-arrow {
+    animation: arrow-slide 1s ease-in-out infinite;
 }

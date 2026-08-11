@@ -16,6 +16,7 @@
 
     <!-- Core stylesheet -->
     @vite('resources/css/app.css')
+    @routes
     @inertiaHead
 
 </head>
