@@ -145,7 +145,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `app_credit_cards`;
 
-CREATE TABLE `app_credit_cards` (
+CREATE TABLE `credit_cards` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
   `brand` varchar(20) NOT NULL DEFAULT '',
@@ -163,7 +163,7 @@ CREATE TABLE `app_credit_cards` (
 LOCK TABLES `app_credit_cards` WRITE;
 /*!40000 ALTER TABLE `app_credit_cards` DISABLE KEYS */;
 
-INSERT INTO `app_credit_cards` (`id`, `user_id`, `brand`, `last_digits`, `cvv`, `hash`, `status`, `created_at`, `updated_at`)
+INSERT INTO `credit_cards` (`id`, `user_id`, `brand`, `last_digits`, `cvv`, `hash`, `status`, `created_at`, `updated_at`)
 VALUES
 	(1,1,'visa','5386','978','card_cjqh0engf02q34ka6ewd27xk8ya','active','2019-01-03 17:34:27','2019-02-12 08:53:42'),
 	(2,2,'mastercard','7058','651','card_cjqmkmrtr003d6qa6d0ll1z9osa','active','2019-01-07 14:59:29','2019-02-12 08:53:41'),

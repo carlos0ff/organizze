@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+
+</script>
 
 <template>
     <div class="relative w-full flex items-center justify-center my-2 mb-6">

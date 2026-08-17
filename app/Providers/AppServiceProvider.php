@@ -5,10 +5,12 @@ namespace App\Providers;
 use Generator;
 use Faker\Factory;
 
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
@@ -55,6 +57,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(Generator::class, function () {
             return Factory::create('pt_BR');
+        });
+
+        RateLimiter::for('n8n', function () {
+            return Limit::perMinute(30)->by('n8n');
         });
     }
 }

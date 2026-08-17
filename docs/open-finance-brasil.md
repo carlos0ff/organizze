@@ -1,4 +1,4 @@
-# Open Finance Brasil — Guia Completo de Integração
+cade# Open Finance Brasil — Guia Completo de Integração
 
 > Fonte oficial: https://openfinancebrasil.atlassian.net/wiki/spaces/OF  
 > Regulamentação: Banco Central do Brasil (BCB) — Resoluções BCB nº 1/2020 e atualizações 2025-2026  

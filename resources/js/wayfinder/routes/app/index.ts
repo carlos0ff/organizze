@@ -1,5 +1,5 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../wayfinder'
-import dashboard074181035978 from './dashboard'
+import dashboard074181 from './dashboard'
 import contas1f7ed9 from './contas'
 import lancamentos5ee860 from './lancamentos'
 import cartoesB32811 from './cartoes'
@@ -11,50 +11,6 @@ import configuracoes0197ca from './configuracoes'
 import conexaoBancaria182595 from './conexao-bancaria'
 import plano44ff36 from './plano'
 import chamados2b39c2 from './chamados'
-/**
-* @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see [unknown]:0
-* @route '/panel'
-*/
-export const dashboard = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: dashboard.url(options),
-    method: 'get',
-})
-
-dashboard.definition = {
-    methods: ["get","head"],
-    url: '/panel',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see [unknown]:0
-* @route '/panel'
-*/
-dashboard.url = (options?: RouteQueryOptions) => {
-    return dashboard.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see [unknown]:0
-* @route '/panel'
-*/
-dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: dashboard.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\App\DashboardController::dashboard
-* @see [unknown]:0
-* @route '/panel'
-*/
-dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: dashboard.url(options),
-    method: 'head',
-})
-
 /**
 * @see \App\Http\Controllers\App\Dashboard\DashboardController::dashboard
 * @see app/Http/Controllers/App/Dashboard/DashboardController.php:14
@@ -96,94 +52,6 @@ dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 */
 dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: dashboard.url(options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\App\SettingsController::settings
-* @see [unknown]:0
-* @route '/panel/configuracoes'
-*/
-export const settings = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: settings.url(options),
-    method: 'get',
-})
-
-settings.definition = {
-    methods: ["get","head"],
-    url: '/panel/configuracoes',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\App\SettingsController::settings
-* @see [unknown]:0
-* @route '/panel/configuracoes'
-*/
-settings.url = (options?: RouteQueryOptions) => {
-    return settings.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\App\SettingsController::settings
-* @see [unknown]:0
-* @route '/panel/configuracoes'
-*/
-settings.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: settings.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\App\SettingsController::settings
-* @see [unknown]:0
-* @route '/panel/configuracoes'
-*/
-settings.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: settings.url(options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\App\AccountController::conta
-* @see [unknown]:0
-* @route '/panel/contas'
-*/
-export const conta = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: conta.url(options),
-    method: 'get',
-})
-
-conta.definition = {
-    methods: ["get","head"],
-    url: '/panel/contas',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\App\AccountController::conta
-* @see [unknown]:0
-* @route '/panel/contas'
-*/
-conta.url = (options?: RouteQueryOptions) => {
-    return conta.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\App\AccountController::conta
-* @see [unknown]:0
-* @route '/panel/contas'
-*/
-conta.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: conta.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\App\AccountController::conta
-* @see [unknown]:0
-* @route '/panel/contas'
-*/
-conta.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: conta.url(options),
     method: 'head',
 })
 
@@ -672,9 +540,7 @@ chamados.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 const app = {
-    dashboard: Object.assign(dashboard, dashboard074181035978),
-    settings: Object.assign(settings, settings),
-    conta: Object.assign(conta, conta),
+    dashboard: Object.assign(dashboard, dashboard074181),
     contas: Object.assign(contas, contas1f7ed9),
     lancamentos: Object.assign(lancamentos, lancamentos5ee860),
     cartoes: Object.assign(cartoes, cartoesB32811),

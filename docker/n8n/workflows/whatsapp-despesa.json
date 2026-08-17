@@ -1,0 +1,274 @@
+{
+  "name": "WhatsApp — Registrar Despesa no Organizze",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-despesa",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000001",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "organizze-whatsapp-despesa-v1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extrai o texto da mensagem de múltiplos formatos de webhook.\n// Suporta: genérico, WAHA, Evolution API v2, WhatsApp Cloud API (Meta).\nconst body = $input.item.json;\n\nlet message = null;\n\n// 1. Formato genérico: { \"message\": \"...\" }\nif (typeof body.message === 'string' && body.message.trim()) {\n  message = body.message.trim();\n}\n// 2. WAHA (WhatsApp HTTP API)\nelse if (body.payload?.body) {\n  message = String(body.payload.body).trim();\n}\n// 3. Evolution API v2\nelse if (body.data?.message?.conversation) {\n  message = String(body.data.message.conversation).trim();\n} else if (body.data?.message?.extendedTextMessage?.text) {\n  message = String(body.data.message.extendedTextMessage.text).trim();\n}\n// 4. WhatsApp Cloud API (Meta / 360dialog)\nelse if (body.entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.text?.body) {\n  message = String(body.entry[0].changes[0].value.messages[0].text.body).trim();\n}\n// 5. Campo \"text\" genérico\nelse if (typeof body.text === 'string' && body.text.trim()) {\n  message = body.text.trim();\n}\n\nreturn [{ json: { message } }];"
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000002",
+      "name": "Extrair Mensagem",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const message = $input.item.json.message;\n\nif (!message || typeof message !== 'string') {\n  return [{ json: { success: false, originalMessage: null } }];\n}\n\nconst text = message.trim();\n\n// ── Extrai valor monetário ─────────────────────────────────────────────────\n// Aceita: R$ 35 | R$35 | R$ 35,90 | R$ 35.90 | 25,90 | 12\nconst valueRegex = /(?:r\\$\\s*)?(\\d{1,6}(?:[.,]\\d{1,2})?)/i;\nconst match = text.match(valueRegex);\n\nif (!match) {\n  return [{ json: { success: false, originalMessage: text } }];\n}\n\nconst amount = parseFloat(match[1].replace(',', '.'));\n\nif (isNaN(amount) || amount <= 0) {\n  return [{ json: { success: false, originalMessage: text } }];\n}\n\n// ── Extrai descrição ────────────────────────────────────────────────────────\nconst descPatterns = [\n  /(?:gastei|paguei|gasto|pago|comprei|compra)(?:\\s+r\\$\\s*|\\s+)\\d+(?:[.,]\\d{1,2})?\\s+(?:no|na|de|em|do|da|num|numa|com)\\s+(.+)/i,\n  /(?:no|na|de|em|do|da|num|numa|com)\\s+(.+)$/i,\n];\n\nlet description = null;\nfor (const pattern of descPatterns) {\n  const m = text.match(pattern);\n  if (m) { description = m[1].trim(); break; }\n}\n\nif (!description) {\n  description = text\n    .replace(/^(?:gastei|paguei|gasto|pago|comprei|compra)\\s+/i, '')\n    .replace(/(?:r\\$\\s*)?\\d+(?:[.,]\\d{1,2})?\\s*/i, '')\n    .trim();\n}\n\nif (!description) {\n  return [{ json: { success: false, originalMessage: text } }];\n}\n\n// Capitaliza primeira letra\ndescription = description.charAt(0).toUpperCase() + description.slice(1).toLowerCase();\n\n// ── Categorização por palavras-chave ────────────────────────────────────────\nconst lower = description.toLowerCase();\nlet category = 'Outros';\n\nif (/almo[cç]|jantar|lanche|caf[eé]|restaurante|comida|pizza|hambur|sushi|refei[cç]|ifood|rappi|delivery/.test(lower)) {\n  category = 'Alimentação';\n} else if (/mercado|supermercado|hortifruti|feira|atacad/.test(lower)) {\n  category = 'Mercado';\n} else if (/combust[ií]vel|gasolina|posto|etanol|diesel|uber|99|taxi|t[aá]xi|metr[oô]|[oô]nibus|passagem|estacion|pedag/.test(lower)) {\n  category = 'Transporte';\n} else if (/rem[eé]dio|farm[aá]cia|m[eé]dico|consulta|exame|hospital|cl[ií]nica|sa[uú]de|plano|dental/.test(lower)) {\n  category = 'Saúde';\n}\n\n// ── Data no fuso horário America/Recife ─────────────────────────────────────\nconst now = new Date();\nconst parts = new Intl.DateTimeFormat('pt-BR', {\n  timeZone: 'America/Recife',\n  year: 'numeric',\n  month: '2-digit',\n  day: '2-digit',\n}).formatToParts(now).reduce((acc, p) => ({ ...acc, [p.type]: p.value }), {});\nconst date = `${parts.year}-${parts.month}-${parts.day}`;\n\n// Formata valor para exibição (ex: 35,00)\nconst amountFormatted = amount.toFixed(2).replace('.', ',');\n\nreturn [{\n  json: {\n    success: true,\n    amountFormatted,\n    description,\n    category,\n    payload: {\n      type: 'despesa',\n      description,\n      amount,\n      date,\n      category,\n      note: `Registrado pelo WhatsApp: ${text}`,\n      paid: true,\n    },\n    originalMessage: text,\n  }\n}];"
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000003",
+      "name": "Parsear Despesa",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cond-success-001",
+              "leftValue": "={{ $json.success }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000004",
+      "name": "Despesa Reconhecida?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.ORGANIZZE_LARAVEL_URL }}/api/n8n/webhook",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-N8N-Secret",
+              "value": "={{ $env.ORGANIZZE_N8N_SECRET }}"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.payload) }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000005",
+      "name": "Registrar no Organizze",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 200]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cond-api-001",
+              "leftValue": "={{ $json.statusCode }}",
+              "rightValue": 201,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000006",
+      "name": "Registrado?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [1340, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: '✅ Despesa registrada: R$ ' + $('Parsear Despesa').item.json.amountFormatted + ' — ' + $('Parsear Despesa').item.json.description + ' — ' + $('Parsear Despesa').item.json.category + '.' }) }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000007",
+      "name": "Responder — Sucesso",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1560, 100]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: false, message: '❌ Erro ao registrar a despesa. Tente novamente ou contate o suporte.' }) }}",
+        "options": {
+          "responseCode": 500
+        }
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000008",
+      "name": "Responder — Erro API",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1560, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: false, message: 'Não consegui identificar a despesa. Envie, por exemplo: Gastei R$ 35 no almoço.' }) }}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000009",
+      "name": "Responder — Formato Inválido",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1120, 420]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Extrair Mensagem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair Mensagem": {
+      "main": [
+        [
+          {
+            "node": "Parsear Despesa",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parsear Despesa": {
+      "main": [
+        [
+          {
+            "node": "Despesa Reconhecida?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Despesa Reconhecida?": {
+      "main": [
+        [
+          {
+            "node": "Registrar no Organizze",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder — Formato Inválido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registrar no Organizze": {
+      "main": [
+        [
+          {
+            "node": "Registrado?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registrado?": {
+      "main": [
+        [
+          {
+            "node": "Responder — Sucesso",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder — Erro API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "organizze-whatsapp-v1-0-0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "organizze-local"
+  }
+}

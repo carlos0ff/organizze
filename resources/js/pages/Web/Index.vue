@@ -1,16 +1,133 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import {
     BarChart3, Shield, Zap, CreditCard, PieChart, Bell,
     ArrowRight, Check, CheckCircle, ChevronDown, Menu, X,
     TrendingUp, Wallet, Target, RefreshCw, Star,
     Building2, Smartphone, FileText, Lock, ShoppingCart, Film
 } from 'lucide-vue-next';
-import Navbar from "@/pages/Web/Components/Navigation/Navbar.vue";
+import Navbar from "@/pages/Web/Components/navigation/Navbar.vue";
+import Footer from "@/pages/Web/Components/layout/Footer.vue";
 
+const openFaq = ref<number | null>(null);
 const toggleFaq = (index: number) => {
     openFaq.value = openFaq.value === index ? null : index;
 };
+
+// ── Open Finance demo animation ──────────────────────────────────
+const ofDemoEl   = ref<HTMLElement | null>(null);
+const ofContaEl  = ref<HTMLElement | null>(null);
+const ofCartaoEl = ref<HTMLElement | null>(null);
+
+const curX       = ref(0);
+const curY       = ref(0);
+const curVisible = ref(false);
+const curClick   = ref(false);
+const curRipple  = ref(false);
+
+const hoverConta  = ref(false);
+const hoverCartao = ref(false);
+const pulseConta  = ref(false);
+const pulseCartao = ref(false);
+
+const showSuccess  = ref(false);
+const showSyncLine = ref(false);
+
+const contaBadgeState  = ref<'novas' | 'buscando' | 'importadas'>('novas');
+const cartaoBadgeState = ref<'novas' | 'buscando' | 'importadas'>('novas');
+
+// Hero dashboard
+const heroReady = ref(false);
+
+// ── Timer helpers ─────────────────────────────────────────────────
+const _timers: ReturnType<typeof setTimeout>[] = [];
+function _clearTimers() { _timers.forEach(clearTimeout); _timers.length = 0; }
+function _at(delay: number, fn: () => void) { _timers.push(setTimeout(fn, delay)); }
+function _pos(el: HTMLElement, parent: HTMLElement, ox = 0, oy = 0) {
+    const er = el.getBoundingClientRect();
+    const pr = parent.getBoundingClientRect();
+    return { x: er.left - pr.left + ox, y: er.top - pr.top + oy };
+}
+
+function _resetState() {
+    curClick.value         = false;
+    curRipple.value        = false;
+    curVisible.value       = false;
+    hoverConta.value       = false;
+    hoverCartao.value      = false;
+    pulseConta.value       = false;
+    pulseCartao.value      = false;
+    showSyncLine.value     = false;
+    showSuccess.value      = false;
+    contaBadgeState.value  = 'novas';
+    cartaoBadgeState.value = 'novas';
+}
+
+function runOfAnimation() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const demo   = ofDemoEl.value;
+    const conta  = ofContaEl.value;
+    const cartao = ofCartaoEl.value;
+    if (!demo || !conta || !cartao) return;
+
+    _clearTimers();
+    _resetState();
+
+    const MOVE = 520;
+
+    _at(300, () => {
+        const p = _pos(conta, demo, 44 - 3, -26 - 2);
+        curX.value = p.x; curY.value = p.y; curVisible.value = true;
+    });
+
+    _at(750, () => {
+        const p = _pos(conta, demo, 82 - 3, conta.offsetHeight / 2 - 2);
+        curX.value = p.x; curY.value = p.y;
+    });
+
+    const A = 750 + MOVE;
+
+    _at(A + 55,  () => { hoverConta.value = true; });
+    _at(A + 340, () => { curClick.value = true; curRipple.value = true; });
+    _at(A + 490, () => { curClick.value = false; contaBadgeState.value = 'buscando'; });
+    _at(A + 880, () => { curRipple.value = false; });
+    _at(A + 1100,() => { contaBadgeState.value = 'importadas'; pulseConta.value = true; });
+    _at(A + 1800,() => { pulseConta.value = false; });
+
+    const B = A + 2050;
+    _at(B, () => {
+        const p = _pos(cartao, demo, 82 - 3, cartao.offsetHeight / 2 - 2);
+        curX.value = p.x; curY.value = p.y;
+    });
+
+    const C = B + MOVE;
+
+    _at(C + 55,  () => { hoverCartao.value = true; });
+    _at(C + 320, () => { curClick.value = true; curRipple.value = true; });
+    _at(C + 470, () => { curClick.value = false; cartaoBadgeState.value = 'buscando'; });
+    _at(C + 860, () => { curRipple.value = false; });
+    _at(C + 1060,() => { cartaoBadgeState.value = 'importadas'; pulseCartao.value = true; });
+    _at(C + 1760,() => { pulseCartao.value = false; });
+    _at(C + 1950,() => { curVisible.value = false; });
+    _at(C + 2100,() => { showSyncLine.value = true; });
+    _at(C + 2700,() => { showSyncLine.value = false; });
+    _at(C + 2850,() => { showSuccess.value = true; });
+
+    const D = C + 4850;
+    _at(D,       () => { showSuccess.value = false; });
+    _at(D + 380, () => { hoverConta.value = false; hoverCartao.value = false;
+                         contaBadgeState.value = 'novas'; cartaoBadgeState.value = 'novas'; });
+    _at(D + 780, () => { runOfAnimation(); });
+}
+
+onMounted(() => {
+    setTimeout(() => { heroReady.value = true; }, 120);
+    setTimeout(runOfAnimation, 900);
+});
+onUnmounted(() => {
+    _clearTimers();
+});
 
 const features = [
     {
@@ -226,271 +343,385 @@ const stats = [
         <Navbar />
 
         <!-- ───────────────── HERO ───────────────── -->
-        <section class="relative pt-20 pb-0 overflow-hidden bg-gray-50">
+        <section class="relative overflow-hidden hero-section mt-30" style="background:#eaf7ef;">
 
-            <!-- Gradiente sutil no fundo -->
-            <div class="absolute inset-0 pointer-events-none"
-                style="background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(22,198,79,0.07) 0%, transparent 70%);">
-            </div>
+            <div class="hero-inner flex flex-col lg:flex-row lg:items-center max-w-[1680px] mx-auto w-full ">
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-80px)] py-16 lg:py-0">
+                <div class="flex flex-col justify-center hero-left">
 
-                    <!-- ── Coluna esquerda: texto ── -->
-                    <div class="flex flex-col justify-center">
-
-                        <!-- Badge pill -->
-                        <div class="inline-flex items-center gap-2 self-start mb-6 px-3.5 py-1.5 rounded-full border border-[#16C64F]/30 bg-white shadow-sm">
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#16C64F] animate-pulse"></span>
-                            <span class="text-[#16C64F] text-[11px] font-bold tracking-widest uppercase">Controle financeiro inteligente</span>
-                        </div>
-
-                        <!-- Headline -->
-                        <h1 class="text-[2.6rem] sm:text-5xl lg:text-[3.25rem] font-extrabold leading-[1.1] tracking-tight mb-5">
-                            <span class="text-gray-900">A melhor forma de</span><br />
-                            <span class="text-gray-900">organizar suas</span><br />
-                            <span style="background: linear-gradient(135deg, #16C64F 0%, #0ea843 60%, #059669 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                                finanças pessoais
-                            </span>
-                        </h1>
-
-                        <!-- Subtítulo -->
-                        <p class="text-gray-500 text-[1.05rem] leading-relaxed mb-8 max-w-[420px]">
-                            Controle receitas, despesas e cartões em um painel intuitivo. Conecte seus bancos via Open Finance e veja seu dinheiro trabalhar por você.
-                        </p>
-
-                        <!-- CTAs -->
-                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10">
-                            <a href="/auth/cadastro"
-                                class="group inline-flex items-center gap-2 text-white font-bold px-8 py-4 rounded-xl text-base transition-all"
-                                style="background: linear-gradient(135deg, #16C64F 0%, #12b845 100%); box-shadow: 0 8px 24px -4px rgba(22,198,79,0.35);">
-                                Começar grátis agora
-                                <ArrowRight class="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                            </a>
-                        </div>
-
-                        <!-- Social proof -->
-                        <div class="flex items-center gap-3 mb-8">
-                            <div class="flex -space-x-2">
-                                <img v-for="(id, i) in [10, 20, 30, 40]" :key="i"
-                                    :src="`https://i.pravatar.cc/40?img=${id}`"
-                                    class="w-9 h-9 rounded-full border-2 border-white object-cover" />
-                            </div>
-                            <div>
-                                <div class="flex items-center gap-1 mb-0.5">
-                                    <span v-for="s in 5" :key="s" class="text-amber-400 text-xs">★</span>
-                                </div>
-                                <p class="text-[13px] text-gray-500">
-                                    <span class="font-bold text-gray-800">+150k usuários</span> confiam no Organizze
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Trust badges -->
-                        <div class="flex flex-wrap items-center gap-4">
-                            <div v-for="badge in [
-                                { icon: Shield,    text: 'SSL 256-bit' },
-                                { icon: Building2, text: 'Open Finance BCB' },
-                                { icon: Zap,       text: 'Sync automático' },
-                            ]" :key="badge.text"
-                                class="flex items-center gap-1.5 text-[11px] text-gray-500 font-medium">
-                                <component :is="badge.icon" class="w-3.5 h-3.5 text-[#16C64F]" />
-                                {{ badge.text }}
-                            </div>
-                        </div>
+                    <div class="inline-flex items-center gap-1.5 self-start mb-6 rounded-full overflow-hidden border border-[#16C64F]/40 bg-white/70">
+                        <span class="bg-[#16C64F] text-white text-[10px] font-black px-2.5 py-1 tracking-wide">Novo</span>
+                        <span class="text-gray-700 text-[11px] font-semibold pr-3">Conexão com agentes de IA</span>
                     </div>
 
-                    <!-- ── Coluna direita: mockup fiel ao /app ── -->
-                    <div class="relative flex items-center justify-center lg:justify-end lg:h-[calc(100vh-80px)]">
+                    <!-- Headline -->
+                    <h1 class="hero-h1" style="font-weight:900; line-height:1.05; letter-spacing:-0.02em; margin-bottom:18px; color:#111827;">
+                        Seu dinheiro sob<br />
+                        controle, <span style="color:#16C64F;">sem esforço</span>
+                    </h1>
 
-                        <!-- Sombra de profundidade atrás do app -->
-                        <div class="absolute inset-8 rounded-3xl pointer-events-none"
-                            style="background: radial-gradient(ellipse at 60% 50%, rgba(22,198,79,0.10) 0%, transparent 70%); filter: blur(32px);"></div>
+                    <!-- Subtítulo -->
+                    <p style="color:#6b7280; font-size:17px; line-height:1.6; margin-bottom:32px; max-width:420px;">
+                        Tudo o que você precisa para organizar suas finanças sem perder tempo.
+                    </p>
 
-                        <!-- Wrapper 3D -->
-                        <div class="relative z-10 w-full max-w-[580px]"
-                            style="transform: perspective(1600px) rotateY(-9deg) rotateX(3deg); filter: drop-shadow(0 32px 56px rgba(0,0,0,0.16));">
+                    <!-- CTA -->
+                    <div class="mb-10">
+                        <a href="/auth/cadastro"
+                            class="group inline-flex items-center gap-3 text-white font-bold rounded-xl transition-all hover:opacity-90"
+                            style="background:#16C64F; box-shadow:0 6px 20px -4px rgba(22,198,79,0.40); padding: 16px 32px; font-size:15px; width:212px; height:57px;">
+                            Começar agora
+                            <ArrowRight class="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        </a>
+                    </div>
 
-                            <!-- ── App Shell (replica /app) ── -->
-                            <div class="bg-[#f3f4f6] rounded-2xl overflow-hidden border border-gray-200/60">
-
-                                <!-- Navbar verde idêntica ao app -->
-                                <div class="bg-[#16C64F] px-4 py-2.5 flex items-center justify-between">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-6 h-6 bg-white rounded-lg flex items-center justify-center">
-                                            <div class="w-3 h-3 bg-[#16C64F] rounded-sm"></div>
-                                        </div>
-                                        <span class="text-white text-[11px] font-extrabold tracking-tight">organizze</span>
-                                    </div>
-                                    <div class="flex items-center gap-3">
-                                        <span v-for="nav in ['Visão Geral','Lançamentos','Relatórios','Limite de Gastos']" :key="nav"
-                                            class="text-white/85 text-[8px] font-semibold hidden sm:block">{{ nav }}</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
-                                            <span class="text-[7px] text-white font-black">CS</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Conteúdo principal -->
-                                <div class="p-3 space-y-2.5">
-
-                                    <!-- Card de saudação + Receitas/Despesas/Saldo -->
-                                    <div class="bg-white rounded-xl p-3.5 shadow-sm">
-                                        <div class="flex items-center justify-between mb-3">
-                                            <div>
-                                                <p class="text-[7.5px] text-gray-400 font-semibold uppercase tracking-wider">BOA TARDE,</p>
-                                                <p class="text-[13px] font-extrabold text-gray-900 leading-tight">Carlos Silva</p>
-                                            </div>
-                                            <div class="flex gap-1.5">
-                                                <span class="text-[7px] font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-lg cursor-default">Lançamentos</span>
-                                                <span class="text-[7px] font-semibold text-[#16C64F] bg-[#16C64F]/10 px-2 py-1 rounded-lg cursor-default">↗ Relatórios</span>
-                                            </div>
-                                        </div>
-                                        <div class="grid grid-cols-3 gap-2 mb-3">
-                                            <div class="bg-[#16C64F]/8 border border-[#16C64F]/15 rounded-xl p-2.5">
-                                                <div class="flex items-center gap-1 mb-1">
-                                                    <span class="text-[#16C64F] text-[9px] font-black">⊕</span>
-                                                    <p class="text-[6.5px] text-gray-400 font-bold uppercase tracking-wide">RECEITAS</p>
-                                                </div>
-                                                <p class="text-[11px] font-extrabold text-[#16C64F]">R$ 5.500,00</p>
-                                            </div>
-                                            <div class="bg-red-50 border border-red-100 rounded-xl p-2.5">
-                                                <div class="flex items-center gap-1 mb-1">
-                                                    <span class="text-red-400 text-[9px] font-black">⊖</span>
-                                                    <p class="text-[6.5px] text-gray-400 font-bold uppercase tracking-wide">DESPESAS</p>
-                                                </div>
-                                                <p class="text-[11px] font-extrabold text-red-500">R$ 2.470,80</p>
-                                            </div>
-                                            <div class="bg-gray-50 border border-gray-200 rounded-xl p-2.5">
-                                                <div class="flex items-center gap-1 mb-1">
-                                                    <span class="text-gray-400 text-[9px]">◎</span>
-                                                    <p class="text-[6.5px] text-gray-400 font-bold uppercase tracking-wide">SALDO</p>
-                                                </div>
-                                                <p class="text-[11px] font-extrabold text-gray-900">R$ 3.029,20</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="flex items-center justify-between mb-1">
-                                                <p class="text-[7px] text-gray-400">Despesas representam <b class="text-gray-600">45%</b> das receitas</p>
-                                                <span class="text-[7px] font-bold text-[#16C64F]">Saudável</span>
-                                            </div>
-                                            <div class="h-1.5 bg-gray-100 rounded-full">
-                                                <div class="h-1.5 bg-[#16C64F] rounded-full" style="width:45%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Ações rápidas + Contas -->
-                                    <div class="grid grid-cols-2 gap-2.5">
-
-                                        <!-- Ações rápidas (Despesa/Receita/Transferência/Importar) -->
-                                        <div class="bg-white rounded-xl p-3 shadow-sm">
-                                            <div class="grid grid-cols-2 gap-2">
-                                                <div v-for="action in [
-                                                    { label:'DESPESA',    bg:'bg-red-50',    icon:'−', iconBg:'bg-red-100',    color:'text-red-500',    text:'text-red-600' },
-                                                    { label:'RECEITA',    bg:'bg-green-50',  icon:'+', iconBg:'bg-[#16C64F]/15', color:'text-[#16C64F]', text:'text-[#16C64F]' },
-                                                    { label:'TRANSFER.',  bg:'bg-blue-50',   icon:'⇄', iconBg:'bg-blue-100',   color:'text-blue-500',   text:'text-blue-600' },
-                                                    { label:'IMPORTAR',   bg:'bg-purple-50', icon:'↓', iconBg:'bg-purple-100', color:'text-purple-500', text:'text-purple-600' },
-                                                ]" :key="action.label"
-                                                    :class="action.bg"
-                                                    class="flex flex-col items-center gap-1.5 p-2 rounded-xl cursor-default">
-                                                    <div :class="action.iconBg" class="w-8 h-8 rounded-xl flex items-center justify-center">
-                                                        <span :class="action.color" class="font-black text-sm leading-none">{{ action.icon }}</span>
-                                                    </div>
-                                                    <span :class="action.text" class="text-[6.5px] font-black tracking-wide">{{ action.label }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Minhas Contas -->
-                                        <div class="bg-white rounded-xl p-3 shadow-sm">
-                                            <div class="flex items-center justify-between mb-2">
-                                                <p class="text-[8px] font-extrabold text-gray-800">Minhas Contas</p>
-                                                <span class="text-[7px] text-[#16C64F] font-semibold cursor-default">Ver Todos ›</span>
-                                            </div>
-                                            <div class="space-y-2">
-                                                <div v-for="acc in [
-                                                    { abbr:'NU', bg:'bg-[#8B5CF6]', name:'Nubank',   sub:'Conta Corrente', val:'R$ 2.150,00' },
-                                                    { abbr:'IT', bg:'bg-orange-500', name:'Itaú',     sub:'Conta Corrente', val:'R$ 1.890,20' },
-                                                    { abbr:'C',  bg:'bg-[#16C64F]', name:'Carteira', sub:'Dinheiro',       val:'R$ 989,00' },
-                                                ]" :key="acc.name" class="flex items-center gap-2">
-                                                    <div :class="acc.bg" class="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0">
-                                                        <span class="text-white text-[6.5px] font-black">{{ acc.abbr }}</span>
-                                                    </div>
-                                                    <div class="flex-1 min-w-0">
-                                                        <p class="text-[8px] font-semibold text-gray-800 leading-none truncate">{{ acc.name }}</p>
-                                                        <p class="text-[6.5px] text-gray-400 mt-0.5">{{ acc.sub }}</p>
-                                                    </div>
-                                                    <span class="text-[7.5px] font-extrabold text-[#16C64F] flex-shrink-0">{{ acc.val }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Maiores Gastos (resumo do donut) -->
-                                    <div class="bg-white rounded-xl p-3 shadow-sm">
-                                        <div class="flex items-center justify-between mb-2">
-                                            <p class="text-[8px] font-extrabold text-gray-800">Maiores Gastos <span class="text-gray-400 font-normal">— Resumo do mês</span></p>
-                                            <span class="text-[7px] font-semibold text-[#16C64F] border border-[#16C64F]/30 px-2 py-0.5 rounded-full cursor-default">Relatório</span>
-                                        </div>
-                                        <div class="grid grid-cols-3 gap-2">
-                                            <div v-for="cat in [
-                                                { name:'Presentes', pct:'18,83%', color:'bg-purple-400', textColor:'text-purple-600' },
-                                                { name:'Compras',   pct:'9,20%',  color:'bg-red-400',    textColor:'text-red-600' },
-                                                { name:'Alimentação', pct:'6,18%', color:'bg-orange-400', textColor:'text-orange-600' },
-                                            ]" :key="cat.name" class="space-y-1">
-                                                <div class="flex items-center justify-between">
-                                                    <span class="text-[7px] text-gray-600 font-semibold">{{ cat.name }}</span>
-                                                    <span :class="cat.textColor" class="text-[7px] font-black">{{ cat.pct }}</span>
-                                                </div>
-                                                <div class="h-1 bg-gray-100 rounded-full">
-                                                    <div :class="cat.color" class="h-1 rounded-full"
-                                                        :style="`width:${parseFloat(cat.pct) * 4}%`"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                    <!-- Trust badges -->
+                    <div class="flex items-center gap-8">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-white/80 flex items-center justify-center flex-shrink-0 shadow-sm">
+                                <svg width="24" height="24" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M 40.6 40.6 A 84 84 0 1 1 58.0 172.7 L 80.0 134.6 A 40 40 0 1 0 71.7 71.7 Z" fill="#404040"/>
+                                    <path d="M 55.5 171.2 A 84 84 0 0 1 23.3 134.2 L 63.5 116.3 A 40 40 0 0 0 78.8 133.9 Z" fill="#5183a0"/>
+                                    <path d="M 21.0 128.7 A 84 84 0 0 1 17.0 86.9 L 60.5 93.7 A 40 40 0 0 0 62.4 113.7 Z" fill="#5183a0"/>
+                                    <path d="M 18.2 81.1 A 84 84 0 0 1 38.6 42.7 L 70.7 72.7 A 40 40 0 0 0 61.0 91.0 Z" fill="#5183a0"/>
+                                </svg>
                             </div>
+                            <p class="text-[12px] text-gray-600 leading-tight">
+                                Conecte seus bancos<br />com <strong class="text-gray-900">Open Finance</strong>
+                            </p>
                         </div>
-
-                        <!-- Card flutuante — Transação recente -->
-                        <div class="absolute top-1/3 -left-10 bg-white rounded-2xl p-3 w-40 z-20 hidden lg:block"
-                            style="box-shadow: 0 16px 40px -8px rgba(0,0,0,0.13), 0 0 0 1px rgba(0,0,0,0.05);">
-                            <div class="flex items-center gap-2 mb-2">
-                                <div class="w-6 h-6 bg-green-100 rounded-lg flex items-center justify-center">
-                                    <Wallet class="w-3.5 h-3.5 text-green-600" />
-                                </div>
-                                <span class="text-[8.5px] font-bold text-gray-800">Salário recebido</span>
-                            </div>
-                            <p class="text-[15px] font-extrabold text-[#16C64F]">+R$ 6.500</p>
-                            <p class="text-[7px] text-gray-400 mt-0.5">Hoje, 08:42 · Conta Corrente</p>
-                        </div>
-
-                        <!-- Card flutuante — Nubank conectado -->
-                        <div class="absolute bottom-16 -right-6 bg-white rounded-2xl p-3 w-48 z-20 hidden lg:block"
-                            style="box-shadow: 0 16px 40px -8px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05);">
-                            <div class="flex items-center gap-2 mb-2">
-                                <div class="relative w-8 h-8 bg-[#8B5CF6]/10 rounded-xl flex items-center justify-center">
-                                    <span class="text-sm font-black text-[#8B5CF6]">NU</span>
-                                    <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[#16C64F] rounded-full border-2 border-white"></span>
-                                </div>
-                                <div>
-                                    <p class="text-[8.5px] font-extrabold text-gray-900 leading-none">Nubank conectado</p>
-                                    <p class="text-[7px] text-[#16C64F] font-semibold mt-0.5">● Open Finance ativo</p>
-                                </div>
-                            </div>
-                            <div class="flex justify-between bg-gray-50 rounded-lg px-2 py-1.5">
-                                <span class="text-[7px] text-gray-500">Último sync</span>
-                                <span class="text-[7px] font-bold text-gray-700">há 2 min</span>
-                            </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 font-black text-[13px]"
+                                 style="background:#f5a623; color:white;">RA</div>
+                            <p class="text-[12px] text-gray-600 leading-tight">
+                                Certificado RA 1000<br /><strong class="text-gray-900">Reclame Aqui</strong>
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <!-- ── Coluna direita: mockups (desktop only) ── -->
+                <div class="hidden lg:block hero-right relative overflow-hidden " style="align-self:stretch; min-width:0;">
+
+                    <!-- Composition wrapper: altura fixa, centralizada verticalmente -->
+                    <div class="absolute inset-x-0 w-full hero-composition" style="bottom:-45px;">
+
+                        <!-- Brilho ambiente -->
+                        <div class="absolute pointer-events-none" style="left:28%; top:10%; width:55%; height:70%; background:radial-gradient(ellipse, rgba(22,198,79,0.10) 0%, transparent 70%); filter:blur(48px); z-index:1;"></div>
+
+                        <!-- Dashboard desktop -->
+                        <div class="absolute rounded-2xl overflow-hidden"
+                             style="left:22%; top: 20px; right:0; height:520px; background:white; z-index:10;
+                                    box-shadow: 0 32px 72px -8px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06);">
+
+                            <div style="transform: scale(1.05); transform-origin: top left; width: calc(100% / 1.05);">
+
+                        <!-- Navbar -->
+                        <div class="bg-[#16C64F] px-5 py-2.5 flex items-center gap-6">
+                            <!-- Logo -->
+                            <div class="flex items-center gap-1.5 flex-shrink-0">
+                                <div class="w-3.5 h-3.5 bg-white rounded-full flex items-center justify-center">
+                                    <div class="w-1.5 h-1.5 bg-[#16C64F] rounded-full"></div>
+                                </div>
+                                <span class="text-white text-[9.5px] font-black tracking-wide">organizze</span>
+                            </div>
+                            <!-- Nav links -->
+                            <div class="flex items-center gap-5 flex-1">
+                                <span v-for="(nav, ni) in ['visão geral','lançamentos','relatórios','limite de gastos']" :key="nav"
+                                      class="text-[8px] font-semibold whitespace-nowrap pb-0.5"
+                                      :class="ni===0 ? 'text-white font-black border-b-2 border-white' : 'text-white/70 hover:text-white'">{{ nav }}</span>
+                            </div>
+                            <!-- Avatar -->
+                            <div class="w-7 h-7 rounded-full bg-[#8B5CF6] flex items-center justify-center flex-shrink-0 ring-2 ring-white/30">
+                                <span class="text-white text-[7px] font-black">NU</span>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="bg-[#f4f5f7] p-4 space-y-2.5">
+
+                            <!-- Greeting + stats card -->
+                            <div class="bg-white rounded-xl p-4 pb-5" style="box-shadow:0 1px 3px rgba(0,0,0,0.07), 0 4px 12px rgba(0,0,0,0.04);">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <p class="text-[8px] text-gray-400 font-medium tracking-wide">Boa tarde,</p>
+                                        <p class="text-[18px] font-black text-gray-900 leading-none mt-1">Felipe! <span class="text-[15px]">☁️</span></p>
+                                    </div>
+                                    <!-- Conexões ativas -->
+                                    <div class="text-right">
+                                        <p class="text-[6.5px] text-gray-400 mb-1.5 uppercase tracking-wider">Conexões ativas</p>
+                                        <div class="flex items-center gap-0 justify-end">
+                                            <div class="w-7 h-7 rounded-full bg-[#8B5CF6] flex items-center justify-center ring-2 ring-white shadow-sm z-30 relative">
+                                                <span class="text-white text-[6px] font-black">NU</span>
+                                            </div>
+                                            <div class="w-7 h-7 rounded-full bg-red-500 flex items-center justify-center ring-2 ring-white shadow-sm -ml-2 z-20 relative">
+                                                <span class="text-white text-[6px] font-black">S</span>
+                                            </div>
+                                            <div class="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center ring-2 ring-white shadow-sm -ml-2 z-10 relative">
+                                                <span class="text-gray-500 text-[9px] font-bold">+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Stats row -->
+                                <div class="flex items-end gap-0">
+                                    <div class="flex-1 pr-6 border-r border-gray-100">
+                                        <p class="text-[6.5px] text-gray-400 font-medium mb-1 uppercase tracking-wider">receita mensal</p>
+                                        <p class="text-[14px] font-black text-[#16C64F]">R$ 13.883,00</p>
+                                    </div>
+                                    <div class="flex-1 px-6 border-r border-gray-100">
+                                        <p class="text-[6.5px] text-gray-400 font-medium mb-1 uppercase tracking-wider">despesa mensal</p>
+                                        <p class="text-[14px] font-black text-red-500">R$ 12.802,36</p>
+                                    </div>
+                                    <!-- Mini sparkline -->
+                                    <div class="pl-5 flex items-end pb-0.5">
+                                        <svg width="52" height="28" viewBox="0 0 52 28" fill="none">
+                                            <polyline points="0,24 8,18 16,20 24,10 32,14 40,6 52,2"
+                                                stroke="#16C64F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                            <polyline points="0,24 8,18 16,20 24,10 32,14 40,6 52,2 52,28 0,28"
+                                                fill="url(#g1)" opacity="0.15"/>
+                                            <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#16C64F"/><stop offset="100%" stop-color="#16C64F" stop-opacity="0"/></linearGradient></defs>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bottom panels -->
+                            <div class="grid grid-cols-2 gap-2.5">
+
+                                <!-- Saldo + Minhas contas -->
+                                <div class="bg-white rounded-xl overflow-hidden" style="box-shadow:0 1px 3px rgba(0,0,0,0.07), 0 4px 12px rgba(0,0,0,0.04);">
+                                    <!-- Saldo header com barra verde -->
+                                    <div class="px-4 pt-4 pb-3 border-b border-gray-50">
+                                        <div class="flex items-center justify-between mb-0.5">
+                                            <p class="text-[6.5px] text-gray-400 uppercase tracking-wider font-medium">Saldo geral</p>
+                                            <span class="text-gray-300 text-[10px]">👁</span>
+                                        </div>
+                                        <p class="text-[16px] font-black text-gray-900 mb-2">R$ 14.945,61</p>
+                                        <!-- Progress bar receitas vs despesas -->
+                                        <div class="h-1 bg-gray-100 rounded-full overflow-hidden">
+                                            <div class="h-full bg-[#16C64F] rounded-full"
+                                                 :style="{ width: heroReady ? '92%' : '0%', transition: 'width 1.2s ease 0.8s' }"></div>
+                                        </div>
+                                        <p class="text-[6px] text-gray-400 mt-1">92% das receitas disponível</p>
+                                    </div>
+
+                                    <!-- Accounts -->
+                                    <div class="px-4 pt-3 pb-2">
+                                        <p class="text-[8px] font-bold text-gray-800 mb-2">Minhas contas</p>
+                                        <div v-for="(acc, ai) in [
+                                            { abbr:'S',  bg:'#ef4444', name:'Conta Santander', sub:'Conta conectada', val:'R$ 1.486,45', connected:true  },
+                                            { abbr:'CX', bg:'#2563eb', name:'Conta Caixa',     sub:'Conta manual',    val:'R$ 5.468,99', connected:false },
+                                            { abbr:'i',  bg:'#f97316', name:'Conta Inter',      sub:'Conta manual',    val:'R$ 3.645,00', connected:false },
+                                            { abbr:'NU', bg:'#8B5CF6', name:'Conta Nubank',    sub:'Conta conectada', val:'R$ 4.345,17', connected:true  },
+                                        ]" :key="acc.name"
+                                            class="flex items-center gap-2.5 py-2 border-b border-gray-50 last:border-0 of-hero-account"
+                                            :style="`animation-delay: ${600 + ai * 140}ms`">
+                                            <div class="relative flex-shrink-0">
+                                                <div class="w-7 h-7 rounded-full flex items-center justify-center"
+                                                     :style="`background:${acc.bg}`">
+                                                    <span class="text-white text-[6px] font-black">{{ acc.abbr }}</span>
+                                                </div>
+                                                <span v-if="acc.connected"
+                                                      class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-[#16C64F] rounded-full border-2 border-white"></span>
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <p class="text-[7.5px] font-semibold text-gray-800 leading-none truncate">{{ acc.name }}</p>
+                                                <p class="text-[6px] mt-0.5" :class="acc.connected ? 'text-[#16C64F]' : 'text-gray-400'">{{ acc.sub }}</p>
+                                            </div>
+                                            <span class="text-[7.5px] font-bold text-gray-800 flex-shrink-0">{{ acc.val }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Faturas + Meus cartões -->
+                                <div class="bg-white rounded-xl overflow-hidden" style="box-shadow:0 1px 3px rgba(0,0,0,0.07), 0 4px 12px rgba(0,0,0,0.04);">
+                                    <!-- Faturas header -->
+                                    <div class="px-4 pt-4 pb-3 border-b border-gray-50">
+                                        <p class="text-[6.5px] text-gray-400 uppercase tracking-wider font-medium mb-0.5">Faturas de Maio</p>
+                                        <p class="text-[16px] font-black text-red-500">R$ -2.607,15</p>
+                                    </div>
+                                    <!-- Cards -->
+                                    <div class="px-4 pt-3 pb-2">
+                                        <p class="text-[8px] font-bold text-gray-800 mb-2">Meus cartões</p>
+                                        <div v-for="card in [
+                                            { abbr:'IT', bg:'#f97316', name:'Inter',  sub:'Cartão de crédito', lim:'Lim. R$ 5.000', fatura:'R$ 0,00',      red:false },
+                                            { abbr:'NU', bg:'#8B5CF6', name:'Nubank', sub:'Cartão conectado',  lim:'Lim. R$ 8.000', fatura:'R$ -2.607,15', red:true  },
+                                        ]" :key="card.name" class="py-2.5 border-b border-gray-50 last:border-0">
+                                            <div class="flex items-center gap-2 mb-2">
+                                                <div class="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+                                                     :style="`background:${card.bg}`">
+                                                    <span class="text-white text-[6px] font-black">{{ card.abbr }}</span>
+                                                </div>
+                                                <div>
+                                                    <p class="text-[7.5px] font-semibold text-gray-800 leading-none">{{ card.name }}</p>
+                                                    <p class="text-[6px] text-gray-400 mt-0.5">{{ card.sub }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex justify-between bg-gray-50 rounded-lg px-2.5 py-1.5">
+                                                <div>
+                                                    <p class="text-[5.5px] text-gray-400 uppercase tracking-wide">Limite disponível</p>
+                                                    <p class="text-[7px] font-bold text-gray-700 mt-0.5">{{ card.lim }}</p>
+                                                </div>
+                                                <div class="text-right">
+                                                    <p class="text-[5.5px] text-gray-400 uppercase tracking-wide">Fatura atual</p>
+                                                    <p class="text-[7px] font-bold mt-0.5" :class="card.red ? 'text-red-500' : 'text-gray-600'">{{ card.fatura }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            </div><!-- /escala 1.05× -->
+                        </div><!-- /dashboard -->
+
+                        <!-- ── Phone mockup: flex flex-col preenche tela sem área preta ── -->
+                        <div class="absolute flex flex-col"
+                             style="left:0; top:50px; width:29%; aspect-ratio:9/19.5; z-index:20;
+                                    border-radius:32px; overflow:hidden; background:#0f0f0f;
+                                    border:6px solid #1c1c1e; box-sizing:border-box;
+                                    box-shadow: 0 12px 40px -6px rgba(0,0,0,0.35), 0 0 0 1px #2c2c2e;">
+
+                            <!-- Dynamic island -->
+                            <div class="flex justify-center pt-2 pb-1 bg-[#0f0f0f] flex-shrink-0">
+                                <div class="w-14 h-3.5 bg-black rounded-full"></div>
+                            </div>
+
+                            <!-- Status bar -->
+                            <div class="bg-[#16C64F] px-3 pt-1 pb-0 flex-shrink-0">
+                            <div class="flex justify-between items-center">
+                                <span class="text-white text-[7.5px] font-bold">9:41</span>
+                                <div class="flex items-center gap-1">
+                                    <svg width="11" height="8" viewBox="0 0 11 8" fill="white" opacity="0.9"><rect x="0" y="4" width="2" height="4" rx="0.5"/><rect x="3" y="2.5" width="2" height="5.5" rx="0.5"/><rect x="6" y="1" width="2" height="7" rx="0.5"/><rect x="9" y="0" width="2" height="8" rx="0.5"/></svg>
+                                    <svg width="12" height="8" viewBox="0 0 12 8" fill="white" opacity="0.9"><path d="M6 1.5C4.1 1.5 2.4 2.3 1.2 3.6L0 2.4C1.5 0.9 3.6 0 6 0s4.5 0.9 6 2.4L10.8 3.6C9.6 2.3 7.9 1.5 6 1.5z"/><path d="M6 4.5C4.9 4.5 3.9 5 3.2 5.7L2 4.5C3 3.6 4.4 3 6 3s3 0.6 4 1.5L8.8 5.7C8.1 5 7.1 4.5 6 4.5z"/><circle cx="6" cy="7" r="1"/></svg>
+                                    <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><rect x="0.5" y="0.5" width="16" height="9" rx="2" stroke="white" stroke-opacity="0.5"/><rect x="1.5" y="1.5" width="13" height="7" rx="1.5" fill="white"/><rect x="17" y="3" width="2.5" height="4" rx="1" fill="white" fill-opacity="0.5"/></svg>
+                                </div>
+                            </div>
+
+                            <!-- App header -->
+                            <div class="flex items-center justify-between py-2 mt-0.5">
+                                <span class="text-white text-[13px] font-light">‹</span>
+                                <span class="text-white text-[10px] font-bold tracking-tight">Fluxo de caixa</span>
+                                <div class="flex gap-2.5">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="white" opacity="0.9"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="white" opacity="0.9"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+                                </div>
+                            </div>
+
+                            <!-- Month tabs -->
+                            <div class="flex items-center justify-center gap-0.5 pb-2.5">
+                                <span class="text-white/50 text-[8px] pr-1">‹</span>
+                                <span class="text-white/60 text-[8px]">Dezembro</span>
+                                <span class="bg-white/20 backdrop-blur text-white text-[8px] font-bold px-2.5 py-1 rounded-full mx-1">Janeiro</span>
+                                <span class="text-white/60 text-[8px]">Fevereiro</span>
+                                <span class="text-white/50 text-[8px] pl-1">›</span>
+                            </div>
+                        </div>
+
+                            <!-- Transações: flex-1 preenche toda a área sem faixa preta -->
+                            <div class="bg-white flex-1 overflow-hidden">
+                                <p class="text-[6.5px] font-black text-gray-400 uppercase tracking-[0.12em] px-3.5 pt-2.5 pb-1">Dia atual</p>
+
+                            <div v-for="tx in [
+                                { abbr:'C',  bg:'#6b7280', name:'Conta de luz',  sub:'Conta Nubank', val:'-R$ 258,00',  red:true  },
+                                { abbr:'F',  bg:'#7c3aed', name:'Faculdade',     sub:'Conta Nubank', val:'-R$ 647,12',  red:true  },
+                                { abbr:'P',  bg:'#ea580c', name:'Padaria Carmi', sub:'Conta Nubank', val:'-R$ 12,56',   red:true  },
+                                { abbr:'C',  bg:'#16C64F', name:'Creche filho',  sub:'Conta Nubank', val:'-R$ 764,00',  red:true  },
+                            ]" :key="tx.name" class="flex items-center gap-2.5 px-3.5 py-2 border-b border-gray-50/80">
+                                <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
+                                     :style="`background:${tx.bg}`">
+                                    <span class="text-white text-[7px] font-black">{{ tx.abbr }}</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-[8px] font-semibold text-gray-900 truncate leading-none">{{ tx.name }}</p>
+                                    <p class="text-[6px] text-gray-400 mt-0.5">{{ tx.sub }}</p>
+                                </div>
+                                <div class="text-right flex-shrink-0">
+                                    <p class="text-[8px] font-bold" :class="tx.red ? 'text-red-500' : 'text-[#16C64F]'">{{ tx.val }}</p>
+                                    <p class="text-[5.5px] text-gray-400 mt-0.5">pago</p>
+                                </div>
+                            </div>
+
+                            <p class="text-[6.5px] font-black text-gray-400 uppercase tracking-[0.12em] px-3.5 pt-2.5 pb-1 bg-gray-50/50">15 de Setembro</p>
+
+                            <div v-for="tx2 in [
+                                { abbr:'$', bg:'#16C64F', name:'Salário',  sub:'Conta Nubank', val:'R$ 5.000,00', red:false },
+                                { abbr:'M', bg:'#ea580c', name:'Mercado',  sub:'Conta Nubank', val:'-R$ 845,78',  red:true  },
+                            ]" :key="tx2.name" class="flex items-center gap-2.5 px-3.5 py-2 border-b border-gray-50/80">
+                                <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
+                                     :style="`background:${tx2.bg}`">
+                                    <span class="text-white text-[7px] font-black">{{ tx2.abbr }}</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-[8px] font-semibold text-gray-900 truncate leading-none">{{ tx2.name }}</p>
+                                    <p class="text-[6px] text-gray-400 mt-0.5">{{ tx2.sub }}</p>
+                                </div>
+                                <div class="text-right flex-shrink-0">
+                                    <p class="text-[8px] font-bold" :class="tx2.red ? 'text-red-500' : 'text-[#16C64F]'">{{ tx2.val }}</p>
+                                    <p class="text-[5.5px] text-gray-400 mt-0.5">{{ tx2.red ? 'pago' : 'recebido' }}</p>
+                                </div>
+                            </div>
+
+                            <p class="text-[6.5px] font-black text-gray-400 uppercase tracking-[0.12em] px-3.5 pt-2.5 pb-1 bg-gray-50/50">14 de Setembro</p>
+
+                            <div class="flex items-center gap-2.5 px-3.5 py-2">
+                                <div class="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white text-[7px] font-black">A</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-[8px] font-semibold text-gray-900 leading-none">Aluguel</p>
+                                    <p class="text-[6px] text-gray-400 mt-0.5">Conta Nubank</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-[8px] font-bold text-red-500">-R$ 1.645,47</p>
+                                    <p class="text-[5.5px] text-gray-400 mt-0.5">pago</p>
+                                </div>
+                            </div>
+                            </div><!-- /transações -->
+                        </div><!-- /phone -->
+
+                        <!-- Ícones flutuantes nos quatro cantos da composição -->
+
+                        <!-- RefreshCw: canto superior esquerdo da composição -->
+                        <div class="absolute pointer-events-none hero-float-icon-1"
+                             style="left:calc(22% - 27px); top:10px; width:54px; height:54px; border-radius:16px; z-index:30;
+                                    background:linear-gradient(145deg,#f5a623,#e07b1a);
+                                    box-shadow:0 8px 24px rgba(240,140,30,0.40), 0 0 0 1px rgba(255,255,255,0.15);
+                                    display:flex; align-items:center; justify-content:center; will-change:transform;">
+                            <RefreshCw class="w-6 h-6 text-white" />
+                        </div>
+
+                        <!-- CreditCard: canto superior direito -->
+                        <div class="absolute pointer-events-none hero-float-icon-3"
+                             style="right:8px; top:10px; width:54px; height:54px; border-radius:16px; z-index:30;
+                                    background:linear-gradient(145deg,#fbbf24,#f59e0b);
+                                    box-shadow:0 8px 24px rgba(245,158,11,0.40), 0 0 0 1px rgba(255,255,255,0.15);
+                                    display:flex; align-items:center; justify-content:center; will-change:transform;">
+                            <CreditCard class="w-6 h-6 text-white" />
+                        </div>
+
+                        <!-- Lock: canto inferior esquerdo -->
+                        <div class="absolute pointer-events-none hero-float-icon-2"
+                             style="left:calc(22% - 27px); bottom:75px; width:54px; height:54px; border-radius:16px; z-index:30;
+                                    background:linear-gradient(145deg,#f5a623,#e07b1a);
+                                    box-shadow:0 8px 24px rgba(240,140,30,0.40), 0 0 0 1px rgba(255,255,255,0.15);
+                                    display:flex; align-items:center; justify-content:center; will-change:transform;">
+                            <Lock class="w-6 h-6 text-white" />
+                        </div>
+
+                        <!-- TrendingUp: canto inferior direito -->
+                        <div class="absolute pointer-events-none hero-float-icon-4"
+                             style="right:8px; bottom:75px; width:54px; height:54px; border-radius:16px; z-index:30;
+                                    background:linear-gradient(145deg,#fb923c,#ea580c);
+                                    box-shadow:0 8px 24px rgba(234,88,12,0.40), 0 0 0 1px rgba(255,255,255,0.15);
+                                    display:flex; align-items:center; justify-content:center; will-change:transform;">
+                            <TrendingUp class="w-6 h-6 text-white" />
+                        </div>
+                    </div><!-- /composition wrapper -->
+                </div><!-- /coluna direita -->
+            </div><!-- /hero-inner -->
         </section>
 
         <!-- ───────────────── TRUSTED BY ───────────────── -->
@@ -736,27 +967,56 @@ const stats = [
                     </div>
 
                     <!-- RIGHT: mockup interativo -->
-                    <div class="relative flex flex-col items-center">
+                    <div ref="ofDemoEl" class="relative flex flex-col items-center">
+
+                        <!-- Cursor animado da demo -->
+                        <Transition name="of-fade">
+                            <div v-if="curVisible"
+                                 class="absolute top-0 left-0 pointer-events-none z-30 select-none"
+                                 :style="{
+                                     transform: `translate3d(${curX}px,${curY}px,0)`,
+                                     transition: 'transform 0.52s cubic-bezier(0.16,1,0.3,1)'
+                                 }">
+                                <div v-if="curRipple" class="of-ripple"></div>
+                                <svg :class="{ 'of-cur-click': curClick }"
+                                     width="22" height="26" viewBox="0 0 22 26" fill="none"
+                                     style="filter:drop-shadow(0 1px 3px rgba(0,0,0,0.28)) drop-shadow(0 3px 6px rgba(0,0,0,0.18))">
+                                    <path d="M3 2 L3 20 L7 16 L10.5 23 L13.5 21.5 L10 14.5 L16 14.5 Z"
+                                          fill="white" stroke="#1a1a1a" stroke-width="1.4"
+                                          stroke-linejoin="round" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </Transition>
 
                         <!-- Connector pill: Organizze ——✓—— openfinance -->
-                        <div class="flex items-center gap-2 mb-6 self-start ml-8">
+                        <div class="flex items-center gap-2 mb-6 self-center">
                             <div class="flex items-center gap-2 bg-white border-2 border-[#16C64F] rounded-full px-4 py-1.5 shadow-sm">
                                 <div class="w-5 h-5 rounded-full bg-[#16C64F] flex items-center justify-center">
                                     <span class="text-white text-[9px] font-black">O</span>
                                 </div>
                                 <span class="text-gray-800 text-sm font-bold">organizze</span>
                             </div>
-                            <div class="flex items-center">
-                                <div class="flex items-center gap-1">
-                                    <div class="w-4 h-[2px] bg-gray-300"></div>
-                                    <div class="w-5 h-5 rounded-full bg-[#16C64F] border-2 border-white shadow flex items-center justify-center">
-                                        <Check class="w-3 h-3 text-white" strokeWidth="3" />
-                                    </div>
-                                    <div class="w-4 h-[2px] bg-gray-300"></div>
+                            <div class="flex items-center gap-1">
+                                <div class="w-4 h-[2px] bg-gray-300 rounded-full"></div>
+                                <div class="w-5 h-5 rounded-full bg-[#16C64F] border-2 border-white shadow flex items-center justify-center">
+                                    <Check class="w-3 h-3 text-white" :stroke-width="3" />
                                 </div>
-                                <div class="flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-1.5 shadow-sm">
+                                <div class="w-4 h-[2px] bg-gray-300 rounded-full"></div>
+                            </div>
+                            <div class="flex items-center gap-2 bg-white border border-gray-200 rounded-full px-3 py-1.5">
+                                <!-- toggle estático (ligado) -->
+                                <div class="relative w-7 h-[17px] rounded-full bg-[#16C64F] flex-shrink-0">
+                                    <div class="absolute top-[2px] right-[2px] w-[13px] h-[13px] bg-white rounded-full shadow-sm"></div>
+                                </div>
+                                <span class="flex items-center gap-1.5 whitespace-nowrap">
+                                    <svg width="16" height="16" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Open Finance">
+                                        <path d="M 40.6 40.6 A 84 84 0 1 1 58.0 172.7 L 80.0 134.6 A 40 40 0 1 0 71.7 71.7 Z" fill="#404040"/>
+                                        <path d="M 55.5 171.2 A 84 84 0 0 1 23.3 134.2 L 63.5 116.3 A 40 40 0 0 0 78.8 133.9 Z" fill="#5183a0"/>
+                                        <path d="M 21.0 128.7 A 84 84 0 0 1 17.0 86.9 L 60.5 93.7 A 40 40 0 0 0 62.4 113.7 Z" fill="#5183a0"/>
+                                        <path d="M 18.2 81.1 A 84 84 0 0 1 38.6 42.7 L 70.7 72.7 A 40 40 0 0 0 61.0 91.0 Z" fill="#5183a0"/>
+                                    </svg>
                                     <span class="text-gray-800 text-sm font-semibold"><span class="font-black">open</span>finance</span>
-                                </div>
+                                </span>
                             </div>
                         </div>
 
@@ -789,23 +1049,62 @@ const stats = [
                                 <p class="text-xs font-semibold text-gray-700 mb-3">Transações encontradas</p>
 
                                 <!-- Item: Conta Corrente -->
-                                <div class="flex items-center gap-3 border border-gray-100 rounded-xl px-4 py-3 mb-2 hover:bg-gray-50 transition-colors cursor-default">
+                                <div ref="ofContaEl"
+                                     class="flex items-center gap-3 border rounded-xl px-4 py-3 mb-2 cursor-default select-none transition-all duration-300"
+                                     :class="hoverConta
+                                        ? 'border-[#16C64F]/35 bg-[#F0FFF6] shadow-md -translate-y-px'
+                                        : 'border-gray-100 bg-transparent'">
                                     <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
                                         <Building2 class="w-4 h-4 text-gray-500" />
                                     </div>
-                                    <span class="text-sm font-medium text-gray-800 flex-1">Conta Corrente</span>
-                                    <span class="text-[10px] font-bold text-[#16C64F] bg-[#E8FAF0] px-2.5 py-1 rounded-full">3 NOVAS</span>
+                                    <span class="text-sm font-medium flex-1 transition-colors duration-200"
+                                          :class="hoverConta ? 'text-[#16C64F] font-semibold' : 'text-gray-800'">Conta Corrente</span>
+                                    <span class="text-[10px] font-bold px-2.5 py-1 rounded-full inline-flex items-center gap-1 whitespace-nowrap transition-colors duration-300"
+                                          :class="[
+                                              contaBadgeState === 'buscando' ? 'text-amber-600 bg-amber-50' : 'text-[#16C64F] bg-[#E8FAF0]',
+                                              contaBadgeState === 'importadas' ? 'of-badge-pulse' : ''
+                                          ]">
+                                        <RefreshCw v-if="contaBadgeState === 'buscando'" class="w-2.5 h-2.5 of-spin" />
+                                        <Check v-if="contaBadgeState === 'importadas'" class="w-2.5 h-2.5" :stroke-width="3" />
+                                        {{ contaBadgeState === 'novas' ? '3 NOVAS' : contaBadgeState === 'buscando' ? 'BUSCANDO' : '3 IMPORTADAS' }}
+                                    </span>
                                 </div>
 
                                 <!-- Item: Cartão de Crédito -->
-                                <div class="flex items-center gap-3 border border-gray-100 rounded-xl px-4 py-3 hover:bg-gray-50 transition-colors cursor-default">
+                                <div ref="ofCartaoEl"
+                                     class="flex items-center gap-3 border rounded-xl px-4 py-3 cursor-default select-none transition-all duration-300"
+                                     :class="hoverCartao
+                                        ? 'border-[#16C64F]/35 bg-[#F0FFF6] shadow-md -translate-y-px'
+                                        : 'border-gray-100 bg-transparent'">
                                     <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
                                         <CreditCard class="w-4 h-4 text-gray-500" />
                                     </div>
-                                    <span class="text-sm font-medium text-gray-800 flex-1">Cartão de Crédito</span>
-                                    <span class="text-[10px] font-bold text-[#16C64F] bg-[#E8FAF0] px-2.5 py-1 rounded-full">17 NOVAS</span>
+                                    <span class="text-sm font-medium flex-1 transition-colors duration-200"
+                                          :class="hoverCartao ? 'text-[#16C64F] font-semibold' : 'text-gray-800'">Cartão de Crédito</span>
+                                    <span class="text-[10px] font-bold px-2.5 py-1 rounded-full inline-flex items-center gap-1 whitespace-nowrap transition-colors duration-300"
+                                          :class="[
+                                              cartaoBadgeState === 'buscando' ? 'text-amber-600 bg-amber-50' : 'text-[#16C64F] bg-[#E8FAF0]',
+                                              cartaoBadgeState === 'importadas' ? 'of-badge-pulse' : ''
+                                          ]">
+                                        <RefreshCw v-if="cartaoBadgeState === 'buscando'" class="w-2.5 h-2.5 of-spin" />
+                                        <Check v-if="cartaoBadgeState === 'importadas'" class="w-2.5 h-2.5" :stroke-width="3" />
+                                        {{ cartaoBadgeState === 'novas' ? '17 NOVAS' : cartaoBadgeState === 'buscando' ? 'BUSCANDO' : '17 IMPORTADAS' }}
+                                    </span>
                                 </div>
                             </div>
+
+                            <!-- Toast: Open Finance ativo -->
+                            <Transition name="of-toast">
+                                <div v-if="showSuccess"
+                                     class="absolute bottom-5 left-0 right-0 flex justify-center pointer-events-none z-10">
+                                    <div class="flex items-center gap-2 bg-white border border-[#16C64F]/25 rounded-2xl px-4 py-2.5 shadow-xl">
+                                        <div class="w-5 h-5 rounded-full bg-[#16C64F] flex items-center justify-center flex-shrink-0">
+                                            <Check class="w-3 h-3 text-white" :stroke-width="3" />
+                                        </div>
+                                        <span class="text-xs font-semibold text-gray-800 whitespace-nowrap">20 transações sincronizadas com sucesso</span>
+                                    </div>
+                                </div>
+                            </Transition>
 
                             <!-- Skeleton rows (baixo) -->
                             <div class="space-y-3 mt-4 opacity-60">
@@ -1199,72 +1498,162 @@ const stats = [
         </section>
 
         <!-- ───────────────── FOOTER ───────────────── -->
-        <footer style="background: #0C1B10;" class="text-gray-400">
-            <!-- Main links -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-10">
-                    <!-- Brand -->
-                    <div class="md:col-span-2">
-                        <a href="/" class="flex items-center gap-2.5 mb-5">
-                            <div class="w-9 h-9 bg-[#16C64F] rounded-xl flex items-center justify-center">
-                                <BarChart3 class="w-5 h-5 text-white" />
-                            </div>
-                            <span class="text-xl font-bold text-white">Organizze</span>
-                        </a>
-                        <p class="text-sm leading-relaxed text-gray-500 max-w-xs mb-6">
-                            O jeito mais simples e completo de organizar suas finanças pessoais no Brasil. Gratuito para começar.
-                        </p>
-                        <!-- Badges regulatório -->
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="text-[10px] font-semibold text-[#16C64F] bg-[#16C64F]/10 border border-[#16C64F]/20 px-2.5 py-1 rounded-full">Open Finance BCB</span>
-                            <span class="text-[10px] font-semibold text-gray-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">SSL 256-bit</span>
-                            <span class="text-[10px] font-semibold text-gray-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">LGPD</span>
-                        </div>
-                        <!-- Sociais -->
-                        <div class="flex gap-2">
-                            <a v-for="s in [
-                                { label: 'Instagram', letter: 'In' },
-                                { label: 'Twitter / X', letter: 'X' },
-                                { label: 'LinkedIn', letter: 'Li' },
-                                { label: 'YouTube', letter: 'Yt' },
-                            ]" :key="s.label" :title="s.label" href="#"
-                                class="w-9 h-9 rounded-lg bg-white/5 hover:bg-[#16C64F]/15 border border-white/8 hover:border-[#16C64F]/30 flex items-center justify-center text-gray-500 hover:text-[#16C64F] transition-all duration-200 text-xs font-bold">
-                                {{ s.letter }}
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Colunas de links -->
-                    <div v-for="col in [
-                        { title: 'Produto',  links: ['Funcionalidades', 'Planos', 'Open Finance', 'Novidades'] },
-                        { title: 'Empresa',  links: ['Sobre nós', 'Blog', 'Carreiras', 'Imprensa'] },
-                        { title: 'Suporte',  links: ['Central de ajuda', 'Fale conosco', 'Status', 'Privacidade'] },
-                    ]" :key="col.title">
-                        <p class="text-xs font-bold text-gray-300 uppercase tracking-widest mb-5">{{ col.title }}</p>
-                        <ul class="space-y-3.5">
-                            <li v-for="link in col.links" :key="link">
-                                <a href="#" class="text-sm text-gray-500 hover:text-[#16C64F] transition-colors duration-150">
-                                    {{ link }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bottom bar -->
-            <div class="border-t border-white/[0.06]">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <p class="text-xs text-gray-600">
-                        © {{ new Date().getFullYear() }} Organizze. Todos os direitos reservados.
-                    </p>
-                    <div class="flex gap-5">
-                        <a v-for="l in ['Termos de uso', 'Privacidade', 'Cookies']" :key="l"
-                            href="#" class="text-xs text-gray-600 hover:text-gray-400 transition-colors">{{ l }}</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <Footer />
 
     </div>
 </template>
+
+<style scoped>
+/* ── Cursor: clique ────────────────────────────────── */
+@keyframes of-click {
+    0%   { transform: scale(1)    rotate(0deg); }
+    25%  { transform: scale(0.78) rotate(-4deg); }
+    60%  { transform: scale(1.04) rotate(1deg); }
+    100% { transform: scale(1)    rotate(0deg); }
+}
+.of-cur-click {
+    animation: of-click 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Badge: pulsação ───────────────────────────────── */
+@keyframes of-pulse {
+    0%   { transform: scale(1);    box-shadow: 0 0 0 0   rgba(22,198,79,0); }
+    35%  { transform: scale(1.28); box-shadow: 0 0 0 6px rgba(22,198,79,0.24); }
+    70%  { transform: scale(0.97); box-shadow: 0 0 0 0   rgba(22,198,79,0); }
+    100% { transform: scale(1); }
+}
+.of-badge-pulse {
+    animation: of-pulse 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) 1;
+}
+
+/* ── Spin: ícone BUSCANDO ──────────────────────────── */
+@keyframes of-spin {
+    to { transform: rotate(360deg); }
+}
+.of-spin {
+    animation: of-spin 0.75s linear infinite;
+}
+
+/* ── Ripple: onda verde no clique ──────────────────── */
+@keyframes of-ripple-anim {
+    0%   { transform: scale(0.5); opacity: 0.6; }
+    100% { transform: scale(5);   opacity: 0; }
+}
+.of-ripple {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(22, 198, 79, 0.48);
+    animation: of-ripple-anim 0.5s cubic-bezier(0.2, 0, 0.6, 1) forwards;
+    pointer-events: none;
+    top: -9px;
+    left: -8px;
+}
+
+/* ── Toast: entrada ────────────────────────────────── */
+@keyframes of-toast-in {
+    from { opacity: 0; transform: translateY(10px) scale(0.94); }
+    to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+@keyframes of-toast-out {
+    from { opacity: 1; transform: translateY(0)   scale(1); }
+    to   { opacity: 0; transform: translateY(-6px) scale(0.97); }
+}
+.of-toast-enter-active { animation: of-toast-in  0.38s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.of-toast-leave-active { animation: of-toast-out 0.26s ease-in; }
+
+/* ── Cursor: fade in/out ───────────────────────────── */
+.of-fade-enter-active { transition: opacity 0.3s ease; }
+.of-fade-leave-active { transition: opacity 0.2s ease; }
+.of-fade-enter-from,
+.of-fade-leave-to     { opacity: 0; }
+
+/* ── Hero section: responsividade ──────────────────── */
+.hero-section {
+    padding: 52px 0 40px;
+}
+.hero-inner {
+    padding: 0 24px;
+    gap: 0;
+}
+.hero-left {
+    width: 100%;
+    padding-bottom: 40px;
+}
+.hero-h1 {
+    font-size: 40px;
+}
+.hero-right { display: none; }
+.hero-composition { height: 620px; }
+
+@media (min-width: 768px) {
+    .hero-h1 { font-size: 48px; }
+}
+
+@media (min-width: 1024px) {
+    .hero-section {
+        height: auto;
+        padding: 0;
+    }
+    .hero-inner {
+        height: auto;
+        padding: 0 72px;
+        gap: 48px;
+    }
+    .hero-left {
+        width: 42%;
+        max-width: 620px;
+        flex-shrink: 0;
+        padding-bottom: 0;
+    }
+    .hero-h1 { font-size: 58px; }
+    .hero-right {
+        display: block;
+        flex: 1;
+        min-height: 575px;
+    }
+    .hero-composition {
+        height: 620px;
+    }
+}
+
+/* ── Hero floating icons ────────────────────────────── */
+@keyframes hero-float-icon-a {
+    0%, 100% { transform: translateY(0px)   rotate(-8deg)  scale(1); }
+    50%       { transform: translateY(-8px)  rotate(-11deg) scale(1.03); }
+}
+@keyframes hero-float-icon-b {
+    0%, 100% { transform: translateY(0px)  rotate(8deg)  scale(1); }
+    50%       { transform: translateY(-6px) rotate(11deg) scale(1.02); }
+}
+@keyframes hero-float-icon-c {
+    0%, 100% { transform: translateY(0px)   rotate(6deg)  scale(1); }
+    50%       { transform: translateY(-10px) rotate(9deg)  scale(1.04); }
+}
+@keyframes hero-float-icon-d {
+    0%, 100% { transform: translateY(0px)   rotate(-6deg) scale(1); }
+    50%       { transform: translateY(-7px)  rotate(-9deg) scale(1.03); }
+}
+.hero-float-icon-1 { animation: hero-float-icon-a 5s ease-in-out 0.3s infinite; }
+.hero-float-icon-2 { animation: hero-float-icon-b 6s ease-in-out 1.1s infinite; }
+.hero-float-icon-3 { animation: hero-float-icon-c 4.5s ease-in-out 0.7s infinite; }
+.hero-float-icon-4 { animation: hero-float-icon-d 7s ease-in-out 1.8s infinite; }
+
+/* ── prefers-reduced-motion ────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .of-cur-click,
+    .of-badge-pulse,
+    .of-toast-enter-active,
+    .of-toast-leave-active,
+    .of-fade-enter-active,
+    .of-fade-leave-active,
+    .of-spin,
+    .of-ripple { animation: none; transition: none; }
+    .hero-float-icon-1,
+    .hero-float-icon-2,
+    .hero-float-icon-3,
+    .hero-float-icon-4,
+    .of-hero-account { animation: none; opacity: 1; }
+}
+</style>

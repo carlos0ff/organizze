@@ -1,8 +1,8 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../wayfinder'
 /**
-* @see \App\Http\Controllers\App\SettingsController::index
-* @see [unknown]:0
-* @route '/panel/configuracoes'
+* @see \App\Http\Controllers\App\SuporteController::index
+* @see app/Http/Controllers/App/SuporteController.php:11
+* @route '/app/suporte'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: index.url(options),
@@ -11,22 +11,22 @@ export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 index.definition = {
     methods: ["get","head"],
-    url: '/panel/configuracoes',
+    url: '/app/suporte',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\App\SettingsController::index
-* @see [unknown]:0
-* @route '/panel/configuracoes'
+* @see \App\Http\Controllers\App\SuporteController::index
+* @see app/Http/Controllers/App/SuporteController.php:11
+* @route '/app/suporte'
 */
 index.url = (options?: RouteQueryOptions) => {
     return index.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\App\SettingsController::index
-* @see [unknown]:0
-* @route '/panel/configuracoes'
+* @see \App\Http\Controllers\App\SuporteController::index
+* @see app/Http/Controllers/App/SuporteController.php:11
+* @route '/app/suporte'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: index.url(options),
@@ -34,15 +34,15 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\App\SettingsController::index
-* @see [unknown]:0
-* @route '/panel/configuracoes'
+* @see \App\Http\Controllers\App\SuporteController::index
+* @see app/Http/Controllers/App/SuporteController.php:11
+* @route '/app/suporte'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: index.url(options),
     method: 'head',
 })
 
-const SettingsController = { index }
+const SuporteController = { index }
 
-export default SettingsController
+export default SuporteController

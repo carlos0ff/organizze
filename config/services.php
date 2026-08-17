@@ -35,14 +35,15 @@ return [
         ],
     ],
 
-    /**
-     * 
-     */
     'google' => [
-        'client_id' => env('GOOGLE_CLIENT_ID' ),
+        'client_id'     => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => env('GOOGLE_REDIRECT_URI'),
+        'redirect'      => env('GOOGLE_REDIRECT_URI'),
     ],
 
+    'n8n' => [
+        'secret'     => env('N8N_SECRET'),
+        'user_email' => env('ORGANIZZE_N8N_USER_EMAIL'),
+    ],
 
 ];

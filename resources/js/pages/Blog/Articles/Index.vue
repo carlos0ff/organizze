@@ -1,6 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { Search, Clock, X, ChevronLeft, ChevronRight, BookOpen, TrendingUp } from 'lucide-vue-next';
+import Footer from "@/pages/Blog/Components/layout/Footer.vue";
+import Navbar from "@/pages/Blog/Components/Navigation/Navbar.vue";
 
 const ALL_POSTS = [
     { slug: 'apps-de-financas',         img: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=75', cat: 'Tecnologia',           title: 'Apps de finanças: como escolher o ideal',                         excerpt: 'Aprenda os critérios essenciais para escolher um app financeiro eficiente para o seu dia a dia.',                readTime: 7,  date: '05/01/2026', author: 'Carlos Júnior', authorImg: 'https://i.pravatar.cc/40?img=12' },
@@ -68,132 +70,11 @@ const clearFilters = () => {
 
 <template>
     <!-- ── Navbar (idêntica ao Blog/Index.vue) ── -->
-    <nav class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white shadow-sm">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-                <!-- Logo -->
-                <div class="flex items-center shrink-0">
-                    <a href="/blog" class="flex items-center gap-2 transition-opacity hover:opacity-80">
-                        <img src="https://auth.organizze.com.br/images/auth/logo-909f6075bb5972376e589ed01866ee33.svg?vsn=d"
-                            alt="Organizze" class="h-8 w-auto" />
-                        <span class="hidden text-sm font-medium text-gray-600 sm:inline">Blog</span>
-                    </a>
-                </div>
-
-                <!-- Links -->
-                <div class="hidden md:flex items-center justify-center space-x-8 flex-1">
-                    <a href="/blog"
-                        class="capitalize relative text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full">
-                        Home
-                    </a>
-                    <a href="/blog#categorias"
-                        class="capitalize relative text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full">
-                        Categorias
-                    </a>
-                    <a href="/blog/artigos"
-                        class="capitalize relative text-sm font-semibold text-[#22c75e] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:bg-[#22c75e]">
-                        Artigos
-                    </a>
-                    <a href="/blog#mais-lido"
-                        class="capitalize relative text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-gray-800 after:transition-all after:duration-300 hover:after:w-full">
-                        Mais lido
-                    </a>
-                </div>
-
-                <div class="flex items-center gap-3">
-                    <!-- Busca -->
-                    <div class="hidden md:flex items-center relative">
-                        <button @click="searchOpen = !searchOpen"
-                            class="p-2 text-gray-700 rounded-lg border border-gray-200 hover:bg-gray-100 transition cursor-pointer">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </button>
-
-                        <div v-if="searchOpen" class="absolute top-14 right-0 w-80 z-50">
-                            <div class="bg-white rounded-xl shadow-xl border border-gray-200 p-4">
-                                <div class="relative">
-                                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                    </svg>
-                                    <input v-model="searchQuery" autofocus type="text" placeholder="Buscar artigos..."
-                                        @keyup.escape="searchOpen = false"
-                                        class="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#16C64F]/30 focus:border-[#16C64F]" />
-                                </div>
-                                <div class="mt-4 text-sm">
-                                    <p class="text-gray-500 font-medium mb-2">Buscas recentes:</p>
-                                    <div class="space-y-1">
-                                        <a href="#" class="block text-gray-700 hover:text-[#16C64F] transition">Como organizar finanças</a>
-                                        <a href="#" class="block text-gray-700 hover:text-[#16C64F] transition">Reserva de emergência</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CTA -->
-                    <a href="/auth/cadastro" class="relative overflow-hidden px-6 py-2 rounded-md font-medium text-white bg-[#117641] group">
-                        <span class="absolute inset-0 bg-[#006A33] -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></span>
-                        <span class="relative z-10">Conheça o organizze</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <Navbar />
 
     <main class="bg-gray-50 min-h-screen">
 
-        <!-- ── Hero ── -->
-        <section class="bg-white border-b border-gray-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-                <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-                    <div>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#22c75e] bg-[#22c75e]/10 px-3 py-1 rounded-full">
-                                <BookOpen class="w-3.5 h-3.5" /> Biblioteca de artigos
-                            </span>
-                        </div>
-                        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-3">
-                            Todos os artigos
-                        </h1>
-                        <p class="text-gray-500 text-base leading-relaxed max-w-xl">
-                            Conteúdos práticos sobre finanças pessoais, investimentos, orçamento e muito mais para transformar sua relação com o dinheiro.
-                        </p>
-                    </div>
 
-                    <!-- Stats -->
-                    <div class="flex items-center gap-6 shrink-0">
-                        <div class="text-center">
-                            <p class="text-2xl font-bold text-gray-900">{{ ALL_POSTS.length }}</p>
-                            <p class="text-xs text-gray-400 mt-0.5">Artigos</p>
-                        </div>
-                        <div class="w-px h-10 bg-gray-200"></div>
-                        <div class="text-center">
-                            <p class="text-2xl font-bold text-gray-900">{{ CATEGORIES.length - 1 }}</p>
-                            <p class="text-xs text-gray-400 mt-0.5">Categorias</p>
-                        </div>
-                        <div class="w-px h-10 bg-gray-200"></div>
-                        <div class="text-center">
-                            <p class="text-2xl font-bold text-gray-900">~{{ Math.round(ALL_POSTS.reduce((s, p) => s + p.readTime, 0) / ALL_POSTS.length) }}</p>
-                            <p class="text-xs text-gray-400 mt-0.5">min médio</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Busca inline -->
-                <div class="mt-8 relative max-w-lg">
-                    <Search class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input v-model="search" type="text" placeholder="Pesquisar artigos por título ou conteúdo..."
-                        class="w-full pl-11 pr-10 py-3 text-sm border border-gray-200 rounded-2xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#22c75e]/30 focus:border-[#22c75e] focus:bg-white transition shadow-sm" />
-                    <button v-if="search" @click="search = ''" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                        <X class="w-4 h-4" />
-                    </button>
-                </div>
-            </div>
-        </section>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
@@ -250,35 +131,29 @@ const clearFilters = () => {
                 </a>
             </div>
 
-            <!-- ── Filtros por categoria ── -->
-            <div class="flex items-center gap-2 flex-wrap mb-8">
-                <button v-for="cat in CATEGORIES" :key="cat" @click="selectCat(cat)"
-                    :class="activecat === cat
-                        ? 'bg-[#22c75e] text-white border-[#22c75e] shadow-sm shadow-emerald-200'
-                        : 'bg-white text-gray-600 border-gray-200 hover:border-[#22c75e] hover:text-[#22c75e]'"
-                    class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200">
-                    {{ cat }}
-                    <span :class="activecat === cat ? 'bg-white/30 text-white' : 'bg-gray-100 text-gray-400'"
-                        class="text-[11px] font-bold px-1.5 py-0.5 rounded-full leading-none">
-                        {{ catCount(cat) }}
-                    </span>
-                </button>
-            </div>
 
-            <!-- ── Resultados ── -->
             <div v-if="paginated.length > 0">
                 <!-- Contagem + limpar filtros -->
                 <div class="flex items-center justify-between mb-6">
-                    <p class="text-sm text-gray-500">
-                        <span class="font-semibold text-gray-800">{{ filtered.length }}</span>
-                        artigo{{ filtered.length !== 1 ? 's' : '' }} encontrado{{ filtered.length !== 1 ? 's' : '' }}
-                        <span v-if="activecat !== 'Todas'" class="text-[#22c75e]"> em {{ activecat }}</span>
-                    </p>
+
                     <button v-if="search || activecat !== 'Todas'"
                         @click="clearFilters"
                         class="flex items-center gap-1 text-xs text-gray-400 hover:text-[#22c75e] transition">
                         <X class="w-3.5 h-3.5" /> Limpar filtros
                     </button>
+                </div>
+
+                <div class="mb-8 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">Mais artigos</h2>
+                        <p class="text-sm text-gray-500">
+                            <span class="font-semibold text-gray-800">{{ filtered.length }}</span>
+                            artigo{{ filtered.length !== 1 ? 's' : '' }} encontrado{{ filtered.length !== 1 ? 's' : '' }}
+                            <span v-if="activecat !== 'Todas'" class="text-[#22c75e]"> em {{ activecat }}</span>
+                        </p>
+                    </div>
+
+
                 </div>
 
                 <!-- Grid de artigos -->
@@ -362,22 +237,8 @@ const clearFilters = () => {
                     <X class="w-3.5 h-3.5" /> Limpar filtros
                 </button>
             </div>
-
-            <!-- ── CTA Newsletter ── -->
-            <div class="mt-16 rounded-2xl bg-gradient-to-br from-[#1F4D2E] to-[#117641] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-lg shadow-emerald-900/10">
-                <div class="text-white text-center md:text-left">
-                    <p class="text-xs font-semibold uppercase tracking-widest text-emerald-300 mb-2">Newsletter</p>
-                    <h3 class="text-xl md:text-2xl font-bold leading-snug mb-1">Receba dicas de finanças toda semana</h3>
-                    <p class="text-sm text-emerald-100/80">Sem spam. Só conteúdo que realmente transforma sua vida financeira.</p>
-                </div>
-                <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto shrink-0">
-                    <input type="email" placeholder="seu@email.com"
-                        class="w-full sm:w-64 px-4 py-2.5 rounded-xl text-sm border-0 focus:outline-none focus:ring-2 focus:ring-white/30 bg-white/10 text-white placeholder-emerald-200/60" />
-                    <button class="w-full sm:w-auto px-6 py-2.5 rounded-xl text-sm font-bold text-[#117641] bg-white hover:bg-emerald-50 transition-colors shadow-sm whitespace-nowrap">
-                        Inscrever-se
-                    </button>
-                </div>
-            </div>
         </div>
+
+        <Footer />
     </main>
 </template>

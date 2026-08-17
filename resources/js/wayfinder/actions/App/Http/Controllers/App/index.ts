@@ -1,6 +1,3 @@
-import DashboardController from './DashboardController'
-import SettingsController from './SettingsController'
-import AccountController from './AccountController'
 import Dashboard from './Dashboard'
 import Conta from './Conta'
 import Lancamento from './Lancamento'
@@ -15,9 +12,6 @@ import Plano from './Plano'
 import Suporte from './Suporte'
 
 const App = {
-    DashboardController: Object.assign(DashboardController, DashboardController),
-    SettingsController: Object.assign(SettingsController, SettingsController),
-    AccountController: Object.assign(AccountController, AccountController),
     Dashboard: Object.assign(Dashboard, Dashboard),
     Conta: Object.assign(Conta, Conta),
     Lancamento: Object.assign(Lancamento, Lancamento),

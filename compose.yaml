@@ -38,6 +38,7 @@ services:
         volumes:
             - 'sail-mysql:/var/lib/mysql'
             - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+            - './docker/mysql/init.sql:/docker-entrypoint-initdb.d/20-evolution-init.sql'
         networks:
             - sail
         healthcheck:
@@ -48,9 +49,120 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    postgres:
+        image: 'postgres:16-alpine'
+        ports:
+            - '${FORWARD_PGSQL_PORT:-5432}:5432'
+        environment:
+            PGPASSWORD: '${POSTGRES_PASSWORD:-password}'
+            POSTGRES_DB: '${POSTGRES_DB:-evolution_api}'
+            POSTGRES_USER: '${POSTGRES_USER:-evolution}'
+            POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-password}'
+        volumes:
+            - 'sail-pgsql:/var/lib/postgresql/data'
+        networks:
+            - sail
+        healthcheck:
+            test:
+                - CMD
+                - pg_isready
+                - '-q'
+                - '-d'
+                - '${POSTGRES_DB:-evolution_api}'
+                - '-U'
+                - '${POSTGRES_USER:-evolution}'
+            retries: 3
+            timeout: 5s
+    redis:
+        image: 'redis:7-alpine'
+        ports:
+            - '${FORWARD_REDIS_PORT:-6379}:6379'
+        volumes:
+            - 'sail-redis:/data'
+        networks:
+            - sail
+        healthcheck:
+            test: ['CMD', 'redis-cli', 'ping']
+            retries: 3
+            timeout: 5s
+    evolution-api:
+        image: 'evoapicloud/evolution-api:latest'
+        restart: unless-stopped
+        ports:
+            - '${EVOLUTION_PORT:-8081}:8080'
+        environment:
+            SERVER_URL: '${EVOLUTION_SERVER_URL:-http://localhost:8081}'
+            AUTHENTICATION_TYPE: 'apikey'
+            AUTHENTICATION_API_KEY: '${EVOLUTION_API_KEY:-mude-esta-chave-evolution}'
+            AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES: 'true'
+            DATABASE_PROVIDER: 'postgresql'
+            DATABASE_CONNECTION_URI: 'postgresql://${POSTGRES_USER:-evolution}:${POSTGRES_PASSWORD:-password}@postgres:5432/${POSTGRES_DB:-evolution_api}'
+            DATABASE_CONNECTION_CLIENT_NAME: 'evolution_exchange'
+            DATABASE_SAVE_DATA_INSTANCE: 'true'
+            DATABASE_SAVE_DATA_NEW_MESSAGE: 'true'
+            DATABASE_SAVE_MESSAGE_UPDATE: 'true'
+            DATABASE_SAVE_DATA_CONTACTS: 'true'
+            DATABASE_SAVE_DATA_CHATS: 'true'
+            DATABASE_SAVE_DATA_LABELS: 'true'
+            WEBHOOK_GLOBAL_ENABLED: 'false'
+            WEBHOOK_GLOBAL_URL: ''
+            WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS: 'false'
+            QRCODE_LIMIT: '30'
+            QRCODE_COLOR: '#198754'
+            DEL_INSTANCE: 'false'
+            LOG_LEVEL: '${EVOLUTION_LOG_LEVEL:-ERROR}'
+            LOG_COLOR: 'true'
+            GENERIC_TIMEZONE: 'America/Recife'
+            TZ: 'America/Recife'
+            CACHE_REDIS_ENABLED: 'true'
+            CACHE_REDIS_URI: 'redis://redis:6379/6'
+            CACHE_REDIS_PREFIX_KEY: 'evolution'
+            CACHE_REDIS_SAVE_INSTANCES: 'false'
+        volumes:
+            - 'evolution-data:/evolution/instances'
+        networks:
+            - sail
+        depends_on:
+            postgres:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+    n8n:
+        image: 'n8nio/n8n:latest'
+        ports:
+            - '${N8N_PORT:-5678}:5678'
+        environment:
+            N8N_HOST: '${N8N_HOST:-localhost}'
+            N8N_PORT: '5678'
+            N8N_PROTOCOL: '${N8N_PROTOCOL:-http}'
+            WEBHOOK_URL: '${N8N_WEBHOOK_URL:-http://localhost:5678/}'
+            GENERIC_TIMEZONE: 'America/Recife'
+            TZ: 'America/Recife'
+            N8N_BASIC_AUTH_ACTIVE: 'true'
+            N8N_BASIC_AUTH_USER: '${N8N_BASIC_AUTH_USER:-admin}'
+            N8N_BASIC_AUTH_PASSWORD: '${N8N_BASIC_AUTH_PASSWORD:-secret}'
+            N8N_BLOCK_ENV_ACCESS_IN_NODE: 'false'
+            ORGANIZZE_N8N_SECRET: '${N8N_SECRET:-}'
+            ORGANIZZE_LARAVEL_URL: 'http://laravel.test'
+            ANTHROPIC_API_KEY: '${ANTHROPIC_API_KEY:-}'
+        volumes:
+            - 'n8n-data:/home/node/.n8n'
+            - './docker/n8n/workflows:/home/node/workflows:ro'
+        networks:
+            - sail
+        depends_on:
+            - laravel.test
 networks:
     sail:
         driver: bridge
 volumes:
     sail-mysql:
+        driver: local
+    sail-pgsql:
+        driver: local
+    sail-redis:
+        driver: local
+    n8n-data:
+        driver: local
+    evolution-data:
         driver: local

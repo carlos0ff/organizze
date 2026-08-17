@@ -1,5 +1,6 @@
 <script setup>
 import { ArrowRight } from 'lucide-vue-next';
+import Footer from "@/pages/Blog/Components/layout/Footer.vue";
 </script>
 
 <template>
@@ -956,100 +957,6 @@ import { ArrowRight } from 'lucide-vue-next';
         </div>
 
         <!-- Footer -->
-        <footer class="bg-[#2F4F3F] mt-10">
-            <div class="max-w-6xl mx-auto px-4 py-10">
-                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
-                    <div class="flex flex-col gap-4">
-                        <img
-                            src="https://auth.organizze.com.br/images/auth/logo-909f6075bb5972376e589ed01866ee33.svg?vsn=d"
-                            alt="Organizze"
-                            class="h-8 w-auto"
-                            style="filter: brightness(0) invert(1)"
-                        />
-
-                        <p class="text-sm text-gray-300 max-w-xs leading-relaxed">
-                            Simplificando o controle financeiro para você tomar decisões melhores todos os dias.
-                        </p>
-                    </div>
-
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
-                        <div>
-                            <h4 class="text-sm font-semibold text-white mb-3">Institucional</h4>
-                            <ul class="space-y-2 text-sm">
-                                <li>
-                                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Quem somos</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Trabalhe conosco</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h4 class="text-sm font-semibold text-white mb-3">Ajuda</h4>
-                            <ul class="space-y-2 text-sm">
-                                <li>
-                                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Central de ajuda</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Contato</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-white mb-3">Legal</h4>
-                            <ul class="space-y-2 text-sm">
-                                <li>
-                                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Termos de uso</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Privacidade</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col gap-4">
-                        <h4 class="text-sm font-semibold text-white">Baixe o app</h4>
-                        <div class="flex gap-3">
-                            <a href="#" class="hover:opacity-90 transition">
-                                <img
-                                    src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                                    alt="App Store"
-                                    class="h-10"
-                                />
-                            </a>
-
-                            <a href="#" class="hover:opacity-90 transition">
-                                <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-                                    alt="Google Play"
-                                    class="h-10"
-                                />
-                            </a>
-                        </div>
-
-                        <!-- QR Code -->
-                        <div class="flex items-center gap-3 mt-2">
-                            <img
-                                src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.organizze.com.br"
-                                alt="QR Code para download do app"
-                                class="h-20 w-20 rounded-md bg-white p-1"
-                            />
-                            <p class="text-xs text-gray-300 leading-snug max-w-30">Escaneie o QR Code e baixe o app no seu celular</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border-t border-[#3A5849] mt-10 pt-4">
-                    <p class="text-center text-xs text-gray-300">
-                        © {{ new Date().getFullYear() }} Organizze Tecnologia Ltda. CNPJ 35.381.093/0001-26
-                    </p>
-                </div>
-            </div>
-        </footer>
+        <Footer />
     </main>
 </template>

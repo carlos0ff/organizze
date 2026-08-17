@@ -262,7 +262,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
     <!-- Content -->
     <main class="max-w-7xl mx-auto px-4 pb-12"
-        :class="trialBarDismissed ? 'pt-24' : 'pt-[7rem]'">
+        :class="trialBarDismissed ? 'pt-24' : 'pt-[2rem]'">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-4">
             <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col justify-between gap-5">
                 <!-- Linha 1: saudação + ações -->

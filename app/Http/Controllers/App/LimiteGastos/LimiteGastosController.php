@@ -27,10 +27,11 @@ class LimiteGastosController extends Controller
 
     /**
      * Salva um novo limite de gastos.
+     * validar e salvar limite de gastos
      */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        // TODO: validar e salvar limite de gastos
+
     }
 
     /**
@@ -51,17 +52,18 @@ class LimiteGastosController extends Controller
 
     /**
      * Atualiza um limite de gastos existente.
+     * validar e atualizar limite
      */
     public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
-        // TODO: validar e atualizar limite
+
     }
 
     /**
-     * Remove um limite de gastos.
+     * Remove um limite de gastos. excluir limite
      */
     public function destroy(int $id): \Illuminate\Http\RedirectResponse
     {
-        // TODO: excluir limite
+
     }
 }

@@ -27,9 +27,10 @@ class PerfilController extends Controller
 
     /**
      * Atualiza os dados do perfil do usuário.
+     * validar e atualizar perfil
      */
     public function update(Request $request): \Illuminate\Http\RedirectResponse
     {
-        // TODO: validar e atualizar perfil
+
     }
 }

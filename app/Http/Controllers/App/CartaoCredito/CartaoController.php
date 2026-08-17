@@ -14,7 +14,7 @@ class CartaoController extends Controller
      */
     public function index(): \Inertia\Response
     {
-        return inertia('App/CartaoCredito/Index');
+        return Inertia::render('App/CartaoCredito/Index');
     }
 
     /**
@@ -22,7 +22,7 @@ class CartaoController extends Controller
      */
     public function create(): \Inertia\Response
     {
-        return inertia('App/CartaoCredito/Create');
+        return Inertia::render('App/CartaoCredito/Create');
     }
 
     /**
