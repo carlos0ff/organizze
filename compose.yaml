@@ -145,6 +145,9 @@ services:
             ORGANIZZE_N8N_SECRET: '${N8N_SECRET:-}'
             ORGANIZZE_LARAVEL_URL: 'http://laravel.test'
             ANTHROPIC_API_KEY: '${ANTHROPIC_API_KEY:-}'
+            EVOLUTION_SERVER_URL: 'http://evolution-api:8080'
+            EVOLUTION_API_KEY: '${EVOLUTION_API_KEY:-mude-esta-chave-evolution}'
+            EVOLUTION_INSTANCE: '${EVOLUTION_INSTANCE:-Realizze}'
         volumes:
             - 'n8n-data:/home/node/.n8n'
             - './docker/n8n/workflows:/home/node/workflows:ro'

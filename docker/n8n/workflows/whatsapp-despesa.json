@@ -1,4 +1,5 @@
 {
+  "id": "EmdpdliLNxpITOiI",
   "name": "WhatsApp — Registrar Despesa no Organizze",
   "nodes": [
     {
@@ -17,7 +18,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Extrai o texto da mensagem de múltiplos formatos de webhook.\n// Suporta: genérico, WAHA, Evolution API v2, WhatsApp Cloud API (Meta).\nconst body = $input.item.json;\n\nlet message = null;\n\n// 1. Formato genérico: { \"message\": \"...\" }\nif (typeof body.message === 'string' && body.message.trim()) {\n  message = body.message.trim();\n}\n// 2. WAHA (WhatsApp HTTP API)\nelse if (body.payload?.body) {\n  message = String(body.payload.body).trim();\n}\n// 3. Evolution API v2\nelse if (body.data?.message?.conversation) {\n  message = String(body.data.message.conversation).trim();\n} else if (body.data?.message?.extendedTextMessage?.text) {\n  message = String(body.data.message.extendedTextMessage.text).trim();\n}\n// 4. WhatsApp Cloud API (Meta / 360dialog)\nelse if (body.entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.text?.body) {\n  message = String(body.entry[0].changes[0].value.messages[0].text.body).trim();\n}\n// 5. Campo \"text\" genérico\nelse if (typeof body.text === 'string' && body.text.trim()) {\n  message = body.text.trim();\n}\n\nreturn [{ json: { message } }];"
+        "jsCode": "// Extrai o texto da mensagem e o remoteJid do remetente.\n// Suporta: genérico, WAHA, Evolution API v2, WhatsApp Cloud API (Meta).\nconst body = $input.item.json;\n\nlet message = null;\nlet remoteJid = null;\n\n// 1. Formato genérico: { \"message\": \"...\" }\nif (typeof body.message === 'string' && body.message.trim()) {\n  message = body.message.trim();\n}\n// 2. WAHA (WhatsApp HTTP API)\nelse if (body.payload?.body) {\n  message = String(body.payload.body).trim();\n}\n// 3. Evolution API v2\nelse if (body.data?.message?.conversation) {\n  message = String(body.data.message.conversation).trim();\n} else if (body.data?.message?.extendedTextMessage?.text) {\n  message = String(body.data.message.extendedTextMessage.text).trim();\n}\n// 4. WhatsApp Cloud API (Meta / 360dialog)\nelse if (body.entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.text?.body) {\n  message = String(body.entry[0].changes[0].value.messages[0].text.body).trim();\n}\n// 5. Campo \"text\" genérico\nelse if (typeof body.text === 'string' && body.text.trim()) {\n  message = body.text.trim();\n}\n\n// ── Extrai remoteJid do remetente ──────────────────────────────────────────\n// Evolution API v2\nif (body.data?.key?.remoteJid) {\n  remoteJid = body.data.key.remoteJid;\n}\n// WAHA\nelse if (body.payload?.from) {\n  remoteJid = body.payload.from;\n}\n// WhatsApp Cloud API (Meta)\nelse if (body.entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.from) {\n  remoteJid = body.entry[0].changes[0].value.messages[0].from;\n}\n// Genérico\nelse if (body.from || body.phone || body.number) {\n  remoteJid = body.from || body.phone || body.number;\n}\n\nreturn [{ json: { message, remoteJid } }];"
       },
       "id": "a1b2c3d4-0001-0001-0001-000000000002",
       "name": "Extrair Mensagem",
@@ -147,7 +148,7 @@
       "name": "Responder — Sucesso",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
-      "position": [1560, 100]
+      "position": [1560, 60]
     },
     {
       "parameters": {
@@ -175,7 +176,91 @@
       "name": "Responder — Formato Inválido",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
-      "position": [1120, 420]
+      "position": [1120, 500]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.EVOLUTION_SERVER_URL }}/message/sendText/{{ $env.EVOLUTION_INSTANCE }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $env.EVOLUTION_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ number: $('Extrair Mensagem').item.json.remoteJid, text: '✅ Despesa registrada: R$ ' + $('Parsear Despesa').item.json.amountFormatted + ' — ' + $('Parsear Despesa').item.json.description + ' (' + $('Parsear Despesa').item.json.category + ').' }) }}",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000010",
+      "name": "Enviar WA — Sucesso",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1560, 160]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.EVOLUTION_SERVER_URL }}/message/sendText/{{ $env.EVOLUTION_INSTANCE }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $env.EVOLUTION_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ number: $('Extrair Mensagem').item.json.remoteJid, text: '❌ Erro ao registrar a despesa. Tente novamente ou contate o suporte.' }) }}",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000011",
+      "name": "Enviar WA — Erro API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1560, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.EVOLUTION_SERVER_URL }}/message/sendText/{{ $env.EVOLUTION_INSTANCE }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $env.EVOLUTION_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ number: $('Extrair Mensagem').item.json.remoteJid, text: 'Não consegui identificar a despesa. Envie, por exemplo: _Gastei R$ 35 no almoço_.' }) }}",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000012",
+      "name": "Enviar WA — Formato Inválido",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 620]
     }
   ],
   "connections": {
@@ -226,6 +311,11 @@
             "node": "Responder — Formato Inválido",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Enviar WA — Formato Inválido",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -248,11 +338,21 @@
             "node": "Responder — Sucesso",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Enviar WA — Sucesso",
+            "type": "main",
+            "index": 0
           }
         ],
         [
           {
             "node": "Responder — Erro API",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Enviar WA — Erro API",
             "type": "main",
             "index": 0
           }
@@ -266,7 +366,7 @@
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner"
   },
-  "versionId": "organizze-whatsapp-v1-0-0",
+  "versionId": "organizze-whatsapp-v1-1-0",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "organizze-local"
