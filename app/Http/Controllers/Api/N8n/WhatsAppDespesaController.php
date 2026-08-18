@@ -38,7 +38,7 @@ class WhatsAppDespesaController extends Controller
         if (empty($email)) {
             return response()->json([
                 'error'   => 'configuration_error',
-                'message' => 'ORGANIZZE_N8N_USER_EMAIL não configurado no servidor.',
+                'message' => 'POUPAI_N8N_USER_EMAIL não configurado no servidor.',
             ], 500);
         }
 

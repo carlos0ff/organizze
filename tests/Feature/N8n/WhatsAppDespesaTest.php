@@ -14,7 +14,7 @@ class WhatsAppDespesaTest extends TestCase
     use RefreshDatabase;
 
     private const SECRET = 'test-n8n-secret-123';
-    private const EMAIL  = 'usuario@organizze.test';
+    private const EMAIL  = 'usuario@poupai.test';
 
     protected function setUp(): void
     {
@@ -190,7 +190,7 @@ class WhatsAppDespesaTest extends TestCase
     public function test_transacao_vinculada_ao_usuario_correto(): void
     {
         $idUsuario = $this->criarUsuario();
-        $idOutro   = $this->criarUsuario('outro@organizze.test');
+        $idOutro   = $this->criarUsuario('outro@poupai.test');
 
         $this->withHeaders($this->secretHeader())
             ->postJson('/api/n8n/webhook', $this->payload());

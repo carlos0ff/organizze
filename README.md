@@ -1,5 +1,5 @@
 <h1 align="center">
-  <br /> <img src="" alt="Organizze logo" width="180"> <br /> Organizze <br />
+  <br /> <img src="" alt="Poupai logo" width="180"> <br /> Poupai <br />
 </h1>
 
 <p align="center">
@@ -31,7 +31,7 @@
 
 ## 📋 Sobre o projeto
 
-O **Organizze** é uma aplicação full-stack de finanças pessoais que combina a robustez do Laravel 12 no backend com a reatividade do Vue 3 no frontend via Inertia.js — sem necessidade de API REST separada.
+O **Poupai** é uma aplicação full-stack de finanças pessoais que combina a robustez do Laravel 12 no backend com a reatividade do Vue 3 no frontend via Inertia.js — sem necessidade de API REST separada.
 
 O projeto cobre o fluxo completo de um SaaS financeiro: autenticação, onboarding, dashboard com dados em tempo real, múltiplos tipos de relatório, controle de limites por categoria, gestão de cartões, assinatura por planos e integração com o ecossistema Open Finance Brasil regulamentado pelo BACEN.
 
@@ -112,8 +112,8 @@ O projeto cobre o fluxo completo de um SaaS financeiro: autenticação, onboardi
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/carlos0ff/organizze.git
-cd organizze
+git clone https://github.com/carlos0ff/poupai.git
+cd poupai
 
 # 2. Instale as dependências PHP
 composer install
@@ -189,7 +189,7 @@ Protocolo de segurança: FAPI-BR v2.2 · PAR · PKCE · mTLS · PS256 · DCR
 ## 📁 Estrutura do projeto
 
 ```
-organizze/
+poupai/
 ├── app/
 │   ├── Http/Controllers/App/   # Controllers do app (Dashboard, Reports, etc.)
 │   └── Providers/
@@ -219,7 +219,7 @@ organizze/
 
 ## 📄 Licença
 
-MIT © [carlos0ff](https://github.com/carlos0ff)
+MIT © [carlos0ff](https://github.com/carlos0ff/poupai)
 
 ---
 

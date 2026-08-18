@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Integração n8n → Organizze
+| Integração n8n → Poupai
 |--------------------------------------------------------------------------
 |
 | Autenticação via header X-N8N-Secret (middleware ensure.n8n.secret).

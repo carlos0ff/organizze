@@ -1,3 +1,5 @@
+name: poupai
+
 services:
     laravel.test:
         build:
@@ -142,8 +144,8 @@ services:
             N8N_BASIC_AUTH_USER: '${N8N_BASIC_AUTH_USER:-admin}'
             N8N_BASIC_AUTH_PASSWORD: '${N8N_BASIC_AUTH_PASSWORD:-secret}'
             N8N_BLOCK_ENV_ACCESS_IN_NODE: 'false'
-            ORGANIZZE_N8N_SECRET: '${N8N_SECRET:-}'
-            ORGANIZZE_LARAVEL_URL: 'http://laravel.test'
+            POUPAI_N8N_SECRET: '${N8N_SECRET:-}'
+            POUPAI_LARAVEL_URL: 'http://laravel.test'
             ANTHROPIC_API_KEY: '${ANTHROPIC_API_KEY:-}'
             EVOLUTION_SERVER_URL: 'http://evolution-api:8080'
             EVOLUTION_API_KEY: '${EVOLUTION_API_KEY:-mude-esta-chave-evolution}'

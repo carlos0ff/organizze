@@ -43,7 +43,7 @@ return [
 
     'n8n' => [
         'secret'     => env('N8N_SECRET'),
-        'user_email' => env('ORGANIZZE_N8N_USER_EMAIL'),
+        'user_email' => env('POUPAI_N8N_USER_EMAIL'),
     ],
 
 ];

@@ -1,6 +1,6 @@
 {
   "id": "EmdpdliLNxpITOiI",
-  "name": "WhatsApp — Registrar Despesa no Organizze",
+  "name": "WhatsApp — Registrar Despesa no Poupai",
   "nodes": [
     {
       "parameters": {
@@ -14,7 +14,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [240, 300],
-      "webhookId": "organizze-whatsapp-despesa-v1"
+      "webhookId": "poupai-whatsapp-despesa-v1"
     },
     {
       "parameters": {
@@ -70,13 +70,13 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "={{ $env.ORGANIZZE_LARAVEL_URL }}/api/n8n/webhook",
+        "url": "={{ $env.POUPAI_LARAVEL_URL }}/api/n8n/webhook",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "X-N8N-Secret",
-              "value": "={{ $env.ORGANIZZE_N8N_SECRET }}"
+              "value": "={{ $env.POUPAI_N8N_SECRET }}"
             },
             {
               "name": "Accept",
@@ -101,7 +101,7 @@
         }
       },
       "id": "a1b2c3d4-0001-0001-0001-000000000005",
-      "name": "Registrar no Organizze",
+      "name": "Registrar no Poupai",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [1120, 200]
@@ -301,7 +301,7 @@
       "main": [
         [
           {
-            "node": "Registrar no Organizze",
+            "node": "Registrar no Poupai",
             "type": "main",
             "index": 0
           }
@@ -320,7 +320,7 @@
         ]
       ]
     },
-    "Registrar no Organizze": {
+    "Registrar no Poupai": {
       "main": [
         [
           {
@@ -366,9 +366,9 @@
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner"
   },
-  "versionId": "organizze-whatsapp-v1-1-0",
+  "versionId": "poupai-whatsapp-v1-1-0",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "organizze-local"
+    "instanceId": "poupai-local"
   }
 }
